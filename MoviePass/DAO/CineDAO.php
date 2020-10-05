@@ -12,6 +12,8 @@
         public function Add(Cine $cine)
         {
             $this->RetrieveData();
+
+            $cine->setId($this->GetNextId());
             
             array_push($this->cines, $cine);
 
@@ -66,5 +68,20 @@
                 }
             }
         }
+
+        private function GetNextId()
+        {
+            $id = 0;
+
+            foreach($this->cines as $cine)
+            {
+                $id = ($cine->getId() > $id) ? $cine->getId() : $id;
+            }
+
+            return $id + 1;
+        }
+
+
+
     }
 ?>
