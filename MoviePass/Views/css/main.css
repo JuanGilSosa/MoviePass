@@ -24,11 +24,16 @@ body {
      font-family: 'Montserrat', sans-serif;
      color: #ffffff;
      /* background: url(../img/alfombraCine.jpg) no-repeat center center fixed; */
-     background: url(../img/bg.png) no-repeat center center fixed;
+     background: url(../img/alfombraCine.jpg) no-repeat center center fixed;
      -webkit-background-size: cover;
         -moz-background-size: cover;
           -o-background-size: cover;
              background-size: cover;
+}
+
+main
+{
+     margin-top: 5vh;
 }
 
 .height-100 {
@@ -51,6 +56,10 @@ body {
      .nameHeader{
           margin-left: 1vw;
      }
+}
+
+.fixed-top{
+     background-color:#000000;
 }
 
 nav div a span{

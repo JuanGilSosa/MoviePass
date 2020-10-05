@@ -1,11 +1,11 @@
 <?php
     require_once('nav.php');
 ?>
-<main class="py-5">
+<main class="py-5 height-100">
      <section id="listado" class="mb-5">
           <div class="container">
                <h2 class="mb-4">Listado de Cines</h2>
-               <table class="table bg-light-alpha">
+               <table class="table bg-light-alpha text-white">
                     <thead>
                          <th>Nombre</th>
                          <th>Direccion</th>
