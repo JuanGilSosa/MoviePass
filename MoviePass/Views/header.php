@@ -14,7 +14,7 @@
      />
 
      <!-- SCRIPTS FONTAWESOME-->
-     <link href="root/fontawesome/css/all.css" rel="stylesheet">
+     <link href="<?php echo FA_PATH ?> rel="stylesheet">
 
      <!-- Custom styles -->
      <link rel="stylesheet" type="text/css" href="<?php echo CSS_PATH ?>estilos.css">

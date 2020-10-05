@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top" id="mainNav">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="#page-top">
-          <span class="nameHeader text-white">MoviePass</span>
+          <i class="fas fa-film"></i><span class="nameHeader text-white">MoviePass</span>
         </a>
         <button
           class="navbar-toggler"
