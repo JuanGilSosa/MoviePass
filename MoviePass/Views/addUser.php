@@ -42,10 +42,16 @@
                                    <input type="text" name="numero" value="" class="form-control" placeholder="Ingrese Altura" required>
                               </div>
                          </div>
-                         <div class="col-lg-2">
+                         <div class="col-lg-1">
                               <div class="form-group">
                                    <label for="">Piso</label>
-                                   <input type="text" name="piso" value="" class="form-control" placeholder="Piso">
+                                   <input type="text" name="piso" value="" class="form-control" placeholder="Piso" required>
+                              </div>
+                         </div>
+                         <div class="col-lg-1">
+                              <div class="form-group">
+                                   <label for="">Dpto.</label>
+                                   <input type="text" name="departamento" value="" class="form-control" placeholder="Nº" required>
                               </div>
                          </div>
                     </div>

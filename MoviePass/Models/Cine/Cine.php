@@ -11,16 +11,16 @@
         private $nombre;
         private $email;
         private $numeroDeContacto;
-        private $direcciones;
-        private $localidades;
+        //private $direccionId;
+        //private $localidadId;
 
-        public function __construct($nombre = "", $email = "", $numeroDeContacto = "")
+        public function __construct($nombre = "", $email = "", $numeroDeContacto = "", $direccionId="", $localidadId =" ")
         {
             $this->nombre=$nombre;
             $this->email=$email;
             $this->numeroDeContacto=$numeroDeContacto;
-            $this->direcciones = array();
-            $this->localidades = array();
+            //$this->direccion = $direccionId;
+            //$this->localidad = $localidadId;
         }
 
         public function getId(){
@@ -39,13 +39,13 @@
             return $this->numeroDeContacto;
         }
 
-        public function getDireccion(){
-            return $this->direcciones;
+        /* public function getDireccionId(){
+            return $this->direccion;
         }
 
-        public function getLocalidad(){
-            return $this->localidades;
-        }
+        public function getLocalidadId(){
+            return $this->localidad;
+        } */
 
         public function setId($id){
             $this->id = $id;
@@ -63,13 +63,13 @@
             $this->numeroDeContacto = $numeroDeContacto;
         }
 
-        public function setDireccion(Direccion $direccion){
-            array_push($this->direcciones, $direccion);
+        /* public function setDireccion($direccionId){
+            $this->direccionId = $direccionId;
         }
 
-        public function setLocalidad(Localidad $localidad){
-            array_push($this->localidades, $localidad);
-        }
+        public function setLocalidad($codigoPostal){
+            $this->localidadId = $codigoPostal;
+        } */
 
     }
 

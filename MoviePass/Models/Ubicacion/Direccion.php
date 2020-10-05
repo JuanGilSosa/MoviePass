@@ -69,8 +69,9 @@
             $this->departamento = $departamento;
         }
 
-        
-
+        public function __toString(){
+            echo '{"id":"' . $this->id . '", "id":"' . $this->id . '",';
+        }
 
     }
 

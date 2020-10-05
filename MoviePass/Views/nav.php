@@ -17,12 +17,13 @@
         <div class="collapse navbar-collapse " id="navbarResponsive">
           <ul class="navbar-nav ml-auto ">
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger text-white" href="#about">Nosotros</a>
+              <a class="nav-link js-scroll-trigger text-white" href="#about">Entradas</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger text-white" href="#services"
-                >Servicios</a
-              >
+              <a class="nav-link js-scroll-trigger text-white" href="<?php  echo FRONT_ROOT . "Cine/ShowListView"   ?>">Cines</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger text-white" href="<?php  echo FRONT_ROOT . "Cine/ShowAddView "   ?>">Agregar Cine</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger text-white" href="#contact">Contacto</a>

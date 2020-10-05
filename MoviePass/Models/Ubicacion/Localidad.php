@@ -4,7 +4,6 @@
 
     class Localidad
     {
-        private $id;
         private $localidad;
         private $codigoPostal;
         private $provincia;

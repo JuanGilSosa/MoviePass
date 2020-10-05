@@ -2,6 +2,8 @@
     namespace Controllers;
 
     use DAO\CineDAO as CineDAO;
+    use DAO\LocalidadDAO as LocalidadDAO;
+    use DAO\DireccionDAO as DireccionDAO;
     use Models\Cine\Cine as Cine;
     use Models\Ubicacion\Direccion as Direccion;
     use Models\Ubicacion\Localidad as Localidad;
@@ -9,10 +11,14 @@
     class CineController
     {
         private $cineDAO;
+        private $localidadDAO;
+        private $direccionDAO;
 
         public function __construct()
         {
             $this->cineDAO = new CineDAO();
+            $this->localidadDAO = new LocalidadDAO();
+            $this->direccionDAO = new DireccionDAO();
         }
 
         public function ShowAddView()
@@ -22,7 +28,9 @@
 
         public function ShowListView()
         {
-            $studentList = $this->studentDAO->GetAll();
+            $cines = $this->cineDAO->GetAll();
+            $direcciones = $this->direccionDAO->GetAll();
+            $localidades = $this->localidadDAO->GetAll();
 
             require_once(VIEWS_PATH."cinesList.php");
         }
@@ -33,12 +41,19 @@
             $direccion = new Direccion($calle, $numero, $piso, $departamento);
             $localidad = new Localidad($localidad, $codigoPostal, $provincia, $pais);
 
-            $cine->setDireccion($direccion);
-            $cine->setLocalidad($localidad);
+            /* 
+                $cine->setDireccionId($direccionId);
+                $cine->setLocalidadId($codigoPostal);
+            */
 
             $this->cineDAO->Add($cine);
+            $this->localidadDAO->Add($localidad);
+            $this->direccionDAO->Add($direccion);
+
+            //ACA SE GUARDARIA EN TABLA CINESxLOCALIDADxDIRECCION?
 
             $this->ShowAddView();
         }
+
     }
 ?>

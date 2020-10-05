@@ -33,10 +33,13 @@
 
             foreach($this->cines as $cine)
             {
+
                 $valuesArray["id"] = $cine->getId();
                 $valuesArray["nombre"] = $cine->getNombre();
-                $valuesArray["direccion"] = $cine->getDirecciones();
-                $valuesArray["localidad"] = $cine->getLocalidades();
+                $valuesArray["email"] = $cine->getEmail();
+                $valuesArray["numeroDeContacto"] = $cine->getNumeroDeContacto();
+                //$valuesArray["direccion"] = $direccion;
+                //$valuesArray["localidad"] = $localidad;
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -52,7 +55,7 @@
 
             if(file_exists($this->fileName))
             {
-                $jsonContent = file_get_contents('Data/students.json');
+                $jsonContent = file_get_contents($this->fileName);
 
                 $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
 
@@ -61,8 +64,10 @@
                     $cine = new Cine();
                     $cine->setId($valuesArray["id"]);
                     $cine->setNombre($valuesArray["nombre"]);
-                    $cine->setDireccion($valuesArray["direccion"]);
-                    $cine->setLocalidad($valuesArray["localidad"]);
+                    $cine->setEmail($valuesArray["email"]);
+                    $cine->setNumeroDeContacto($valuesArray["numeroDeContacto"]);
+                    //$cine->setDireccion($valuesArray["direccion"]);
+                    //$cine->setLocalidad($valuesArray["localidad"]);
 
                     array_push($this->cines, $cine);
                 }
