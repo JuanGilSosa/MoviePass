@@ -22,7 +22,8 @@ html, body{
  
 body {
      font-family: 'Montserrat', sans-serif;
-     background: url(../img/bg.png) no-repeat center center fixed;
+     color: #ffffff;
+     background: url(../img/alfombraCine.jpg) no-repeat center center fixed;
      -webkit-background-size: cover;
         -moz-background-size: cover;
           -o-background-size: cover;
@@ -41,7 +42,14 @@ body {
 }
 
 .nameHeader{
-     margin-left: 10px;
+     margin-left: 0.5vw;
+}
+
+@media screen and (max-width:600px){
+
+     .nameHeader{
+          margin-left: 1vw;
+     }
 }
 
 nav div a span{

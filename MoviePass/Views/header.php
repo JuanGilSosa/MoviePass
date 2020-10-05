@@ -17,7 +17,7 @@
      <link href="<?php echo FONTAWESOME_PATH ?>" rel="stylesheet">
 
      <!-- Custom styles -->
-     <link rel="stylesheet" type="text/css" href="<?php echo CSS_PATH ?>estilos.css">
+     <link rel="stylesheet" type="text/css" href="<?php echo CSS_PATH ?>main.css">
 
      <title>MoviePass</title>
 </head>
