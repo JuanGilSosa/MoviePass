@@ -1,38 +1,39 @@
 <?php
     namespace Controllers;
 
-    use DAO\TheaterDAO as TheaterDAO;
-    use Models\Theater as Theater;
+    use DAO\CineDAO as CineDAO;
+    use Cine\Cine as Cine;
 
-    class TheaterController
+    class CineController
     {
-        private $studentDAO;
+        private $cineDAO;
 
         public function __construct()
         {
-            $this->studentDAO = new StudentDAO();
+            $this->cineDAO = new CineDAO();
         }
 
         public function ShowAddView()
         {
-            require_once(VIEWS_PATH."addTheater.php");
+            require_once(VIEWS_PATH."addCine.php");
         }
 
         public function ShowListView()
         {
             $studentList = $this->studentDAO->GetAll();
 
-            require_once(VIEWS_PATH."theaterList.php");
+            require_once(VIEWS_PATH."cinesList.php");
         }
 
-        public function Add($recordId, $firstName, $lastName)
+        public function Add($id, $nombre, $direccion, $localidad)
         {
-            $student = new Student();
-            $student->setRecordId($recordId);
-            $student->setfirstName($firstName);
-            $student->setLastName($lastName);
+            $cine = new Cine();
+            $cine->setId($id);
+            $cine->setNombre($nombre);
+            $cine->setDireccion($direccion);
+            $cine->setLocalidad($localidad);
 
-            $this->studentDAO->Add($student);
+            $this->cineDAO->Add($cine);
 
             $this->ShowAddView();
         }

@@ -1,11 +1,11 @@
 <?php
     namespace DAO;
 
-    use Models\Theater as Theater;
+    use Cine\Cine as Cine;
 
-    interface ITheaterDAO
+    interface ICineDAO
     {
-        function Add(Theater $theater);
+        function Add(Cine $cine);
         function GetAll();
     }
 ?>

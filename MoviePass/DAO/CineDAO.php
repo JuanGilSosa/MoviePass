@@ -1,18 +1,19 @@
 <?php
     namespace DAO;
 
-    use DAO\IStudentDAO as IStudentDAO;
-    use Models\Student as Student;
+    use DAO\ICineDAO as ICineDAO;
+    use Cine\Cine as Cine;
 
-    class StudentDAO implements IStudentDAO
+    class CineDAO implements ICineDAO
     {
-        private $studentList = array();
+        private $cines = array();
+        private $fileName = 'Data/cines.json';
 
-        public function Add(Student $student)
+        public function Add(Cine $cine)
         {
             $this->RetrieveData();
             
-            array_push($this->studentList, $student);
+            array_push($this->cines, $cine);
 
             $this->SaveData();
         }
@@ -21,32 +22,33 @@
         {
             $this->RetrieveData();
 
-            return $this->studentList;
+            return $this->cines;
         }
 
         private function SaveData()
         {
             $arrayToEncode = array();
 
-            foreach($this->studentList as $student)
+            foreach($this->cines as $cine)
             {
-                $valuesArray["recordId"] = $student->getRecordId();
-                $valuesArray["firstName"] = $student->getFirstName();
-                $valuesArray["lastName"] = $student->getLastName();
+                $valuesArray["id"] = $cine->getId();
+                $valuesArray["nombre"] = $cine->getNombre();
+                $valuesArray["direccion"] = $cine->getDirecciones();
+                $valuesArray["localidad"] = $cine->getLocalidades();
 
                 array_push($arrayToEncode, $valuesArray);
             }
 
             $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
             
-            file_put_contents('Data/students.json', $jsonContent);
+            file_put_contents($this->fileName, $jsonContent);
         }
 
         private function RetrieveData()
         {
             $this->studentList = array();
 
-            if(file_exists('Data/students.json'))
+            if(file_exists($this->fileName))
             {
                 $jsonContent = file_get_contents('Data/students.json');
 
@@ -54,12 +56,13 @@
 
                 foreach($arrayToDecode as $valuesArray)
                 {
-                    $student = new Student();
-                    $student->setRecordId($valuesArray["recordId"]);
-                    $student->setFirstName($valuesArray["firstName"]);
-                    $student->setLastName($valuesArray["lastName"]);
+                    $cine = new Cine();
+                    $cine->setId($valuesArray["id"]);
+                    $cine->setNombre($valuesArray["nombre"]);
+                    $cine->setDireccion($valuesArray["direccion"]);
+                    $cine->setLocalidad($valuesArray["localidad"]);
 
-                    array_push($this->studentList, $student);
+                    array_push($this->cines, $cine);
                 }
             }
         }

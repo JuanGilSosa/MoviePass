@@ -9,14 +9,14 @@
     {
         private $id;
         private $nombre;
-        private $direccion;
-        private $localidad;
+        private $direcciones;
+        private $localidades;
 
         public function __construct($nombre = "")
         {
             $this->nombre=$nombre;
-            $this->direccion = new Direccion();
-            $this->localidad = new Localidad();
+            $this->direcciones = array();
+            $this->localidades = array();
         }
 
         public function getId(){
@@ -28,11 +28,11 @@
         }
 
         public function getDireccion(){
-            return $this->direccion;
+            return $this->direcciones;
         }
 
         public function getLocalidad(){
-            return $this->localidad;
+            return $this->localidades;
         }
 
         public function setId($id){
@@ -44,11 +44,11 @@
         }
 
         public function setDireccion(Direccion $direccion){
-            $this->direccion = $direccion;
+            array_push($this->direcciones, $direccion);
         }
 
         public function setLocalidad(Localidad $localidad){
-            $this->localidad = $localidad;
+            array_push($this->localidades, $localidad);
         }
 
     }
