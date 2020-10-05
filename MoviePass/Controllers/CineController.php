@@ -2,7 +2,9 @@
     namespace Controllers;
 
     use DAO\CineDAO as CineDAO;
-    use Cine\Cine as Cine;
+    use Models\Cine\Cine as Cine;
+    use Models\Ubicacion\Direccion as Direccion;
+    use Models\Ubicacion\Localidad as Localidad;
 
     class CineController
     {
@@ -25,11 +27,12 @@
             require_once(VIEWS_PATH."cinesList.php");
         }
 
-        public function Add($id, $nombre, $direccion, $localidad)
+        public function Add($nombre, $email, $numeroDeContacto, $calle, $numero, $piso, $departamento, $localidad, $codigoPostal, $provincia, $pais)
         {
-            $cine = new Cine();
-            $cine->setId($id);
-            $cine->setNombre($nombre);
+            $cine = new Cine($nombre, $email, $numeroDeContacto);
+            $direccion = new Direccion($calle, $numero, $piso, $departamento);
+            $localidad = new Localidad($localidad, $codigoPostal, $provincia, $pais);
+
             $cine->setDireccion($direccion);
             $cine->setLocalidad($localidad);
 

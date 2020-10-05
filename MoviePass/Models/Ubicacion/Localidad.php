@@ -1,6 +1,6 @@
 <?php
 
-    namespace Ubicacion;
+    namespace Models\Ubicacion;
 
     class Localidad
     {
@@ -10,9 +10,8 @@
         private $provincia;
         private $pais;
 
-        public function __construct($id = "", $localidad = "", $codigoPostal = "", $provincia = "", $pais = "")
+        public function __construct($localidad = "", $codigoPostal = "", $provincia = "", $pais = "")
         {
-            $this->id = $id;
             $this->localidad = $localidad;
             $this->codigoPostal = $codigoPostal;
             $this->provincia = $provincia;

@@ -1,6 +1,6 @@
 <?php
 
-    namespace Ubicacion;
+    namespace Models\Ubicacion;
 
     class Direccion
     {

@@ -1,7 +1,7 @@
 <?php
     namespace DAO;
 
-    use Cine\Cine as Cine;
+    use Models\Cine\Cine as Cine;
 
     interface ICineDAO
     {

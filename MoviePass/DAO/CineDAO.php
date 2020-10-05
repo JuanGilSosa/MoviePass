@@ -2,7 +2,7 @@
     namespace DAO;
 
     use DAO\ICineDAO as ICineDAO;
-    use Cine\Cine as Cine;
+    use Models\Cine\Cine as Cine;
 
     class CineDAO implements ICineDAO
     {

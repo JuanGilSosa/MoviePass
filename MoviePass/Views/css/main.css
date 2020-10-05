@@ -23,7 +23,8 @@ html, body{
 body {
      font-family: 'Montserrat', sans-serif;
      color: #ffffff;
-     background: url(../img/alfombraCine.jpg) no-repeat center center fixed;
+     /* background: url(../img/alfombraCine.jpg) no-repeat center center fixed; */
+     background: url(../img/bg.png) no-repeat center center fixed;
      -webkit-background-size: cover;
         -moz-background-size: cover;
           -o-background-size: cover;
