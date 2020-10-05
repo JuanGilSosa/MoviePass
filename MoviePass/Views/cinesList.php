@@ -19,10 +19,11 @@
                                    ?>
                                         <tr>
                                              <td><?php echo $cines[$contador]->getNombre() ?></td>
-                                             <td><?php echo $direccion[$contador]->getCalle()  ?></td>
-                                             <td><?php echo $localidad->getLocalidad() ?></td>
+                                             <td><?php echo $direcciones[$contador]->getCalle() . " " . $direcciones[$contador]->getNumero()  ?></td>
+                                             <td><?php echo $localidades[$contador]->getLocalidad() ?></td>
                                         </tr>
                                    <?php
+                                   $contador++;
                               }
                          ?>
                          

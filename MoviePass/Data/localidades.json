@@ -1,8 +1,20 @@
 [
     {
-        "codigoPostal": "Buenos Aires",
-        "localidad": "7600",
-        "provincia": "Argentina",
-        "pais": ""
+        "localidad": "Mar del Plata",
+        "codigoPostal": "7600",
+        "provincia": "Buenos Aires",
+        "pais": "Argentina"
+    },
+    {
+        "localidad": "Mar del Plata",
+        "codigoPostal": "7600",
+        "provincia": "Buenos Aires",
+        "pais": "Argentina"
+    },
+    {
+        "localidad": "Mar del Plata",
+        "codigoPostal": "7600",
+        "provincia": "Buenos Aires",
+        "pais": "Argentina"
     }
 ]

@@ -1,9 +1,23 @@
 [
     {
         "id": 1,
-        "calle": "2659",
-        "numero": "2",
-        "piso": "Mar del Plata",
+        "calle": "Diagonal Alberdi",
+        "numero": "2659",
+        "piso": "",
+        "departamento": ""
+    },
+    {
+        "id": 2,
+        "calle": "Diagonal Alberdi",
+        "numero": "2659",
+        "piso": "2",
+        "departamento": ""
+    },
+    {
+        "id": 3,
+        "calle": "Catamarca",
+        "numero": "1554",
+        "piso": "3",
         "departamento": ""
     }
 ]

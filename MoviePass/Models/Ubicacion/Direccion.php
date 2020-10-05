@@ -10,9 +10,8 @@
         private $piso;
         private $departamento;
 
-        public function __construct($id = "", $calle = "", $numero = "", $piso = "", $departamento = "")
+        public function __construct( $calle = "", $numero = "", $piso = "", $departamento = "")
         {
-            $this->id = $id;
             $this->calle = $calle;
             $this->numero = $numero;
             $this->piso = $piso;

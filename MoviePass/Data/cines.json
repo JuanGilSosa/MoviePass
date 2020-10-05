@@ -4,5 +4,17 @@
         "nombre": "Cine Diagonal",
         "email": "user@myapp.com",
         "numeroDeContacto": "1156425716"
+    },
+    {
+        "id": 2,
+        "nombre": "Cine Diagonal",
+        "email": "user@myapp.com",
+        "numeroDeContacto": "1156425716"
+    },
+    {
+        "id": 3,
+        "nombre": "Cine Los Gallegos",
+        "email": "matias@gmail.com",
+        "numeroDeContacto": "1156425716"
     }
 ]

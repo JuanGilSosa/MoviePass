@@ -45,7 +45,13 @@
                          <div class="col-lg-2">
                               <div class="form-group">
                                    <label for="">Piso</label>
-                                   <input type="text" name="piso" value="" class="form-control" placeholder="Piso">
+                                   <input type="text" name="piso" value="" class="form-control" placeholder="Piso" >
+                              </div>
+                         </div>
+                         <div class="col-lg-1 d-none">
+                              <div class="form-group">
+                                   <label for="">Piso</label>
+                                   <input type="text" name="departamento" value="" class="form-control " placeholder="Dpto">
                               </div>
                          </div>
                     </div>

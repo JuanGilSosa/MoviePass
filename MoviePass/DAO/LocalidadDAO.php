@@ -45,8 +45,8 @@
 
             foreach($this->localidades as $localidad)
             {                
-                $valuesArray["codigoPostal"] = $localidad->getCodigoPostal();
                 $valuesArray["localidad"] = $localidad->getLocalidad();
+                $valuesArray["codigoPostal"] = $localidad->getCodigoPostal();
                 $valuesArray["provincia"] = $localidad->getProvincia();
                 $valuesArray["pais"] = $localidad->getPais();
 
@@ -71,8 +71,8 @@
                 foreach($arrayToDecode as $valuesArray)
                 {
                     $localidad = new Localidad();
-                    $localidad->setCodigoPostal($valuesArray["codigoPostal"]);
                     $localidad->setLocalidad($valuesArray["localidad"]);
+                    $localidad->setCodigoPostal($valuesArray["codigoPostal"]);
                     $localidad->setProvincia($valuesArray["provincia"]);
                     $localidad->setPais($valuesArray["pais"]);
 
