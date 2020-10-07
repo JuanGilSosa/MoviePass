@@ -48,31 +48,27 @@
         }
 
         public function LogIn($username, $password)
-        {
-            $users = $this->usersDAO->GetAll();
+        {   
+            $loggedUser = $this->findUser($username, $password);
             
-            $loggedUser = $this->findUser($users, $username, $password);
-            
-            
-            if ($loggedUser->getEmail() == "false" || $loggedUser->getPassword() == "false" ){
-                require_once(VIEWS_PATH."loginForm.php");   
-            }else{
-                $_SESSION["loggedUser"] = $loggedUser;
-                $this->ShowIndex();
+            if(!is_null($loggedUser)){
+                if ($loggedUser->getEmail() == "false" || $loggedUser->getPassword() == "false" ){
+                    require_once(VIEWS_PATH."loginForm.php");   
+                }else{
+                    $_SESSION["loggedUser"] = $loggedUser;
+                    $this->ShowIndex();
+                }
             }
 
         }
 
-        public function findUser($users, $email, $password)
-        {
-
-            foreach ($users as $user)
-            {
+        public function findUser($email, $password){
+            $users = $this->usersDAO->GetAll(); //ESTO
+            $loggedUser = null; // ESTO
+            foreach($users as $user){
                 $loggedUser = $this->verifyUsernameAndPassword($user, $email, $password);                
             }
-
             return $loggedUser;
-            
         }
 
         public function verifyUsernameAndPassword($user, $email, $password){
@@ -95,10 +91,8 @@
 
         
         public function LogOut(){
-
             session_destroy();
             $this->ShowIndex(); 
-            
         }
         
     }
