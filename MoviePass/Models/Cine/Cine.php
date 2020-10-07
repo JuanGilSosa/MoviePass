@@ -11,10 +11,9 @@
         private $nombre;
         private $email;
         private $numeroDeContacto;
-        //private $direccionId;
-        //private $localidadId;
-
-        public function __construct($nombre = "", $email = "", $numeroDeContacto = "", $direccionId="", $localidadId =" ")
+        private $direccionId;
+        
+        public function __construct($nombre = "", $email = "", $numeroDeContacto = "", $direccionId="")
         {
             $this->nombre=$nombre;
             $this->email=$email;
