@@ -182,7 +182,111 @@ nav div a span{
      background-color: transparent; 
      border: 1px solid white;
  }
+
+ .link{    
+     color: greenyellow;
+ }
+ .link:hover{
+     color: rgb(0, 255, 255);
+ }
  
 /*********************************************************************************************************************************************/
 /**********************************************  FIN ***  LOG *** IN *** FORM  *** STYLES*****************************************************/
 /*********************************************************************************************************************************************/
+
+
+/*FORMULARIO DE REGISTRO*/
+   
+.form-registro{
+  width:800px;
+  height:650px;
+  background: transparent;
+  color: white;
+  border-radius:8px;
+  /*box-shadow:0 0 40px -10px #000;*/
+  /*margin:calc(50vh - 220px) auto;*/
+  padding:20px 30px;
+  /*max-width:calc(100vw - 40px);*/
+  box-sizing:border-box;
+  font-family:'Montserrat',sans-serif;
+}
+
+
+@media screen and (max-width:1200px){ 
+  .form-registro{
+      max-width: 70%;
+  }
+  
+}   
+
+@media screen and (max-width:600px){
+
+  .form-registro{
+      max-width: 100%;
+  }
+}
+
+.h2-registro{
+  margin:10px 0;
+  padding-bottom:10px;
+  width:300px;
+  color:#78788c;
+  border-bottom:3px solid #78788c
+}
+
+.input-registro{
+  width:100%;
+  padding:10px;
+  box-sizing:border-box;
+  background:none;
+  outline:none;
+  resize:none;
+  border:0;
+  font-family:'Montserrat',sans-serif;
+  transition:all .3s;
+  border-bottom:2px solid #bebed2
+}
+
+.input-registro:focus{border-bottom:2px solid #78788c}
+
+p.p-registro:before{
+  content:attr(type);
+  display:block;
+  margin:28px 0 0;
+  font-size:14px;
+  color:#5a5a5a
+}
+
+#button-registro{
+  float:right;
+  padding:8px 12px;
+  margin:8px 0 0;
+  font-family:'Montserrat',sans-serif;
+  border:2px solid #78788c;
+  background:0;
+  color:#5a5a6e;
+  cursor:pointer;
+  transition:all .3s
+}
+
+#button-registro:hover{
+  background:#78788c;
+  color:#fff
+}
+/*
+div.div-registro{
+  content:'Hi';
+  bottom:-15px;
+  right:-20px;
+  background:#50505a;
+  color:#fff;
+  width:320px;
+  padding:16px 4px 16px 0;
+  border-radius:6px;
+  font-size:13px;
+  box-shadow:10px 10px 40px -14px #000
+}
+*/
+span{
+  margin:0 5px 0 15px
+}
