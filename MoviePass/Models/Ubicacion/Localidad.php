@@ -7,14 +7,14 @@
         private $localidad;
         private $codigoPostal;
         private $provincia;
-        private $pais;
+        private $idPais;
 
-        public function __construct($localidad = "", $codigoPostal = "", $provincia = "", $pais = "")
+        public function __construct($localidad = "", $codigoPostal = "", $provincia = "", $idPais = "")
         {
             $this->localidad = $localidad;
             $this->codigoPostal = $codigoPostal;
             $this->provincia = $provincia;
-            $this->pais = $pais;
+            $this->idPais = $idPais;
         }        
 
         public function getId() {
@@ -33,8 +33,8 @@
             return $this->provincia;
         }
 
-        public function getPais() {
-            return $this->pais;
+        public function getIdPais() {
+            return $this->idPais;
         }
 
         public function setId($id) {
@@ -55,9 +55,9 @@
             $this->provincia = $provincia;
         }
 
-        public function setPais($pais)
+        public function setPaisId($idPais)
         {
-            $this->pais = $pais;
+            $this->idPais = $idPais;
         }
     }
 

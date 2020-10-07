@@ -9,13 +9,15 @@
         private $numero;
         private $piso;
         private $departamento;
+        private $idLocalidad;
 
-        public function __construct( $calle = "", $numero = "", $piso = "", $departamento = "")
+        public function __construct( $calle = "", $numero = "", $piso = "", $departamento = "", $idLocalidad = "")
         {
             $this->calle = $calle;
             $this->numero = $numero;
             $this->piso = $piso;
             $this->departamento = $departamento;
+            $this->idLocalidad = $idLocalidad;
         }
 
         public function getId()
@@ -43,6 +45,12 @@
             return $this->departamento;
         }
 
+        public function getIdPais()
+        {
+            return $this->idLocalidad;
+        }
+
+
         public function setId($id)
         {
             $this->id = $id;
@@ -68,9 +76,11 @@
             $this->departamento = $departamento;
         }
 
-        public function __toString(){
-            echo '{"id":"' . $this->id . '", "id":"' . $this->id . '",';
+        public function setIdPais($idLocalidad)
+        {
+            $this->idLocalidad = $idLocalidad;
         }
+
 
     }
 
