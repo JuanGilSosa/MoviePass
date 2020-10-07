@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600');
+
+
+html, body{
+     font-family: 'Kumbh Sans', sans-serif;
+     height: 100%;
+     width: 100%;
+}
+   
+.col{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+   
+.row{    
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin: 0px;
+}   
+ 
+body {
+     font-family: 'Montserrat', sans-serif;
+     color: #ffffff;
+     /* background: url(../img/alfombraCine.jpg) no-repeat center center fixed; */
+     background: url(../img/alfombraCine.jpg) no-repeat center center fixed;
+     -webkit-background-size: cover;
+        -moz-background-size: cover;
+          -o-background-size: cover;
+             background-size: cover;
+}
+
+main
+{
+     margin-top: 5vh;
+}
+
+.height-100 {
+     height: 100%;
+}
+
+.bg-dark-alpha {
+     background-color: rgba(0,0,0,0.2);
+}
+.bg-light-alpha {
+     background-color: rgba(255,255,255,0.2);
+}
+
+.nameHeader{
+     margin-left: 0.5vw;
+}
+
+@media screen and (max-width:600px){
+
+     .nameHeader{
+          margin-left: 1vw;
+     }
+}
+
+.fixed-top{
+     background-color:#000000;
+}
+
+nav div a span{
+     text-align: center;
+     font-size: 2vh;
+     color: rgb(184, 184, 184);
+}
+   
+.fixed-top.scrolled { 
+     background-color: #000000 !important; 
+     transition: background-color 1200ms linear; 
+} 
+
+.userIconCol{
+    height: 50px;
+}
+
+#userIcon{
+  text-align: center;
+  font-size:8vh;
+  color:#ffffff;
+}
+
+.table{
+    max-width: 35%;
+    border: none;
+    border-radius: 5px;
+    padding:25px;
+}
+
+@media screen and (max-width:1800px){
+
+
+  .table{
+      max-width: 35%;
+  }
+
+}
+
+@media screen and (max-width:1200px){
+
+  .table{
+      max-width: 70%;
+  }
+  
+}   
+
+@media screen and (max-width:600px){
+
+  .table{
+      max-width: 100%;
+  }
+}
+
+form
+{
+  width: 100%;
+}
+
+.usernameRow, .passwordRow{
+    background-color: none;
+    margin: 30px 0px ;
+    width: 100%;
+    
+}
+
+.logInInputs, .logInInputs:focus{
+  color: #ffffff;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #97251bdc;
+  text-align: center;
+
+}
+
+.logInInputs::placeholder { /* Most modern browsers support this now. */
+  color:#ffffff;
+  font-size: 0.8em;
+}
+
+
+.inputLogin:focus {
+  border: 1px solid #ffffff;
+}
+
+.loginInputContainer{
+    width: 100%;
+}
+
+.loginInputContainer input{
+    width: 100%;
+    margin: 0px;
+    padding: 5px 0px;
+    border-radius: 5px;
+}
+
+.loginBoton {
+  color: #ffffff;
+  background-color: #97251bdc; 
+  border: 1px solid #97251bdc;
+}
+
+.loginBoton:hover {
+    color: #ffffff;
+    background-color: transparent; 
+    border: 1px solid white;
+}
