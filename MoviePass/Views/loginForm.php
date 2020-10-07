@@ -1,8 +1,8 @@
 <?php
     require_once('nav.php');
 ?>
-<main class="py-5">
-<div class="container text-center table  w-100" style="padding:0px;">
+<main class="py-5 height-100">
+    <div class="container text-center table  w-100" style="padding:0px;">
       
       <form action="<?php echo FRONT_ROOT . 'Users/LogIn' ?>" method="POST" class="login-form bg-dark-alpha p-5 mx-auto text-white">
 
