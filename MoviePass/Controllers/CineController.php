@@ -23,7 +23,15 @@
 
         public function ShowAddView()
         {
-            require_once(VIEWS_PATH."addCine.php");
+            if($this->hayUsuario())
+            {
+                require_once(VIEWS_PATH."addCine.php");
+            } 
+            else
+            {
+                require_once(VIEWS_PATH."loginForm.php");
+            }
+                
         }
 
         public function ShowListView()
@@ -53,6 +61,17 @@
             //ACA SE GUARDARIA EN TABLA CINESxLOCALIDADxDIRECCION?
 
             $this->ShowAddView();
+        }
+
+        public function hayUsuario () {
+
+            if(!isset($_SESSION["loggedUser"]))
+            {
+                $this->ShowLogIn;
+                return false;
+            }
+            else
+                return true;
         }
 
     }

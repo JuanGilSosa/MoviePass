@@ -13,28 +13,26 @@
         </div>
         
         <div class="form-group">
-          <input type="text" name="username" class="form-control form-control-lg logInInputs" placeholder="Ingrese Nº de Documento">
-          <?php
-              if(isset($loggedUser) && $loggedUser->getEmail() == 'false')
-              {
-                  echo "<div style='color:#97251bdc'>Nº de Documento incorrecto </div>";
-              }
-          ?>
+          <input type="text" name="username" class="form-control form-control-lg logInInputs" placeholder="Ingrese su email">
+          
         </div>
         
-        
+        <?php 
+                         if (isset($message))
+                         echo $message;
+                         else
+                         echo "no hay mensaje";
+
+                    ?>
+                    
         <div class="form-group">
           <input type="password" name="password" class="form-control form-control-lg logInInputs" placeholder="Ingrese constraseña">
-          <?php
-              if(isset($loggedUser) && $loggedUser->getPassword() == 'false')
-              {
-                  echo "<div style='color:#97251bdc'>Contraseña incorrecto </div>";
-              }
-          ?>
+          
         </div>
         <br>
         <button class="btn btn-secondary w-50 loginBoton" type="submit">Iniciar Sesión</button>
         <br>
+        
       </form>
       <form action="<?php echo FRONT_ROOT . 'Users\ShowRegisterForm' ?>" method="POST">
         <label class="text-white" style="margin-right: 10px;">¿Aun no estas registrado?</label><button class="btn btn-secondary btn-danger w-20">Registrate</button>

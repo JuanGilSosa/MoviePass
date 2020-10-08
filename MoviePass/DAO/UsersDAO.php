@@ -3,7 +3,8 @@
 
     use DAO\IAdminDAO as IAdminDAO;
     use Models\Users\Admin as Admin;
-    use Models\Users\Member;
+    use Models\Users\Member as Member;
+    use Models\Users\User as User;
 
     class UsersDAO implements IUsersDAO
     {
@@ -82,9 +83,42 @@
             file_put_contents($this->fileName, $jsonContent);
         }
 
+
         private function RetrieveData()
         {
-            $this->studentList = array();
+                $this->users = array();
+                //echo $this->fileName;
+
+                if(file_exists("Data/users.json"))
+                {
+                $jsonContent = file_get_contents("Data/users.json");
+            
+                $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true): array();
+        
+                    foreach ($arrayToDecode as $value)
+                    {
+                        $user = new User();
+                        $user->setEmail($value["email"]);
+                        $user->setPassword($value["password"]);
+                        $user->setId($value["id"]);
+                        $user->setFirstName($value["firstName"]);
+                        $user->setLastName($value["lastName"]);
+                        $user->setDni($value["dni"]);
+                        array_push ($this->users, $user);
+                        //sort($this->userList);
+                    }
+                }
+                else
+                    echo "No existe el archivo";
+
+        }
+
+
+
+
+        /*private function RetrieveData()
+        {
+            $this->users = array();
 
             if(file_exists($this->fileName))
             {
@@ -122,7 +156,7 @@
                     
                 }
             }
-        }
+        }*/
 
         private function GetNextId()
         {
