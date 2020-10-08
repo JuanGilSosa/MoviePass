@@ -50,17 +50,10 @@
 
         public function login ($email, $password)
         {
-            $rta = 0;
-            
-            $users = $this->usersDAO->GetAll();
+            $rta = "";
+            $rta = $this->verificarUsuarioYPassword($email,$password);
+            $this->direccionarLogin($rta);
 
-            foreach ($users as $user)
-            {
-                $rta = $this->verificarUsuarioYPassword($user,$email,$password);
-                
-            }
-            $message = "Logeo ok.";
-            $this->direccionarLogin($message);
         }
 
         public function direccionarLogin ($message)
@@ -71,37 +64,48 @@
             }
             else
             {
-                $message = "Sin usuario";
+                //$message = "Sin usuario";
                 $this->ShowLogIn($message);
             }
         }
 
-
-
-        public function verificarUsuarioYPassword($user, $email, $password)
+        public function buscarUsuario ($email)
         {
-            $rta = 0;
+            $userEncontrado;
+            $users = $this->usersDAO->GetAll();
 
-            if ($user->getEmail() == $email)
+            foreach ($users as $user)
             {
-                if($user->getPassword() == $password)
+                if($user->getEmail() == $email)
                 {
-                    $_SESSION["loggedUser"] = $user;
-                    $rta = 1;
+                    $userEncontrado = $user;
+                }
+            }
+            return $userEncontrado;
+        }
+
+        public function verificarUsuarioYPassword($email, $password)
+        {
+            $rta = "";
+            $userEncontrado = $this->buscarUsuario($email);
+
+            if (isset($userEncontrado))
+            {
+                if ($userEncontrado->getPassword() == $password)
+                {
+                    $_SESSION["loggedUser"] = $userEncontrado;
                 }
                 else
                 {
-                    $rta = 2;
+                    $rta = "Contraseña incorrecta";
                 }
             }
-            else
-            {
-                $rta = 3;
+            else{
+                $rta = "Email Incorrecto"; 
             }
-    
+                         
             return $rta;
         }
-
         
         public function LogOut($message="") {
             
@@ -110,13 +114,6 @@
             $this->ShowLogIn($message);
         }
         
-        public function hayUsuario () {
-
-            if(!isset($_SESSION["loggedUser"]))
-            {
-                $this->ShowLogIn;
-            }
-        }
     }
 
 ?>

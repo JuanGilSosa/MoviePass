@@ -17,21 +17,23 @@
           
         </div>
         
-        <?php 
-                         if (isset($message))
-                         echo $message;
-                         else
-                         echo "no hay mensaje";
-
-                    ?>
                     
         <div class="form-group">
           <input type="password" name="password" class="form-control form-control-lg logInInputs" placeholder="Ingrese constraseña">
           
         </div>
+
+        <?php 
+           if (isset($message))
+              echo $message;
+           
+       ?>
+
         <br>
         <button class="btn btn-secondary w-50 loginBoton" type="submit">Iniciar Sesión</button>
         <br>
+
+        
         
       </form>
       <form action="<?php echo FRONT_ROOT . 'Users\ShowRegisterForm' ?>" method="POST">
