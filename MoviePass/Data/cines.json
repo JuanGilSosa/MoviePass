@@ -1,20 +1,26 @@
 [
     {
         "id": 1,
-        "nombre": "Cine Diagonal",
-        "email": "user@myapp.com",
-        "numeroDeContacto": "1156425716"
+        "nombre": "MarketCine",
+        "email": "market@gmail.com",
+        "numeroDeContacto": "2234837261"
     },
     {
         "id": 2,
-        "nombre": "Cine Diagonal",
-        "email": "user@myapp.com",
-        "numeroDeContacto": "1156425716"
+        "nombre": "Cinemacenter",
+        "email": "cinema@gmail.com",
+        "numeroDeContacto": "4951111"
     },
     {
         "id": 3,
-        "nombre": "Cine Los Gallegos",
-        "email": "matias@gmail.com",
-        "numeroDeContacto": "1156425716"
+        "nombre": "FinemaFenter",
+        "email": "finema@fotmail.com",
+        "numeroDeContacto": "223939383"
+    },
+    {
+        "id": 4,
+        "nombre": "asdasd",
+        "email": "asd@gmail.com",
+        "numeroDeContacto": "211123123"
     }
 ]
