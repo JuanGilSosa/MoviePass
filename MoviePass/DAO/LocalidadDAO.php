@@ -3,6 +3,7 @@
 
     use DAO\IDireccionDao as IDireccionDao;
     use Models\Ubicacion\Localidad as Localidad;
+    use Models\Ubicacion\Pais as Pais;
 
     class LocalidadDAO implements ILocalidadDAO
     {
@@ -48,7 +49,7 @@
                 $valuesArray["localidad"] = $localidad->getLocalidad();
                 $valuesArray["codigoPostal"] = $localidad->getCodigoPostal();
                 $valuesArray["provincia"] = $localidad->getProvincia();
-                $valuesArray["pais"] = $localidad->getPais();
+                $valuesArray["idPais"] = $localidad->getIdPais();
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -74,7 +75,7 @@
                     $localidad->setLocalidad($valuesArray["localidad"]);
                     $localidad->setCodigoPostal($valuesArray["codigoPostal"]);
                     $localidad->setProvincia($valuesArray["provincia"]);
-                    $localidad->setPais($valuesArray["pais"]);
+                    $localidad->setIdPais($valuesArray["idPais"]);
 
                     array_push($this->localidades, $localidad);
                 }
