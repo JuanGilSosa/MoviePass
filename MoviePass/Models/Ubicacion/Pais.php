@@ -2,13 +2,12 @@
 
     namespace Models\Ubicacion;
 
-    class Localidad
+    class Pais
     {
         private $id;
         private $pais;
 
-        public function __construct($pais = "")
-        {
+        public function __construct($pais = ""){
             $this->pais = $pais;
         }        
 
@@ -27,8 +26,5 @@
         public function setPais($pais){
             $this->pais = $pais;
         }
-
     }
-
-
 ?>
