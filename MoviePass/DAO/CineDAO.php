@@ -1,15 +1,15 @@
 <?php
     namespace DAO;
 
-    use DAO\ICineDAO as ICineDAO;
+    use DAO\IDAO as IDAO;
     use Models\Cine\Cine as Cine;
 
-    class CineDAO implements ICineDAO
+    class CineDAO implements IDAO
     {
         private $cines = array();
         private $fileName = 'Data/cines.json';
 
-        public function Add(Cine $cine)
+        public function Add($cine)
         {
             $this->RetrieveData();
 
@@ -25,6 +25,14 @@
             $this->RetrieveData();
 
             return $this->cines;
+        }
+
+        public function Delete($idUser){
+
+        }
+
+        public function Update($user){
+            
         }
 
         private function SaveData()

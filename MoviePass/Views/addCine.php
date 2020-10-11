@@ -5,11 +5,6 @@
      <section id="listado" class="mb-5">
           <div class="container">
                <h2 class="mb-4">Agregar Cine</h2>
-               <?php 
-                         if (isset($message))
-                         echo $message;
-
-                    ?>   
                <form action="<?php echo FRONT_ROOT ?>Cine/Add" method="POST" class="bg-light-alpha p-5">
                     <div class="row justify-content-start">                         
                          <div class="col-lg-8 ">
@@ -66,7 +61,7 @@
                          <div class="col-lg-8">
                               <div class="form-group">
                                    <label for="">Ciudad</label>
-                                   <input type="text" name="localidad" value="" placeholder="Ingrese Localidad" class="form-control" required>
+                                   <input type="text" name="ciudad" value="" placeholder="Ingrese Localidad" class="form-control" required>
                               </div>
                          </div>
                          <div class="col-lg-4">

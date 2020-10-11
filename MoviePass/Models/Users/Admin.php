@@ -6,6 +6,10 @@
 
         protected $employeeType;
 
+        public function __construct ($employeeType = ""){
+            $this->employeeType = $employeeType;
+        }
+
         public function getEmployeeType(){
             return $this->employeeType;
         }

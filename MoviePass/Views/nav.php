@@ -28,9 +28,6 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger text-white" href="#contact">Contacto</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger text-white" href="<?php  echo FRONT_ROOT . "Users/LogOut"   ?>">Cerrar Sesion</a>
-            </li>
             
           </ul>
         </div>

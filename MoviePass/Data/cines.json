@@ -16,5 +16,11 @@
         "nombre": "Cine Los Gallegos",
         "email": "matias@gmail.com",
         "numeroDeContacto": "1156425716"
+    },
+    {
+        "id": 4,
+        "nombre": "Cine Diagonal",
+        "email": "user@myapp.com",
+        "numeroDeContacto": "1156425716"
     }
 ]

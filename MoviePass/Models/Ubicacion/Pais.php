@@ -2,7 +2,7 @@
 
     namespace Models\Ubicacion;
 
-    class Localidad
+    class Pais
     {
         private $id;
         private $pais;
