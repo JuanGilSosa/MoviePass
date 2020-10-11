@@ -18,7 +18,7 @@
 
         public function __construct()
         {
-            $this->memberDAO = new MemberDAO(); 
+            $this->membersDAO = new MemberDAO(); 
             $this->adminDAO = new AdminDAO(); 
         }
 
@@ -136,7 +136,34 @@
             session_destroy();
             $this->ShowIndex(); 
         }
-        
+
+        public function registro(){
+
+            if(!$_POST){
+
+                $nombre = $_POST['firstName'];
+                $apellido = $_POST['lastName'];
+                $dni = $_POST['dni'];
+                $email = $_POST['email'];
+                $password = $_POST['password']; 
+
+                if( isset($nombre) and isset($apellido) and 
+                    isset($dni) and isset($email) and isset($password)
+                ){
+                    $member = new Member();
+                    $member->setFirstName($nombre);
+                    $member->setLastName($apellido);
+                    $member->setDni($dni);
+                    $member->setEmail($email);
+                    $member->setPassword($password);
+
+                    $this->membersDAO->Add($member);
+
+                }
+            }else{
+                $this->ShowRegisterForm();
+            }
+        }
     }
 
 ?>
