@@ -27,7 +27,7 @@
             require_once(FRONT_ROOT."index.php");            
         }
 
-        public function ShowLogIn()
+        public function ShowLogIn($message = "")
         {
             require_once(VIEWS_PATH."loginForm.php");            
         }
@@ -49,17 +49,20 @@
 
         public function AddMember($firstName, $lastName, $dni, $email, $password, $checkPassword){
 
+            
             if($password == $checkPassword)
             {
-                $member = new Member($dni, $email, $password, $firstName, $lastName, 0);
-                            
-                $bytes = $this->memberDAO->Add($member);
+                $member = new Member($dni, $email, $password, $firstName, $lastName);
+                 
+                $bytes = $this->membersDAO->Add($member);
+                
+                $this->ShowAddCineView();
                 
                 if($bytes == false){
                     echo "error on save";
-                }
+                } 
             }else{
-                //showRegisterForm
+                $this->ShowRegisterForm();
             }
 
         }
@@ -70,14 +73,6 @@
             $this->RedirectLogIn($rta);
 
         }
-/*
-        public function LogIn ($email, $password)
-        {
-            $rta = $this->VerifyMemberAndPassword($email,$password);
-            $this->RedirectLogIn($rta);
-
-        }
-*/
 
         public function RedirectLogIn ($message)
         {
@@ -87,7 +82,6 @@
             }
             else
             {
-                //$message = "Sin usuario";
                 $this->ShowLogIn($message);
             }
         }
@@ -95,7 +89,7 @@
         public function FindMemberByEmail ($email)
         {
             $loggedMember = null;
-            $members = $this->memberDAO->GetAll();
+            $members = $this->membersDAO->GetAll();
 
             foreach ($members as $member)
             {
@@ -135,34 +129,6 @@
         public function LogOut(){
             session_destroy();
             $this->ShowIndex(); 
-        }
-
-        public function registro(){
-
-            if(!$_POST){
-
-                $nombre = $_POST['firstName'];
-                $apellido = $_POST['lastName'];
-                $dni = $_POST['dni'];
-                $email = $_POST['email'];
-                $password = $_POST['password']; 
-
-                if( isset($nombre) and isset($apellido) and 
-                    isset($dni) and isset($email) and isset($password)
-                ){
-                    $member = new Member();
-                    $member->setFirstName($nombre);
-                    $member->setLastName($apellido);
-                    $member->setDni($dni);
-                    $member->setEmail($email);
-                    $member->setPassword($password);
-
-                    $this->membersDAO->Add($member);
-
-                }
-            }else{
-                $this->ShowRegisterForm();
-            }
         }
     }
 
