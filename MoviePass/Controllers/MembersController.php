@@ -33,6 +33,11 @@
             require_once(VIEWS_PATH."registerForm.php");
         }
 
+        public function ShowAddCineView()
+        {
+            require_once(VIEWS_PATH."addCine.php");
+        }
+
         public function ShowListView()
         {
             //require_once(VIEWS_PATH."usersList.php");
@@ -50,51 +55,63 @@
 
         }
 
-        public function LogIn($username, $password)
-        {   
-            $loggedUser = $this->findMember($username, $password);
-            
-            if(!is_null($loggedUser)){      
-                if ($loggedUser->getEmail() == "false" || $loggedUser->getPassword() == "false" ){
-                    require_once(VIEWS_PATH."loginForm.php");   
-                }else{
-                    $_SESSION["loggedUser"] = $loggedUser;
-                    $this->ShowIndex();
-                }
-            }else{
-                require_once(VIEWS_PATH."loginForm.php");   
-            }
+        public function LogIn ($email, $password)
+        {
+            $rta = $this->VerifyMemberAndPassword($email,$password);
+            $this->RedirectLogIn($rta);
 
         }
 
-        public function findMember($email, $password){
-            $members = $this->memberDAO->GetAll(); //ESTO //?
-            $loggedUser = null; // ESTO //?
-
-            if(count($this->members > 0)){ // ahora si, loggedUser puede volver en null, sin esto verifyUsernameAndPassword() devuelve un objeto de tipo member y si la lista llegara a estar vacia va a tirar error
-                foreach($members as $member){
-                    $loggedUser = $this->verifyUsernameAndPassword($member, $email, $password);                
-                }
+        public function RedirectLogIn ($message)
+        {
+            if(isset($_SESSION["loggedUser"]))
+            {
+                $this->ShowAddCineView($message);
             }
-            return $loggedUser;
+            else
+            {
+                //$message = "Sin usuario";
+                $this->ShowLogIn($message);
+            }
         }
 
-        public function verifyUsernameAndPassword($member, $email, $password){
+        public function FindMemberByEmail ($email)
+        {
+            $loggedMember = null;
+            $members = $this->memberDAO->GetAll();
 
-            if($member->getEmail() == $email){
-                if($member->getPassword() == $password)
-                    {
-                        return $member;
-                    }
-                    else
-                    {
-                        $member->setPassword("false");
-                        return $member;
-                    }
-            }else{
-                $member->setEmail("false");
-                return $member;
+            foreach ($members as $member)
+            {
+                if($member->getEmail() == $email)
+                {
+                    return $member;
+                }
             }
+            return $loggedMember;
+        }
+
+        public function VerifyMemberAndPassword($email, $password)
+        {
+            $rta = "";
+            $loggedMember = $this->FindMemberByEmail($email);
+
+            if ($loggedMember != null) 
+            {
+                if ($loggedMember->getPassword() == $password)
+                {
+                    $_SESSION["loggedUser"] = $loggedMember;
+                }
+                else
+                {
+                    $rta = "Contraseña incorrecta";
+                }
+            }
+            else
+            {
+                $rta = "Email Incorrecto"; 
+            }
+                         
+            return $rta;
         }
 
         
