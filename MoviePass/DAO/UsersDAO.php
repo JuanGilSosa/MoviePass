@@ -114,50 +114,6 @@
         }
 
 
-
-
-        /*private function RetrieveData()
-        {
-            $this->users = array();
-
-            if(file_exists($this->fileName))
-            {
-                $jsonContent = file_get_contents($this->fileName);
-
-                $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-
-                foreach($arrayToDecode as $valuesArray)
-                {
-                    if (isset($valuesArray["employeeType"]))
-                    {
-                        $admin = new Admin();
-                        $admin->setId($valuesArray["id"]);
-                        $admin->setDni($valuesArray["dni"]);
-                        $admin->setEmail($valuesArray["email"]);
-                        $admin->setPassword($valuesArray["password"]);
-                        $admin->setFirstName($valuesArray["firstName"]);
-                        $admin->setLastName($valuesArray["lastName"]);
-                        $admin->setEmployeeType($valuesArray["employeeType"]);
-
-                        array_push($this->users, $admin);
-
-                    }else{
-                        $member = new Member();
-                        $member->setId($valuesArray["id"]);
-                        $member->setDni($valuesArray["dni"]);
-                        $member->setEmail($valuesArray["email"]);
-                        $member->setPassword($valuesArray["password"]);
-                        $member->setFirstName($valuesArray["firstName"]);
-                        $member->setLastName($valuesArray["lastName"]);
-                        $member->setIdTarjetaDeCredito($valuesArray["idTarjetaDeCredito"]);
-
-                        array_push($this->users, $member);
-                    }
-                    
-                }
-            }
-        }*/
-
         private function GetNextId()
         {
             $id = 0;

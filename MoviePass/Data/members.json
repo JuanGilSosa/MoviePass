@@ -1,27 +1,10 @@
 [
     {
-<<<<<<< HEAD
         "id": 1,
-        "dni": null,
-        "email": null,
-        "password": null,
-        "firstName": null,
-        "lastName": null
-    },
-    {
-        "id": 2,
-        "dni": null,
-        "email": null,
-        "password": null,
-        "firstName": null,
-        "lastName": null
-=======
-        "id": 4,
-        "dni": "123",
-        "email": "fariel@cervigni.com",
+        "dni": "37098210",
+        "email": "arielcervigni@gmail.com",
         "password": "ariel123",
         "firstName": "ariel",
         "lastName": "cervigni"
->>>>>>> ramaAriel
     }
 ]
