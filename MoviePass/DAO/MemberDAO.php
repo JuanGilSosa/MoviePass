@@ -15,7 +15,9 @@
 
             $member->setId($this->GetNextId());
             array_push($this->members, $member);
-            $this->SaveData();
+            $bytes = $this->SaveData();
+
+            return $bytes;
         }
 
         public function GetAll()
@@ -47,7 +49,7 @@
                 $valuesArray["password"] = $member->getPassword();    
                 $valuesArray["firstName"] = $member->getFirstName();
                 $valuesArray["lastName"] = $member->getLastName();
-                $valuesArray["idTarjetaDeCredito"] = $member->getIdTarjetaDeCredito();
+                //$valuesArray["idTarjetaDeCredito"] = $member->getIdTarjetaDeCredito();
 
                 array_push($arrayToEncode, $valuesArray);    
             }
@@ -81,7 +83,7 @@
                     $member->setPassword($valuesArray['password']);
                     $member->setFirstName($valuesArray['firstName']);
                     $member->setLastName($valuesArray['lastName']);
-                    $member->setIdTarjetaDeCredito($valuesArray['idTarjetaDeCredito']);
+                    //$member->setIdTarjetaDeCredito($valuesArray['idTarjetaDeCredito']);
                     array_push($this->members, $member);
                 }
         
@@ -91,7 +93,7 @@
 
         function GetJsonFilePath(){
 
-            $initialPath = "Data/Members.json";
+            $initialPath = "Data/members.json";
             if(file_exists($initialPath)){
                 $jsonFilePath = $initialPath;
             }else{

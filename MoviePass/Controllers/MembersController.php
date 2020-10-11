@@ -47,14 +47,19 @@
             //require_once(VIEWS_PATH."usersList.php");
         }
 
-        public function AddMember($numeroDocumento, $firstName, $lastName, $email, $password){
+        public function AddMember($firstName, $lastName, $dni, $email, $password, $checkPassword){
 
-            $member = new Member($email, $password, $numeroDocumento, $firstName, $lastName);
-            
-            $bytes = $this->memberDAO->AddMember($member);
-            
-            if($bytes == false){
-                echo "error on save";
+            if($password == $checkPassword)
+            {
+                $member = new Member($dni, $email, $password, $firstName, $lastName, 0);
+                            
+                $bytes = $this->memberDAO->Add($member);
+                
+                if($bytes == false){
+                    echo "error on save";
+                }
+            }else{
+                //showRegisterForm
             }
 
         }
@@ -65,6 +70,14 @@
             $this->RedirectLogIn($rta);
 
         }
+/*
+        public function LogIn ($email, $password)
+        {
+            $rta = $this->VerifyMemberAndPassword($email,$password);
+            $this->RedirectLogIn($rta);
+
+        }
+*/
 
         public function RedirectLogIn ($message)
         {

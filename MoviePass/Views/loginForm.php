@@ -4,7 +4,7 @@
 <main class="py-5 height-100">
     <div class="container text-center table  w-100" style="padding:0px;">
       
-      <form action="<?php echo FRONT_ROOT . 'Users/LogIn' ?>" method="POST" class="login-form bg-dark-alpha p-5 mx-auto text-white">
+      <form action="<?php echo FRONT_ROOT . 'Members\LogIn' ?>" method="POST" class="login-form bg-dark-alpha p-5 mx-auto text-white">
 
         <div class="form-group" text-align="center">
           <div class="col userIconCol">
@@ -17,7 +17,7 @@
           <?php
               if(isset($loggedUser) && $loggedUser->getEmail() == 'false')
               {
-                  echo "<div style='color:#97251bdc'>Nº de Documento incorrecto </div>";
+                  echo "<small style='color:#97251bdc'>Nº de Documento incorrecto </small>";
               }
           ?>
         </div>
@@ -28,7 +28,7 @@
           <?php
               if(isset($loggedUser) && $loggedUser->getPassword() == 'false')
               {
-                  echo "<div style='color:#97251bdc'>Contraseña incorrecto </div>";
+                  echo "<small style='color:#97251bdc'>Contraseña incorrecto </small>";
               }
           ?>
         </div>
@@ -36,7 +36,7 @@
         <button class="btn btn-secondary w-50 loginBoton" type="submit">Iniciar Sesión</button>
         <br>
       </form>
-      <form action="<?php echo FRONT_ROOT . 'Users\ShowRegisterForm' ?>" method="POST">
+      <form action="<?php echo FRONT_ROOT . 'Members\ShowRegisterForm' ?>" method="POST">
         <label class="text-white" style="margin-right: 10px;">¿Aun no estas registrado?</label><button class="btn btn-secondary btn-danger w-20">Registrate</button>
       </form>
     </div>
