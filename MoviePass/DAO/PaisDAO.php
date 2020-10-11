@@ -4,7 +4,7 @@
     use DAO\IDAO as IDAO;
     use Models\Ubicacion\Pais as Pais;
 
-    class PaisesDAO implements IDAO
+    class PaisDAO implements IDAO
     {
         private $paises = array();
         private $fileName = 'Data/paises.json';
