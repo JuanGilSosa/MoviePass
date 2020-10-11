@@ -63,17 +63,16 @@
             $cine = new Cine($nombre, $email, $numeroDeContacto);
             $direccion = new Direccion($calle, $numero, $piso, $departamento);
             $ciudad = new Ciudad($ciudad, $codigoPostal);
-            #provincia = new Provincia($provincia);
-            #pais = new Pais($pais);
+            $provincia = new Provincia($provincia);
+            $pais = new Pais($pais);
 
-            #$this->paisDAO->getForId($idPais)->getId() obtengo la instancia del pais para usar el metodo getId() y setearlo en localidad   //QUE ES ESTO
             
 
             $this->cineDAO->Add($cine);
             $this->direccionDAO->Add($direccion);
             $this->ciudadDAO->Add($ciudad);
-            #$this->provinciaDAO->Add($provincia);
-            #$this->paisDAO->Add($pais);
+            $this->provinciaDAO->Add($provincia);
+            $this->paisDAO->Add($pais);
 
 
             //ACA SE GUARDARIA EN TABLA CINESxLOCALIDADxDIRECCION? 

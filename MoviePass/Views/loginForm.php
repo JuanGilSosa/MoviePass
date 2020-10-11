@@ -13,22 +13,17 @@
         </div>
         
         <div class="form-group">
-          <input type="text" name="username" class="form-control form-control-lg logInInputs" placeholder="Ingrese Nº de Documento">
-          <?php
-              if(isset($loggedUser) && $loggedUser->getEmail() == 'false')
-              {
-                  echo "<small style='color:#97251bdc'>Nº de Documento incorrecto </small>";
-              }
-          ?>
+          <input type="text" name="username" class="form-control form-control-lg logInInputs" placeholder="Ingrese su email">
+          
         </div>
         
         
         <div class="form-group">
           <input type="password" name="password" class="form-control form-control-lg logInInputs" placeholder="Ingrese constraseña">
           <?php
-              if(isset($loggedUser) && $loggedUser->getPassword() == 'false')
+              if(isset($message))
               {
-                  echo "<small style='color:#97251bdc'>Contraseña incorrecto </small>";
+                  echo "<small> $message </small>"; 
               }
           ?>
         </div>
