@@ -2,17 +2,20 @@
 
     namespace Controllers;
 
-    use DAO\UsersDAO as UsersDAO;
+    use DAO\AdminDAO as AdminDAO;
+    use DAO\MemberDAO as MemberDAO;
     use Models\Users\Member as Member;
     use Models\Users\Admin as Admin;
 
-    class usersController
+    class MembersController
     {
-        private $usersDAO; 
+        private $adminDAO; //FIJENSE SI QUIEREN CONTROLAR TODO EN UNO O DIVIDIRLO EN DOS, CREO QUE SERIA MEJOR TENER DOS CONTROLES, AHORA LO DEJO ACA PARA NO OLVIDAR DE HACERLO
+        private $membersDAO; 
 
         public function __construct()
         {
-            $this->usersDAO = new UsersDAO(); 
+            $this->memberDAO = new MemberDAO(); 
+            $this->adminDAO = new AdminDAO(); 
         }
 
         public function ShowIndex()
@@ -39,7 +42,7 @@
 
             $member = new Member($email, $password, $numeroDocumento, $firstName, $lastName);
             
-            $bytes = $this->usersDAO->AddMember($member);
+            $bytes = $this->memberDAO->AddMember($member);
             
             if($bytes == false){
                 echo "error on save";
@@ -49,43 +52,48 @@
 
         public function LogIn($username, $password)
         {   
-            $loggedUser = $this->findUser($username, $password);
+            $loggedUser = $this->findMember($username, $password);
             
-            if(!is_null($loggedUser)){
+            if(!is_null($loggedUser)){      
                 if ($loggedUser->getEmail() == "false" || $loggedUser->getPassword() == "false" ){
                     require_once(VIEWS_PATH."loginForm.php");   
                 }else{
                     $_SESSION["loggedUser"] = $loggedUser;
                     $this->ShowIndex();
                 }
+            }else{
+                require_once(VIEWS_PATH."loginForm.php");   
             }
 
         }
 
-        public function findUser($email, $password){
-            $users = $this->usersDAO->GetAll(); //ESTO
-            $loggedUser = null; // ESTO
-            foreach($users as $user){
-                $loggedUser = $this->verifyUsernameAndPassword($user, $email, $password);                
+        public function findMember($email, $password){
+            $members = $this->memberDAO->GetAll(); //ESTO //?
+            $loggedUser = null; // ESTO //?
+
+            if(count($this->members > 0)){ // ahora si, loggedUser puede volver en null, sin esto verifyUsernameAndPassword() devuelve un objeto de tipo member y si la lista llegara a estar vacia va a tirar error
+                foreach($members as $member){
+                    $loggedUser = $this->verifyUsernameAndPassword($member, $email, $password);                
+                }
             }
             return $loggedUser;
         }
 
-        public function verifyUsernameAndPassword($user, $email, $password){
+        public function verifyUsernameAndPassword($member, $email, $password){
 
-            if($user->getEmail() == $email){
-                if($user->getPassword() == $password)
+            if($member->getEmail() == $email){
+                if($member->getPassword() == $password)
                     {
-                        return $user;
+                        return $member;
                     }
                     else
                     {
-                        $user->setPassword("false");
-                        return $user;
+                        $member->setPassword("false");
+                        return $member;
                     }
             }else{
-                $user->setEmail("false");
-                return $user;
+                $member->setEmail("false");
+                return $member;
             }
         }
 

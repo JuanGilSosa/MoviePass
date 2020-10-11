@@ -4,12 +4,12 @@
     use DAO\IDAO as IDAO;
     use Models\Ubicacion\Ciudad as Ciudad;
 
-    class CiudadesDAO implements IDAO
+    class CiudadDAO implements IDAO
     {
         private $ciudades = array();
         private $fileName = 'Data/ciudades.json';
 
-        public function Add($localidad)
+        public function Add($ciudad)
         {
             $this->RetrieveData();
             

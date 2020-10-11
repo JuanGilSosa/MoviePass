@@ -61,7 +61,7 @@
                          <div class="col-lg-8">
                               <div class="form-group">
                                    <label for="">Ciudad</label>
-                                   <input type="text" name="localidad" value="" placeholder="Ingrese Localidad" class="form-control" required>
+                                   <input type="text" name="ciudad" value="" placeholder="Ingrese Localidad" class="form-control" required>
                               </div>
                          </div>
                          <div class="col-lg-4">

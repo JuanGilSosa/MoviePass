@@ -2,22 +2,24 @@
     namespace Controllers;
 
     use DAO\CineDAO as CineDAO;
-    use DAO\LocalidadDAO as LocalidadDAO;
+    use DAO\CiudadDAO as CiudadDAO;
     use DAO\DireccionDAO as DireccionDAO;
     use Models\Cine\Cine as Cine;
     use Models\Ubicacion\Direccion as Direccion;
-    use Models\Ubicacion\Localidad as Localidad;
+    use Models\Ubicacion\Ciudad as Ciudad;
+    //agregar Provincias
+    //agregar Pais
 
     class CineController
     {
         private $cineDAO;
-        private $localidadDAO;
+        private $ciudadDAO;
         private $direccionDAO;
 
         public function __construct()
         {
             $this->cineDAO = new CineDAO();
-            $this->localidadDAO = new LocalidadDAO();
+            $this->ciudadDAO = new CiudadDAO();
             $this->direccionDAO = new DireccionDAO();
         }
 
@@ -30,16 +32,18 @@
         {
             $cines = $this->cineDAO->GetAll();
             $direcciones = $this->direccionDAO->GetAll();
-            $localidades = $this->localidadDAO->GetAll();
+            $ciudades = $this->ciudadDAO->GetAll();
 
             require_once(VIEWS_PATH."cinesList.php");
         }
 
-        public function Add($nombre, $email, $numeroDeContacto, $calle, $numero, $piso, $departamento, $localidad, $codigoPostal, $provincia, $pais)
+        public function Add($nombre, $email, $numeroDeContacto, $calle, $numero, $piso, $departamento, $ciudad, $codigoPostal, $idProvincia, $pais)
         {
             $cine = new Cine($nombre, $email, $numeroDeContacto);
             $direccion = new Direccion($calle, $numero, $piso, $departamento);
-            $localidad = new Localidad($localidad, $codigoPostal, $provincia, $pais);
+            $ciudad = new Ciudad($ciudad, $codigoPostal, $idProvincia);
+
+            //REVISAR ESTO, HAY QUE AGREGAR PAIS Y PROVINCIA
 
             /* 
                 $cine->setDireccionId($direccionId);
@@ -47,7 +51,7 @@
             */
 
             $this->cineDAO->Add($cine);
-            $this->localidadDAO->Add($localidad);
+            $this->ciudadDAO->Add($ciudad);
             $this->direccionDAO->Add($direccion);
 
             //ACA SE GUARDARIA EN TABLA CINESxLOCALIDADxDIRECCION?
