@@ -81,7 +81,18 @@
                          <div class="col-lg-6">
                               <div class="form-group">
                                    <label for="">Pais</label>
-                                   <input type="text" name="pais" value="" class="form-control" placeholder="Ingrese Pais" required>
+                                   <select class="form-control" name="paises" id="">
+                                        <option value="0">Argentina</option>
+                                        <option value="1">Venezuela</option>
+                                        <option value="2">Chile</option>
+                                        <option value="3">Uruguay</option>
+                                        <option value="4">Paraguay</option>
+                                        <option value="5">Peru</option>
+                                        <option value="6">Bolivia</option>
+                                        <option value="7">Ecuador</option>
+                                        <option value="8">Colombia</option>
+                                   </select>
+                                   <!--<input type="text" name="pais" value="" class="form-control" placeholder="Ingrese Pais" required>-->
                               </div>
                          </div>
                     </div>

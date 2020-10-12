@@ -1,20 +1,26 @@
 [
     {
-        "localidad": "Mar del Plata",
-        "codigoPostal": "7600",
-        "provincia": "Buenos Aires",
-        "pais": "Argentina"
+        "localidad": "Sprinfield",
+        "codigoPostal": "2000",
+        "provincia": "Manhattan",
+        "idPais": "6"
     },
     {
         "localidad": "Mar del Plata",
         "codigoPostal": "7600",
         "provincia": "Buenos Aires",
-        "pais": "Argentina"
+        "idPais": "0"
     },
     {
-        "localidad": "Mar del Plata",
-        "codigoPostal": "7600",
-        "provincia": "Buenos Aires",
-        "pais": "Argentina"
+        "localidad": "Posadas",
+        "codigoPostal": "4003",
+        "provincia": "Misiones",
+        "idPais": "0"
+    },
+    {
+        "localidad": "asdasdasd",
+        "codigoPostal": "123123",
+        "provincia": "asdasdasd",
+        "idPais": "0"
     }
 ]
