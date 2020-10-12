@@ -1,12 +1,13 @@
 <?php  namespace Controllers;
     use Models\Pelicula\Pelicula as Pelicula;
+    use Models\Pelicula\Genero as Genero;
     use DAO\PeliculaDAO as PeliculaDAO;
     class PeliculaController{
 
-        private $peliDAO;
+        private $peliculasDAO;
 
         public function __construct(){
-            $this->peliDAO = new PeliculaDAO();
+            $this->peliculasDAO = new PeliculaDAO();
         }
         public function ShowIndex()
         {
@@ -28,8 +29,9 @@
             require_once(VIEWS_PATH."addCine.php");
         }
 
-        public function ShowListMovies(){
-            $lista_pelis = $this->peliDAO->GetAll();
+        public function ShowMoviesNowPlaying(){
+            $peliculas = $this->peliculasDAO->GetAll();
+            $genero = new Genero();
             require_once(VIEWS_PATH."listMovies.php");
         }
     }

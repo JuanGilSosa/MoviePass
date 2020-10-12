@@ -140,6 +140,11 @@ nav div a span{
      width: 100%;
      
  }
+
+ .inputContainer
+ {
+   border-bottom: 1px solid #ffffff;
+ }
  
  .logInInputs, .logInInputs:focus{
    color: #ffffff;
@@ -184,7 +189,7 @@ nav div a span{
  }
 
  .link{    
-     color: greenyellow;
+     color: rgb(77, 105, 248);
  }
  .link:hover{
      color: rgb(0, 255, 255);
@@ -289,4 +294,20 @@ div.div-registro{
 */
 span{
   margin:0 5px 0 15px
+}
+
+
+/***********************************************************************************************/
+
+.moviesTableContainer
+{
+  width:100%;
+}
+
+.moviesTable{
+  width: 100%;
+  border: 5px solid #ffffff;
+  border-radius: 5px;
+  padding:25px;
+  margin-top: 10%;
 }

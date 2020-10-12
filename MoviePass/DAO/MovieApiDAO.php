@@ -3,80 +3,69 @@
     namespace DAO;
 
     
+    class MovieApiDAO
+    {
 
+
+        function GetMoviesPlaying(){
+            
+            $get_data = $this->callAPI('GET', 'https://api.themoviedb.org/3/movie/now_playing?api_key=a67565019e2b3ed72b43911ab7692772&language=es-AR', false);
+            $response = json_decode($get_data, true);
+            //$errors = $response['response']['errors'];
+            $data = $response['results'];
+
+            return $data;
+            
+        }
+
+        function GetMovieById($idMovie){
+
+            $get_data = $this->callAPI('GET', 'https://api.themoviedb.org/3/movie/' . $idMovie .'?api_key=a67565019e2b3ed72b43911ab7692772&language=es-AR', false);
+            $response = json_decode($get_data, true);
+            //$errors = $response['response']['errors'];
+            $data = $response;
+
+            return $data;
+        }
+
+        function callAPI($method, $url, $data){
+            $curl = curl_init();
+            switch ($method){
+               case "POST":
+                  curl_setopt($curl, CURLOPT_POST, 1);
+                  if ($data)
+                     curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                  break;
+               case "PUT":
+                  curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+                  if ($data)
+                     curl_setopt($curl, CURLOPT_POSTFIELDS, $data);			 					
+                  break;
+               default:
+                  if ($data)
+                     $url = sprintf("%s?%s", $url, http_build_query($data));
+            }
+            // OPTIONS:
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+               'APIKEY: a67565019e2b3ed72b43911ab7692772',
+               'Content-Type: application/json',
+            ));
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+            // EXECUTE:
+            $result = curl_exec($curl);
+            if(!$result){die("Connection Failure");}
+            curl_close($curl);
+            return $result;
+         }
+
+
+         
+
+    }
 
 
 
 
 ?>
-
-
-
-    <script>
-        /*************
-        SAMPLE URLS
-        
-        1. To get the config data like image base urls
-        https://api.themoviedb.org/3/configuration?api_key=<APIKEY>
-        
-        2. To fetch a list of movies based on a keyword
-        https://api.themoviedb.org/3/search/movie?api_key=<APIKEY>&query=<keyword>
-        
-        3. To fetch more details about a movie
-        https://api.themoviedb.org/3/movie/<movie-id>?api_key=<APIKEY>
-        *************/
-        //const APIKEY is inside key.js
-        let baseURL = 'https://api.themoviedb.org/3/';
-        let configData = null;
-        let baseImageURL = null;
-        
-        let getConfig = function () {
-            let url = "".concat(baseURL, 'configuration?api_key=', APIKEY); 
-            fetch(url)
-            .then((result)=>{
-                return result.json();
-            })
-            .then((data)=>{
-                baseImageURL = data.images.secure_base_url;
-                configData = data.images;
-                console.log('config:', data);
-                console.log('config fetched');
-                runSearch('jaws')
-            })
-            .catch(function(err){
-                alert(err);
-            });
-        }
-        
-        let runSearch = function (keyword) {
-            let url = ''.concat(baseURL, 'search/movie?api_key=', APIKEY, '&query=', keyword);
-            fetch(url)
-            .then(result=>result.json())
-            .then((data)=>{
-                //process the returned data
-                document.getElementById('output').innerHTML = JSON.stringify(data, null, 4);
-                //work with results array...
-                
-            })
-        }
-        
-        document.addEventListener('DOMContentLoaded', getConfig);
-        /*******************************
-        SAMPLE SEARCH RESULTS DATA
-        { "vote_count": 2762, 
-            "id": 578, 
-            "video": false, 
-            "vote_average": 7.5, 
-            "title": "Jaws", 
-            "popularity": 16.273358, 
-            "poster_path": "/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg", 
-            "original_language": "en", 
-            "original_title": "Jaws", 
-            "genre_ids": [ 27, 53, 12 ], 
-            "backdrop_path": "/slkPgAt1IQgxZXNrazEcOzhAK8f.jpg", 
-            "adult": false, 
-            "overview": "An insatiable great white shark terrorizes the townspeople of Amity Island, The police chief, an oceanographer and a grizzled shark hunter seek to destroy the bloodthirsty beast.", 
-            "release_date": "1975-06-18" 
-        }
-        *******************************/
-    </script>

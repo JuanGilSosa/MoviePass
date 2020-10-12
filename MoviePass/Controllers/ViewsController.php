@@ -25,9 +25,9 @@
             require_once(VIEWS_PATH."addCine.php");
         }
 
-        public function ShowListView()
+        public function ShowMoviesListView()
         {
-            //require_once(VIEWS_PATH."usersList.php");
+            require_once(VIEWS_PATH."moviesList.php");
         }
 
     }
