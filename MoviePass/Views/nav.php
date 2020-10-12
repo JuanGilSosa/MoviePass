@@ -29,7 +29,7 @@
               <a class="nav-link js-scroll-trigger text-white" href="#contact">Contacto</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger text-white" href="<?php echo VIEWS_PATH. "listMovies.php"?>">Lista Peliculas</a>
+              <a class="nav-link js-scroll-trigger text-white" href="<?php echo FRONT_ROOT. "Pelicula/ShowListMovies"?>">Lista Peliculas</a>
             </li>
             
           </ul>
