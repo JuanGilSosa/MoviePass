@@ -1,5 +1,18 @@
 <?php
     require_once('nav.php');
+
+    use DAO\PaisDAO as PaisDAO;
+    use Models\Ubicacion\Pais as Pais;
+    use DAO\ProvinciaDAO as ProvinciaDAO;
+    use Models\Ubicacion\Provincia as Provincia;
+
+    $paisDAO = new PaisDAO(); 
+    $paises = $paisDAO->GetAll();
+
+    $provinciaDAO = new ProvinciaDAO();
+    $provincias = $provinciaDAO->GetAll();
+
+
 ?>
 <main id="page-top" class="no-nav py-5 height-100">
      <section id="listado" class="mb-5">
@@ -72,16 +85,50 @@
                          </div>
                     </div>
                     <div class="row">    
-                         <div class="col-lg-6">
-                              <div class="form-group">
-                                   <label for="">Provincia</label>
-                                   <input type="text" name="provincia" value="" class="form-control" placeholder="Ingrese Provincia" required>
-                              </div>
-                         </div>
+                         
                          <div class="col-lg-6">
                               <div class="form-group">
                                    <label for="">Pais</label>
-                                   <input type="text" name="pais" value="" class="form-control" placeholder="Ingrese Pais" required>
+                                   <select name="pais" class="form-control" placeholder="Seleccione su Pais" required>
+                                   <?php
+                                             foreach ($paises as $pais)
+                                             {
+                                                  $name = $pais->getPais();
+                                                  $idPais = $pais->getId();
+                                                  
+                                                  ?>
+                                                  <option value="<?php echo $idPais?>"><?php echo $name?></option>
+                                                  
+                                             <?php 
+                                             }
+                                             ?>
+                                   </select>
+                              </div>
+                         </div>
+                         <?php     
+                    
+                                             echo "Aca" . $_POST["pais"];
+                         ?>
+                         <div class="col-lg-6">
+                              <div class="form-group">
+                                   <label for="">Provincia</label>
+                                   <select name="provincia" class="form-control" placeholder="Seleccione su Provincia" required>
+                                   <?php
+                                             $idPaisSeleccionado = $_POST["pais"];
+
+                                             echo "Aca." . $idPaisSeleccionado;
+
+                                             foreach ($provinciasPorPais as $provincia)
+                                             {
+                                                  $name = $provincia->getName();
+                                                  $idProvincia = $provincia->getId();
+                                                  
+                                                  ?>
+                                                  <option value="<?php echo $idProvincia?>"><?php echo $provincia?></option>
+                                             <?php 
+                                             }
+                                             ?>
+                                   </select>
                               </div>
                          </div>
                     </div>
