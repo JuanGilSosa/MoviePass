@@ -11,7 +11,7 @@
         private $id;
         private $adult;
         private $backdrop_path;
-        private $original_lenguaje;
+        private $original_language;
         private $original_title;
         private $genre_ids; #arreglo de generos
         private $title;
@@ -21,7 +21,7 @@
 
         public function __construct (
             $popularity, $vote_count, $video, $poster_path,
-            $id, $adult, $backdrop_path, $original_lenguaje,
+            $id, $adult, $backdrop_path, $original_language,
             $original_title, $genre_ids, $title, $vote_average,
             $overview, $release_date
         )
@@ -33,7 +33,7 @@
             $this->id = $id;
             $this->adult = $adult;
             $this->backdrop_path = $backdrop_path;
-            $this->original_lenguaje = $original_lenguaje;
+            $this->original_language = $original_language;
             $this->original_title = $original_title;
             $this->genre_ids = $genre_ids;
             $this->title = $title;
@@ -42,7 +42,7 @@
             $this->release_date = $release_date;
         }
 
-        public function getPoularity(){return $this->popularity;}
+        public function getPopularity(){return $this->popularity;}
 
         public function getVoteCount(){return $this->vote_count;}
         
@@ -56,7 +56,7 @@
         
         public function getBackdropPath(){return $this->backdrop_path;}
         
-        public function getOriginalLenguaje(){return $this->original_lenguaje;}
+        public function getOriginalLanguage(){return $this->original_language;}
         
         public function getOriginalTitle(){return $this->original_title;}
         
