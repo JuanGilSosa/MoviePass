@@ -4,73 +4,73 @@
 
     class Pelicula
     {
+        private $popularity;
+        private $vote_count;
+        private $video;
+        private $poster_path;
         private $id;
-        private $pelicula;
-        private $categoria;
-        private $duracion;
-        private $idGenero;
+        private $adult;
+        private $backdrop_path;
+        private $original_lenguaje;
+        private $original_title;
+        private $genre_ids; #arreglo de generos
+        private $title;
+        private $vote_average;
+        private $overview;
+        private $release_date;
 
-
-        public function __construct ($pelicula, $categoria, $duracion, $genero)
+        public function __construct (
+            $popularity, $vote_count, $video, $poster_path,
+            $id, $adult, $backdrop_path, $original_lenguaje,
+            $original_title, $genre_ids, $title, $vote_average,
+            $overview, $release_date
+        )
         {
-            $this->pelicula = $pelicula;
-            $this->categoria = $categoria;
-            $this->duracion = $duracion;
-            $this->genero = $genero;
-        }
-
-        public function getId()
-        {
-            return $this->id;
-        }
-
-        public function getPelicula()
-        {
-            return $this->pelicula;
-        }
-
-        public function getCategoria()
-        {
-            return $this->categoria;
-        }
-
-        public function getDuracion()
-        {
-            return $this->duracion;
-        }
-
-        public function getIdGenero()
-        {
-            return $this->idGenero;
-        }
-
-        public function setId($id)
-        {
+            $this->popularity = $popularity;
+            $this->vote_count = $vote_count;
+            $this->video = $video;
+            $this->poster_path = $poster_path;
             $this->id = $id;
+            $this->adult = $adult;
+            $this->backdrop_path = $backdrop_path;
+            $this->original_lenguaje = $original_lenguaje;
+            $this->original_title = $original_title;
+            $this->genre_ids = $genre_ids;
+            $this->title = $title;
+            $this->vote_average = $vote_average;
+            $this->overview = $overview;
+            $this->release_date = $release_date;
         }
 
-        public function setPelicula($pelicula)
-        {
-            $this->pelicula = $pelicula;
-        }
+        public function getPoularity(){return $this->popularity;}
 
-        public function setCategoria($categoria)
-        {
-            $this->categoria = $categoria;
-        }
-
-        public function setDuracion($duracion)
-        {
-            $this->duracion = $duracion;
-        }
-
-        public function setIdCategoria($idGenero)
-        {
-            $this->idGenero = $idGenero;
-        }
-
-
+        public function getVoteCount(){return $this->vote_count;}
+        
+        public function isVideo(){return $this->video;}
+        
+        public function getPosterPath(){return $this->poster_path;}
+        
+        public function getId(){return $this->id;}
+        
+        public function isAdult(){return $this->adult;}
+        
+        public function getBackdropPath(){return $this->backdrop_path;}
+        
+        public function getOriginalLenguaje(){return $this->original_lenguaje;}
+        
+        public function getOriginalTitle(){return $this->original_title;}
+        
+        public function getGenreIds(){return $this->genre_ids;}
+        
+        public function getTitle(){return $this->title;}
+        
+        public function getVoteAverage(){return $this->vote_average;}
+        
+        public function getOverview(){return $this->overview;}
+        
+        public function getReleaseDate(){return $this->release_date;}
     }
+    
 
 
 ?>
