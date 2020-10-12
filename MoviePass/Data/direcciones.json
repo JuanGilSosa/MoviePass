@@ -1,23 +1,30 @@
 [
     {
         "id": 1,
-        "calle": "Diagonal Alberdi",
-        "numero": "2659",
-        "piso": "",
-        "departamento": ""
-    },
-    {
-        "id": 2,
-        "calle": "Diagonal Alberdi",
-        "numero": "2659",
+        "calle": "Avenida Siempre Viva",
+        "numero": "843",
         "piso": "2",
         "departamento": ""
     },
     {
+        "id": 2,
+        "calle": "Constitucion",
+        "numero": "10101",
+        "piso": "4",
+        "departamento": ""
+    },
+    {
         "id": 3,
-        "calle": "Catamarca",
-        "numero": "1554",
+        "calle": "Fontitufion",
+        "numero": "7006",
         "piso": "3",
+        "departamento": ""
+    },
+    {
+        "id": 4,
+        "calle": "asdasdasd",
+        "numero": "123123",
+        "piso": "123",
         "departamento": ""
     }
 ]

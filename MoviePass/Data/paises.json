@@ -1,0 +1,38 @@
+[
+    {
+        "nombre" : "Argentina",
+        "id" : 0
+    },
+    {
+        "nombre" : "Venezuela",
+        "id" : 1
+    },
+    {
+        "nombre" : "Chile",
+        "id" : 2
+    },
+    {
+        "nombre" : "Uruguay",
+        "id" : 3
+    },
+    {
+        "nombre" : "Paraguay",
+        "id" : 4
+    },
+    {
+        "nombre" : "Peru",
+        "id" : 5
+    },
+    {
+        "nombre" : "Bolivia",
+        "id" : 6
+    },
+    {
+        "nombre" : "Ecuador",
+        "id" : 7
+    },
+    {
+        "nombre" : "Colombia",
+        "id" : 8
+    }
+]
