@@ -47,7 +47,6 @@
                 $valuesArray["email"] = $cine->getEmail();
                 $valuesArray["numeroDeContacto"] = $cine->getNumeroDeContacto();
                 $valuesArray["idDireccion"] = $cine->getIdDireccion();
-                
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -75,7 +74,7 @@
                     $cine->setEmail($valuesArray["email"]);
                     $cine->setNumeroDeContacto($valuesArray["numeroDeContacto"]);
                     $cine->setIdDireccion($valuesArray["idDireccion"]);
-
+                    
                     array_push($this->cines, $cine);
                 }
             }
