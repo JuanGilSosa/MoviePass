@@ -25,7 +25,7 @@
 
         public function __construct(){
             $this->cineDAO = new CineDAO();
-            $this->localidadDAO = new CiudadDAO();
+            $this->ciudadDAO = new CiudadDAO();
             $this->direccionDAO = new DireccionDAO();
             $this->paisDAO = new PaisDAO();
         }
@@ -47,13 +47,13 @@
             $cines = $this->cineDAO->GetAll();
             $direcciones = $this->direccionDAO->GetAll();
             $ciudad = $this->ciudadDAO->GetAll();
-            #$paises = $this->paisDAO->GetAll();
+            $paises = $this->paisDAO->GetAll();
 
             require_once(VIEWS_PATH."cinesList.php");
         }
 
         public function Add(
-            $nombre, $email, $numeroDeContacto, 
+            $nombre, $email, $numeroDeContacto,
             $calle, $numero, $piso, $departamento, 
             $ciudad, $codigoPostal, 
             $provincia, 
@@ -62,17 +62,17 @@
         {
             $cine = new Cine($nombre, $email, $numeroDeContacto);
             $direccion = new Direccion($calle, $numero, $piso, $departamento);
-            $ciudad = new Ciudad($ciudad, $codigoPostal);
-            $provincia = new Provincia($provincia);
-            $pais = new Pais($pais);
+            #$ciudad = new Ciudad($ciudad, $codigoPostal);
+            #$provincia = new Provincia($provincia);
+            #$pais = new Pais($pais);
 
             
 
             $this->cineDAO->Add($cine);
             $this->direccionDAO->Add($direccion);
-            $this->ciudadDAO->Add($ciudad);
-            $this->provinciaDAO->Add($provincia);
-            $this->paisDAO->Add($pais);
+            #$this->ciudadDAO->Add($ciudad);
+            #$this->provinciaDAO->Add($provincia);
+            #$this->paisDAO->Add($pais);
 
 
             //ACA SE GUARDARIA EN TABLA CINESxLOCALIDADxDIRECCION? 

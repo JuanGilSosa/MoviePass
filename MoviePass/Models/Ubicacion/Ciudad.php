@@ -4,15 +4,18 @@
 
     class Ciudad
     {
-        private $ciudad;
+        private $id;
+        private $name;
         private $codigoPostal;
         private $idProvincia;
+        private $idPais;
 
-        public function __construct($ciudad = "", $codigoPostal = "", $provincia = "", $idPais = "")
+        public function __construct($id = "", $name = "", $codigoPostal = "", $idProvincia = "", $idPais = "")
         {
-            $this->ciudad = $ciudad;
+            $this->id = $id;
+            $this->name = $name;
             $this->codigoPostal = $codigoPostal;
-            $this->provincia = $provincia;
+            $this->idProvincia = $idProvincia;
             $this->idPais = $idPais;
         }        
 
@@ -20,8 +23,8 @@
             return $this->id;
         }
 
-        public function getCiudad() {
-            return $this->ciudad;
+        public function getName() {
+            return $this->name;
         }
 
         public function getCodigoPostal() {
@@ -32,12 +35,16 @@
             return $this->idProvincia;
         }
 
+        public function getIdPais() {
+            return $this->idPais;
+        }
+
         public function setId($id) {
             $this->id = $id;
         }
 
-        public function setCiudad($ciudad){
-            $this->ciudad = $ciudad;
+        public function setName($name){
+            $this->name = $name;
         }
 
         public function setCodigoPostal($codigoPostal)
@@ -48,6 +55,10 @@
         public function setIdProvincia($idProvincia)
         {
             $this->idProvincia = $idProvincia;
+        }
+
+        public function setIdPais($idPais) {
+            $this->idPais = $idPais;
         }
 
     }

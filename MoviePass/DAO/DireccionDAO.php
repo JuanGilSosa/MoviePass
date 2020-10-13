@@ -27,6 +27,19 @@
             return $this->direcciones;
         }
 
+        public function GetById ($idDireccion)
+        {
+            $this->RetrieveData();
+
+            $home = new Direccion();
+
+            foreach($this->direcciones as $direccion){
+                if ($direccion->getId() == $idDireccion)
+                    $home = $direccion; 
+            }
+
+            return $home;
+        }
         public function GetByCodigoPostal($codigoPostal)
         {
             $this->RetrieveData();

@@ -3,24 +3,49 @@
         "id": 1,
         "nombre": "Cine Diagonal",
         "email": "user@myapp.com",
-        "numeroDeContacto": "1156425716"
+        "numeroDeContacto": "1156425716",
+        "idCiudad": 1,
+        "idProvincia": 1,
+        "idPais": 1,
+        "idDireccion": 1
     },
     {
         "id": 2,
         "nombre": "Cine Diagonal",
         "email": "user@myapp.com",
-        "numeroDeContacto": "1156425716"
+        "numeroDeContacto": "1156425716",
+        "idCiudad": 3,
+        "idProvincia": 2,
+        "idPais": 1,
+        "idDireccion": 2
     },
     {
         "id": 3,
         "nombre": "Cine Los Gallegos",
         "email": "matias@gmail.com",
-        "numeroDeContacto": "1156425716"
+        "numeroDeContacto": "1156425716",
+        "idCiudad": 2,
+        "idProvincia": 1,
+        "idPais": 1,
+        "idDireccion": 3
     },
     {
         "id": 4,
         "nombre": "Cine Diagonal",
         "email": "user@myapp.com",
-        "numeroDeContacto": "1156425716"
+        "numeroDeContacto": "1156425716",
+        "idCiudad": 1,
+        "idPais": 1,
+        "idDireccion": 2
+    },
+    {
+        "id": 5,
+        "nombre": "Shopping Carlos Paz",
+        "email": "finemaCarlosPaz@FinemaFenter.com",
+        "numeroDeContacto": "3415789465",
+        "idCiudad": 4,
+        "idProvincia": 3,
+        "idPais": 1,
+        "idDireccion": 4
     }
 ]

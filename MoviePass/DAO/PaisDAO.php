@@ -32,11 +32,12 @@
             $this->RetrieveData();
 
             $pais = new Pais();
-
+            $country;
             foreach($this->paises as $pais){
                 if ($pais->getId() == $idPais)
-                return $pais;
+                $country = $pais;
             }
+            return $country;
 
             
         }

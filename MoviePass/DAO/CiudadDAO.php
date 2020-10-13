@@ -25,6 +25,20 @@
             return $this->ciudades;
         }
 
+        public function GetById ($idCiudad)
+        {
+            $this->RetrieveData();
+
+            $city;
+            foreach($this->ciudades as $ciudad){
+                if ($ciudad->getId() == $idCiudad)
+                    $city = $ciudad; 
+            }
+            
+            return $city;
+
+        }
+
         public function GetByCodigoPostal($codigoPostal)
         {
             $this->RetrieveData();
@@ -76,9 +90,11 @@
                 foreach($arrayToDecode as $valuesArray)
                 {
                     $ciudad = new Ciudad();
-                    $ciudad->setCiudad($valuesArray["ciudad"]);
+                    $ciudad->setId($valuesArray["id"]);
+                    $ciudad->setName($valuesArray["name"]);
                     $ciudad->setCodigoPostal($valuesArray["codigoPostal"]);
-                    $ciudad->setIdProvincia($valuesArray["provincia"]);
+                    $ciudad->setIdProvincia($valuesArray["idProvincia"]);
+                    $ciudad->setIdPais($valuesArray["idPais"]);
 
                     array_push($this->ciudades, $ciudad);
                 }
