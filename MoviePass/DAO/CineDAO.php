@@ -1,15 +1,15 @@
 <?php
     namespace DAO;
 
-    use DAO\ICineDAO as ICineDAO;
+    use DAO\IDAO as IDAO;
     use Models\Cine\Cine as Cine;
 
-    class CineDAO implements ICineDAO
+    class CineDAO implements IDAO
     {
         private $cines = array();
         private $fileName = 'Data/cines.json';
 
-        public function Add(Cine $cine)
+        public function Add($cine)
         {
             $this->RetrieveData();
 
@@ -25,6 +25,14 @@
             $this->RetrieveData();
 
             return $this->cines;
+        }
+
+        public function Delete($idUser){
+
+        }
+
+        public function Update($user){
+            
         }
 
         private function SaveData()
@@ -51,7 +59,7 @@
 
         private function RetrieveData()
         {
-            $this->studentList = array();
+            $this->cines = array();
 
             if(file_exists($this->fileName))
             {
@@ -66,8 +74,9 @@
                     $cine->setNombre($valuesArray["nombre"]);
                     $cine->setEmail($valuesArray["email"]);
                     $cine->setNumeroDeContacto($valuesArray["numeroDeContacto"]);
-                    //$cine->setDireccion($valuesArray["direccion"]);
-                    //$cine->setLocalidad($valuesArray["localidad"]);
+                    $cine->setIdDireccion($valuesArray["idDireccion"]);
+                    $cine->setIdCiudad($valuesArray["idCiudad"]);
+                    $cine->setIdPais($valuesArray["idPais"]);
 
                     array_push($this->cines, $cine);
                 }

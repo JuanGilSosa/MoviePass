@@ -1,15 +1,15 @@
 <?php
     namespace DAO;
 
-    use DAO\IDireccionDao as IDireccionDao;
+    use DAO\IDAO as IDAO;
     use Models\Ubicacion\Direccion as Direccion;
 
-    class DireccionDAO implements IDireccionDAO
+    class DireccionDAO implements IDAO
     {
         private $direcciones = array();
         private $fileName = 'Data/direcciones.json';
 
-        public function Add(Direccion $direccion)
+        public function Add($direccion)
         {
             $this->RetrieveData();
 
@@ -27,6 +27,19 @@
             return $this->direcciones;
         }
 
+        public function GetById ($idDireccion)
+        {
+            $this->RetrieveData();
+
+            $home = new Direccion();
+
+            foreach($this->direcciones as $direccion){
+                if ($direccion->getId() == $idDireccion)
+                    $home = $direccion; 
+            }
+
+            return $home;
+        }
         public function GetByCodigoPostal($codigoPostal)
         {
             $this->RetrieveData();
@@ -39,6 +52,14 @@
             }
 
             return $home;
+        }
+
+        public function Delete($idUser){
+
+        }
+
+        public function Update($user){
+            
         }
 
         private function SaveData()

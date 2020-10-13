@@ -1,5 +1,22 @@
 <?php
     require_once('nav.php');
+
+    use DAO\PaisDAO as PaisDAO;
+    use Models\Ubicacion\Pais as Pais;
+    use DAO\ProvinciaDAO as ProvinciaDAO;
+    use Models\Ubicacion\Provincia as Provincia;
+    use DAO\CiudadDAO as CiudadDAO;
+    use Models\Ubicacion\Ciudad as Ciudad;
+
+    $paisDAO = new PaisDAO(); 
+    $paises = $paisDAO->GetAll();
+
+    $provinciaDAO = new ProvinciaDAO();
+    $provincias = $provinciaDAO->GetAll();
+
+    $ciudadDAO = new CiudadDAO();
+    $ciudades = $ciudadDAO->GetAll();
+
 ?>
 <main id="page-top" class="no-nav py-5 height-100">
      <section id="listado" class="mb-5">
@@ -61,7 +78,19 @@
                          <div class="col-lg-8">
                               <div class="form-group">
                                    <label for="">Ciudad</label>
-                                   <input type="text" name="localidad" value="" placeholder="Ingrese Localidad" class="form-control" required>
+                                   <select name="pais" class="form-control" placeholder="Seleccione su Ciudad" required>
+                                   <?php
+                                             foreach ($ciudades as $ciudad)
+                                             {
+                                                  $name = $ciudad->getName();
+                                                  $idCiudad = $ciudad->getId();
+                                                  ?>
+                                                  <option value="<?php echo $idCiudad?>"><?php echo $name?></option>
+                                                  
+                                             <?php 
+                                             }
+                                             ?>
+                                   </select>
                               </div>
                          </div>
                          <div class="col-lg-4">
@@ -72,27 +101,43 @@
                          </div>
                     </div>
                     <div class="row">    
-                         <div class="col-lg-6">
-                              <div class="form-group">
-                                   <label for="">Provincia</label>
-                                   <input type="text" name="provincia" value="" class="form-control" placeholder="Ingrese Provincia" required>
-                              </div>
-                         </div>
+                         
                          <div class="col-lg-6">
                               <div class="form-group">
                                    <label for="">Pais</label>
-                                   <select class="form-control" name="paises" id="">
-                                        <option value="0">Argentina</option>
-                                        <option value="1">Venezuela</option>
-                                        <option value="2">Chile</option>
-                                        <option value="3">Uruguay</option>
-                                        <option value="4">Paraguay</option>
-                                        <option value="5">Peru</option>
-                                        <option value="6">Bolivia</option>
-                                        <option value="7">Ecuador</option>
-                                        <option value="8">Colombia</option>
+                                   <select name="pais" class="form-control" placeholder="Seleccione su Pais" required>
+                                   <?php
+                                             foreach ($paises as $pais)
+                                             {
+                                                  $name = $pais->getPais();
+                                                  $idPais = $pais->getId();
+                                                  ?>
+                                                  <option value="<?php echo $idPais?>"><?php echo $name?></option>
+                                                  
+                                             <?php 
+                                             }
+                                             ?>
                                    </select>
-                                   <!--<input type="text" name="pais" value="" class="form-control" placeholder="Ingrese Pais" required>-->
+                              </div>
+                         </div>
+                         
+                         <div class="col-lg-6">
+                              <div class="form-group">
+                                   <label for="">Provincia</label>
+                                   <select name="provincia" class="form-control" placeholder="Seleccione su Provincia" required>
+                                   <?php
+
+                                             foreach ($provincias as $provincia)
+                                             {
+                                                  $name = $provincia->getName();
+                                                  $idProvincia = $provincia->getId();
+                                                  
+                                                  ?>
+                                                  <option value="<?php echo $idProvincia?>"><?php echo $name?></option>
+                                             <?php 
+                                             }
+                                             ?>
+                                   </select>
                               </div>
                          </div>
                     </div>

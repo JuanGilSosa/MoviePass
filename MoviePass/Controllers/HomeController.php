@@ -7,5 +7,6 @@
         {
             require_once(VIEWS_PATH."loginForm.php");
         }        
+        
     }
 ?>

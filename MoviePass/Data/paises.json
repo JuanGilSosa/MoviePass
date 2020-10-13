@@ -1,38 +1,19 @@
 [
     {
-        "nombre" : "Argentina",
-        "id" : 0
+        "id": 1,
+        "pais": "Argentina"
     },
     {
-        "nombre" : "Venezuela",
-        "id" : 1
+        "id": 2,
+        "pais": "Brasil"
     },
     {
-        "nombre" : "Chile",
-        "id" : 2
+        "id": 3,
+        "pais": "Chile"
     },
     {
-        "nombre" : "Uruguay",
-        "id" : 3
-    },
-    {
-        "nombre" : "Paraguay",
-        "id" : 4
-    },
-    {
-        "nombre" : "Peru",
-        "id" : 5
-    },
-    {
-        "nombre" : "Bolivia",
-        "id" : 6
-    },
-    {
-        "nombre" : "Ecuador",
-        "id" : 7
-    },
-    {
-        "nombre" : "Colombia",
-        "id" : 8
+        "id": 4,
+        "pais": "Uruguay"
     }
+
 ]

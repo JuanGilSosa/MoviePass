@@ -2,18 +2,20 @@
 
     namespace Models\Ubicacion;
 
-    class Localidad
+    class Ciudad
     {
-        private $localidad;
+        private $id;
+        private $name;
         private $codigoPostal;
-        private $provincia;
+        private $idProvincia;
         private $idPais;
 
-        public function __construct($localidad = "", $codigoPostal = "", $provincia = "", $idPais="")
+        public function __construct($id = "", $name = "", $codigoPostal = "", $idProvincia = "", $idPais = "")
         {
-            $this->localidad = $localidad;
+            $this->id = $id;
+            $this->name = $name;
             $this->codigoPostal = $codigoPostal;
-            $this->provincia = $provincia;
+            $this->idProvincia = $idProvincia;
             $this->idPais = $idPais;
         }        
 
@@ -21,16 +23,16 @@
             return $this->id;
         }
 
-        public function getLocalidad() {
-            return $this->localidad;
+        public function getName() {
+            return $this->name;
         }
 
         public function getCodigoPostal() {
             return $this->codigoPostal;
         }
 
-        public function getProvincia() {
-            return $this->provincia;
+        public function getIdProvincia() {
+            return $this->idProvincia;
         }
 
         public function getIdPais() {
@@ -41,8 +43,8 @@
             $this->id = $id;
         }
 
-        public function setLocalidad($localidad){
-            $this->localidad = $localidad;
+        public function setName($name){
+            $this->name = $name;
         }
 
         public function setCodigoPostal($codigoPostal)
@@ -50,15 +52,15 @@
             $this->codigoPostal = $codigoPostal;
         }
 
-        public function setProvincia($provincia)
+        public function setIdProvincia($idProvincia)
         {
-            $this->provincia = $provincia;
+            $this->idProvincia = $idProvincia;
         }
 
-        public function setIdPais($idPais)
-        {
+        public function setIdPais($idPais) {
             $this->idPais = $idPais;
         }
+
     }
 
 

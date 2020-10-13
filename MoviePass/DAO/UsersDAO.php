@@ -3,7 +3,8 @@
 
     use DAO\IAdminDAO as IAdminDAO;
     use Models\Users\Admin as Admin;
-    use Models\Users\Member;
+    use Models\Users\Member as Member;
+    use Models\Users\User as User;
 
     class UsersDAO implements IUsersDAO
     {
@@ -82,47 +83,36 @@
             file_put_contents($this->fileName, $jsonContent);
         }
 
+
         private function RetrieveData()
         {
-            $this->studentList = array();
+                $this->users = array();
+                //echo $this->fileName;
 
-            if(file_exists($this->fileName))
-            {
-                $jsonContent = file_get_contents($this->fileName);
-
-                $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-
-                foreach($arrayToDecode as $valuesArray)
+                if(file_exists("Data/users.json"))
                 {
-                    if (isset($valuesArray["employeeType"]))
+                $jsonContent = file_get_contents("Data/users.json");
+            
+                $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true): array();
+        
+                    foreach ($arrayToDecode as $value)
                     {
-                        $admin = new Admin();
-                        $admin->setId($valuesArray["id"]);
-                        $admin->setDni($valuesArray["dni"]);
-                        $admin->setEmail($valuesArray["email"]);
-                        $admin->setPassword($valuesArray["password"]);
-                        $admin->setFirstName($valuesArray["firstName"]);
-                        $admin->setLastName($valuesArray["lastName"]);
-                        $admin->setEmployeeType($valuesArray["employeeType"]);
-
-                        array_push($this->users, $admin);
-
-                    }else{
-                        $member = new Member();
-                        $member->setId($valuesArray["id"]);
-                        $member->setDni($valuesArray["dni"]);
-                        $member->setEmail($valuesArray["email"]);
-                        $member->setPassword($valuesArray["password"]);
-                        $member->setFirstName($valuesArray["firstName"]);
-                        $member->setLastName($valuesArray["lastName"]);
-                        $member->setIdTarjetaDeCredito($valuesArray["idTarjetaDeCredito"]);
-
-                        array_push($this->users, $member);
+                        $user = new User();
+                        $user->setEmail($value["email"]);
+                        $user->setPassword($value["password"]);
+                        $user->setId($value["id"]);
+                        $user->setFirstName($value["firstName"]);
+                        $user->setLastName($value["lastName"]);
+                        $user->setDni($value["dni"]);
+                        array_push ($this->users, $user);
+                        //sort($this->userList);
                     }
-                    
                 }
-            }
+                else
+                    echo "No existe el archivo";
+
         }
+
 
         private function GetNextId()
         {

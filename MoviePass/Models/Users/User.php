@@ -11,6 +11,14 @@
         protected $firstName;
         protected $lastName;
 
+        public function __construct($dni, $email, $password, $firstName, $lastName){
+            $this->dni = $dni;
+            $this->email= $email;
+            $this->password = $password;
+            $this->firstName = $firstName;
+            $this->lastName = $lastName;
+        }
+
         public function getId(){
             return $this->id;
         }
