@@ -5,22 +5,22 @@
     class Provincia
     {
         private $id;
-        private $name;
+        private $nameProvincia;
         private $idPais;
 
-        /*public function __construct($id, $name, $idPais)
+        public function __construct($id = "", $nameProvincia = "", $idPais = "")
         {
             $this->id = $id;
-            $this->name = $name;
+            $this->nameProvincia = $nameProvincia;
             $this->idPais = $idPais;
-        }*/       
+        }       
 
         public function getId() {
             return $this->id;
         }
 
-        public function getName() {
-            return $this->name;
+        public function getNameProvincia() {
+            return $this->nameProvincia;
         }
 
         public function getIdPais() {
@@ -31,8 +31,8 @@
             $this->id = $id;
         }
 
-        public function setName($name){
-            $this->name = $name;
+        public function setNameProvincia ($nameProvincia){
+            $this->nameProvincia = $nameProvincia;
         }
 
         public function setIdPais($idPais){

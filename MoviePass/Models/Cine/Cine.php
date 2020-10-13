@@ -12,19 +12,14 @@
         private $email;
         private $numeroDeContacto;
         private $idDireccion;
-        private $idCiudad;
-        private $idPais;
         
-        public function __construct($id = "",$nombre = "", $email = "", $numeroDeContacto = "", $idDireccion="", $idCiudad ="", $idProvincia="", $idPais ="")
+        public function __construct($id = "",$nombre = "", $email = "", $numeroDeContacto = "", $idDireccion="")
         {
             $this->id = $id;
-            $this->nombre=$nombre;
-            $this->email=$email;
-            $this->numeroDeContacto=$numeroDeContacto;
+            $this->nombre = $nombre;
+            $this->email = $email;
+            $this->numeroDeContacto = $numeroDeContacto;
             $this->idDireccion = $idDireccion;
-            $this->idCiudad = $idCiudad;
-            $this->idProvincia = $idProvincia;
-            $this->idPais = $idPais;
         }
 
         public function getId(){
@@ -47,17 +42,6 @@
             return $this->idDireccion;
         }
 
-        public function getIdCiudad(){
-            return $this->idCiudad;
-        } 
-        public function getIdProvincia(){
-            return $this->idProvincia;
-        }
-        public function getIdPais()
-        {
-            return $this->idPais;
-        }
-
         public function setId($id){
             $this->id = $id;
         }
@@ -76,14 +60,6 @@
 
         public function setIdDireccion($idDireccion){
             $this->idDireccion = $idDireccion;
-        }
-
-        public function setIdCiudad($idCiudad){
-            $this->idCiudad = $idCiudad;
-        } 
-        public function setIdPais($idPais)
-        {
-            $this->idPais = $idPais;
         }
 
     }

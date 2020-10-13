@@ -70,7 +70,7 @@
             foreach($this->provincias as $provincias)
             {                
                 $valuesArray["id"] = $provincia->getId();
-                $valuesArray["name"] = $provincia->getName();
+                $valuesArray["nameProvincia"] = $provincia->getNameProvincia();
                 $valuesArray["idPais"] = $provincia->getIdPais();
 
                 array_push($arrayToEncode, $valuesArray);
@@ -95,7 +95,7 @@
                 {
                     $provincia = new Provincia();
                     $provincia->setId($valuesArray["id"]);
-                    $provincia->setName($valuesArray["name"]);
+                    $provincia->setNameProvincia($valuesArray["nameProvincia"]);
                     $provincia->setIdPais($valuesArray["idPais"]);
 
                     array_push($this->provincias, $provincia);

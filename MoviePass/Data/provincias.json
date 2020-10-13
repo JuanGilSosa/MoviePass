@@ -1,47 +1,47 @@
 [
     {
         "id": 1,
-        "name": "Buenos Aires",
+        "nameProvincia": "Buenos Aires",
         "idPais": 1
     },
     {
         "id": 2,
-        "name": "Santa Fe",
+        "nameProvincia": "Santa Fe",
         "idPais": 1
     },
     {
         "id": 3,
-        "name": "Córdoba",
+        "nameProvincia": "Córdoba",
         "idPais": 1
     },
     {
         "id": 4,
-        "name": "Paysandú",
+        "nameProvincia": "Paysandú",
         "idPais": 4
     },
     {
         "id": 5,
-        "name": "Salto",
+        "nameProvincia": "Salto",
         "idPais": 4
     },
     {
         "id": 6,
-        "name": "Una provincia de Chile",
+        "nameProvincia": "Una provincia de Chile",
         "idPais": 3
     },
     {
         "id": 7,
-        "name": "Otra provincia de Chile",
+        "nameProvincia": "Otra provincia de Chile",
         "idPais": 3
     },
     {
         "id": 8,
-        "name": "Santa Catarina",
+        "nameProvincia": "Santa Catarina",
         "idPais": 2
     },
     {
         "id": 9,
-        "name": "Rio Grande del Sur",
+        "nameProvincia": "Rio Grande del Sur",
         "idPais": 2
     }
 ]

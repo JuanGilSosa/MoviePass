@@ -27,19 +27,6 @@
             return $this->direcciones;
         }
 
-        public function GetById ($idDireccion)
-        {
-            $this->RetrieveData();
-
-            $home = new Direccion();
-
-            foreach($this->direcciones as $direccion){
-                if ($direccion->getId() == $idDireccion)
-                    $home = $direccion; 
-            }
-
-            return $home;
-        }
         public function GetByCodigoPostal($codigoPostal)
         {
             $this->RetrieveData();
@@ -73,6 +60,7 @@
                 $valuesArray["numero"] = $direccion->getNumero();
                 $valuesArray["piso"] = $direccion->getPiso();
                 $valuesArray["departamento"] = $direccion->getDepartamento();
+                $valuesArray["idCiudad"] = $direccion->getIdCiudad();
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -100,10 +88,25 @@
                     $direccion->setNumero($valuesArray["numero"]);
                     $direccion->setPiso($valuesArray["piso"]);
                     $direccion->setDepartamento($valuesArray["departamento"]);
+                    $direccion->setCodigoPostal($valuesArray["codigoPostal"]);
 
                     array_push($this->direcciones, $direccion);
                 }
             }
+        }
+
+        public function GetById ($idDireccion)
+        {
+            $this->RetrieveData();
+
+            $home = new Direccion();
+            
+
+            foreach($this->direcciones as $direccion){
+                if ($direccion->getId() == $idDireccion)
+                $home = $direccion;
+            }
+            return $home;
         }
 
         private function GetNextId()

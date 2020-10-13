@@ -57,7 +57,7 @@
             foreach($this->paises as $pais)
             {                
                 $valuesArray["id"] = $pais->getId();
-                $valuesArray["pais"] = $pais->getPais();
+                $valuesArray["namePais"] = $pais->getNamePais();
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -81,7 +81,7 @@
                 {
                     $pais = new Pais();
                     $pais->setId($valuesArray["id"]);
-                    $pais->setPais($valuesArray["pais"]);
+                    $pais->setNamePais($valuesArray["namePais"]);
 
                     array_push($this->paises, $pais);
                 }

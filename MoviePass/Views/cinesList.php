@@ -46,16 +46,16 @@
                               { 
                                    $name = $cine->getNombre();
                                    $idDireccion = $cine->getIdDireccion();
-                                   $direccion = $direccionDAO->GetById($cine->getIdDireccion());
-                                   $ciudad = $ciudadDAO->GetById($cine->getIdCiudad());
+                                   $direccion = $direccionDAO->GetById($idDireccion);
+                                   $ciudad = $ciudadDAO->GetByCodigoPostal($direccion->getCodigoPostal());
                                    $provincia = $provinciaDAO->GetById($ciudad->getIdProvincia());
-                                   $pais = $paisDAO->GetById($ciudad->getIdPais());     
+                                   $pais = $paisDAO->GetById($provincia->getIdPais());     
                          ?>
                                    <tr>
                                         <td><?php echo $name ?> </td>
                                         <td><?php echo $direccion->getCalle() . ", " . $direccion->getNumero() . 
                                              ", " . $direccion->getPiso() . ", " . $direccion->getDepartamento() ?> </td>
-                                        <td><?php echo $ciudad->getName() .", " .$provincia->getName() .", ". $pais->getPais() ?> </td>
+                                        <td><?php echo $ciudad->getNameCiudad() .", " .$provincia->getNameProvincia() .", ". $pais->getNamePais() ?> </td>
                                         <td><button class="btn btn-secondary btn-info w-20" type="submit" name="modificar">Modificar</button></td>
                                         <td><button class="btn btn-secondary btn-danger w-20" type="submit" name="eliminar">Eliminar</button></td>
                                    </tr>             

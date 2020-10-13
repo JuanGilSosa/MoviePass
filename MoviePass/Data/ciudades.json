@@ -1,29 +1,25 @@
 [
     {
-        "id":1,
-        "name": "Mar del Plata",
         "codigoPostal": 7600,
+        "nameCiudad": "Mar del Plata",
         "idProvincia": 1,
         "idPais": 1
     },
     {
-        "id":2,
-        "name": "Ciudad Autónoma de Buenos Aires",
         "codigoPostal": 1016,
+        "nameCiudad": "Ciudad Autónoma de Buenos Aires",
         "idProvincia": 1,
         "idPais": 1
     },
     {
-        "id":3,
-        "name": "Santa Fé",
         "codigoPostal": 4555,
+        "nameCiudad": "Santa Fé",
         "idProvincia": 2,
         "idPais": 1
     },
     {
-        "id":4,
-        "name": "Carlos Paz",
         "codigoPostal": 5486,
+        "nameCiudad": "Carlos Paz",
         "idProvincia": 3,
         "idPais": 1
     }
