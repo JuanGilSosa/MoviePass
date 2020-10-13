@@ -32,7 +32,7 @@
         <br>
       </form>
       <form action="<?php echo FRONT_ROOT . 'Members\ShowRegisterForm' ?>" method="POST">
-        <label class="text-white" style="margin-right: 10px;">¿Aun no estas registrado?</label><button class="btn btn-secondary btn-danger w-20">Registrate</button>
+        <label class="text-white" style="margin-right: 10px;">¿Aun no estas registrado?</label><button class="btn btn-secondary btn btn-success w-20">Registrate</button>
       </form>
     </div>
     <?php include('Login-Facebook\index.php');?>

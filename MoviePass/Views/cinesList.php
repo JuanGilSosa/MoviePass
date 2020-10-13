@@ -11,7 +11,7 @@
     use Models\Ubicacion\Provincia as Provincia;
     use DAO\PaisDAO as PaisDAO;
     use Models\Ubicacion\Pais as Pais;
-
+  
     $cineDAO = new CineDAO();
     $cines = $cineDAO->GetAll();
 
@@ -37,12 +37,13 @@
                          <th>Nombre</th>
                          <th>Direccion</th>
                          <th>Ciudad</th>
+                         <th class="text-right">Acciones</th>
+                         <th></th>
                     </thead>
                     <tbody>
                          <?php
                               foreach ($cines as $cine)
-                              {
-                                   
+                              { 
                                    $name = $cine->getNombre();
                                    $idDireccion = $cine->getIdDireccion();
                                    $direccion = $direccionDAO->GetById($cine->getIdDireccion());
@@ -55,8 +56,8 @@
                                         <td><?php echo $direccion->getCalle() . ", " . $direccion->getNumero() . 
                                              ", " . $direccion->getPiso() . ", " . $direccion->getDepartamento() ?> </td>
                                         <td><?php echo $ciudad->getName() .", " .$provincia->getName() .", ". $pais->getPais() ?> </td>
-                                        <td><button type="submit" name="modificar"> Modificar </button></td>
-                                        <td><button type="submit" name="eliminar"> Eliminar </button></td>
+                                        <td><button class="btn btn-secondary btn-info w-20" type="submit" name="modificar">Modificar</button></td>
+                                        <td><button class="btn btn-secondary btn-danger w-20" type="submit" name="eliminar">Eliminar</button></td>
                                    </tr>             
                          <?php 
                               }
