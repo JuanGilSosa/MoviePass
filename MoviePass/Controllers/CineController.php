@@ -4,10 +4,8 @@
     use DAO\CineDAO as CineDAO;
     use Models\Cine\Cine as Cine;
 
-    use DAO\PaisDAO as PaisDAO;
     use DAO\ProvinciaDAO as ProvinciaDAO;
     use DAO\CiudadDAO as CiudadDAO;
-    use DAO\DireccionDAO as DireccionDAO;
 
 
     use Models\Ubicacion\Direccion as Direccion;

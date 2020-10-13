@@ -36,7 +36,7 @@
                     <thead>
                          <th>Nombre</th>
                          <th>Direccion</th>
-                         <th>Localidad</th>
+                         <th>Ciudad</th>
                     </thead>
                     <tbody>
                          <?php

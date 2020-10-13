@@ -1,7 +1,7 @@
 <?php
     require_once('nav.php');
 ?>
-<main class="py-5 height-100">
+<main class="height-100">
     <div class="container text-center table  w-100" style="padding:0px;">
       
       <form action="<?php echo FRONT_ROOT . 'Members\LogIn' ?>" method="POST" class="login-form bg-dark-alpha p-5 mx-auto text-white">
@@ -12,22 +12,22 @@
           </div>
         </div>
         
-        <div class="form-group">
+        <div class="form-group inputContainer">
           <input type="text" name="username" class="form-control form-control-lg logInInputs" placeholder="Ingrese su email">
           
         </div>
         
         
-        <div class="form-group">
+        <div class="form-group inputContainer">
           <input type="password" name="password" class="form-control form-control-lg logInInputs" placeholder="Ingrese constraseña">
-          <?php
+        
+        </div>
+        <?php
               if(isset($message))
               {
-                  echo "<small> $message </small>"; 
+                  echo "<small style='color:#97251bdc'> $message </small><br>"; 
               }
           ?>
-        </div>
-        <br>
         <button class="btn btn-secondary w-50 loginBoton" type="submit">Iniciar Sesión</button>
         <br>
       </form>

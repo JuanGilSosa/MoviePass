@@ -21,4 +21,4 @@
 
      <title>MoviePass</title>
 </head>
-<body id="page-top" class="height-100">
+<body id="page-top" class="height-100 w-100">
