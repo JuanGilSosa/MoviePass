@@ -1,5 +1,4 @@
 <?php 
-    #ignore : $img = file_get_contents('https://api.themoviedb.org/3/configuration?api_key=<<your_key>>');
     require_once('nav.php');
 ?>
 <main class="py-5 mx-auto">
@@ -17,25 +16,16 @@
                     </thead>
                     <tbody>
                          <?php
-
                               foreach ($peliculas as $pelicula){
-                                   $movie = $this->peliculasDAO->GetMovieById($pelicula->getId());
-                                   //print_r($movie);
+                                   #$movie = $this->peliculasDAO->GetMovieById($pelicula->getId());
                                 ?>
                                     <tr>
-                                        <td><?php echo $movie->getTitle() ?></td>
-                                        <td><?php echo $movie->getOverview() ?></td>
-                                        <td><?php
-                                             $count = 0;
-                                             while($count < count($movie->getGenres()))
-                                             {
-                                                  $generos = $movie->getGenres();
-                                                  echo $generos[$count]["name"] . "<br>";
-                                                  $count++;
-                                             }
-                                        ?></td>
-                                        <td><?php echo $movie->getReleaseDate() ?></td>
-                                        <td><?php echo $movie->getVoteAverage() ?></td>
+                                        <td><?php echo $pelicula->getTitle() ?></td>
+                                        <td><?php echo $pelicula->getOverview() ?></td>
+                                        <td><?php $this->peliculasDAO->ShowGenres($this->peliculasDAO->getGenresNamesById($pelicula->getGenres()));?></td>
+                                        <!--$this->peliculasDAO->getGenresNamesById($pelicula->getGenres());-->
+                                        <td><?php echo $pelicula->getReleaseDate() ?></td>
+                                        <td><?php echo $pelicula->getVoteAverage() ?></td>
                                     </tr>
                                 <?php
                             }
