@@ -1,12 +1,13 @@
 <?php
     namespace Controllers;
 
-    use DAO\CineDAO as CineDAO;
     use Models\Cine\Cine as Cine;
 
+    use DAO\CineDAO as CineDAO;
     use DAO\ProvinciaDAO as ProvinciaDAO;
     use DAO\CiudadDAO as CiudadDAO;
-
+    use DAO\DireccionDAO as DireccionDAO;
+    use DAO\PaisDAO as PaisDAO;
 
     use Models\Ubicacion\Direccion as Direccion;
     use Models\Ubicacion\Ciudad as Ciudad;
@@ -46,7 +47,6 @@
             $direcciones = $this->direccionDAO->GetAll();
             $ciudad = $this->ciudadDAO->GetAll();
             $paises = $this->paisDAO->GetAll();
-
             require_once(VIEWS_PATH."cinesList.php");
         }
 
