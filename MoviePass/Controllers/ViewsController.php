@@ -4,6 +4,7 @@
 
     class ViewsController
     {
+
         
         public function ShowIndex()
         {
@@ -23,6 +24,11 @@
         public function ShowAddCineView()
         {
             require_once(VIEWS_PATH."addCine.php");
+        }
+
+        public function ShowCinesList()
+        {
+            require_once(VIEWS_PATH."cinesList.php");
         }
 
         public function ShowMoviesListView()

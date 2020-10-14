@@ -2,7 +2,7 @@
     require_once('nav.php');
 ?>
 <main class="height-100">
-    <div class="container text-center table  w-100" style="padding:0px;">
+    <div class="container text-center table loginTable  w-100" style="padding:0px;">
       
       <form action="<?php echo FRONT_ROOT . 'Members\LogIn' ?>" method="POST" class="login-form bg-dark-alpha p-5 mx-auto text-white">
 

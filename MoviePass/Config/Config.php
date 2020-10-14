@@ -7,6 +7,7 @@ define("VIEWS_PATH", "Views/");
 define("CSS_PATH", FRONT_ROOT.VIEWS_PATH . "css/");
 define("JS_PATH", FRONT_ROOT.VIEWS_PATH . "js/");
 define("FONTAWESOME_PATH", FRONT_ROOT.VIEWS_PATH . "fontawesome/css/all.css");
+define("MDB_PATH", FRONT_ROOT.VIEWS_PATH . "BootstrapMaterialDesign/css/mdb.min.css");
 
 //
 define("API_URL", "https://api.themoviedb.org/3/movie/");
