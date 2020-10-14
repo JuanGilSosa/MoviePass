@@ -82,8 +82,8 @@
                                    <?php
                                              foreach ($ciudades as $ciudad)
                                              {
-                                                  $name = $ciudad->getName();
-                                                  $idCiudad = $ciudad->getId();
+                                                  $name = $ciudad->getNameCiudad();
+                                                  $idCiudad = $ciudad->getCodigoPostal();
                                                   ?>
                                                   <option value="<?php echo $idCiudad?>"><?php echo $name?></option>
                                                   
@@ -109,7 +109,7 @@
                                    <?php
                                              foreach ($paises as $pais)
                                              {
-                                                  $name = $pais->getPais();
+                                                  $name = $pais->getNamePais();
                                                   $idPais = $pais->getId();
                                                   ?>
                                                   <option value="<?php echo $idPais?>"><?php echo $name?></option>
@@ -129,7 +129,7 @@
 
                                              foreach ($provincias as $provincia)
                                              {
-                                                  $name = $provincia->getName();
+                                                  $name = $provincia->getNameProvincia();
                                                   $idProvincia = $provincia->getId();
                                                   
                                                   ?>
