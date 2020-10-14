@@ -10,7 +10,7 @@
                     <form action="<?php echo FRONT_ROOT.'Pelicula/ShowMovies'?>" method="POST">
                          <div>
                               <label><h6>Generos Disponibles</h6></label>
-                              <select name="generos" id="idGenres" class="selectpicker show-tick" required>
+                              <select name="generos" id="idGenres" class="selectpicker show-tick" onchange="this.form.submit()" required>
                               <!-- 
                                    onchange="this.form.submit()"  y asi es mas dinamico sin necesidad de presionar el boton Filtrar
                                    Funciona para el select pero cuando tiene que 
@@ -25,17 +25,25 @@
                          </div>
                     </form>
                </div>
-               <table class="moviesTable table-striped bg-dark text-white">
-                    <thead class="text-center">
-                         <th>Titulo</th>
-                         <th>Desripcion</th>
-                         <th class="moviesHeader">Generos</th>
-                         <th class="moviesHeader">Release Date</th>
-                         <th class="moviesHeader">Promedio</th>
-
-                    </thead>
+              
+               <section id="listado" class="mb-5">
+               <table id="dt-vertical-scroll" class="table  table-striped bg-dark text-white" cellspacing="0" width="100%" style="margin:0px; padding:0px;">
+               <thead>
+                    <tr>
+                         <th class="th-sm">Titulo
+                         </th>
+                         <th class="th-sm">Descripcion
+                         </th>
+                         <th class="th-sm">Generos
+                         </th>
+                         <th class="th-sm">Lanzamiento
+                         </th>
+                         <th class="th-sm">Rating
+                         </th>
+                    </tr>
+               </thead>
                     <tbody>
-                         <?php
+                    <?php
                               foreach ($peliculas as $pelicula){
                                 ?>
                                     <tr>
@@ -49,10 +57,12 @@
                                 <?php
                             }
                          ?>
-                         
-                         </tr>
                     </tbody>
-               </table>
+          </table>
+     </section>
+
+
+
           </div>
      </section>
 </main>

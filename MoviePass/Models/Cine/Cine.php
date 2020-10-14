@@ -13,7 +13,7 @@
         private $numeroDeContacto;
         private $idDireccion;
         
-        public function __construct($id = "",$nombre = "", $email = "", $numeroDeContacto = "", $idDireccion="")
+        public function __construct($id = "", $nombre = "", $email = "", $numeroDeContacto = "", $idDireccion="")
         {
             $this->id = $id;
             $this->nombre = $nombre;

@@ -34,8 +34,7 @@
     ></script>
     
     
-    <script src="<?php echo JS_PATH . "scrolling-nav.js" ?>"></script>
-    <script src="<?php echo JS_PATH . "change-color.js" ?>"></script>
+  <script src="<?php echo JS_PATH . "tables.js" ?>"></script>
 
 </body>
 </html>
