@@ -39,14 +39,22 @@
         #@param valueOfSelect tiene el id del genero
         
         public function ShowMovies($valueOfSelect=""){
-            if($valueOfSelect != 0){
-                $peliculas = $this->peliculasDAO->GetMoviesByGenre($valueOfSelect);
-                $generos = $this->peliculasDAO->GetAllGenres();
-                require_once(VIEWS_PATH.'listMovies.php');
+            if(!$this->HayUsuario()){
+                if($valueOfSelect != 0){
+                    $peliculas = $this->peliculasDAO->GetMoviesByGenre($valueOfSelect);
+                    $generos = $this->peliculasDAO->GetAllGenres();
+                    require_once(VIEWS_PATH.'listMovies.php');
+                }else{
+                    $this->ShowMoviesNowPlaying();
+                }
             }else{
-                $this->ShowMoviesNowPlaying();
+                $this->ShowLogin();
             }
         }
-        
+
+        #TENEMOS QUE HACER UNA INTERFAZ PARA CONTROLLER
+        private function HayUsuario(){
+            return (!isset($_SESSION["loggedUser"]));
+        }
     }
 ?>

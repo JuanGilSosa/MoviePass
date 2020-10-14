@@ -32,7 +32,7 @@
 
         public function ShowAddView()
         {
-            if($this->hayUsuario())
+            if($this->HayUsuario())
             {
                 require_once(VIEWS_PATH."addCine.php");
             } 
@@ -44,18 +44,34 @@
         }
 
         public function ShowListView(){
-            $cines = $this->cineDAO->GetAll();
-            $direccionDAO = new DireccionDAO(); 
-            $ciudadDAO = new CiudadDAO();
-            $provinciaDAO = new ProvinciaDAO();
-            $paisDAO = new PaisDAO();
-            
-            require_once(VIEWS_PATH."cinesList.php");
+            if($this->HayUsuario())
+            {
+                $cines = $this->cineDAO->GetAll();
+                $direccionDAO = new DireccionDAO(); 
+                $ciudadDAO = new CiudadDAO();
+                $provinciaDAO = new ProvinciaDAO();
+                $paisDAO = new PaisDAO();
+                
+                require_once(VIEWS_PATH."cinesList.php");
+            } 
+            else
+            {
+                require_once(VIEWS_PATH."loginForm.php");
+            }
+
         }
         
         public function ShowModifyCine($cineId){
-            $miCine = $this->cineDAO->getCineById($cineId);
-            require_once(VIEWS_PATH."modifyCine.php");
+            if($this->HayUsuario())
+            {
+                $miCine = $this->cineDAO->getCineById($cineId);
+                require_once(VIEWS_PATH."modifyCine.php");
+            } 
+            else
+            {
+                require_once(VIEWS_PATH."loginForm.php");
+            }
+
         }
 
         public function Add(
@@ -91,11 +107,12 @@
 
             if(!isset($_SESSION["loggedUser"]))
             {
-                $this->ShowLogIn;
+                #$this->ShowLogIn;
                 return false;
             }
-            else
+            else{
                 return true;
+            }
         }
 
 
