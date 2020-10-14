@@ -3,7 +3,8 @@
 ?>                
 <main id="page-top" class="no-nav py-5 height-100">
      <section id="listado" class="mb-5">
-          <table id="dt-vertical-scroll" class="table  table-striped bg-dark text-white" cellspacing="0" style="margin:0px; padding:0px;">
+          <div class="container">
+          <table id="dt-vertical-scroll" class="table  table-striped bg-dark text-white" cellspacing="0">
                <thead>
                     <tr>
                          <th class="th-sm">Nombre
@@ -45,6 +46,7 @@
                         <?php }?>  
                     </tbody>
           </table>
+          </div>
      </section>
 
 <main>

@@ -1,6 +1,6 @@
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">
+        <a class="navbar-brand js-scroll-trigger" href="<?php  echo FRONT_ROOT . "Views/ShowIndex"   ?>">
           <i class="fas fa-film"></i><span class="nameHeader text-white">MoviePass</span>
         </a>
         <button
@@ -17,7 +17,7 @@
         <div class="collapse navbar-collapse " id="navbarResponsive">
           <ul class="navbar-nav ml-auto ">
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger text-white" href="<?php  echo FRONT_ROOT . "Views/ShowIndex"   ?>">Entradas</a>
+              <a class="nav-link js-scroll-trigger text-white" href="#entradas">Entradas</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger text-white" href="<?php  echo FRONT_ROOT . "Cine/ShowListView"   ?>">Cines</a>
