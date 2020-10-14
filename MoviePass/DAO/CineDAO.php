@@ -95,6 +95,20 @@
             return $id + 1;
         }
 
+        public function getCineById($idCine):? Cine{
+            $this->RetrieveData();
+            $myCinema = null;
+            $i = 0;$flag = false;
+            $cine = null;
+            while(($i<count($this->cines)) and (!$flag)){
+                $cine = $this->cines[$i];
+                if($cine->getId() == $idCine){
+                    $myCinema = $cine;
+                    $flag = true;
+                }
+            }
+            return $myCinema;
+        }
 
     }
 ?>
