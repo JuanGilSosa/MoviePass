@@ -42,27 +42,29 @@
                     </thead>
                     <tbody>
                          <?php
-                              foreach ($cines as $cine)
-                              { 
+                              foreach ($cines as $cine){ 
                                    $name = $cine->getNombre();
                                    $idDireccion = $cine->getIdDireccion();
                                    $direccion = $direccionDAO->GetById($cine->getIdDireccion());
                                    $ciudad = $ciudadDAO->GetById($cine->getIdCiudad());
                                    $provincia = $provinciaDAO->GetById($ciudad->getIdProvincia());
-                                   $pais = $paisDAO->GetById($ciudad->getIdPais());     
-                         ?>
+                                   $pais = $paisDAO->GetById($ciudad->getIdPais());?>
                                    <tr>
                                         <td><?php echo $name ?> </td>
                                         <td><?php echo $direccion->getCalle() . ", " . $direccion->getNumero() . 
                                              ", " . $direccion->getPiso() . ", " . $direccion->getDepartamento() ?> </td>
                                         <td><?php echo $ciudad->getName() .", " .$provincia->getName() .", ". $pais->getPais() ?> </td>
-                                        <td><button class="btn btn-secondary btn-info w-20" type="submit" name="modificar">Modificar</button></td>
-                                        <td><button class="btn btn-secondary btn-danger w-20" type="submit" name="eliminar">Eliminar</button></td>
+                                        <!-- Estos dos botones mejor los voy a poner en un formulario porque ta dificil obtener value con este framework --> 
+                                        <td>
+                                             <div class="btn-group d-inline-flex">
+                                                  <form action="<?php echo FRONT_ROOT.'Cine/ShowModifyCine' ?>" method="post">
+                                                       <button type="submit" value="<?php echo $cine->getId() ?>" class="btn btn-secondary btn-info w-20" name="modificar">Modificar</button>
+                                                  </form>
+                                                  <button type="submit" value="<?php echo $cine->getId() ?>" class="btn btn-secondary btn-danger w-20" name="eliminar">Eliminar</button>
+                                             </div>
+                                        </td>
                                    </tr>             
-                         <?php 
-                              }
-                        ?>
-                         
+                        <?php }?>  
                          </tr>
                     </tbody>
                </table>
