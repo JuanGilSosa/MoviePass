@@ -7,6 +7,12 @@ define("VIEWS_PATH", "Views/");
 define("CSS_PATH", FRONT_ROOT.VIEWS_PATH . "css/");
 define("JS_PATH", FRONT_ROOT.VIEWS_PATH . "js/");
 define("FONTAWESOME_PATH", FRONT_ROOT.VIEWS_PATH . "fontawesome/css/all.css");
+
+//
+define("API_URL", "https://api.themoviedb.org/3/movie/");
+define("API_KEY", "a67565019e2b3ed72b43911ab7692772");
+
+
 ?>
 
 
