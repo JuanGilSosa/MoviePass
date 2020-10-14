@@ -9,15 +9,16 @@
         private $numero;
         private $piso;
         private $departamento;
-        private $idLocalidad;
+        private $codigoPostal;
 
-        public function __construct( $calle = "", $numero = "", $piso = "", $departamento = "", $idLocalidad = "")
+        public function __construct( $id = "", $calle = "", $numero = "", $piso = "", $departamento = "", $codigoPostal = "")
         {
+            $this->id = $id;
             $this->calle = $calle;
             $this->numero = $numero;
             $this->piso = $piso;
             $this->departamento = $departamento;
-            $this->idLocalidad = $idLocalidad;
+            $this->codigoPostal = $codigoPostal;
         }
 
         public function getId()
@@ -45,9 +46,9 @@
             return $this->departamento;
         }
 
-        public function getIdPais()
+        public function getCodigoPostal()
         {
-            return $this->idLocalidad;
+            return $this->codigoPostal;
         }
 
 
@@ -76,9 +77,9 @@
             $this->departamento = $departamento;
         }
 
-        public function setIdPais($idLocalidad)
+        public function setCodigoPostal($codigoPostal)
         {
-            $this->idLocalidad = $idLocalidad;
+            $this->codigoPostal = $codigoPostal;
         }
 
 

@@ -4,27 +4,31 @@
         "calle": "Avenida Siempre Viva",
         "numero": "843",
         "piso": "2",
-        "departamento": ""
+        "departamento": "",
+        "codigoPostal": 7600
     },
     {
         "id": 2,
         "calle": "Constitucion",
         "numero": "10101",
         "piso": "4",
-        "departamento": ""
+        "departamento": "",
+        "codigoPostal": 1016
     },
     {
         "id": 3,
         "calle": "Fontitufion",
         "numero": "7006",
         "piso": "3",
-        "departamento": ""
+        "departamento": "",
+        "codigoPostal": 4555
     },
     {
         "id": 4,
         "calle": "Calle falsa",
         "numero": "123",
         "piso": "1",
-        "departamento": ""
+        "departamento": "",
+        "codigoPostal": 5486
     }
 ]

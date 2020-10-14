@@ -46,8 +46,7 @@
                 $valuesArray["nombre"] = $cine->getNombre();
                 $valuesArray["email"] = $cine->getEmail();
                 $valuesArray["numeroDeContacto"] = $cine->getNumeroDeContacto();
-                //$valuesArray["direccion"] = $direccion;
-                //$valuesArray["localidad"] = $localidad;
+                $valuesArray["idDireccion"] = $cine->getIdDireccion();
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -75,9 +74,7 @@
                     $cine->setEmail($valuesArray["email"]);
                     $cine->setNumeroDeContacto($valuesArray["numeroDeContacto"]);
                     $cine->setIdDireccion($valuesArray["idDireccion"]);
-                    $cine->setIdCiudad($valuesArray["idCiudad"]);
-                    $cine->setIdPais($valuesArray["idPais"]);
-
+                    
                     array_push($this->cines, $cine);
                 }
             }

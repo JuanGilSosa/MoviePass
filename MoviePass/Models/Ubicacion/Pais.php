@@ -5,26 +5,26 @@
     class Pais
     {
         private $id;
-        private $pais;
+        private $namePais;
 
-        public function __construct($pais = ""){
-            $this->pais = $pais;
+        public function __construct ($namePais = ""){
+            $this->namePais = $namePais;
         }        
 
         public function getId() {
             return $this->id;
         }
 
-        public function getPais() {
-            return $this->pais;
+        public function getNamePais() {
+            return $this->namePais;
         }
 
         public function setId($id) {
             $this->id = $id;
         }
 
-        public function setPais($pais){
-            $this->pais = $pais;
+        public function setNamePais($namePais){
+            $this->namePais = $namePais;
         }
     }
 ?>
