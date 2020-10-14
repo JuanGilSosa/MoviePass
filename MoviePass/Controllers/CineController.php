@@ -49,6 +49,11 @@
             $paises = $this->paisDAO->GetAll();
             require_once(VIEWS_PATH."cinesList.php");
         }
+        
+        public function ShowModifyCine($cineId){
+            $miCine = $this->cineDAO->getCineById($cineId);
+            require_once(VIEWS_PATH."modifyCine.php");
+        }
 
         public function Add(
             $nombre, $email, $numeroDeContacto,
