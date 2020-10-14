@@ -28,11 +28,29 @@
         }
 
         public function Delete($idCine){
+            $newMoviesArray = array();
+            $this->RetrieveData();
 
+            foreach($this->cines as $cine){
+                if ($cine->GetId() != $idCine){
+                    array_push($newMoviesArray, $cine);
+                }
+            }
+
+            $this->cines = $newMoviesArray;
+            $this->SaveData();
         }
 
-        public function Update($idCine){
-            
+        public function Update($updatedCine){
+            $this->RetrieveData();
+
+            foreach($this->cines as $cine){
+                if ($cine->GetId() == $updatedCine->GetId()){
+                    $cine = $updatedCine;
+                }
+            }
+
+            $this->SaveData();
         }
 
         private function SaveData()

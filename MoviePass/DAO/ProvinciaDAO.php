@@ -13,7 +13,7 @@
         {
             $this->RetrieveData();
 
-            $provincias->$this->GetNextId();
+            $provincia->setId($this->GetNextId());
             
             array_push($this->provincias, $provincia);
 
@@ -67,7 +67,7 @@
         {
             $arrayToEncode = array();
 
-            foreach($this->provincias as $provincias)
+            foreach($this->provincias as $provincia)
             {                
                 $valuesArray["id"] = $provincia->getId();
                 $valuesArray["nameProvincia"] = $provincia->getNameProvincia();

@@ -42,23 +42,23 @@
 
             $decode = ($result) ? json_decode($result, true):array();
             if(!empty($decode)){
-				$pelicula = new Pelicula(
-					$decode['poster_path'],
-					$decode['id'],
-					$decode['adult'],
-					$decode['original_language'],
-					$decode['original_title'],
-					$decode['genres'],
-					$decode['vote_average'],
-					$decode['overview'],
-					$decode['release_date'],
-				);
-				$this->SaveGenero($pelicula->getGenres());
-			}
-			*/
+              $pelicula = new Pelicula(
+                $decode['poster_path'],
+                $decode['id'],
+                $decode['adult'],
+                $decode['original_language'],
+                $decode['original_title'],
+                $decode['genres'],
+                $decode['vote_average'],
+                $decode['overview'],
+                $decode['release_date'],
+              );
+              $this->SaveGenero($pelicula->getGenres());
+            }
+            
 
             return $pelicula;
-
+            */
         }
 
         

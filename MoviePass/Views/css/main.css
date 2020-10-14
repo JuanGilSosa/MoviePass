@@ -97,7 +97,7 @@ nav div a span{
    color:#ffffff;
  }
  
- .table{
+ .loginTable{
      max-width: 35%;
      border: none;
      border-radius: 5px;
@@ -108,7 +108,7 @@ nav div a span{
  @media screen and (max-width:1800px){
  
  
-   .table{
+   .loginTable{
        max-width: 35%;
    }
  
@@ -116,7 +116,7 @@ nav div a span{
  
  @media screen and (max-width:1200px){
  
-   .table{
+   .loginTable{
        max-width: 70%;
    }
    
@@ -124,7 +124,7 @@ nav div a span{
  
  @media screen and (max-width:600px){
  
-   .table{
+   .loginTable{
        max-width: 100%;
    }
  }
@@ -298,7 +298,7 @@ span{
 
 
 /***********************************************************************************************/
-
+/**********************************MOVIES LIST STYLES*******************************************/
 .moviesTableContainer
 {
   width:100%;
@@ -310,4 +310,17 @@ span{
   border-radius: 5px;
   padding:25px;
   margin-top: 10%;
+}
+
+/***********************************************************************************************/
+/***********************************CINE LIST VIEW**********************************************/
+/***********************************************************************************************/
+
+
+.tableHeader{
+  padding: 15px;
+}
+
+th{
+  padding: 50px;
 }

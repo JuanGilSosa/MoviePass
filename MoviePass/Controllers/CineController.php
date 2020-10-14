@@ -4,9 +4,9 @@
     use Models\Cine\Cine as Cine;
 
     use DAO\CineDAO as CineDAO;
-    use DAO\ProvinciaDAO as ProvinciaDAO;
-    use DAO\CiudadDAO as CiudadDAO;
     use DAO\DireccionDAO as DireccionDAO;
+    use DAO\CiudadDAO as CiudadDAO;
+    use DAO\ProvinciaDAO as ProvinciaDAO;
     use DAO\PaisDAO as PaisDAO;
 
     use Models\Ubicacion\Direccion as Direccion;
@@ -24,8 +24,9 @@
 
         public function __construct(){
             $this->cineDAO = new CineDAO();
-            $this->ciudadDAO = new CiudadDAO();
             $this->direccionDAO = new DireccionDAO();
+            $this->ciudadDAO = new CiudadDAO();
+            $this->provinciaDAO = new ProvinciaDAO();
             $this->paisDAO = new PaisDAO();
         }
 
@@ -44,9 +45,11 @@
 
         public function ShowListView(){
             $cines = $this->cineDAO->GetAll();
-            $direcciones = $this->direccionDAO->GetAll();
-            $ciudad = $this->ciudadDAO->GetAll();
-            $paises = $this->paisDAO->GetAll();
+            $direccionDAO = new DireccionDAO(); 
+            $ciudadDAO = new CiudadDAO();
+            $provinciaDAO = new ProvinciaDAO();
+            $paisDAO = new PaisDAO();
+            
             require_once(VIEWS_PATH."cinesList.php");
         }
         

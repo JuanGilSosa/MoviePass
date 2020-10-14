@@ -15,6 +15,9 @@
 
      <!-- SCRIPTS FONTAWESOME-->
      <link href="<?php echo FONTAWESOME_PATH ?>" rel="stylesheet">
+    
+     <!-- Material Design Bootstrap -->
+     <link href="<?php echo MDB_PATH ?>" rel="stylesheet">
 
      <!-- Custom styles -->
      <link rel="stylesheet" type="text/css" href="<?php echo CSS_PATH ?>main.css">

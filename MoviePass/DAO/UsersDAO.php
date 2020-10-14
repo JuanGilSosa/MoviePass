@@ -1,4 +1,4 @@
-<?php
+<?php/*
     namespace DAO;
 
     use DAO\IAdminDAO as IAdminDAO;
@@ -6,7 +6,7 @@
     use Models\Users\Member as Member;
     use Models\Users\User as User;
 
-    class UsersDAO implements IUsersDAO
+    class UsersDAO implements IDAO
     {
         private $users = array();
         private $fileName = '../Data/users.json';
@@ -128,5 +128,5 @@
 
 
 
-    }
+    }*/
 ?>
