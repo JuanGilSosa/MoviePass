@@ -80,8 +80,8 @@
                                    <select name="pais" class="form-control" placeholder="Seleccione su Ciudad" required>
                                    <?php
                                              foreach ($ciudades as $ciudad){
-                                                $name = $ciudad->getName();
-                                                $idCiudad = $ciudad->getId();?>
+                                                $name = $ciudad->getNameCiudad();
+                                                $idCiudad = $ciudad->getCodigoPostal();?>
                                                 <option value="<?php echo $idCiudad?>"><?php echo $name?></option>
                                     <?php }?>
                                    </select>
@@ -102,7 +102,7 @@
                                    <select name="pais" class="form-control" placeholder="Seleccione su Pais" required>
                                    <?php
                                              foreach ($paises as $pais){
-                                                $name = $pais->getPais();
+                                                $name = $pais->getNamePais();
                                                 $idPais = $pais->getId();?>
                                                 <option value="<?php echo $idPais?>"><?php echo $name?></option>
                                     <?php }?>
@@ -116,7 +116,7 @@
                                    <select name="provincia" class="form-control" placeholder="Seleccione su Provincia" required>
                                    <?php
                                              foreach ($provincias as $provincia){
-                                                $name = $provincia->getName();
+                                                $name = $provincia->getNameProvincia();
                                                 $idProvincia = $provincia->getId();?>
                                                 <option value="<?php echo $idProvincia?>"><?php echo $name?></option>
                                     <?php }?>

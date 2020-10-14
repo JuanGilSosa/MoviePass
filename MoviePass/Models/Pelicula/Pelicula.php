@@ -9,7 +9,7 @@
         private $adult;
         private $original_language;
         private $title;
-        private $genres; #arreglo de generos
+        private $genres; #arreglo de id de generos
         private $vote_average;
         private $overview;
         private $release_date;
