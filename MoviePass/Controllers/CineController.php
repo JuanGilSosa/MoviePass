@@ -55,6 +55,7 @@
         
         public function ShowModifyCine($cineId){
             $miCine = $this->cineDAO->getCineById($cineId);
+
             require_once(VIEWS_PATH."modifyCine.php");
         }
 
@@ -84,6 +85,23 @@
             //ACA SE GUARDARIA EN TABLA CINESxLOCALIDADxDIRECCION? 
 
             $this->ShowAddView();
+        }
+
+        public function Update(
+            $id, $nombre, $email, $numeroDeContacto
+        )
+        {
+            $cine = new Cine($id, $nombre, $email, $numeroDeContacto, 1);
+            
+            $this->cineDAO->Update($cine);
+
+            $this->ShowListView();
+        }
+
+        public function Delete($idCine)
+        {
+            $this->cineDAO->Delete($idCine);
+            $this->ShowListView();
         }
  
 

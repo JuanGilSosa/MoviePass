@@ -32,7 +32,7 @@
             $this->RetrieveData();
 
             foreach($this->cines as $cine){
-                if ($cine->GetId() != $idCine){
+                if ($cine->getId() != $idCine){
                     array_push($newMoviesArray, $cine);
                 }
             }
@@ -42,15 +42,24 @@
         }
 
         public function Update($updatedCine){
+
             $this->RetrieveData();
+            
+            $newArray = array();
 
             foreach($this->cines as $cine){
-                if ($cine->GetId() == $updatedCine->GetId()){
+                if ($cine->getId() == $updatedCine->getId()){
                     $cine = $updatedCine;
                 }
+                array_push($newArray, $cine);
             }
 
+            //var_dump($newArray);
+
+            $this->cines = $newArray;
+
             $this->SaveData();
+            
         }
 
         private function SaveData()
