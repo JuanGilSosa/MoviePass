@@ -56,7 +56,7 @@
                  
                 $bytes = $this->membersDAO->Add($member);
                 
-                $this->ShowAddCineView();
+                $this->ShowRegisterForm();
                 
                 if($bytes == false){
                     echo "error on save";

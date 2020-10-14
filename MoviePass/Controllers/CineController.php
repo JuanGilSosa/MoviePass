@@ -101,6 +101,23 @@
 
             $this->ShowAddView();
         }
+
+        public function Update(
+            $id, $nombre, $email, $numeroDeContacto
+        )
+        {
+            $cine = new Cine($id, $nombre, $email, $numeroDeContacto, 1);
+            
+            $this->cineDAO->Update($cine);
+
+            $this->ShowListView();
+        }
+
+        public function Delete($idCine)
+        {
+            $this->cineDAO->Delete($idCine);
+            $this->ShowListView();
+        }
  
 
         public function HayUsuario () {

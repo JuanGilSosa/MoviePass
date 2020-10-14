@@ -14,5 +14,13 @@
         "password": "juan123",
         "firstName": "Juan",
         "lastName": "Gil Sosa"
+    },
+    {
+        "id": 3,
+        "dni": "38406741",
+        "email": "matiasportela94@gmail.com",
+        "password": "matias123",
+        "firstName": "Matias",
+        "lastName": "Portela"
     }
 ]
