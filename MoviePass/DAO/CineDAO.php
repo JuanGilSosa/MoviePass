@@ -27,11 +27,11 @@
             return $this->cines;
         }
 
-        public function Delete($idUser){
+        public function Delete($idCine){
 
         }
 
-        public function Update($user){
+        public function Update($idCine){
             
         }
 

@@ -135,8 +135,7 @@
                 array_push($this->generos, $genero);
                 $count++;
             }
-
-		}
+        }
 		
 		/*	
 			Este metodo retorna un string con los generos ordenados respectivamente al arreglo de ids pasados por parametro
@@ -182,8 +181,43 @@
 			return $stringOfGenre;
 		}
 
-
+    /*
+      Retorna un arreglo de peliculas seleccionadas por genero
+    */
+    public function GetMoviesByGenre($idGenre){
+      $this->GetMoviesNowPlaying();
+      $moviesByGenre = array();
+      foreach($this->peliculas as $pelicula){
+        $generosPelicula = $pelicula->getGenres();
+        foreach($generosPelicula as $idGenero){
+          if($idGenero == $idGenre){ #@param idGenre
+            array_push($moviesByGenre, $pelicula);
+          }
+        }
+      }
+      return $moviesByGenre;
     }
+    /*
+      Hacer DAO de generos
+    */
+    private function RetrieveGeneros(){
+      $generos = file_get_contents(
+				'https://api.themoviedb.org/3/genre/movie/list?api_key=48621040dbb9c7f28355bff08c002197&language=es-ES'	
+      );
+      
+      $jsonGenres = ($generos) ? json_decode($generos, true) : array();
+      foreach($jsonGenres['genres'] as $g){
+        $genre = new Genero();
+        $genre->setGenero($g['name']);
+        $genre->setId($g['id']);
+        array_push($this->generos, $g);
+      }
+    }
+    public function GetAllGenres(){
+      $this->RetrieveGeneros();
+      return $this->generos;
+    }
+  }
 
 ?>
 
