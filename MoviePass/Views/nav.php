@@ -1,6 +1,6 @@
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="<?php  echo FRONT_ROOT . "Views/ShowIndex"   ?>">
+        <a class="navbar-brand js-scroll-trigger" href="<?php  echo FRONT_ROOT . "Cine/ShowAddView"   ?>">
           <i class="fas fa-film"></i><span class="nameHeader text-white">MoviePass</span>
         </a>
         <button
