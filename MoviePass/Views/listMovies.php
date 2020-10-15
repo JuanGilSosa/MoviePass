@@ -22,7 +22,6 @@
                                              <option value="<?php echo $g['id'] ?>" required><?php echo $g['name']; ?></option>
                                    <?php }?>
                               </select>
-                              <input type="submit" value="Filtrar">
                          </div>
                     </form>
                </div>
