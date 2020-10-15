@@ -57,6 +57,9 @@
                               </div>
                          </div>
                     </div>
+                    <div class="row justify-content-start" type="hidden">                         
+                         <input type="hidden" name="idDireccion" value="<?php echo $miCine->getIdDireccion()?>" class="form-control">
+                    </div>
 
                     </div>
                     <div class="row">    

@@ -62,7 +62,7 @@
                     echo "error on save";
                 } 
             }else{
-                $this->ShowRegisterForm();
+                $this->ShowLogIn();
             }
 
         }

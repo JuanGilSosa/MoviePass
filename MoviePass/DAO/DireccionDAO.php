@@ -4,31 +4,29 @@
     use DAO\IDAO as IDAO;
     use Models\Ubicacion\Direccion as Direccion;
 
-    class DireccionDAO implements IDAO
-    {
+    class DireccionDAO implements IDAO{
+
         private $direcciones = array();
         private $fileName = 'Data/direcciones.json';
 
-        public function Add($direccion)
-        {
+        public function Add($direccion){
             $this->RetrieveData();
-
+            echo '<h1>'.$this->getNextId().'</h1>';
             $direccion->setId($this->GetNextId());
+            
             
             array_push($this->direcciones, $direccion);
 
             $this->SaveData();
         }
 
-        public function GetAll()
-        {
+        public function GetAll(){
             $this->RetrieveData();
 
             return $this->direcciones;
         }
 
-        public function GetByCodigoPostal($codigoPostal)
-        {
+        public function GetByCodigoPostal($codigoPostal){
             $this->RetrieveData();
 
             $home = new Direccion();
@@ -49,8 +47,7 @@
             
         }
 
-        private function SaveData()
-        {
+        private function SaveData(){
             $arrayToEncode = array();
 
             foreach($this->direcciones as $direccion)
@@ -60,7 +57,7 @@
                 $valuesArray["numero"] = $direccion->getNumero();
                 $valuesArray["piso"] = $direccion->getPiso();
                 $valuesArray["departamento"] = $direccion->getDepartamento();
-                $valuesArray["idCiudad"] = $direccion->getIdCiudad();
+                $valuesArray["codigoPostal"] = $direccion->getCodigoPostal();
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -69,9 +66,9 @@
             
             file_put_contents($this->fileName, $jsonContent);
         }
+        
+        private function RetrieveData(){
 
-        private function RetrieveData()
-        {
             $this->studentList = array();
 
             if(file_exists($this->fileName))
@@ -95,16 +92,14 @@
             }
         }
 
-        public function GetById ($idDireccion)
-        {
+        public function GetById ($idDireccion){
             $this->RetrieveData();
 
             $home = new Direccion();
-            
-
+        
             foreach($this->direcciones as $direccion){
                 if ($direccion->getId() == $idDireccion)
-                $home = $direccion;
+                    $home = $direccion;
             }
             return $home;
         }

@@ -82,16 +82,19 @@
             $pais
         )
         {
-            $cine = new Cine($nombre, $email, $numeroDeContacto);
-            $direccion = new Direccion($calle, $numero, $piso, $departamento);
+            $direccion = new Direccion($calle, $numero, $piso, $departamento, $codigoPostal);
+            
             #$ciudad = new Ciudad($ciudad, $codigoPostal);
             #$provincia = new Provincia($provincia);
             #$pais = new Pais($pais);
 
-            
+            $this->direccionDAO->Add($direccion);
+
+            $dirWithId = $this->direccionDAO->GetByCodigoPostal($direccion->getCodigoPostal());
+            $cine = new Cine($nombre, $email, $numeroDeContacto,$dirWithId->getId());
 
             $this->cineDAO->Add($cine);
-            $this->direccionDAO->Add($direccion);
+            
             #$this->ciudadDAO->Add($ciudad);
             #$this->provinciaDAO->Add($provincia);
             #$this->paisDAO->Add($pais);
@@ -99,15 +102,15 @@
 
             //ACA SE GUARDARIA EN TABLA CINESxLOCALIDADxDIRECCION? 
 
-            $this->ShowAddView();
+            #$this->ShowAddView();
         }
 
         public function Update(
-            $id, $nombre, $email, $numeroDeContacto
+            $id, $nombre, $email, $numeroDeContacto, $direccion
         )
         {
-            $cine = new Cine($id, $nombre, $email, $numeroDeContacto, 1);
-            
+            $cine = new Cine($nombre, $email, $numeroDeContacto, $direccion);
+            $cine->setId($id);
             $this->cineDAO->Update($cine);
 
             $this->ShowListView();
