@@ -11,9 +11,8 @@
         private $departamento;
         private $codigoPostal;
 
-        public function __construct( $id = "", $calle = "", $numero = "", $piso = "", $departamento = "", $codigoPostal = "")
+        public function __construct($calle = "", $numero = "", $piso = "", $departamento = "", $codigoPostal = "")
         {
-            $this->id = $id;
             $this->calle = $calle;
             $this->numero = $numero;
             $this->piso = $piso;
