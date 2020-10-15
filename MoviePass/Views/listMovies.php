@@ -16,6 +16,7 @@
                                    Funciona para el select pero cuando tiene que 
                                    mostrar todas las peliculas no lo hace
                               -->
+                                   <option selected="true" disabled="disabled">Generos</option>
                                    <option value="0">Todos</option>
                                    <?php foreach($generos as $g){ ?>
                                              <option value="<?php echo $g['id'] ?>" required><?php echo $g['name']; ?></option>
