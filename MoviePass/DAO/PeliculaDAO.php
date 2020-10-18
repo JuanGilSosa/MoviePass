@@ -137,17 +137,22 @@
             }
         }
 		
-		/*	
+
+    /*
+        Nota: getGenresNamesById - ShowGenres - getGenreNameById se usan en la linea 53 de la vista 
+                listMovies.php para mostrar los generos de la pelicula
+    */
+    /*	
 			Este metodo retorna un string con los generos ordenados respectivamente al arreglo de ids pasados por parametro
 			@param idGenres es el arreglo con los id de los generos
-		*/
+    */
 		public function getGenresNamesById($idGenres){
 			$generos = file_get_contents(
 				'https://api.themoviedb.org/3/genre/movie/list?api_key=48621040dbb9c7f28355bff08c002197&language=es-ES'	
 			);
 			$jsonGeneros = ($generos) ? json_decode($generos, true) : array();
 			$arrayStringGeneros = array();
-			/* 
+			/*
 				Esta fue  la forma mas optima de buscar y extraer el string de generos a un arreglo
 				Siendo que lo primero que hacemos es obtener el primer elemento del @param $idGenres y 
 				hasta no encontrarlo en la lista de generos traido de la API no avanza. 
@@ -163,14 +168,14 @@
 				$i++;
 			}
 			return $arrayStringGeneros;
-		}
-
+    }
+    
 		public function ShowGenres($stringGenres){
 			for($i = 0;$i<count($stringGenres);$i++){
 				echo '<br>'.$stringGenres[$i];
 			}	
 		}
-
+    
 		public function getGenreNameById($jsonGenres, $idGenre):?string{
 			$stringOfGenre = "";
 			foreach($jsonGenres['genres'] as $g){#$g tendria, por ej.: id": 28,"name": "Action"
