@@ -54,12 +54,12 @@
                 }
                 else
                 {
-                    $rta = "Contraseña incorrecta";
+                    $rta = "Datos incorrecta";
                 }
             }
             else
             {
-                $rta = "Email Incorrecto"; 
+                $rta = "Datos Incorrecto"; 
             }
                          
             return $rta;
