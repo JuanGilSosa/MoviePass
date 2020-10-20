@@ -102,7 +102,7 @@
 
             //ACA SE GUARDARIA EN TABLA CINESxLOCALIDADxDIRECCION? 
 
-            #$this->ShowAddView();
+            $this->ShowAddView();
         }
 
         public function Update(

@@ -11,7 +11,7 @@
 
         public function Add($direccion){
             $this->RetrieveData();
-            echo '<h1>'.$this->getNextId().'</h1>';
+            
             $direccion->setId($this->GetNextId());
             
             

@@ -1,16 +1,1 @@
-[
-    {
-        "id": 3,
-        "nombre": "Cine Los Gallegos",
-        "email": "matias@gmail.com",
-        "numeroDeContacto": "1156425716",
-        "idDireccion": 3
-    },
-    {
-        "id": 4,
-        "nombre": "Shopping Carlos Paz",
-        "email": "finemaCarlosPaz@FinemaFenter.com",
-        "numeroDeContacto": "3415789465",
-        "idDireccion": 4
-    }
-]
+[]
