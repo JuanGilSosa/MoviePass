@@ -27,38 +27,11 @@
             return $this->cines;
         }
 
-        public function Delete($idCine){
-            $newMoviesArray = array();
-            $this->RetrieveData();
+        public function Delete($idUser){
 
-            foreach($this->cines as $cine){
-                if ($cine->getId() != $idCine){
-                    array_push($newMoviesArray, $cine);
-                }
-            }
-
-            $this->cines = $newMoviesArray;
-            $this->SaveData();
         }
 
-        public function Update($updatedCine){
-
-            $this->RetrieveData();
-            
-            $newArray = array();
-
-            foreach($this->cines as $cine){
-                if ($cine->getId() == $updatedCine->getId()){
-                    $cine = $updatedCine;
-                }
-                array_push($newArray, $cine);
-            }
-
-            //var_dump($newArray);
-
-            $this->cines = $newArray;
-
-            $this->SaveData();
+        public function Update($user){
             
         }
 
@@ -119,20 +92,6 @@
             return $id + 1;
         }
 
-        public function getCineById($idCine):? Cine{
-            $this->RetrieveData();
-            $myCinema = null;
-            $i = 0;$flag = false;
-            $cine = null;
-            while(($i<count($this->cines)) and (!$flag)){
-                $cine = $this->cines[$i];
-                if($cine->getId() == $idCine){
-                    $myCinema = $cine;
-                    $flag = true;
-                }
-            }
-            return $myCinema;
-        }
 
     }
 ?>
