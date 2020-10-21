@@ -15,6 +15,7 @@
 
             $member->setId($this->GetNextId());
             array_push($this->members, $member);
+            echo "Aca" . count($this->members);
             $bytes = $this->SaveData();
 
             return $bytes;
@@ -63,7 +64,7 @@
 
         public function RetrieveData()
         {
-            $this->users = array();
+            $this->members = array();
 
             $jsonPath = $this->GetJsonFilePath();
 

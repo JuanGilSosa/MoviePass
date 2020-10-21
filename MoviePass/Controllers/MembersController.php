@@ -32,7 +32,7 @@
             require_once(VIEWS_PATH."loginForm.php");            
         }
 
-        public function ShowRegisterForm()
+        public function ShowRegisterForm($message = "")
         {
             require_once(VIEWS_PATH."registerForm.php");
         }
@@ -47,22 +47,41 @@
             //require_once(VIEWS_PATH."usersList.php");
         }
 
-        public function AddMember($firstName, $lastName, $dni, $email, $password, $checkPassword){
+        public function AddMember($firstName, $lastName, $dni, $email, $password, $checkPassword)
+        {
+            $message = "";
 
-            
-            if($password == $checkPassword)
+            $existeUsuario = $this->FindMemberByEmail($email);
+
+            if(!$existeUsuario)
             {
-                $member = new Member($dni, $email, $password, $firstName, $lastName);
-                 
-                $bytes = $this->membersDAO->Add($member);
-                
-                $this->ShowRegisterForm();
-                
-                if($bytes == false){
-                    echo "error on save";
-                } 
-            }else{
-                $this->ShowLogIn();
+                if($password == $checkPassword)
+                {
+                    $member = new Member($dni, $email, $password, $firstName, $lastName);
+
+                    $bytes = $this->membersDAO->Add($member);
+                    
+                    if($bytes == false){
+                        $message = "No se pudo grabar en este momento.";
+                        $this->ShowRegisterForm($message);
+                    } 
+                    #Grabó correctamente?
+                    else
+                    {
+                        $message = "";
+                        $this->ShowLogIn($message);
+                    }
+                    
+
+                }else{
+                    $message = "Error al verificar contraseña.";
+                    $this->ShowRegisterForm($message);
+                }
+            }
+            else
+            {
+                $message = "El email ingresado ya se encuentra registrado.";
+                $this->ShowRegisterForm($message);
             }
 
         }
@@ -114,12 +133,12 @@
                 }
                 else
                 {
-                    $rta = "Datos incorrecta";
+                    $rta = "Contraseña incorrecta";
                 }
             }
             else
             {
-                $rta = "Datos Incorrecto"; 
+                $rta = "Email Incorrecto"; 
             }
                          
             return $rta;
