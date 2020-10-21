@@ -4,6 +4,12 @@
 <main class="py-5 height-100">
     <div class="text-center">
         <form action="<?php echo FRONT_ROOT . 'Members/AddMember' ?>" class="form-registro p-5 mx-auto" method="POST">
+            <?php
+                if(isset($message))
+                {
+                    echo "<small>" . $message . "</small>";
+                }
+            ?>
             <h2 id="h2-registro">Ingresa tus datos</h2>
             <div class="form-group"> 
                 <label class="p-registro text-white">Nombre</label><input class="input-registro text-white" name="firstName" type="text" placeholder="Mi nombre"></input>
