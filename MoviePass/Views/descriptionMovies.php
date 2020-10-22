@@ -71,7 +71,7 @@
             </div>
 
             <div class="onbcn-embed">
-                <h6><?php echo $trailerKey ?></h6>
+		
                 <div class="top"><p class="title">Trailer</p></div>
                 <div class="middle">
                     <iframe 
