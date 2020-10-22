@@ -30,7 +30,7 @@
             $this->paisDAO = new PaisDAO();
         }
 
-        public function ShowAddView()
+        public function ShowAddView($message = "")
         {
             if($this->HayUsuario())
             {
@@ -43,7 +43,7 @@
                 
         }
 
-        public function ShowListView(){
+        public function ShowListView($message = ""){
             if($this->HayUsuario())
             {
                 $cines = $this->cineDAO->GetAll();
@@ -64,8 +64,10 @@
         public function ShowModifyCine($cineId){
             if($this->HayUsuario())
             {
+            
                 $miCine = $this->cineDAO->getCineById($cineId);
                 require_once(VIEWS_PATH."modifyCine.php");
+                
             } 
             else
             {
@@ -82,27 +84,65 @@
             $pais
         )
         {
-            $direccion = new Direccion($calle, $numero, $piso, $departamento, $codigoPostal);
+            $message = "";
+            $existeCine = $this->cineDAO->FindCineByName($nombre);
+
+            if(!$existeCine)
+            {
+                $existeEmail = $this->cineDAO->FindCineByEmail($email);
+                if(!$existeEmail)
+                {
+                    $existeTelefono = $this->cineDAO->FindCineByTelefono($numeroDeContacto);
+
+                    if(!$existeTelefono)
+                    {
+                        $direccion = new Direccion($calle, $numero, $piso, $departamento, $codigoPostal);
             
-            #$ciudad = new Ciudad($ciudad, $codigoPostal);
-            #$provincia = new Provincia($provincia);
-            #$pais = new Pais($pais);
+                        $existeDireccion = $this->direccionDAO->FindDireccion($direccion);
 
-            $this->direccionDAO->Add($direccion);
+                        if(!$existeDireccion)
+                        {
+                            $existeCodigoPostal = $this->ciudadDAO->GetByCodigoPostal($direccion->getCodigoPostal());
 
-            $dirWithId = $this->direccionDAO->GetByCodigoPostal($direccion->getCodigoPostal());
-            $cine = new Cine($nombre, $email, $numeroDeContacto,$dirWithId->getId());
+                            if(isset($existeCodigoPostal) && $existeCodigoPostal->getCodigoPostal() == $codigoPostal)
+                            { 
+                                $message = "Cine agregado con éxito.";
 
-            $this->cineDAO->Add($cine);
+                                $this->direccionDAO->Add($direccion);
+                                $dirWithId = $this->direccionDAO->FindDireccion($direccion);
+
+                                
+                                $cine = new Cine($nombre, $email, $numeroDeContacto,$dirWithId->getId());
+
+                                $this->cineDAO->Add($cine);
             
-            #$this->ciudadDAO->Add($ciudad);
-            #$this->provinciaDAO->Add($provincia);
-            #$this->paisDAO->Add($pais);
+                                //ACA SE GUARDARIA EN TABLA CINESxLOCALIDADxDIRECCION? 
 
+                                $this->ShowListView($message);
+                            }else{
+                                $message = "El código postal ingresado NO se encuentra registrado";
+                                $this->ShowAddView($message);
+                            }
+                            
 
-            //ACA SE GUARDARIA EN TABLA CINESxLOCALIDADxDIRECCION? 
+                        }else{
+                            $message = "La direccón ingresada ya se encuentra registrada.";
+                            $this->ShowAddView($message);
+                        }
+                    }else{
+                        $message = "El teléfono/celular ingresado ya se encuentra registrado.";
+                        $this->ShowAddView($message);
+                    }
+                }else{
+                    $message = "El email ingresado ya se encuentra registrado.";
+                    $this->ShowAddView($message);
+                }
+            }else{
 
-            $this->ShowAddView();
+                $message = "El nombre ingresado ya se encuentra registrado.";
+                $this->ShowAddView($message);
+
+            }
         }
 
         public function Update(

@@ -39,7 +39,7 @@
                          <div class="col-lg-10 ">
                               <div class="form-group">
                                    <label for="">Nombre</label>
-                                   <input type="text" name="nombre" value="" class="form-control" placeholder="<?php echo $miCine->getNombre() ?>" required>
+                                   <input type="text" name="nombre" class="form-control" value="<?php echo $miCine->getNombre() ?>" required>
                               </div>
                          </div>
                     </div>
@@ -47,13 +47,13 @@
                          <div class="col-lg-6">
                               <div class="form-group">
                                    <label for="">Email</label>
-                                   <input type="email" name="email" value="" class="form-control" placeholder="<?php echo $miCine->getEmail() ?>" required>
+                                   <input type="email" name="email" class="form-control" value="<?php echo $miCine->getEmail() ?>" required>
                               </div>
                          </div>
                          <div class="col-lg-6">
                               <div class="form-group">
                                    <label for="">Telefono/Celular</label>
-                                   <input type="text" name="numeroDeContacto" value="" class="form-control" placeholder="<?php echo $miCine->getNumeroDeContacto() ?>" required>
+                                   <input type="text" name="numeroDeContacto"  class="form-control" value="<?php echo $miCine->getNumeroDeContacto() ?>" required>
                               </div>
                          </div>
                     </div>

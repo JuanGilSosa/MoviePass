@@ -5,6 +5,12 @@
      <section id="listado" class="mb-5">
           <div class="container">
           <table id="dt-vertical-scroll" class="table  table-striped bg-dark text-white" cellspacing="0">
+               
+               <?php 
+                    if (isset($message))
+                         echo "<small>" . $message . "</small>";
+               ?>
+
                <thead>
                     <tr>
                          <th class="th-sm">Nombre

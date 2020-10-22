@@ -5,7 +5,7 @@
         "numero": "843",
         "piso": "2",
         "departamento": "",
-        "codigoPostal": 7600
+        "codigoPostal": "7600"
     },
     {
         "id": 2,
@@ -13,7 +13,7 @@
         "numero": "10101",
         "piso": "4",
         "departamento": "",
-        "codigoPostal": 1016
+        "codigoPostal": "1016"
     },
     {
         "id": 3,
@@ -21,7 +21,7 @@
         "numero": "7006",
         "piso": "3",
         "departamento": "",
-        "codigoPostal": 4555
+        "codigoPostal": "4555"
     },
     {
         "id": 4,
@@ -29,6 +29,22 @@
         "numero": "123",
         "piso": "1",
         "departamento": "",
-        "codigoPostal": 5486
+        "codigoPostal": "5486"
+    },
+    {
+        "id": 5,
+        "calle": "Belgrano",
+        "numero": "1111",
+        "piso": "2",
+        "departamento": "",
+        "codigoPostal": "7600"
+    },
+    {
+        "id": 6,
+        "calle": "Belgrano",
+        "numero": "1111",
+        "piso": "2",
+        "departamento": "",
+        "codigoPostal": "7600"
     }
 ]

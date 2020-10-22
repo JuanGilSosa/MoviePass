@@ -29,11 +29,11 @@
         public function GetByCodigoPostal($codigoPostal){
             $this->RetrieveData();
 
-            $home = new Direccion();
+            $home = false;
 
             foreach($this->direcciones as $direccion){
                 if ($direccion->getCodigoPostal() == $codigoPostal)
-                    $home = $direccion; 
+                    return $direccion;
             }
 
             return $home;
@@ -69,7 +69,7 @@
         
         private function RetrieveData(){
 
-            $this->studentList = array();
+            $this->direcciones = array();
 
             if(file_exists($this->fileName))
             {
@@ -116,7 +116,25 @@
             return $id + 1;
         }
 
+        public function FindDireccion($direccionIngresada)
+        {
+            $direcciones = $this->GetAll();
+            $direccionesPorCodigoPostal = $this->GetByCodigoPostal($direccionIngresada->getCodigoPostal());
+            
+            $miDireccion = null;
 
+            foreach($direccionesPorCodigoPostal as $direccion)
+            {
+                if ($direccion->getCalle() == $direccionIngresada->getCalle() && 
+                   $direccion->getNumero() == $direccionIngresada->getNumero() &&
+                   $direccion->getPiso() == $direccionIngresada->getPiso()){
+
+                    return $direccion;
+                }
+            }
+
+            return $miDireccion;
+        }
 
     }
 ?>

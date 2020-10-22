@@ -29,11 +29,14 @@
         {
             $this->RetrieveData();
 
+            $ciudad = null;
 
             foreach($this->ciudades as $ciudad){
                 if ($ciudad->getCodigoPostal() == $codigoPostal)
                     return $ciudad; 
             }
+
+            return $ciudad;
 
         }
 

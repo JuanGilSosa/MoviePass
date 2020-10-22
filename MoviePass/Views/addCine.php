@@ -23,6 +23,19 @@
           <div class="container">
                <h2 class="mb-4">Agregar Cine</h2>
                <form action="<?php echo FRONT_ROOT.'Cine/Add'?>" method="POST" class="bg-light-alpha p-5">
+                    
+                    <div class="row justify-content-start">
+                         <div class="col-lg-8 ">
+                              <?php if(isset($message))
+                                   {
+                                        echo "<small>". $message . "</small>";
+                                   } 
+                              ?>
+                         </div>
+                    </div>
+                    
+                    
+                    
                     <div class="row justify-content-start">                         
                          <div class="col-lg-8 ">
                               <div class="form-group">
