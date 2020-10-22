@@ -2,12 +2,15 @@
     use Models\Pelicula\Pelicula as Pelicula;
     use Models\Pelicula\Genero as Genero;
     use DAO\PeliculaDAO as PeliculaDAO;
+    use DAO\GeneroDAO as GeneroDAO;
     class PeliculaController{
 
         private $peliculasDAO;
+        private $generosDAO;
 
         public function __construct(){
             $this->peliculasDAO = new PeliculaDAO();
+            $this->generosDAO = new GeneroDAO();
         }
         public function ShowIndex()
         {
@@ -32,7 +35,7 @@
         public function ShowMoviesNowPlaying(){
             $peliculas = $this->peliculasDAO->GetAll();
             $genero = new Genero();
-            $generos = $this->peliculasDAO->GetAllGenres();
+            $generos = $this->generosDAO->GetAll();
             require_once(VIEWS_PATH."listMovies.php");
         }
 
@@ -42,7 +45,7 @@
             if(!$this->HayUsuario()){
                 if($valueOfSelect != 0){
                     $peliculas = $this->peliculasDAO->GetMoviesByGenre($valueOfSelect);
-                    $generos = $this->peliculasDAO->GetAllGenres();
+                    $generos = $this->generosDAO->GetAll();
                     require_once(VIEWS_PATH.'listMovies.php');
                 }else{
                     $this->ShowMoviesNowPlaying();
