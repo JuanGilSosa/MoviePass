@@ -55,6 +55,12 @@
             }
         }
 
+        public function ShowMovieDescription($idMovie){
+            $pelicula = $this->peliculasDAO->getMovieById($idMovie);
+            $trailerKey = $this->peliculasDAO->getTrailerKey($idMovie);
+            require_once(VIEWS_PATH.'descriptionMovies.php');
+        }
+
         #TENEMOS QUE HACER UNA INTERFAZ PARA CONTROLLER
         private function HayUsuario(){
             return (!isset($_SESSION["loggedUser"]));
