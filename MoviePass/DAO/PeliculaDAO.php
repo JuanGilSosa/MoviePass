@@ -2,7 +2,7 @@
     namespace DAO;
     use Models\Pelicula\Pelicula as Pelicula;
     use Models\Pelicula\Genero as Genero;
-	use Models\Pelicula\DescripcionPelicula as DescripcionPelicula;
+	  use Models\Pelicula\DescripcionPelicula as DescripcionPelicula;
 	
     class PeliculaDAO implements IDAO{
 
@@ -58,6 +58,7 @@
             foreach($decode['results'] as $allresults){
                 $movie = new Pelicula(
                     $allresults['poster_path'],
+                    $allresults['backdrop_path'],
                     $allresults['id'],
                     $allresults['adult'],
                     $allresults['original_language'],
@@ -79,6 +80,7 @@
             
             foreach($this->peliculas as $m){
                 $valuesArray['poster_path'] = $m->getPosterPath();
+                $valuesArray['backdrop_path'] = $m->getBackdropPath();
                 $valuesArray['id'] = $m->getId();
                 $valuesArray['adult'] = $m->isAdult();
                 $valuesArray['original_language'] = $m->getOriginalLenguage();
@@ -93,13 +95,6 @@
             $dataContent = json_encode($array, JSON_PRETTY_PRINT);
             file_put_contents($moviesFile, $dataContent);
         }
-
-
-
-		
-
-
-
     /*
       Retorna un arreglo de peliculas seleccionadas por genero
     */
@@ -116,26 +111,37 @@
       }
       return $moviesByGenre;
     }
-    
-    private function RetrieveGeneros(){
-      $generos = file_get_contents(
-				'https://api.themoviedb.org/3/genre/movie/list?api_key=48621040dbb9c7f28355bff08c002197&language=es-ES'	
-      );
-      
-      $jsonGenres = ($generos) ? json_decode($generos, true) : array();
-      foreach($jsonGenres['genres'] as $g){
-        $genre = new Genero();
-        $genre->setGenero($g['name']);
-        $genre->setId($g['id']);
-        array_push($this->generos, $g);
+
+    /*
+      Si no existe la pelicula retorna null - no creo que pase eso ya que la logica del programa evita este tipo
+      de retorno
+    */
+    public function getMovieById($idMovie){
+      $this->GetMoviesNowPlaying();
+
+      $i = 0;
+      $flag = false;
+      $return = null;
+
+      while(($flag==false) && ($i<count($this->peliculas))){
+        $aux = $this->peliculas[$i];
+        if($aux->getId() == $idMovie){
+          $return = $aux;
+          $flag = true;
+        }
+        $i++;
       }
+      return $return;
     }
-    public function GetAllGenres(){
-      $this->RetrieveGeneros();
-      return $this->generos;
+
+    public function getTrailerKey($idPelicula){
+      $trailerJson = file_get_contents(
+        "https://api.themoviedb.org/3/movie/{$idPelicula}/videos?api_key=48621040dbb9c7f28355bff08c002197&language=es-ES"
+      );
+      $trailerArray = ($trailerJson) ? json_decode($trailerJson, true) : array();
+      return $trailerArray['results'][0]['key'];
     }
   }
-
 ?>
 
 <!-- Example of MOVIES NOW PLAYING json
