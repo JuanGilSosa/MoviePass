@@ -6,6 +6,7 @@
     {
         private $id;
         private $poster_path;
+        private $backdrop_path;
         private $adult;
         private $original_language;
         private $title;
@@ -14,14 +15,16 @@
         private $overview;
         private $release_date;
 
+
         public function __construct (
-            $poster_path,
+            $poster_path, $backdrop_path,
             $id, $adult, $original_language,
             $title, $genres, $vote_average,
             $overview, $release_date
         )
         {
             $this->poster_path = $poster_path;
+            $this->backdrop_path = $backdrop_path;
             $this->id = $id;
             $this->adult = $adult;
             $this->original_language = $original_language;
@@ -34,6 +37,8 @@
 
         public function getPosterPath(){return $this->poster_path;}
         
+        public function getBackdropPath(){return $this->backdrop_path;}
+
         public function getId(){return $this->id;}
         
         public function isAdult(){return $this->adult;}
