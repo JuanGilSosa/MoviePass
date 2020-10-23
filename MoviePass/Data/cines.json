@@ -1,9 +1,16 @@
 [
     {
         "id": 1,
-        "nombre": "FinemaLosGallegos",
-        "email": "FinemaLosGallegos@gmail.com",
-        "numeroDeContacto": "11111111",
-        "idDireccion": 5
+        "nombre": "FinemaShopping",
+        "email": "FinemaShopping@gmail.com",
+        "numeroDeContacto": "1111111",
+        "idDireccion": 1
+    },
+    {
+        "id": 2,
+        "nombre": "FinemaCarlosPaz",
+        "email": "FinemaCarlosPaz@gmail.com",
+        "numeroDeContacto": "2222222",
+        "idDireccion": 2
     }
-]
+]   

@@ -79,10 +79,7 @@
         public function Add(
             $nombre, $email, $numeroDeContacto,
             $calle, $numero, $piso, $departamento, 
-            $ciudad, $codigoPostal, 
-            $provincia, 
-            $pais
-        )
+            $ciudad, $codigoPostal, $pais, $provincia)
         {
             $message = "";
             $existeCine = $this->cineDAO->FindCineByName($nombre);
@@ -104,14 +101,17 @@
                         {
                             $existeCodigoPostal = $this->ciudadDAO->GetByCodigoPostal($direccion->getCodigoPostal());
 
-                            if(isset($existeCodigoPostal) && $existeCodigoPostal->getCodigoPostal() == $codigoPostal)
+                            
+
+                            if(isset($existeCodigoPostal) && $existeCodigoPostal->getCodigoPostal() == $codigoPostal
+                                                          && $existeCodigoPostal->getIdProvincia() == $provincia
+                                                          && $existeCodigoPostal->getIdPais() == $pais)
                             { 
                                 $message = "Cine agregado con éxito.";
 
                                 $this->direccionDAO->Add($direccion);
                                 $dirWithId = $this->direccionDAO->FindDireccion($direccion);
-
-                                
+                    
                                 $cine = new Cine($nombre, $email, $numeroDeContacto,$dirWithId->getId());
 
                                 $this->cineDAO->Add($cine);
@@ -120,7 +120,8 @@
 
                                 $this->ShowListView($message);
                             }else{
-                                $message = "El código postal ingresado NO se encuentra registrado";
+                                $message = "El código postal ingresado NO se encuentra registrado" .
+                                "cod:" . $codigoPostal. "prov: ".$provincia ."pais".$pais;
                                 $this->ShowAddView($message);
                             }
                             

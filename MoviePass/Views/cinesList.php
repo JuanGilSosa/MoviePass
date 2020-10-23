@@ -27,6 +27,7 @@
                </thead>
                     <tbody>
                          <?php
+                         if(isset($cines)){
                               foreach ($cines as $cine){ 
                                    $name = $cine->getNombre();
                                    $direccion = $direccionDAO->GetById($cine->getIdDireccion());
@@ -36,8 +37,18 @@
                                    ?>
                                    <tr>
                                         <td><?php echo $name ?> </td>
-                                        <td><?php echo $direccion->getCalle() . ", " . $direccion->getNumero() . 
-                                             ", " . $direccion->getPiso() . ", " . $direccion->getDepartamento() ?> </td>
+                                        <td><?php 
+                                             echo $direccion->getCalle() . ", " .
+                                                  $direccion->getNumero();
+                                             if($direccion->getPiso()!= "")
+                                             {
+                                                  echo ", " . $direccion->getPiso();
+                                             }
+                                             if($direccion->getDepartamento()!="")
+                                                  echo", " . $direccion->getDepartamento();
+                                        ?> </td>
+
+
                                         <td><?php echo $ciudad->getNameCiudad() .", " .$provincia->getNameProvincia() .", ". $pais->getNamePais() ?> </td>
                                         
                                         
@@ -49,7 +60,13 @@
                                         </form>
                                         
                                    </tr>             
-                        <?php }?>  
+                        <?php 
+                              }
+                          }else { 
+                        ?>
+                               <tr><td><?php echo "No hay cines para mostrar" ?> </td></tr>
+                         <?php } ?>
+                     
                     </tbody>
           </table>
           </div>

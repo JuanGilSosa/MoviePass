@@ -103,7 +103,17 @@
             return $id + 1;
         }
 
-
+        public function FindPaisByName ($name)
+        {
+            $paises = $this->GetAll();
+            $miPais = null;
+    
+            foreach ($paises as $pais){
+                 if($pais->getNamePais() == $name)
+                    return $pais;
+            }
+                return $miPais;
+        }
 
     }
 ?>
