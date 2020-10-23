@@ -1,41 +1,57 @@
-<?php
-
-    namespace Controllers;
+<?php namespace Controllers;
 
     class ViewsController
     {
-
-        
-        public function ShowIndex()
+        public static function ShowIndex()
         {
             require_once(FRONT_ROOT."index.php");            
         }
 
-        public function ShowLogIn()
+        public static function ShowLogIn($message = "")
         {
-            require_once(VIEWS_PATH."loginForm.php");            
+            $home = new HomeController();
+            $home->Index($message);
         }
 
-        public function ShowRegisterForm()
+        public static function ShowRegisterForm($message = "")
         {
             require_once(VIEWS_PATH."registerForm.php");
         }
 
-        public function ShowAddCineView()
+        public static function ShowAddCineView($message = "")
         {
             require_once(VIEWS_PATH."addCine.php");
         }
 
-        public function ShowCinesList()
+        public static function ShowCinesList()
         {
             require_once(VIEWS_PATH."cinesList.php");
         }
 
-        public function ShowMoviesListView()
+        public static function ShowMoviesListView()
         {
-            require_once(VIEWS_PATH."moviesList.php");
+            require_once(VIEWS_PATH."listMovies.php");
         }
 
+        public static function ShowRegisterAdmin()
+        {
+            require_once(VIEWS_PATH."register-adm.php");
+        }
+        
+        public static function ShowModifyCine()
+        {
+            require_once(VIEWS_PATH."modifyCine.php");
+        }
+        
+        public static function ShowAddSala()
+        {
+            require_once(VIEWS_PATH.'addSala.php');
+        }
+
+        public static function ShowCartelera()
+        {
+            require_once(VIEWS_PATH."cartelera.php");
+        }
     }
 
 ?>

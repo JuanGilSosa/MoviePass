@@ -1,70 +1,29 @@
-<?php
-
-    namespace Controllers;
-
-
+<?php namespace Controllers;
+    
     class LogInController
     {
+
         public function LogIn ($email, $password)
         {
             $rta = $this->VerifyMemberAndPassword($email,$password);
             $this->RedirectLogIn($rta);
-
         }
 
         public function RedirectLogIn ($message)
         {
-            if(isset($_SESSION["loggedUser"]))
-            {
-                require_once( FRONT_ROOT . "Views/ShowAddCineView");
+            if(isset($_SESSION["userLogged"])){
+                ViewsController::ShowMoviesListView();
             }
-            else
-            {
-                //$message = "Sin usuario";
-                require_once( FRONT_ROOT . "Views/ShowLogIn");
+            else{
+                ViewsController::ShowLogIn();
 
             }
         }
 
-        public function FindMemberByEmail ($email)
-        {
-            $loggedMember = null;
-            $members = $this->memberDAO->GetAll();
-
-            foreach ($members as $member)
-            {
-                if($member->getEmail() == $email)
-                {
-                    return $member;
-                }
-            }
-            return $loggedMember;
+        public function free_session(){
+            session_destroy();
+            ViewsController::ShowLogIn();
         }
-
-        public function VerifyMemberAndPassword($email, $password)
-        {
-            $rta = "";
-            $loggedMember = $this->FindMemberByEmail($email);
-
-            if ($loggedMember != null) 
-            {
-                if ($loggedMember->getPassword() == $password)
-                {
-                    $_SESSION["loggedUser"] = $loggedMember;
-                }
-                else
-                {
-                    $rta = "Datos incorrecta";
-                }
-            }
-            else
-            {
-                $rta = "Datos Incorrecto"; 
-            }
-                         
-            return $rta;
-        }
-
     }
 
 ?>

@@ -34,53 +34,46 @@
             $this->paisDAO = new PaisDAO();
         }
 
-        public function ShowAddView($message = "")
-        {
-            if($this->HayUsuario())
-            {
-                require_once(VIEWS_PATH."addCine.php");
-            } 
-            else
-            {
-                require_once(VIEWS_PATH."loginForm.php");
-            }
-                
+        public function AddViewCine($message = ""){
+            if($this->HayUsuario('adminLogged')){
+                ViewsController::ShowAddCineView();
+            }else{
+                ViewsController::ShowLogIn();
+            }   
         }
 
-        public function ShowListView($message = ""){
-            if($this->HayUsuario())
-            {
+        public function ListViewCine($message = ""){
+            if(SessionController::HayUsuario('adminLogged')){
                 $cines = $this->cineDAO->GetAll();
                 $direccionDAO = new DireccionDAO(); 
                 $ciudadDAO = new CiudadDAO();
                 $provinciaDAO = new ProvinciaDAO();
                 $paisDAO = new PaisDAO();
                 
-                require_once(VIEWS_PATH."cinesList.php");
-            } 
-            else
-            {
-                require_once(VIEWS_PATH."loginForm.php");
+                ViewsController::ShowCinesList();
+            }else{
+                ViewsController::ShowLogIn();
             }
 
         }
         
         public function ShowModifyCine($cineId){
-            if($this->HayUsuario())
-            {
-            
+            if(SessionController::HayUsuario('adminLogged')){
                 $miCine = $this->cineDAO->getCineById($cineId);
-                require_once(VIEWS_PATH."modifyCine.php");
-                
-            } 
-            else
-            {
-                require_once(VIEWS_PATH."loginForm.php");
+                ViewsController::ShowModifyCine();
+            }else{
+                ViewsController::ShowLogIn();
             }
         }
-        public function ShowAddSala(){
+
+        public function AddViewSala(){
             $cines = $this->cineDAO->GetAll();
-            require_once(VIEWS_PATH.'addSala.php');
+            ViewsController::ShowAddSala();
+        }
+
+        public function ShowCartelera(){
+            $cines = $this->cineDAO->GetAll();
+            ViewsController::ShowCartelera();
         }
 
         public function Add(
@@ -125,61 +118,47 @@
             
                                 //ACA SE GUARDARIA EN TABLA CINESxLOCALIDADxDIRECCION? 
 
-                                $this->ShowListView($message);
+                                $this->ListViewCine($message);
                             }else{
                                 $message = "El código postal ingresado NO se encuentra registrado" .
                                 "cod:" . $codigoPostal. "prov: ".$provincia ."pais".$pais;
-                                $this->ShowAddView($message);
+                                $this->AddViewCine($message);
                             }
                             
 
                         }else{
                             $message = "La direccón ingresada ya se encuentra registrada.";
-                            $this->ShowAddView($message);
+                            $this->AddViewCine($message);
                         }
                     }else{
                         $message = "El teléfono/celular ingresado ya se encuentra registrado.";
-                        $this->ShowAddView($message);
+                        $this->AddViewCine($message);
                     }
                 }else{
                     $message = "El email ingresado ya se encuentra registrado.";
-                    $this->ShowAddView($message);
+                    $this->AddViewCine($message);
                 }
             }else{
 
                 $message = "El nombre ingresado ya se encuentra registrado.";
-                $this->ShowAddView($message);
+                $this->AddViewCine($message);
 
             }
         }
 
         public function Update(
             $id, $nombre, $email, $numeroDeContacto, $direccion
-        )
-        {
+        ){
             $cine = new Cine($nombre, $email, $numeroDeContacto, $direccion);
             $cine->setId($id);
             $this->cineDAO->Update($cine);
 
-            $this->ShowListView();
+            $this->ListViewCine();
         }
 
-        public function Delete($idCine)
-        {
+        public function Delete($idCine){
             $this->cineDAO->Delete($idCine);
-            $this->ShowListView();
-        }
-
-        public function HayUsuario () {
-
-            if(!isset($_SESSION["loggedUser"]))
-            {
-                #$this->ShowLogIn;
-                return false;
-            }
-            else{
-                return true;
-            }
+            $this->ListViewCine();
         }
 
         public function AddSala($nombre, $idCine, $precio, $capacidad){
@@ -190,7 +169,6 @@
             $cine->setSalas($salas);
             $this->salaDAO->Add($sala);
         }
-
 
     }
 ?>

@@ -15,36 +15,12 @@
 
         private $adminDAO; 
         private $membersDAO; 
+        private $loginController;
 
-        public function __construct()
-        {
+        public function __construct(){
             $this->membersDAO = new MemberDAO(); 
             $this->adminDAO = new AdminDAO(); 
-        }
-
-        public function ShowIndex()
-        {
-            require_once(FRONT_ROOT."index.php");            
-        }
-
-        public function ShowLogIn($message = "")
-        {
-            require_once(VIEWS_PATH."loginForm.php");            
-        }
-
-        public function ShowRegisterForm($message = "")
-        {
-            require_once(VIEWS_PATH."registerForm.php");
-        }
-
-        public function ShowAddCineView()
-        {
-            require_once(VIEWS_PATH."addCine.php");
-        }
-
-        public function ShowListView()
-        {
-            //require_once(VIEWS_PATH."usersList.php");
+            $this->loginController = new LogInController();
         }
 
         public function AddMember($firstName, $lastName, $dni, $email, $password, $checkPassword)
@@ -63,31 +39,32 @@
                     
                     if($bytes == false){
                         $message = "No se pudo grabar en este momento.";
-                        $this->ShowRegisterForm($message);
+                        ViewsController::ShowRegisterForm($message);
                     } 
                     #Grabó correctamente?
                     else
                     {
                         $message = "";
-                        $this->ShowLogIn($message);
+                        ViewsController::ShowLogIn($message);
                     }
                     
 
                 }else{
                     $message = "Error al verificar contraseña.";
-                    $this->ShowRegisterForm($message);
+                    ViewsController::ShowRegisterForm($message);
                 }
             }
             else
             {
                 $message = "El email ingresado ya se encuentra registrado.";
-                $this->ShowRegisterForm($message);
+                ViewsController::ShowRegisterForm($message);
             }
 
         }
 
         public function LogIn ($email, $password)
         {
+            $this->loginController->LogIn($email, $password);
             $rta = $this->VerifyMemberAndPassword($email,$password);
             $this->RedirectLogIn($rta);
 
@@ -95,13 +72,13 @@
 
         public function RedirectLogIn ($message)
         {
-            if(isset($_SESSION["loggedUser"]))
+            if(SessionController::HayUsuario('userLogged'))
             {
-                $this->ShowAddCineView($message);
+                ViewsController::ShowAddCineView($message);
             }
             else
             {
-                $this->ShowLogIn($message);
+                ViewsController::ShowLogIn($message);
             }
         }
 
@@ -129,26 +106,26 @@
             {
                 if ($loggedMember->getPassword() == $password)
                 {
-                    $_SESSION["loggedUser"] = $loggedMember;
+                    $_SESSION["userLogged"] = $loggedMember;
                 }
                 else
                 {
-                    $rta = "Contraseña incorrecta";
+                    $rta = "Datos incorrecta";
                 }
             }
             else
             {
-                $rta = "Email Incorrecto"; 
+                $rta = "Datos Incorrecto"; 
             }
                          
             return $rta;
         }
 
-        
         public function LogOut(){
             session_destroy();
-            $this->ShowIndex(); 
+            ViewsController::ShowIndex(); 
         }
+
     }
 
 ?>
