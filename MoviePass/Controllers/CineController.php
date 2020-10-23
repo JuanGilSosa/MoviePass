@@ -8,15 +8,18 @@
     use DAO\CiudadDAO as CiudadDAO;
     use DAO\ProvinciaDAO as ProvinciaDAO;
     use DAO\PaisDAO as PaisDAO;
+    use DAO\SalaDAO as SalaDAO;
 
     use Models\Ubicacion\Direccion as Direccion;
     use Models\Ubicacion\Ciudad as Ciudad;
     use Models\Ubicacion\Provincia as Provincia;
     use Models\Ubicacion\Pais as Pais;
-
+    use Models\Cine\Sala as Sala;
+ 
     class CineController
     {
         private $cineDAO;
+        private $salaDAO;
         private $direccionDAO;
         private $ciudadDAO;
         private $provinciaDAO;
@@ -24,6 +27,7 @@
 
         public function __construct(){
             $this->cineDAO = new CineDAO();
+            $this->salaDAO = new SalaDAO();
             $this->direccionDAO = new DireccionDAO();
             $this->ciudadDAO = new CiudadDAO();
             $this->provinciaDAO = new ProvinciaDAO();
@@ -71,7 +75,10 @@
             {
                 require_once(VIEWS_PATH."loginForm.php");
             }
-
+        }
+        public function ShowAddSala(){
+            $cines = $this->cineDAO->GetAll();
+            require_once(VIEWS_PATH.'addSala.php');
         }
 
         public function Add(
@@ -121,7 +128,6 @@
             $this->cineDAO->Delete($idCine);
             $this->ShowListView();
         }
- 
 
         public function HayUsuario () {
 
@@ -133,6 +139,15 @@
             else{
                 return true;
             }
+        }
+
+        public function AddSala($nombre, $idCine, $precio, $capacidad){
+            $sala = new Sala($this->salaDAO->GetNextId(),$nombre, $precio, $capacidad);
+            $cine = $this->cineDAO->getCineById($idCine);
+            $salas = $cine->getSalas();
+            array_push($salas, $sala);
+            $cine->setSalas($salas);
+            $this->salaDAO->Add($sala);
         }
 
 
