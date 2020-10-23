@@ -16,25 +16,39 @@
         </button>
         <div class="collapse navbar-collapse " id="navbarResponsive">
           <ul class="navbar-nav ml-auto ">
+
+            <?php if(array_key_exists('adminLogged', $_SESSION)){ 
+                      if($_SESSION['adminLogged'] == true){ ?>
+            
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger text-white" href="<?php  echo FRONT_ROOT . "Admin/ShowAddView "   ?>">Agregar Cine</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger text-white" href="<?php  echo FRONT_ROOT . "Cine/ListViewCine"   ?>">Listar Cines</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger text-white" href="<?php  echo FRONT_ROOT . "Cine/AddViewSala "   ?>">Agregar Sala</a>
+            </li>
+            <?php }}?>
+
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger text-white" href="#entradas">Entradas</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger text-white" href="<?php  echo FRONT_ROOT . "Cine/ShowListView"   ?>">Cines</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger text-white" href="<?php  echo FRONT_ROOT . "Cine/ShowAddView "   ?>">Agregar Cine</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger text-white" href="<?php  echo FRONT_ROOT . "Cine/ShowAddSala "   ?>">Agregar Sala</a>
-            </li>
+            
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger text-white" href="#contact">Contacto</a>
             </li>
+
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger text-white" href="<?php echo FRONT_ROOT. "Pelicula/ShowMovies"?>">Lista Peliculas</a>
             </li>
-            
+
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger text-white" href="<?php echo FRONT_ROOT."Login/free_session"?>">Cerrar Sesion</a>
+            </li>
+
           </ul>
         </div>
       </div>
