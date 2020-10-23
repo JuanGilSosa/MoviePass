@@ -93,5 +93,71 @@
         }
 
 
+        public function getCineById ($cineId)
+        {
+            $cines = $this->GetAll();
+            $micine = null;
+
+            foreach ($cines as $cine)
+            {
+                if($cine->getId() == $cineId)
+                {
+                    return $cine;
+                }
+            }
+
+            return $micine;
+        }
+
+        public function FindCineByName ($name)
+        {
+            $cines = $this->GetAll();
+            $micine = null;
+
+            foreach ($cines as $cine)
+            {
+                if($cine->getNombre() == $name)
+                {
+                    return $cine;
+                }
+            }
+
+            return $micine;
+        }
+
+        public function FindCineByEmail ($email)
+        {
+            $cines = $this->GetAll();
+            $micine = null;
+
+            foreach ($cines as $cine)
+            {
+                if($cine->getEmail() == $email)
+                {
+                    return $cine;
+                }
+            }
+
+            return $micine;
+        }
+
+        public function FindCineByTelefono ($telefono)
+        {
+            $cines = $this->GetAll();
+            $micine = null;
+
+            foreach ($cines as $cine)
+            {
+                if($cine->getNumeroDeContacto() == $telefono)
+                {
+                    return $cine;
+                }
+            }
+
+            return $micine;
+        }
+
     }
+
+
 ?>
