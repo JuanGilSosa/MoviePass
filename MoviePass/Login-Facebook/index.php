@@ -21,7 +21,7 @@
                     <!-- 
                     Donde la variable login que se usa el los script de php sea igual a Facebook si presiona el boton
                     -->
-                    <a href="?login=Facebook" class="btn btn-block btn-social btn-facebook" style="background-color:orange;"><!--<span class="fa fa-facebook"></span>-->Iniciar sesion con Facebok</a>
+                    <a href="?login=Facebook" type="button" class="btn blue-gradient btn-block fab fa-facebook-f">&nbsp;&nbsp;Ingresa con Facebook</a>
                 </div>
             </div>
         </div>
