@@ -51,7 +51,7 @@
             </div>
             <?php }?>
         </div>
-        <form action="" method="post">
+        <form action="<?php echo FRONT_ROOT.'Cine\ShowCartelera'?>" method="post">
             <button type="submit" class="btn btn-success">COMPRAR</button>
         </form>
         

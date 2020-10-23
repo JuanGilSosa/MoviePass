@@ -1,5 +1,8 @@
 <?php
     require_once('nav.php');
+    /*if($_SESSION){
+      session_start();
+    }*/
 ?>
 <main class="height-100">
     <div class="container text-center table loginTable  w-100" style="padding:0px;">
@@ -34,6 +37,9 @@
       <form action="<?php echo FRONT_ROOT . 'Members\ShowRegisterForm' ?>" method="POST">
         <label class="text-white" style="margin-right: 10px;">¿Aun no estas registrado?</label><button class="btn btn-secondary btn btn-success w-20">Registrate</button>
       </form>
+      
+        <a href="<?php echo FRONT_ROOT.'Views/ShowRegisterAdmin'?>" class="text-warning" style="font-size:12px;">Ingresa como Administrador</a>
+      
     </div>
     <?php include('Login-Facebook\index.php');?>
 </main>
