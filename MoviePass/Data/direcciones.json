@@ -30,5 +30,29 @@
         "piso": "1",
         "departamento": "",
         "codigoPostal": 5486
+    },
+    {
+        "id": 5,
+        "calle": "Avenida Siempre Viva",
+        "numero": "843",
+        "piso": "2",
+        "departamento": "",
+        "codigoPostal": "7600"
+    },
+    {
+        "id": 6,
+        "calle": "LuroAutohogar",
+        "numero": "9800",
+        "piso": "4",
+        "departamento": "",
+        "codigoPostal": "7600"
+    },
+    {
+        "id": 7,
+        "calle": "DIagonal",
+        "numero": "20202",
+        "piso": "0",
+        "departamento": "",
+        "codigoPostal": "7600"
     }
 ]
