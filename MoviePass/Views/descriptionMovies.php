@@ -31,8 +31,7 @@
                 <p><strong>GÉNERO:</strong><?php $this->generosDAO->ShowGenres($this->generosDAO->getGenresNamesById($pelicula->getGenres()));?></p><p></p>
                 <p><strong>ESTRENO:</strong><?php echo $pelicula->getReleaseDate() ?></p><p></p>
                 <p><strong>RATING:</strong><?php echo $pelicula->getVoteAverage() ?></p><p>
-                                    
-                                        
+                                                              
             </div>
 
             <div class="onbcn-embed">
@@ -45,14 +44,7 @@
                         src="https://www.youtube.com/embed/<?php echo $trailerKey;?>" 
                         frameborder="0" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen="" 
-                        data-gtm-yt-inspected-2613943_753="true" 
-                        id="956560764" 
-                        data-gtm-yt-inspected-2613943_757="true" 
-                        data-gtm-yt-inspected-2613943_758="true" 
-                        data-gtm-yt-inspected-2613943_759="true" 
-                        data-gtm-yt-inspected-2613943_760="true" 
-                        data-gtm-yt-inspected-2613943_761="true">
+                        allowfullscreen="" >
                     </iframe>                                        
                 </div>
                 
