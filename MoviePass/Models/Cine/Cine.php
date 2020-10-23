@@ -12,9 +12,11 @@
         private $email;
         private $numeroDeContacto;
         private $idDireccion;
-        
+        private $salas;
+
         public function __construct($nombre = "", $email = "", $numeroDeContacto = "", $idDireccion="")
         {
+            $this->salas = array();
             $this->nombre = $nombre;
             $this->email = $email;
             $this->numeroDeContacto = $numeroDeContacto;
@@ -41,6 +43,10 @@
             return $this->idDireccion;
         }
 
+        public function getSalas(){
+            return $this->salas;
+        }
+
         public function setId($id){
             $this->id = $id;
         }
@@ -60,6 +66,10 @@
         public function setIdDireccion($idDireccion){
             $this->idDireccion = $idDireccion;
         }
+        public function setSalas($salas){
+            $this->salas = $salas;
+        }
+
 
     }
 
