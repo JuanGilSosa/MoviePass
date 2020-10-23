@@ -26,6 +26,9 @@
               <a class="nav-link js-scroll-trigger text-white" href="<?php  echo FRONT_ROOT . "Cine/ShowAddView "   ?>">Agregar Cine</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link js-scroll-trigger text-white" href="<?php  echo FRONT_ROOT . "Cine/ShowAddSala "   ?>">Agregar Sala</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link js-scroll-trigger text-white" href="#contact">Contacto</a>
             </li>
             <li class="nav-item">
