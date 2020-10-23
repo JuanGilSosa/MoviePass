@@ -5,6 +5,12 @@
      <section id="listado" class="mb-5">
           <div class="container">
           <table id="dt-vertical-scroll" class="table  table-striped bg-dark text-white" cellspacing="0">
+               
+               <?php 
+                    if (isset($message))
+                         echo "<small>" . $message . "</small>";
+               ?>
+
                <thead>
                     <tr>
                          <th class="th-sm">Nombre
@@ -21,6 +27,7 @@
                </thead>
                     <tbody>
                          <?php
+                         if(isset($cines)){
                               foreach ($cines as $cine){ 
                                    $name = $cine->getNombre();
                                    $direccion = $direccionDAO->GetById($cine->getIdDireccion());
@@ -30,8 +37,18 @@
                                    ?>
                                    <tr>
                                         <td><?php echo $name ?> </td>
-                                        <td><?php echo $direccion->getCalle() . ", " . $direccion->getNumero() . 
-                                             ", " . $direccion->getPiso() . ", " . $direccion->getDepartamento() ?> </td>
+                                        <td><?php 
+                                             echo $direccion->getCalle() . ", " .
+                                                  $direccion->getNumero();
+                                             if($direccion->getPiso()!= "")
+                                             {
+                                                  echo ", " . $direccion->getPiso();
+                                             }
+                                             if($direccion->getDepartamento()!="")
+                                                  echo", " . $direccion->getDepartamento();
+                                        ?> </td>
+
+
                                         <td><?php echo $ciudad->getNameCiudad() .", " .$provincia->getNameProvincia() .", ". $pais->getNamePais() ?> </td>
                                         
                                         
@@ -43,7 +60,13 @@
                                         </form>
                                         
                                    </tr>             
-                        <?php }?>  
+                        <?php 
+                              }
+                          }else { 
+                        ?>
+                               <tr><td><?php echo "No hay cines para mostrar" ?> </td></tr>
+                         <?php } ?>
+                     
                     </tbody>
           </table>
           </div>
