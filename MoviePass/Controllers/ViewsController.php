@@ -41,15 +41,20 @@
             require_once(VIEWS_PATH."addCine.php");
         }
 
-        public static function ShowCinesList()
+        public static function ShowCinesList($message = "")
         {
-            $cineDAO = new CineDAO();
-            $cines = $cineDAO->GetAllActive();
-            $direccionDAO = new DireccionDAO(); 
-            $ciudadDAO = new CiudadDAO();
-            $provinciaDAO = new ProvinciaDAO();
-            $paisDAO = new PaisDAO();
-            require_once(VIEWS_PATH."cinesList.php");
+            if(SessionController::HayUsuario('adminLogged')){
+                $cineDAO = new CineDAO();
+                $cines = $cineDAO->GetAllActive();
+                $direccionDAO = new DireccionDAO(); 
+                $ciudadDAO = new CiudadDAO();
+                $provinciaDAO = new ProvinciaDAO();
+                $paisDAO = new PaisDAO();
+            
+                require_once(VIEWS_PATH."cinesList.php");
+            } else {
+               $this->ShowLogIn();
+            }
         }
 
         public static function ShowMoviesListView()
@@ -64,7 +69,13 @@
         
         public static function ShowModifyCine($miCine, $message = "")
         {
-            require_once(VIEWS_PATH."modifyCine.php");
+            if(SessionController::HayUsuario('adminLogged')){
+                $miCine = $this->cineDAO->getCineById($cineId);
+                require_once(VIEWS_PATH."modifyCine.php");
+            } else {
+
+                $this->ShowLogIn();
+            }
         }
         
         public static function ShowAddSala()
