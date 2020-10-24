@@ -27,12 +27,56 @@
             return $this->cines;
         }
 
-        public function Delete($idUser){
-
+        public function GetAllActive()
+        {
+            $activos = array();
+            $this->RetrieveData();
+            
+            foreach($this->cines as $cine)
+            { 
+                if($cine->getActive() == true)
+                {
+                    array_push($activos,$cine);
+                }
+            }
+            return $activos;
         }
 
-        public function Update($user){
+        public function Delete($idCine){
+
+            // buscar el cine por id. Y llevar el boolean a false y grabar.
+            $cinesNuevos = array();
+            $this->RetrieveData();
+
+            foreach ($this->cines as $cine)
+            {
+                if($cine->getId() == $idCine)
+                {
+                    $cine->setActive(false);
+                }
+                array_push($cinesNuevos,$cine);
+            }
+        
+            $this->cines = $cinesNuevos;
+            $this->SaveData();           
+        }
+
+        public function Update($cineEditado){
             
+            // buscar cine, actualizar array y grabar.
+            $cinesNuevos = array();
+            $this->RetrieveData();
+            
+            foreach ($this->cines as $cine)
+            {
+                if($cine->getId() == $cineEditado->getId())
+                {
+                    $cine = $cineEditado;
+                }
+                array_push($cinesNuevos,$cine);
+            }
+            $this->cines = $cinesNuevos;
+            $this->SaveData();           
         }
 
         private function SaveData()
@@ -47,6 +91,7 @@
                 $valuesArray["email"] = $cine->getEmail();
                 $valuesArray["numeroDeContacto"] = $cine->getNumeroDeContacto();
                 $valuesArray["idDireccion"] = $cine->getIdDireccion();
+                $valuesArray["active"] = $cine->getActive();
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -74,6 +119,7 @@
                     $cine->setEmail($valuesArray["email"]);
                     $cine->setNumeroDeContacto($valuesArray["numeroDeContacto"]);
                     $cine->setIdDireccion($valuesArray["idDireccion"]);
+                    $cine->setActive($valuesArray["active"]);
                     
                     array_push($this->cines, $cine);
                 }

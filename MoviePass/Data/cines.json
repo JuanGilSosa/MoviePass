@@ -1,16 +1,18 @@
 [
     {
-        "id": 1,
-        "nombre": "FinemaShopping",
+        "id": "1",
+        "nombre": "Finema Shopping Mdp",
         "email": "FinemaShopping@gmail.com",
         "numeroDeContacto": "1111111",
-        "idDireccion": 1
+        "idDireccion": 1,
+        "active": true
     },
     {
-        "id": 2,
-        "nombre": "FinemaCarlosPaz",
+        "id": "2",
+        "nombre": "Finema Carlos Paz",
         "email": "FinemaCarlosPaz@gmail.com",
         "numeroDeContacto": "2222222",
-        "idDireccion": 2
+        "idDireccion": 2,
+        "active": true
     }
-]   
+]

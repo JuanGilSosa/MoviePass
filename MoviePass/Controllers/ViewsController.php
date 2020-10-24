@@ -43,7 +43,7 @@
         public static function ShowCinesList()
         {
             $cineDAO = new CineDAO();
-            $cines = $cineDAO->GetAll();
+            $cines = $cineDAO->GetAllActive();
             $direccionDAO = new DireccionDAO(); 
             $ciudadDAO = new CiudadDAO();
             $provinciaDAO = new ProvinciaDAO();
