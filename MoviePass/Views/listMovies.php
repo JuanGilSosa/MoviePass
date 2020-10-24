@@ -33,7 +33,7 @@
 					<form action="<?php echo FRONT_ROOT.'Pelicula/ShowMovieDescription'?>" method="POST">
 						<div class="col-xs-3 col-sm-12 col-md-12" >
 							<?php
-								foreach ($peliculas as $pelicula){
+								foreach ($peliculas as $pelicula){	
 							?>
 							<div class="text-center">
 							<button name="idMovie" type="submit" value="<?php echo $pelicula->getId()?>">

@@ -23,7 +23,7 @@
             require_once(VIEWS_PATH."addCine.php");
         }
 
-        public static function ShowCinesList()
+        public static function ShowCinesList($cines)
         {
             require_once(VIEWS_PATH."cinesList.php");
         }
@@ -38,7 +38,7 @@
             require_once(VIEWS_PATH."register-adm.php");
         }
         
-        public static function ShowModifyCine()
+        public static function ShowModifyCine($miCine)
         {
             require_once(VIEWS_PATH."modifyCine.php");
         }

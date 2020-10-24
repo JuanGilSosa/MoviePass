@@ -13,50 +13,6 @@
         "numero": "2222",
         "piso": "",
         "departamento": "",
-<<<<<<< HEAD
-        "codigoPostal": 1016
-    },
-    {
-        "id": 3,
-        "calle": "Fontitufion",
-        "numero": "7006",
-        "piso": "3",
-        "departamento": "",
-        "codigoPostal": 4555
-    },
-    {
-        "id": 4,
-        "calle": "Calle falsa",
-        "numero": "123",
-        "piso": "1",
-        "departamento": "",
-        "codigoPostal": 5486
-    },
-    {
-        "id": 5,
-        "calle": "Avenida Siempre Viva",
-        "numero": "843",
-        "piso": "2",
-        "departamento": "",
-        "codigoPostal": "7600"
-    },
-    {
-        "id": 6,
-        "calle": "LuroAutohogar",
-        "numero": "9800",
-        "piso": "4",
-        "departamento": "",
-        "codigoPostal": "7600"
-    },
-    {
-        "id": 7,
-        "calle": "DIagonal",
-        "numero": "20202",
-        "piso": "0",
-        "departamento": "",
-        "codigoPostal": "7600"
-=======
         "codigoPostal": "5486"
->>>>>>> f779e9a15f3b356f23ac5eb988cd1be2aedb97f7
     }
 ]
