@@ -6,10 +6,22 @@
           <div class="container">
           <table id="dt-vertical-scroll" class="table  table-striped bg-dark text-white" cellspacing="0">
                
-               <?php 
-                    if (isset($message))
-                         echo "<small>" . $message . "</small>";
-               ?>
+          <?php
+                         if(isset($message) && !empty($message))
+                         {
+                              #echo "<small>" . $message . "</small>";
+                              ?>
+                              <div class="container">
+                                   <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <?php echo $message ?>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                             <span aria-hidden="true">&times;</span>
+                                        </button>
+                                   </div>
+                              </div>
+                              <?php
+                         } 
+                    ?>
 
                <thead>
                     <tr>
@@ -52,7 +64,7 @@
                                         <td><?php echo $ciudad->getNameCiudad() .", " .$provincia->getNameProvincia() .", ". $pais->getNamePais() ?> </td>
                                         
                                         
-                                        <form action="<?php echo FRONT_ROOT.'Cine/ShowModifyCine' ?>" method="POST">
+                                        <form action="<?php echo FRONT_ROOT.'Cine/ShowModify' ?>" method="POST">
                                              <td><button type="submit" value="<?php echo $cine->getId() ?>" class="btn btn-secondary btn-info w-20" name="idCine">Modificar</button></td>
                                         </form>
                                         <form action="<?php echo FRONT_ROOT.'Cine/Delete' ?>" method="post">

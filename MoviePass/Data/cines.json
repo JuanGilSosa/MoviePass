@@ -14,5 +14,13 @@
         "numeroDeContacto": "2222222",
         "idDireccion": 2,
         "active": true
+    },
+    {
+        "id": "3",
+        "nombre": "Finema SantaFe",
+        "email": "FinemaSantaFe@gmail.com",
+        "numeroDeContacto": "3333333",
+        "idDireccion": 3,
+        "active": true
     }
 ]

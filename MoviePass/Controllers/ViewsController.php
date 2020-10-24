@@ -38,7 +38,13 @@
 
         public static function ShowAddCineView($message = "")
         {
-            require_once(VIEWS_PATH."addCine.php");
+            $paisDAO = new PaisDAO(); 
+            $paises = $paisDAO->GetAll();
+            $provinciaDAO = new ProvinciaDAO();
+            $provincias = $provinciaDAO->GetAll();
+            $ciudadDAO = new CiudadDAO();
+            $ciudades = $ciudadDAO->GetAll();
+            require_once(VIEWS_PATH."addCine.php");	         
         }
 
         public static function ShowCinesList($message = "")

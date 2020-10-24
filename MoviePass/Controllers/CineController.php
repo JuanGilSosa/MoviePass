@@ -44,20 +44,15 @@
 
         public function ListViewCine($message = ""){
             if(SessionController::HayUsuario('adminLogged')){
-                #require_once(VIEWS_PATH."cinesList.php");
-                #Llega null el arreglo de Cines.
                 ViewsController::ShowCinesList();
             }else{
                 ViewsController::ShowLogIn();
             }
         }
         
-        public function ShowModifyCine($cineId, $message = ""){
+        public function ShowModify($cineId, $message = ""){
             if(SessionController::HayUsuario('adminLogged')){     
-                $miCine = $this->cineDAO->getCineById($cineId);
-                #require_once(VIEWS_PATH."modifyCine.php");
-                # LLega null $miCine
-                ViewsController::ShowModifyCine($miCine, $message);
+                ViewsController::ShowModifyCine($cineId, $message);
             }else{
                 ViewsController::ShowLogIn();
             }
@@ -164,8 +159,8 @@
         }
 
         public function Delete($idCine){
-            $message = "";
             $this->cineDAO->Delete($idCine);
+            $message = "Cine eliminado con éxito";
             ViewsController::ShowCinesList($message);
         }
 
