@@ -12,15 +12,10 @@
 
         //FIJENSE SI QUIEREN CONTROLAR TODO EN UNO O DIVIDIRLO EN DOS, CREO QUE SERIA MEJOR TENER DOS CONTROLES, AHORA LO DEJO ACA PARA NO OLVIDAR DE HACERLO
         //DE DIVIDIRLO EN DOS VAMOS A TENER QUE PONER LAS FUNCIONES DE LOGIN EN OTRO CONTROLLER, 
-
-        private $adminDAO; 
         private $membersDAO; 
-        private $loginController;
 
         public function __construct(){
-            $this->memberDAO = new MemberDAO(); 
-            $this->adminDAO = new AdminDAO(); 
-            $this->loginController = new LogInController();
+            $this->membersDAO = new MemberDAO(); 
         }
 
         public function AddMember($firstName, $lastName, $dni, $email, $password, $checkPassword)
@@ -60,30 +55,23 @@
                 ViewsController::ShowRegisterForm($message);
             }
 
-        }
+        } 
 
-        public function LogIn ($email, $password)
+        public function FindMemberByEmail ($email)
         {
-            $this->loginController->LogIn($email, $password);
-            $rta = $this->VerifyMemberAndPassword($email,$password);
-            $this->RedirectLogIn($rta);
+            $loggedMember = null;
+            $members = $this->membersDAO->GetAll();
 
+            foreach ($members as $member)
+            {
+                if($member->getEmail() == $email)
+                {
+                    return $member;
+                }
+            }
+            return $loggedMember;
         }
 
-        public function RedirectLogIn ($message)
-        {
-            if(SessionController::HayUsuario('userLogged'))
-            {
-                ViewsController::ShowAddCineView($message);
-            }
-            else
-            {
-                ViewsController::ShowLogIn($message);
-            }
-        }
-
-        
-        #Estos métodos serian del Login. 
         public function VerifyMemberAndPassword($email, $password)
         {
             $rta = "";
@@ -108,26 +96,7 @@
             return $rta;
         }
 
-        public function FindMemberByEmail ($email)
-        {
-            $loggedMember = null;
-            $members = $this->memberDAO->GetAll();
 
-            foreach ($members as $member)
-            {
-                if($member->getEmail() == $email)
-                {
-                    return $member;
-                }
-            }
-            return $loggedMember;
-        }
-        
-
-        public function LogOut(){
-            session_destroy();
-            ViewsController::ShowIndex(); 
-        }
 
     }
 

@@ -1,28 +1,27 @@
 <?php namespace Controllers;
+    use DAO\CineDAO as CineDAO;
+    use DAO\DireccionDAO as DireccionDAO;
+    use DAO\CiudadDAO as CiudadDAO;
+    use DAO\ProvinciaDAO as ProvinciaDAO;
+    use DAO\PaisDAO as PaisDAO;
+    use DAO\SalaDAO as SalaDAO;
+    use DAO\PeliculaDAO as PeliculaDAO;
+    use DAO\GeneroDAO as GeneroDAO;
 
-        use Models\Cine\Cine as Cine;
-
-        use DAO\CineDAO as CineDAO;
-        use DAO\DireccionDAO as DireccionDAO;
-        use DAO\CiudadDAO as CiudadDAO;
-        use DAO\ProvinciaDAO as ProvinciaDAO;
-        use DAO\PaisDAO as PaisDAO;
-        use DAO\SalaDAO as SalaDAO;
-
-        use Models\Ubicacion\Direccion as Direccion;
-        use Models\Ubicacion\Ciudad as Ciudad;
-        use Models\Ubicacion\Provincia as Provincia;
-        use Models\Ubicacion\Pais as Pais;
-        use Models\Cine\Sala as Sala;
+    use Models\Ubicacion\Direccion as Direccion;
+    use Models\Ubicacion\Ciudad as Ciudad;
+    use Models\Ubicacion\Provincia as Provincia;
+    use Models\Ubicacion\Pais as Pais;
+    use Models\Cine\Sala as Sala;
+    use Models\Cine\Cine as Cine;
 
     class ViewsController
     {
-        private $cineDAO;
-        private $direccionDAO;
 
         public static function ShowIndex()
         {
-            require_once(FRONT_ROOT."index.php");            
+            $home = new HomeController();
+            $home->Index($message);       
         }
 
         public static function ShowLogIn($message = "")
@@ -52,9 +51,19 @@
             require_once(VIEWS_PATH."cinesList.php");
         }
 
-        public static function ShowMoviesListView()
+        public static function ShowMoviesListView($valueOfSelect="")
         {
-            require_once(VIEWS_PATH."listMovies.php");
+            $peliculasDAO = new PeliculaDAO();
+            $generosDAO = new GeneroDAO();
+            if($valueOfSelect != 0){
+                $peliculas = $peliculasDAO->GetMoviesByGenre($valueOfSelect);
+                $generos = $generosDAO->GetAll();
+                require_once(VIEWS_PATH."listMovies.php");
+            }else{
+                $peliculas = $peliculasDAO->GetAll();
+                $generos = $generosDAO->GetAll();
+                require_once(VIEWS_PATH."listMovies.php");
+            }
         }
 
         public static function ShowRegisterAdmin()
@@ -74,7 +83,8 @@
 
         public static function ShowCartelera()
         {
-            require_once(VIEWS_PATH."cartelera.php");
+            echo '<h1>CARTELERA.JPG</h1>';
+            #require_once(VIEWS_PATH."cartelera.php");
         }
     }
 
