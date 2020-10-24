@@ -32,13 +32,13 @@
         
         public function ShowAddView(){
             if(SessionController::HayUsuario('adminLogged')){
-                $paisDAO = new PaisDAO(); 
+               /* $paisDAO = new PaisDAO(); 
                 $paises = $paisDAO->GetAll();
                 $provinciaDAO = new ProvinciaDAO();
                 $provincias = $provinciaDAO->GetAll();
                 $ciudadDAO = new CiudadDAO();
                 $ciudades = $ciudadDAO->GetAll();
-
+                */
                 ViewsController::ShowAddCineView();
             }else{
                 ViewsController::ShowLogIn();
