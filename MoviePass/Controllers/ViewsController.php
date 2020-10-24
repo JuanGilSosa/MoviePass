@@ -2,9 +2,10 @@
 
     class ViewsController
     {
-        public static function ShowIndex()
+        public static function ShowIndex($message = "")
         {
-            require_once(FRONT_ROOT."index.php");            
+            $home = new HomeController();
+            $home->Index($message);    
         }
 
         public static function ShowLogIn($message = "")

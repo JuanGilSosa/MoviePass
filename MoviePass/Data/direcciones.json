@@ -13,7 +13,6 @@
         "numero": "2222",
         "piso": "",
         "departamento": "",
-<<<<<<< HEAD
         "codigoPostal": 1016
     },
     {
@@ -55,8 +54,13 @@
         "piso": "0",
         "departamento": "",
         "codigoPostal": "7600"
-=======
-        "codigoPostal": "5486"
->>>>>>> f779e9a15f3b356f23ac5eb988cd1be2aedb97f7
+    },
+    {
+        "id": 8,
+        "calle": "Sulimano ",
+        "numero": "4002",
+        "piso": "",
+        "departamento": "",
+        "codigoPostal": "7600"
     }
 ]

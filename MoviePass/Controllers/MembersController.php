@@ -12,15 +12,10 @@
 
         //FIJENSE SI QUIEREN CONTROLAR TODO EN UNO O DIVIDIRLO EN DOS, CREO QUE SERIA MEJOR TENER DOS CONTROLES, AHORA LO DEJO ACA PARA NO OLVIDAR DE HACERLO
         //DE DIVIDIRLO EN DOS VAMOS A TENER QUE PONER LAS FUNCIONES DE LOGIN EN OTRO CONTROLLER, 
-
-        private $adminDAO; 
         private $membersDAO; 
-        private $loginController;
 
         public function __construct(){
             $this->membersDAO = new MemberDAO(); 
-            $this->adminDAO = new AdminDAO(); 
-            $this->loginController = new LogInController();
         }
 
         public function AddMember($firstName, $lastName, $dni, $email, $password, $checkPassword)
@@ -60,27 +55,7 @@
                 ViewsController::ShowRegisterForm($message);
             }
 
-        }
-
-        public function LogIn ($email, $password)
-        {
-            $this->loginController->LogIn($email, $password);
-            $rta = $this->VerifyMemberAndPassword($email,$password);
-            $this->RedirectLogIn($rta);
-
-        }
-
-        public function RedirectLogIn ($message)
-        {
-            if(SessionController::HayUsuario('userLogged'))
-            {
-                ViewsController::ShowAddCineView($message);
-            }
-            else
-            {
-                ViewsController::ShowLogIn($message);
-            }
-        }
+        } 
 
         public function FindMemberByEmail ($email)
         {
@@ -121,10 +96,7 @@
             return $rta;
         }
 
-        public function LogOut(){
-            session_destroy();
-            ViewsController::ShowIndex(); 
-        }
+
 
     }
 

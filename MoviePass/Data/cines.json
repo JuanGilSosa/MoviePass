@@ -1,7 +1,6 @@
 [
     {
         "id": 1,
-<<<<<<< HEAD
         "nombre": "Cinemacenter",
         "email": "market@gmail.com",
         "numeroDeContacto": "2234837261",
@@ -20,20 +19,12 @@
         "email": "amba@gmail.com",
         "numeroDeContacto": "1129393932",
         "idDireccion": 7
-    }
-]
-=======
-        "nombre": "FinemaShopping",
-        "email": "FinemaShopping@gmail.com",
-        "numeroDeContacto": "1111111",
-        "idDireccion": 1
     },
     {
-        "id": 2,
-        "nombre": "FinemaCarlosPaz",
-        "email": "FinemaCarlosPaz@gmail.com",
-        "numeroDeContacto": "2222222",
-        "idDireccion": 2
+        "id": 4,
+        "nombre": "JuanCINEMA",
+        "email": "juancinema@gotmail.com",
+        "numeroDeContacto": "223949383",
+        "idDireccion": 8
     }
-]   
->>>>>>> f779e9a15f3b356f23ac5eb988cd1be2aedb97f7
+]

@@ -29,8 +29,7 @@
         }
         
         public function ShowAddView(){
-            
-            if($this->HayAdmin('adminLogged')){
+            if(SessionController::HayUsuario('adminLogged')){
                 $paisDAO = new PaisDAO(); 
                 $paises = $paisDAO->GetAll();
                 $provinciaDAO = new ProvinciaDAO();
