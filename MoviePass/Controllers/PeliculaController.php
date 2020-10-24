@@ -16,20 +16,15 @@
         }
         
         public function ShowMoviesNowPlaying(){
-            $peliculas = $this->peliculasDAO->GetAll();
-            $genero = new Genero();
-            $generos = $this->generosDAO->GetAll();
             ViewsController::ShowMoviesListView();
         }
 
         #@param valueOfSelect tiene el id del genero
         
         public function ShowMovies($valueOfSelect=""){
-            if(!SessionController::HayUsuario('userLogged')){
+            if(SessionController::HayUsuario('userLogged')){
                 if($valueOfSelect != 0){
-                    $peliculas = $this->peliculasDAO->GetMoviesByGenre($valueOfSelect);
-                    $generos = $this->generosDAO->GetAll();
-                    ViewsController::ShowMoviesListView();
+                    ViewsController::ShowMoviesListView($valueOfSelect);
                 }else{
                     $this->ShowMoviesNowPlaying();
                 }

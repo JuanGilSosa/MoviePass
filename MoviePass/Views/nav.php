@@ -46,7 +46,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger text-white" href="<?php echo FRONT_ROOT."Login/free_session"?>">Cerrar Sesion</a>
+              <a class="nav-link js-scroll-trigger text-white" href="<?php echo FRONT_ROOT."Login/LogOut"?>">Cerrar Sesion</a>
             </li>
 
           </ul>

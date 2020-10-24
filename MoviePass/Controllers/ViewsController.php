@@ -67,10 +67,11 @@
             require_once(VIEWS_PATH."register-adm.php");
         }
         
-        public static function ShowModifyCine($miCine, $message = "")
+        public static function ShowModifyCine($cineId, $message = "")
         {
             if(SessionController::HayUsuario('adminLogged')){
-                $miCine = $this->cineDAO->getCineById($cineId);
+                $cineDAO = new CineDAO();
+                $miCine = $cineDAO->getCineById($cineId);
                 require_once(VIEWS_PATH."modifyCine.php");
             } else {
 

@@ -34,34 +34,34 @@
             $this->paisDAO = new PaisDAO();
         }
 
-        #public function AddViewCine($message = ""){
-        #    if($this->HayUsuario('adminLogged')){
-        #        ViewsController::ShowAddCineView();
-        #    }else{
-        #        ViewsController::ShowLogIn();
-        #    }   
-        #}
+        public function AddViewCine($message = ""){
+            if($this->HayUsuario('adminLogged')){
+                ViewsController::ShowAddCineView();
+            }else{
+                ViewsController::ShowLogIn();
+            }   
+        }
 
-        #public function ListViewCine($message = ""){
-        #    if(SessionController::HayUsuario('adminLogged')){
-        #        #require_once(VIEWS_PATH."cinesList.php");
-        #        #Llega null el arreglo de Cines.
-        #        ViewsController::ShowCinesList();
-        #    }else{
-        #        ViewsController::ShowLogIn();
-        #    }
-        #}
+        public function ListViewCine($message = ""){
+            if(SessionController::HayUsuario('adminLogged')){
+                #require_once(VIEWS_PATH."cinesList.php");
+                #Llega null el arreglo de Cines.
+                ViewsController::ShowCinesList();
+            }else{
+                ViewsController::ShowLogIn();
+            }
+        }
         
-        #public function ShowModifyCine($cineId, $message = ""){
-        #    if(SessionController::HayUsuario('adminLogged')){     
-        #        $miCine = $this->cineDAO->getCineById($cineId);
+        public function ShowModifyCine($cineId, $message = ""){
+            if(SessionController::HayUsuario('adminLogged')){     
+                $miCine = $this->cineDAO->getCineById($cineId);
                 #require_once(VIEWS_PATH."modifyCine.php");
                 # LLega null $miCine
-        #        ViewsController::ShowModifyCine($miCine, $message);
-        #    }else{
-        #        ViewsController::ShowLogIn();
-        #    }
-        #}
+                ViewsController::ShowModifyCine($miCine, $message);
+            }else{
+                ViewsController::ShowLogIn();
+            }
+        }
 
         public function AddViewSala(){
             $cines = $this->cineDAO->GetAll();
@@ -164,8 +164,9 @@
         }
 
         public function Delete($idCine){
+            $message = "";
             $this->cineDAO->Delete($idCine);
-            ViewsController::ShowCinesList();
+            ViewsController::ShowCinesList($message);
         }
 
         public function AddSala($nombre, $idCine, $precio, $capacidad){

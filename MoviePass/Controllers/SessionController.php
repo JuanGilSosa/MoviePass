@@ -1,4 +1,5 @@
 <?php namespace Controllers;
+
     class SessionController{
 
         public static function HayUsuario($key = ""){
