@@ -49,18 +49,25 @@
                 $ciudadDAO = new CiudadDAO();
                 $provinciaDAO = new ProvinciaDAO();
                 $paisDAO = new PaisDAO();
+
+                #require_once(VIEWS_PATH."cinesList.php");
                 
-                ViewsController::ShowCinesList();
+                # Llega null el arreglo de Cines.
+                ViewsController::ShowCinesList($cines);
             }else{
                 ViewsController::ShowLogIn();
             }
 
         }
         
-        public function ShowModifyCine($cineId){
+        public function ShowModifyCine($cineId, $message = ""){
             if(SessionController::HayUsuario('adminLogged')){
                 $miCine = $this->cineDAO->getCineById($cineId);
-                ViewsController::ShowModifyCine();
+                
+                #require_once(VIEWS_PATH."modifyCine.php");
+                # LLega null $miCine
+
+                ViewsController::ShowModifyCine($miCine);
             }else{
                 ViewsController::ShowLogIn();
             }
@@ -149,11 +156,44 @@
         public function Update(
             $id, $nombre, $email, $numeroDeContacto, $direccion
         ){
-            $cine = new Cine($nombre, $email, $numeroDeContacto, $direccion);
-            $cine->setId($id);
-            $this->cineDAO->Update($cine);
+            
+            $cineViejo = $this->cineDAO->getCineById($id);
+            
 
-            $this->ListViewCine();
+            #$existeId = $this->cineDAO->getCineById($id);
+            #if(!$existeId)
+            #{
+                $existeNombre = $this->cineDAO->FindCineByName($nombre);
+                if(!$existeNombre || $cineViejo->getNombre() == $nombre)
+                {
+                    $existeEmail = $this->cineDAO->FindCineByEmail($email);
+                    if (!$existeEmail || $cineViejo->getEmail() == $email)
+                    {
+                        $existeTelefono = $this->cineDAO->FindCineByTelefono($telefono);
+                        if(!$existeTelefono)
+                        {
+                            $cine = new Cine($nombre, $email, $numeroDeContacto, $direccion);
+                            $cine->setId($id);
+                            $this->cineDAO->Update($cine);
+                            $this->ListViewCine();
+                        }else{
+                            $message = "El teéfono ingresado ya se encuentra registrado";
+                            $this->ShowModifyCine($id, $message);
+                        }
+                    }else{
+                        $message = "El email ingresado ya se encuentra registrado";
+                        $this->ShowModifyCine($id, $message);
+                    }
+
+                }else{
+                    $message = "El nombre ingresado ya se encuentra registrado";
+                    $this->ShowModifyCine($id, $message);
+                }
+                
+            #}else {
+            #    $message = "El ID ingresado ya se encuentra registrado";
+            #    $this->ShowModifyCine($id, $message);
+            #}
         }
 
         public function Delete($idCine){

@@ -27,12 +27,17 @@
           <div class="container">
                <h2 class="mb-4">Modificar Cine</h2>
                <form action="<?php echo FRONT_ROOT .'Cine/Update'?>" method="POST" class="bg-light-alpha p-5">
+                    <?php
+                         if(isset($message))
+                         {
+                              echo "<small>" . $message . "</small>";
+                         } 
+                    ?>
                     <div class="row justify-content-start">      
-
                          <div class="col-lg-2 ">
                               <div class="form-group">
                                    <label for="">I.D. Cine</label>
-                                   <input type="text" name="id" value="<?php if(isset($_POST['idCine'])){ $idCine = $_POST['idCine']; echo $idCine;} ?>" class="form-control" placeholder="<?php $idCine; ?>" required>
+                                   <input type="text" name="id" value="<?php echo $miCine->getId() ?>" class="form-control" placeholder="<?php $idCine; ?>" required>
                               </div>
                          </div>                   
 

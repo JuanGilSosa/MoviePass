@@ -3,6 +3,8 @@
     use Models\Users\Admin as Admin;
     use DAO\AdminDAO as AdminDAO;
 
+    use DAO\CineDAO as CineDAO;
+    use Model\Cine\Cine as Cine;
     use DAO\PaisDAO as PaisDAO;
     use Models\Ubicacion\Pais as Pais;
     use DAO\ProvinciaDAO as ProvinciaDAO;
@@ -31,6 +33,8 @@
         public function ShowAddView(){
             
             if($this->HayAdmin('adminLogged')){
+                $cineDAO = new CineDAO();
+                $cines = $cineDAO->GetAll();
                 $paisDAO = new PaisDAO(); 
                 $paises = $paisDAO->GetAll();
                 $provinciaDAO = new ProvinciaDAO();
@@ -42,6 +46,13 @@
             }else{
                 ViewsController::ShowLogIn();
             }
+        }
+
+        public function HayAdmin(){
+            if($_SESSION["adminLogged"])
+                return true;
+            else
+                return false;
         }
     }
 ?>
