@@ -1,27 +1,28 @@
 <?php namespace Controllers;
-    use DAO\CineDAO as CineDAO;
-    use DAO\DireccionDAO as DireccionDAO;
-    use DAO\CiudadDAO as CiudadDAO;
-    use DAO\ProvinciaDAO as ProvinciaDAO;
-    use DAO\PaisDAO as PaisDAO;
-    use DAO\SalaDAO as SalaDAO;
-    use DAO\PeliculaDAO as PeliculaDAO;
-    use DAO\GeneroDAO as GeneroDAO;
 
-    use Models\Ubicacion\Direccion as Direccion;
-    use Models\Ubicacion\Ciudad as Ciudad;
-    use Models\Ubicacion\Provincia as Provincia;
-    use Models\Ubicacion\Pais as Pais;
-    use Models\Cine\Sala as Sala;
-    use Models\Cine\Cine as Cine;
+        use Models\Cine\Cine as Cine;
+
+        use DAO\CineDAO as CineDAO;
+        use DAO\DireccionDAO as DireccionDAO;
+        use DAO\CiudadDAO as CiudadDAO;
+        use DAO\ProvinciaDAO as ProvinciaDAO;
+        use DAO\PaisDAO as PaisDAO;
+        use DAO\SalaDAO as SalaDAO;
+
+        use Models\Ubicacion\Direccion as Direccion;
+        use Models\Ubicacion\Ciudad as Ciudad;
+        use Models\Ubicacion\Provincia as Provincia;
+        use Models\Ubicacion\Pais as Pais;
+        use Models\Cine\Sala as Sala;
 
     class ViewsController
     {
+        private $cineDAO;
+        private $direccionDAO;
 
         public static function ShowIndex()
         {
-            $home = new HomeController();
-            $home->Index($message);       
+            require_once(FRONT_ROOT."index.php");            
         }
 
         public static function ShowLogIn($message = "")
@@ -37,43 +38,28 @@
 
         public static function ShowAddCineView($message = "")
         {
-            $paisDAO = new PaisDAO(); 
-            $paises = $paisDAO->GetAll();
-            $provinciaDAO = new ProvinciaDAO();
-            $provincias = $provinciaDAO->GetAll();
-            $ciudadDAO = new CiudadDAO();
-            $ciudades = $ciudadDAO->GetAll();
             require_once(VIEWS_PATH."addCine.php");
         }
 
-        public static function ShowCinesList()
+        public static function ShowCinesList($message = "")
         {
-            $cineDAO = new CineDAO();
-            $cines = $cineDAO->GetAllActive();
-            $direccionDAO = new DireccionDAO(); 
-            $ciudadDAO = new CiudadDAO();
-            $provinciaDAO = new ProvinciaDAO();
-            $paisDAO = new PaisDAO();
-            require_once(VIEWS_PATH."cinesList.php");
+            if(SessionController::HayUsuario('adminLogged')){
+                $cineDAO = new CineDAO();
+                $cines = $cineDAO->GetAllActive();
+                $direccionDAO = new DireccionDAO(); 
+                $ciudadDAO = new CiudadDAO();
+                $provinciaDAO = new ProvinciaDAO();
+                $paisDAO = new PaisDAO();
+            
+                require_once(VIEWS_PATH."cinesList.php");
+            } else {
+               $this->ShowLogIn();
+            }
         }
 
-        public static function ShowMoviesListView($valueOfSelect="")
+        public static function ShowMoviesListView()
         {
-            if(SessionController::HayUsuario('userLogged') || SessionController::HayUsuario('adminLogged')){
-                $peliculasDAO = new PeliculaDAO();
-                $generosDAO = new GeneroDAO();
-                if($valueOfSelect != 0){
-                    $peliculas = $peliculasDAO->GetMoviesByGenre($valueOfSelect);
-                    $generos = $generosDAO->GetAll();
-                    require_once(VIEWS_PATH."listMovies.php");
-                }else{
-                    $peliculas = $peliculasDAO->GetAll();
-                    $generos = $generosDAO->GetAll();
-                    require_once(VIEWS_PATH."listMovies.php");
-                }
-            }else{
-                ShowLogIn('Logeate GIL');
-            }
+            require_once(VIEWS_PATH."listMovies.php");
         }
 
         public static function ShowRegisterAdmin()
@@ -81,9 +67,16 @@
             require_once(VIEWS_PATH."register-adm.php");
         }
         
-        public static function ShowModifyCine($miCine, $message = "")
+        public static function ShowModifyCine($cineId, $message = "")
         {
-            require_once(VIEWS_PATH."modifyCine.php");
+            if(SessionController::HayUsuario('adminLogged')){
+                $cineDAO = new CineDAO();
+                $miCine = $cineDAO->getCineById($cineId);
+                require_once(VIEWS_PATH."modifyCine.php");
+            } else {
+
+                $this->ShowLogIn();
+            }
         }
         
         public static function ShowAddSala()
@@ -93,8 +86,7 @@
 
         public static function ShowCartelera()
         {
-            echo '<h1>CARTELERA.JPG</h1>';
-            #require_once(VIEWS_PATH."cartelera.php");
+            require_once(VIEWS_PATH."cartelera.php");
         }
     }
 

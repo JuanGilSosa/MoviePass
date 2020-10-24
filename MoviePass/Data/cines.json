@@ -1,6 +1,5 @@
 [
     {
-<<<<<<< HEAD
         "id": "1",
         "nombre": "Finema Shopping Mdp",
         "email": "FinemaShopping@gmail.com",
@@ -15,33 +14,5 @@
         "numeroDeContacto": "2222222",
         "idDireccion": 2,
         "active": true
-=======
-        "id": 1,
-        "nombre": "Cinemacenter",
-        "email": "market@gmail.com",
-        "numeroDeContacto": "2234837261",
-        "idDireccion": 5
-    },
-    {
-        "id": 2,
-        "nombre": "FinemaFenter",
-        "email": "cinema@gmail.com",
-        "numeroDeContacto": "4951111",
-        "idDireccion": 6
-    },
-    {
-        "id": 3,
-        "nombre": "Ambassador",
-        "email": "amba@gmail.com",
-        "numeroDeContacto": "1129393932",
-        "idDireccion": 7
-    },
-    {
-        "id": 4,
-        "nombre": "JuanCINEMA",
-        "email": "juancinema@gotmail.com",
-        "numeroDeContacto": "223949383",
-        "idDireccion": 8
->>>>>>> 9ae1bcd1bafb93e23a151de670b74bc7ae2ccd7f
     }
 ]
