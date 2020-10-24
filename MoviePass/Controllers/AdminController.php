@@ -31,10 +31,7 @@
         }
         
         public function ShowAddView(){
-            
-            if($this->HayAdmin('adminLogged')){
-                $cineDAO = new CineDAO();
-                $cines = $cineDAO->GetAll();
+            if(SessionController::HayUsuario('adminLogged')){
                 $paisDAO = new PaisDAO(); 
                 $paises = $paisDAO->GetAll();
                 $provinciaDAO = new ProvinciaDAO();
