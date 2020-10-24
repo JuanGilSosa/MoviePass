@@ -18,7 +18,7 @@
         private $loginController;
 
         public function __construct(){
-            $this->membersDAO = new MemberDAO(); 
+            $this->memberDAO = new MemberDAO(); 
             $this->adminDAO = new AdminDAO(); 
             $this->loginController = new LogInController();
         }
@@ -82,21 +82,8 @@
             }
         }
 
-        public function FindMemberByEmail ($email)
-        {
-            $loggedMember = null;
-            $members = $this->membersDAO->GetAll();
-
-            foreach ($members as $member)
-            {
-                if($member->getEmail() == $email)
-                {
-                    return $member;
-                }
-            }
-            return $loggedMember;
-        }
-
+        
+        #Estos métodos serian del Login. 
         public function VerifyMemberAndPassword($email, $password)
         {
             $rta = "";
@@ -120,6 +107,22 @@
                          
             return $rta;
         }
+
+        public function FindMemberByEmail ($email)
+        {
+            $loggedMember = null;
+            $members = $this->memberDAO->GetAll();
+
+            foreach ($members as $member)
+            {
+                if($member->getEmail() == $email)
+                {
+                    return $member;
+                }
+            }
+            return $loggedMember;
+        }
+        
 
         public function LogOut(){
             session_destroy();

@@ -1,28 +1,6 @@
 [
     {
         "id": 1,
-<<<<<<< HEAD
-        "nombre": "Cinemacenter",
-        "email": "market@gmail.com",
-        "numeroDeContacto": "2234837261",
-        "idDireccion": 5
-    },
-    {
-        "id": 2,
-        "nombre": "FinemaFenter",
-        "email": "cinema@gmail.com",
-        "numeroDeContacto": "4951111",
-        "idDireccion": 6
-    },
-    {
-        "id": 3,
-        "nombre": "Ambassador",
-        "email": "amba@gmail.com",
-        "numeroDeContacto": "1129393932",
-        "idDireccion": 7
-    }
-]
-=======
         "nombre": "FinemaShopping",
         "email": "FinemaShopping@gmail.com",
         "numeroDeContacto": "1111111",
@@ -36,4 +14,3 @@
         "idDireccion": 2
     }
 ]   
->>>>>>> f779e9a15f3b356f23ac5eb988cd1be2aedb97f7
