@@ -13,6 +13,7 @@
         private $numeroDeContacto;
         private $idDireccion;
         private $salas;
+        private $active;
 
         public function __construct($nombre = "", $email = "", $numeroDeContacto = "", $idDireccion="")
         {
@@ -21,6 +22,7 @@
             $this->email = $email;
             $this->numeroDeContacto = $numeroDeContacto;
             $this->idDireccion = $idDireccion;
+            $this->active = true;
         }
 
         public function getId(){
@@ -47,6 +49,10 @@
             return $this->salas;
         }
 
+        public function getActive(){
+            return $this->active;
+        }
+
         public function setId($id){
             $this->id = $id;
         }
@@ -68,6 +74,10 @@
         }
         public function setSalas($salas){
             $this->salas = $salas;
+        }
+        public function setActive($active)
+        {
+            $this->active = $active;
         }
 
 

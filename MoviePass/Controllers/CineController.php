@@ -190,7 +190,7 @@
 
         public function Delete($idCine){
             $this->cineDAO->Delete($idCine);
-            $this->ListViewCine();
+            ViewsController::ShowCinesList();
         }
 
         public function AddSala($nombre, $idCine, $precio, $capacidad){
