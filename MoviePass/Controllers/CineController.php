@@ -44,16 +44,9 @@
 
         public function ListViewCine($message = ""){
             if(SessionController::HayUsuario('adminLogged')){
-                $cines = $this->cineDAO->GetAll();
-                $direccionDAO = new DireccionDAO(); 
-                $ciudadDAO = new CiudadDAO();
-                $provinciaDAO = new ProvinciaDAO();
-                $paisDAO = new PaisDAO();
-
                 #require_once(VIEWS_PATH."cinesList.php");
-                
-                # Llega null el arreglo de Cines.
-                ViewsController::ShowCinesList($cines);
+                #Llega null el arreglo de Cines.
+                ViewsController::ShowCinesList();
             }else{
                 ViewsController::ShowLogIn();
             }
@@ -62,12 +55,13 @@
         
         public function ShowModifyCine($cineId, $message = ""){
             if(SessionController::HayUsuario('adminLogged')){
+               
+               
                 $miCine = $this->cineDAO->getCineById($cineId);
-                
                 #require_once(VIEWS_PATH."modifyCine.php");
                 # LLega null $miCine
 
-                ViewsController::ShowModifyCine($miCine);
+                ViewsController::ShowModifyCine($miCine, $message);
             }else{
                 ViewsController::ShowLogIn();
             }
@@ -127,8 +121,7 @@
 
                                 $this->ListViewCine($message);
                             }else{
-                                $message = "El código postal ingresado NO se encuentra registrado" .
-                                "cod:" . $codigoPostal. "prov: ".$provincia ."pais".$pais;
+                                $message = "El código postal ingresado NO se encuentra registrado" ;
                                 $this->AddViewCine($message);
                             }
                             
@@ -154,30 +147,29 @@
         }
 
         public function Update(
-            $id, $nombre, $email, $numeroDeContacto, $direccion
+            $id, $nombre, $email, $numeroDeContacto
         ){
             
             $cineViejo = $this->cineDAO->getCineById($id);
+            $existeNombre = $this->cineDAO->FindCineByName($nombre);
             
-
-            #$existeId = $this->cineDAO->getCineById($id);
-            #if(!$existeId)
-            #{
-                $existeNombre = $this->cineDAO->FindCineByName($nombre);
-                if(!$existeNombre || $cineViejo->getNombre() == $nombre)
+            if(!$existeNombre || $cineViejo->getNombre() == $nombre)
                 {
                     $existeEmail = $this->cineDAO->FindCineByEmail($email);
                     if (!$existeEmail || $cineViejo->getEmail() == $email)
                     {
-                        $existeTelefono = $this->cineDAO->FindCineByTelefono($telefono);
-                        if(!$existeTelefono)
+                        $existeTelefono = $this->cineDAO->FindCineByTelefono($numeroDeContacto);
+                        #echo "<script>console.log('$numeroDeContacto'); </script>";
+
+
+                        if(!$existeTelefono || $cineViejo->getNumeroDeContacto() == $numeroDeContacto)
                         {
-                            $cine = new Cine($nombre, $email, $numeroDeContacto, $direccion);
+                            $cine = new Cine($nombre, $email, $numeroDeContacto, $cineViejo->getIdDireccion());
                             $cine->setId($id);
                             $this->cineDAO->Update($cine);
                             $this->ListViewCine();
                         }else{
-                            $message = "El teéfono ingresado ya se encuentra registrado";
+                            $message = "El teléfono ingresado ya se encuentra registrado";
                             $this->ShowModifyCine($id, $message);
                         }
                     }else{

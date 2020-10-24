@@ -28,13 +28,23 @@
                <h2 class="mb-4">Modificar Cine</h2>
                <form action="<?php echo FRONT_ROOT .'Cine/Update'?>" method="POST" class="bg-light-alpha p-5">
                     <?php
-                         if(isset($message))
+                         if(isset($message) && !empty($message))
                          {
-                              echo "<small>" . $message . "</small>";
+                              #echo "<small>" . $message . "</small>";
+                              ?>
+                              <div class="container">
+                                   <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <?php echo $message ?>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                             <span aria-hidden="true">&times;</span>
+                                        </button>
+                                   </div>
+                              </div>
+                              <?php
                          } 
                     ?>
                     <div class="row justify-content-start">      
-                         <div class="col-lg-2 ">
+                         <div class="col-lg-2 d-none">
                               <div class="form-group">
                                    <label for="">I.D. Cine</label>
                                    <input type="text" name="id" value="<?php echo $miCine->getId() ?>" class="form-control" placeholder="<?php $idCine; ?>" required>
