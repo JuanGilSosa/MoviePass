@@ -35,7 +35,7 @@
         }
 
         public function AddViewCine($message = ""){
-            if($this->HayUsuario('adminLogged')){
+            if(SessionController::HayUsuario('adminLogged')){
                 ViewsController::ShowAddCineView();
             }else{
                 ViewsController::ShowLogIn();
