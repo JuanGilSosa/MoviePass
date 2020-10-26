@@ -3,6 +3,7 @@
 
     use DAO\IDAO as IDAO;
     use Models\Ubicacion\Provincia as Provincia;
+    use Models\Ubicacion\Pais as Pais;
 
     class ProvinciaDAO implements IDAO
     {
@@ -31,15 +32,28 @@
         {
             $this->RetrieveData();
 
-            $provincia = new Provincia();
-
             foreach($this->provincias as $provincia){
                 if ($provincia->getId() == $idProvincia)
-                return $provincia;
+                    return $provincia;
             }
+
+            return false;
         }
 
-        public function GetProvinciasByIdPais ($idPais)
+        public function GetByName($nameProvincia)
+        {
+            $this->RetrieveData();
+
+            foreach($this->provincias as $provincia){
+                if ($provincia->getNameProvincia() == $nameProvincia)
+                    return $provincia;
+            }
+
+            return false;            
+        }
+
+
+        public function GetProvinciasByIdPais($idPais)
         {
             $this->RetrieveData();
             $provincia = new Provincia();
@@ -47,7 +61,8 @@
 
             foreach ($this->provincias as $provincia)
             {
-                if($provincia->getIdPais() == $idPais)
+                $pais = $provincia->getPais();
+                if($pais->getId() == $idPais)
                 {
                     array_push ($provinciasDelPais, $provincia);
                 }
@@ -71,7 +86,8 @@
             {                
                 $valuesArray["id"] = $provincia->getId();
                 $valuesArray["nameProvincia"] = $provincia->getNameProvincia();
-                $valuesArray["idPais"] = $provincia->getIdPais();
+                $pais = $provincia->getPais();
+                $valuesArray["pais"] = $pais->getId();
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -96,7 +112,12 @@
                     $provincia = new Provincia();
                     $provincia->setId($valuesArray["id"]);
                     $provincia->setNameProvincia($valuesArray["nameProvincia"]);
-                    $provincia->setIdPais($valuesArray["idPais"]);
+
+                    $paisDAO = new PaisDAO();
+                     
+                    $pais = $paisDAO->GetById($valuesArray["pais"]);
+
+                    $provincia->setPais($pais);
 
                     array_push($this->provincias, $provincia);
                 }

@@ -13,7 +13,7 @@
         {
             $this->RetrieveData();
 
-            $pais->$this->GetNextId();
+            $pais->setId($this->GetNextId());
             
             array_push($this->paises, $pais);
 
@@ -30,16 +30,24 @@
         public function GetById($idPais)
         {
             $this->RetrieveData();
-
-            $pais = new Pais();
-            $country;
             foreach($this->paises as $pais){
                 if ($pais->getId() == $idPais)
-                $country = $pais;
+                    return $pais;
             }
-            return $country;
 
-            
+            return false;            
+        }
+
+        public function GetByName($namePais)
+        {
+            $this->RetrieveData();
+
+            foreach($this->paises as $pais){
+                if ($pais->getNamePais() == $namePais)
+                    return $pais;
+            }
+
+            return false;            
         }
 
         public function Delete($idPais){

@@ -34,9 +34,9 @@
             
             foreach($this->cines as $cine)
             { 
-                if($cine->getActive() == true)
+                if($cine->getActive())
                 {
-                    array_push($activos,$cine);
+                    array_push($activos, $cine);
                 }
             }
             return $activos;
@@ -90,8 +90,16 @@
                 $valuesArray["nombre"] = $cine->getNombre();
                 $valuesArray["email"] = $cine->getEmail();
                 $valuesArray["numeroDeContacto"] = $cine->getNumeroDeContacto();
-                $valuesArray["idDireccion"] = $cine->getIdDireccion();
-                $valuesArray["active"] = $cine->getActive();
+                $direccion = $cine->getDireccion();
+                /*
+                echo "<br>";
+                var_dump($direccion);
+                echo "<br>";
+                */
+                if(!is_string($direccion))  //SI SACO ESTO QUEDA UNA DIRECCION COMO STRING Y TIRA BRONCA POR ESTAR TRATANDO DE APLICAR UN METODO DE Direccion SOBRE UN STRING
+                    $valuesArray["direccion"] = $direccion->getId();
+                
+                    $valuesArray["active"] = $cine->getActive();
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -118,7 +126,13 @@
                     $cine->setNombre($valuesArray["nombre"]);
                     $cine->setEmail($valuesArray["email"]);
                     $cine->setNumeroDeContacto($valuesArray["numeroDeContacto"]);
-                    $cine->setIdDireccion($valuesArray["idDireccion"]);
+                    $cine->setDireccion($valuesArray["direccion"]);
+
+                    $direccionDAO = new DireccionDAO();
+                    $direccion = $direccionDAO->GetById($valuesArray["direccion"]);
+
+                    $cine->setDireccion($direccion);
+
                     $cine->setActive($valuesArray["active"]);
                     
                     array_push($this->cines, $cine);

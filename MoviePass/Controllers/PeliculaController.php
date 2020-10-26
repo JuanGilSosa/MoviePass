@@ -30,17 +30,22 @@
                     $generos = $this->generosDAO->GetAll();
                     ViewsController::ShowMoviesListView($peliculas,$generos);
                 }else{
-                    $this->ShowMoviesNowPlaying();
+                    ViewsController::ShowMoviesNowPlaying();
                 }
             }else{
                 ViewsController::ShowLogIn();
             }
         }
 
-        public function ShowMovieDescription($idMovie){
-            $pelicula = $this->peliculasDAO->getMovieById($idMovie);
-            $trailerKey = $this->peliculasDAO->getTrailerKey($idMovie);
-            ViewsController::ShowMovieDescription();
+        public function ShowMovieDescription(){
+            if(isset($_GET['idPelicula'])){
+                $idPelicula = $_GET["idPelicula"];
+                $pelicula = $this->peliculasDAO->getMovieById($idPelicula);
+
+                $trailerKey = $this->peliculasDAO->getTrailerKey($idPelicula);
+             
+                ViewsController::ShowMovieDescription($pelicula, $trailerKey);
+            }
         }
 
         public function getPeliculaDAO(){

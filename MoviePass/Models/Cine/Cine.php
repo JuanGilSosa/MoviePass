@@ -11,17 +11,19 @@
         private $nombre;
         private $email;
         private $numeroDeContacto;
-        private $idDireccion;
+        private $direccion; 
         private $salas;
         private $active;
 
-        public function __construct($nombre = "", $email = "", $numeroDeContacto = "", $idDireccion="")
+        public function __construct($id = "", $nombre = "", $email = "", $numeroDeContacto = "", $direccion="")
         {
-            $this->salas = array();
+            
+            $this->id = $id;
             $this->nombre = $nombre;
             $this->email = $email;
             $this->numeroDeContacto = $numeroDeContacto;
-            $this->idDireccion = $idDireccion;
+            $this->direccion = $direccion;
+            $this->salas = array();
             $this->active = true;
         }
 
@@ -41,8 +43,8 @@
             return $this->numeroDeContacto;
         }
 
-        public function getIdDireccion(){
-            return $this->idDireccion;
+        public function getDireccion(){
+            return $this->direccion;
         }
 
         public function getSalas(){
@@ -69,8 +71,8 @@
             $this->numeroDeContacto = $numeroDeContacto;
         }
 
-        public function setIdDireccion($idDireccion){
-            $this->idDireccion = $idDireccion;
+        public function setDireccion($direccion){
+            $this->direccion = $direccion;
         }
         public function setSalas($salas){
             $this->salas = $salas;

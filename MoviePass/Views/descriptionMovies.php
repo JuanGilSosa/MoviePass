@@ -1,60 +1,61 @@
 <?php 
     require_once('nav.php');
 ?>
-<section id="listado" class="mb-5">
-    <div class="movie-container pt-5">
-        <div class="background-movie" style="background: url('https://image.tmdb.org/t/p/original<?php echo $pelicula->getBackdropPath()?>') 0% -30px / cover rgb(17, 17, 17);">
-            <div class="background-shadow">
-                <div class="movie-poster">
-                    <div class="poster">
-                        <img style="" src="https://image.tmdb.org/t/p/w300<?php echo $pelicula->getPosterPath()?>">
-                    </div>
-                </div>
-                <div class="movie-content">
-                    <div class="info">
-                        <div class="text-center">
-                            <h1 style="text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.35);"><?php echo $pelicula->getTitle() ?></h1>
-                        </div>
-                        <div class="text-center">
-                            <?php echo $pelicula->getOverview()?>
-                        </div>
-                    </div>
-                </div>
+<section id="listado" class="mb-5 h-95">
+
+    <div class="container" style="margin-top:10vh;">
+        <div class="row container" style="margin:0px; padding:0px;background-color: rgba(158, 140, 219, 1);">
+            <div class="col container mx-auto">
+                <section class="container" style="width: 100%; height:5vh;">
+                    <h4><?php echo "<strong>" . $pelicula->getTitle() ."</strong>" ?></h4>
+                </section>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-9">
+        <div class="row container" style="margin-top:2vh;">
+                <div class="col-xs-12 col-md-12 col-lg-8" style="height:100%;background-color: rgba(158, 140, 219, 0.4);">
+                    <section class="container" style="width: 100%; height: 100%; margin:2vh 0vh;">
+                        <h5><em>Descripcion</em></h5>
+                        <p><?php echo $pelicula->GetOverview();    ?></p>
+                    </section>
+                    <section class="container" style="width: 100%; height: 100%; margin:2vh 0vh;">
+                        <h5><em>Reparto</em></h5>
+                        <p><?php $peliculasDAO->ShowCastDetails($peliculasDAO->GetCast($pelicula->getId())); ?></p>   
+                    </section>
+                    <section class="row">
+                        <section class="col container d-block" style="width: 100%; height: 100%; margin:2vh 0vh;">
+                            <h5><em>Generos</em></h5>
+                            <p><?php $generosDAO->ShowGenres($generosDAO->getGenresNamesById($pelicula->getGenres())); ?></p>
+                        </section>
+                        <section class="col container d-block" style="width: 100%; height: 100%; margin:2vh 0vh;">
+                            <h5><em>Estreno</em></h5>
+                            <p><?php echo $pelicula->getReleaseDate() ?></p>
+                        </section>
+                        <section class="col container d-block" style="width: 100%; height: 100%; margin:2vh 0vh;">
+                            <h5><em>Clasificacion</em></h5>
+                            <p><?php echo $pelicula->GetVoteAverage();    ?></p>
+                        </section>
+                    </section>
+                    <section class="row">
+                        <section class="col container d-block" style="width: 100%; height: 100%; margin:2vh 0vh;">
+                            <a href="#headerPopup" id="headerVideoLink" target="_blank" class="btn btn-outline-primary popup-modal" style="width: 100%;">Ver Trailer</a>
+                            
+                        </section>
+                        <section class="col container d-block" style="width: 100%; height: 100%; margin:2vh 0vh;">
+                            <button type="" class="btn btn-primary" style="width: 100%;">Reserva</button>
+                        </section>
 
-            <div class="onbcn-cinema-detail-body">
-
-                <p><strong>DURACIÓN:</strong> </p><p></p>
-                <p><strong>TITULO:</strong><?php echo $pelicula->getTitle()?></p><p></p>
-                <p><strong>GÉNERO:</strong><?php $this->generosDAO->ShowGenres($this->generosDAO->getGenresNamesById($pelicula->getGenres()));?></p><p></p>
-                <p><strong>ESTRENO:</strong><?php echo $pelicula->getReleaseDate() ?></p><p></p>
-                <p><strong>RATING:</strong><?php echo $pelicula->getVoteAverage() ?></p><p>
-                                                              
-            </div>
-
-            <div class="onbcn-embed">
-                <?php if($trailerKey != null){?>
-                <div class="top"><p class="title">Trailer</p></div>
-                <div class="middle">
-                    <iframe 
-                        width="560" 
-                        height="315" 
-                        src="https://www.youtube.com/embed/<?php echo $trailerKey;?>" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen="" >
-                    </iframe>                                        
+                    </section>
+                </div>
+                <div class="col-xs-12 col-md-12 col-lg-4">
+                    <img src="https://image.tmdb.org/t/p/original<?php echo $pelicula->getPosterPath()?>" style=width:100%></img>
                 </div>
                 
-            </div>
-            <?php }?>
         </div>
-        <form action="<?php echo FRONT_ROOT.'Cine\ShowCartelera'?>" method="post">
-            <button type="submit" class="btn btn-success">COMPRAR</button>
-        </form>
-        
+        <div class="row container" style="margin-top:2vh; padding:0px;background-color: rgba(158, 140, 219, 1);">
+            <div class="col container mx-auto">
+                <section class="container" style="width: 100%; height:5vh;">
+                </section>
+            </div>
+        </div>
     </div>
-   
 </section>
