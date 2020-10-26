@@ -16,7 +16,9 @@
         }
         
         public function ShowMoviesNowPlaying(){
-            ViewsController::ShowMoviesListView();
+            $peliculas = $this->peliculasDAO->GetAll();
+            $generos = $this->generosDAO->GetAll();
+            ViewsController::ShowMoviesListView($peliculas,$generos);
         }
 
         #@param valueOfSelect tiene el id del genero
@@ -24,7 +26,9 @@
         public function ShowMovies($valueOfSelect=""){
             if(SessionController::HayUsuario('userLogged') || SessionController::HayUsuario('adminLogged')){
                 if($valueOfSelect != 0){
-                    ViewsController::ShowMoviesListView($valueOfSelect);
+                    $peliculas = $this->peliculasDAO->GetMoviesByGenre($valueOfSelect);
+                    $generos = $this->generosDAO->GetAll();
+                    ViewsController::ShowMoviesListView($peliculas,$generos);
                 }else{
                     ViewsController::ShowMoviesNowPlaying();
                 }
@@ -42,6 +46,13 @@
              
                 ViewsController::ShowMovieDescription($pelicula, $trailerKey);
             }
+        }
+
+        public function getPeliculaDAO(){
+            return $this->peliculasDAO;
+        }
+        public function getGeneroDAO(){
+            return $this->generosDAO;
         }
     }
 ?>

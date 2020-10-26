@@ -3,9 +3,10 @@
     class LogInController
     {
         private $memberController;
-
+        private $peliculaController;
         public function __construct(){
             $this->memberController = new MembersController();
+            $this->peliculaController = new PeliculaController();
         }
 
         public function Logeando ($email, $password)
@@ -16,7 +17,8 @@
 
         public function RedirectLogIn ($message){
             if(SessionController::HayUsuario('userLogged')){
-                ViewsController::ShowMoviesListView();
+                ViewsController::ShowMoviesListView($this->peliculaController->getPeliculaDAO()->GetMoviesByGenre(0),
+                 $this->peliculaController->getGeneroDAO()->GetAll());
             }else{
                 ViewsController::ShowLogIn($message);
             }

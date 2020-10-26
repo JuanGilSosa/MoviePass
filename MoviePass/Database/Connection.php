@@ -1,13 +1,14 @@
-<?php 
+<?php namespace Database;
 	class Connection{
+
 		private $pdo = null;
 		private $pdoStatement = null;
 		private static $instancia  = null;
 		
 		public function __construct(){
-			try{
-				$this->pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME,DB_USER,DB_PASS);
-				$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			try{	
+				$this->pdo = new \PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME,DB_USER,DB_PASS);
+				$this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 			}catch(Exception $e){
 				throw $e;
 			}
@@ -17,19 +18,25 @@
 		}
 		/*
 			Se usa para insertar datos
+			INSERT, UPDATE, DELETE
 		*/
 		public function executeNonQuery($query, $param = array()){
+			
 			try{
 				$this->pdoStatement = $this->pdo->prepare($query);
-				foreach($param as $paramName){
+				
+				foreach($param as $paramName => $value){
 					$this->pdoStatement->bindParam(":$paramName", $param[$paramName]);
 				}
+				echo '<script>console.log("ACA");</script>';
 				$this->pdoStatement->execute();
+				
 				return $this->pdoStatement->rowCount(); #esto nos devuelve la cantidad de registros afectados
-			}catch(PDOException $e){
+			}catch(Exception $e){
 				throw $e;
 			}
 		}
+		//Execute retorna los datos en un arreglo asociativo usa SELECT
 		public function execute($query, $param = array()){
 			try{
 				$this->pdoStatement = $this->pdo->prepare($query);
@@ -43,6 +50,5 @@
 				throw $e;
 			}
 		}
-		#HACER MAPEO PARA CADA DAO
 	}
 ?>
