@@ -310,10 +310,8 @@ span{
 
 .zone {
   cursor: pointer;
-  background-color: #4086ce;
   text-align: center;
   font-size: 15px;
-  border-radius: 10px;
   border: hidden;
   margin: 5px;
 }

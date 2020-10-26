@@ -28,22 +28,22 @@
                </div>
 
 			
-			<div class="container bigContainer">
+			<div class="container">
 				<div class="container row">
 					<form action="<?php echo FRONT_ROOT.'Pelicula/ShowMovieDescription'?>" method="POST">
 						
 							<?php
 								foreach ($peliculas as $pelicula){	
 							?>
-							<div class="container col-xs-12 col-sm-6 col-md-3 zone text-center" >
+								<div class="container col-xs-12 col-sm-6 col-md-3 col-lg-3 text-center" >
 								
-								<a name="idMovie" type="submit" href="<?php echo FRONT_ROOT.'Pelicula/ShowMovieDescription?idPelicula='.$pelicula->getId()?>">
-									<img style="width: 100%;" src="https://image.tmdb.org/t/p/original<?php echo $pelicula->getPosterPath()?>" alt="Imagen">
-								</a>
-							
-								<h6 class="title"><?php echo $pelicula->getTitle()?></h6>
-							
-							</div>
+									<a type="submit" href="<?php echo FRONT_ROOT.'Pelicula/ShowMovieDescription?idPelicula='.$pelicula->getId()?>">
+										<img style="width: 100%;" src="https://image.tmdb.org/t/p/original<?php echo $pelicula->getPosterPath()?>" alt="Imagen">
+									</a>
+								
+									<h6 class="title"><?php echo $pelicula->getTitle()?></h6>
+								
+								</div>
 							<?php
 							}?>
 						
