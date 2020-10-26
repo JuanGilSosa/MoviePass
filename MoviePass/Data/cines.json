@@ -1,26 +1,42 @@
 [
     {
-        "id": "1",
+        "id": 1,
         "nombre": "Finema Shopping Mdp",
         "email": "FinemaShopping@gmail.com",
         "numeroDeContacto": "1111111",
-        "idDireccion": 1,
+        "direccion": "1",
         "active": true
     },
     {
-        "id": "2",
+        "id": 2,
         "nombre": "Finema Carlos Paz",
         "email": "FinemaCarlosPaz@gmail.com",
         "numeroDeContacto": "2222222",
-        "idDireccion": 2,
+        "direccion": "2",
         "active": true
     },
     {
-        "id": "3",
+        "id": 3,
         "nombre": "Finema SantaFe",
         "email": "FinemaSantaFe@gmail.com",
         "numeroDeContacto": "3333333",
-        "idDireccion": 3,
+        "direccion": "3",
+        "active": true
+    },
+    {
+        "id": 4,
+        "nombre": "Finema Mardel",
+        "email": "FinemaMardel@gmail.com",
+        "numeroDeContacto": "444444",
+        "direccion": 7,
+        "active": true
+    },
+    {
+        "id": 5,
+        "nombre": "recienSalido@delHorno.com",
+        "email": "555555",
+        "numeroDeContacto": {},
+        "direccion": 7,
         "active": true
     }
 ]

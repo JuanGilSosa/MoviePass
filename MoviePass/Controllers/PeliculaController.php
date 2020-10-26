@@ -26,7 +26,7 @@
                 if($valueOfSelect != 0){
                     ViewsController::ShowMoviesListView($valueOfSelect);
                 }else{
-                    $this->ShowMoviesNowPlaying();
+                    ViewsController::ShowMoviesNowPlaying();
                 }
             }else{
                 ViewsController::ShowLogIn();

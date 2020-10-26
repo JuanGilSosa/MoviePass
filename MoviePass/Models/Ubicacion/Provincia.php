@@ -6,13 +6,13 @@
     {
         private $id;
         private $nameProvincia;
-        private $idPais;
+        private $pais;
 
-        public function __construct($id = "", $nameProvincia = "", $idPais = "")
+        public function __construct($id = "", $nameProvincia = "", $pais = "")
         {
             $this->id = $id;
             $this->nameProvincia = $nameProvincia;
-            $this->idPais = $idPais;
+            $this->pais = $pais;
         }       
 
         public function getId() {
@@ -23,8 +23,8 @@
             return $this->nameProvincia;
         }
 
-        public function getIdPais() {
-            return $this->idPais;
+        public function getPais() {
+            return $this->pais;
         }
 
         public function setId($id) {
@@ -35,8 +35,8 @@
             $this->nameProvincia = $nameProvincia;
         }
 
-        public function setIdPais($idPais){
-            $this->idPais = $idPais;
+        public function setPais($pais){
+            $this->pais = $pais;
         }
 
     }

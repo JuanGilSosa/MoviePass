@@ -1,26 +1,58 @@
 [
     {
-        "id": 1,
+        "id": "1",
         "calle": "Belgrano",
         "numero": "1111",
         "piso": "",
-        "departamento": "",
-        "codigoPostal": "7600"
+        "ciudad": 7600
     },
     {
-        "id": 2,
+        "id": "2",
         "calle": "Belgrano",
         "numero": "2222",
         "piso": "",
-        "departamento": "",
-        "codigoPostal": "5486"
+        "ciudad": 7600
     },
     {
-        "id": 3,
+        "id": "3",
         "calle": "Moreno",
         "numero": "3333",
         "piso": "",
-        "departamento": "",
-        "codigoPostal": "4555"
+        "ciudad": 4555
+    },
+    {
+        "id": "4",
+        "calle": "Avenida Siempre Viva",
+        "numero": "843",
+        "piso": "2",
+        "ciudad": 5486
+    },
+    {
+        "id": 5,
+        "calle": "Avenida Siempre Viva",
+        "numero": "1515",
+        "piso": "2",
+        "ciudad": 7600
+    },
+    {
+        "id": 6,
+        "calle": "Catamarca",
+        "numero": "1692",
+        "piso": "",
+        "ciudad": 7600
+    },
+    {
+        "id": 7,
+        "calle": "Catamarca",
+        "numero": "1569",
+        "piso": "",
+        "ciudad": 7600
+    },
+    {
+        "id": 8,
+        "calle": "Calle Nueva",
+        "numero": "1515",
+        "piso": "",
+        "ciudad": 7600
     }
 ]

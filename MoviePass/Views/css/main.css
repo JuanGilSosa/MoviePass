@@ -299,17 +299,27 @@ span{
 
 /***********************************************************************************************/
 /**********************************MOVIES LIST STYLES*******************************************/
-.moviesTableContainer
-{
-  width:100%;
+
+#movieButton{
+  background-color: #000000;
+  background: #000000;
+  margin: none;
+  padding: none;
 }
 
-.moviesTable{
-  width: 100%;
-  border: 5px solid #ffffff;
-  border-radius: 5px;
-  padding:25px;
-  margin-top: 10%;
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid black;
+  text-align: center;
+  font-size: 30px;
 }
 
 /***********************************************************************************************/
