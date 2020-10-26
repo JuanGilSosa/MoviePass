@@ -77,12 +77,18 @@
 
         public static function ShowMoviesListView($valueOfSelect = "")
         {
-            $generoDAO = new GeneroDAO();
-            $generos = $generoDAO->GetAll();
             $peliculasDAO = new PeliculaDAO();
-            $peliculas = $peliculasDAO->GetMoviesByGenre($valueOfSelect);
-        
-            require_once(VIEWS_PATH."listMovies.php");
+            if($valueOfSelect != 0){
+                $generoDAO = new GeneroDAO();
+                $generos = $generoDAO->GetAll();
+                $peliculas = $peliculasDAO->GetMoviesByGenre($valueOfSelect);
+                require_once(VIEWS_PATH."listMovies.php");
+            }else{
+                $peliculas = $peliculasDAO->GetAll();
+                require_once(VIEWS_PATH."listMovies.php");
+            }
+
+
         }
 
         public static function ShowRegisterAdmin()
