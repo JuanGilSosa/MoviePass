@@ -81,7 +81,7 @@
                          <div class="col-lg-8">
                               <div class="form-group">
                                    <label for="">Ciudad</label>
-                                   <select name="ciudad" class="form-control" placeholder="Seleccione su Ciudad" required>
+                                   <select name="ciudad" class="form-control" placeholder="Seleccione su Ciudad" " required>
                                    <?php
                                              foreach ($ciudades as $ciudad)
                                              {
@@ -108,7 +108,7 @@
                          <div class="col-lg-6">
                               <div class="form-group">
                                    <label for="">Pais</label>
-                                   <select name="pais" class="form-control" placeholder="Seleccione su Pais" required>
+                                   <select name="pais" class="form-control" placeholder="Seleccione su Pais" onchange="this.form.submit()" required>
                                         <?php
                                              foreach ($paises as $pais)
                                              {
@@ -132,6 +132,7 @@
 
                                              foreach ($provincias as $provincia)
                                              {
+                                                  if($provincia->getIdProvincia() == $_POST[$pais])
                                                   $name = $provincia->getNameProvincia();
                                                   $idProvincia = $provincia->getId();
                                                   
