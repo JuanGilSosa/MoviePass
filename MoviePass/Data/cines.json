@@ -35,8 +35,8 @@
         "id": 5,
         "nombre": "recienSalido@delHorno.com",
         "email": "555555",
-        "numeroDeContacto": {},
+        "numeroDeContacto": [],
         "direccion": 7,
-        "active": true
+        "active": false
     }
 ]

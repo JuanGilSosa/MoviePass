@@ -51,7 +51,7 @@
     
 		public function ShowGenres($stringGenres){
 			for($i = 0;$i<count($stringGenres);$i++){
-				echo '<br>'.$stringGenres[$i];
+				echo $stringGenres[$i] .'<br>';
 			}	
 		}
     

@@ -300,26 +300,22 @@ span{
 /***********************************************************************************************/
 /**********************************MOVIES LIST STYLES*******************************************/
 
-#movieButton{
-  background-color: #000000;
-  background: #000000;
-  margin: none;
-  padding: none;
-}
 
-.grid-container {
+.bigContainer {
   display: grid;
-  grid-template-columns: auto auto auto auto;
   grid-gap: 10px;
-  background-color: #2196F3;
-  padding: 10px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto
 }
 
-.grid-container > div {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid black;
+.zone {
+  cursor: pointer;
+  background-color: #4086ce;
   text-align: center;
-  font-size: 30px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: hidden;
+  margin: 5px;
 }
 
 /***********************************************************************************************/
@@ -333,4 +329,18 @@ span{
 
 th{
   padding: 50px;
+}
+
+/***********************************************************************************************/
+/********************************MOVIE DESCRIPTION VIEW*****************************************/
+/***********************************************************************************************/
+
+#headerPopup{
+  width:75%;
+  margin:0 auto;
+}
+
+#headerPopup iframe{
+  width:100%;
+  margin:0 auto;
 }

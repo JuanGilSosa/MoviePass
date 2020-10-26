@@ -24,7 +24,7 @@
 
         public static function ShowIndex()
         {
-            require_once(FRONT_ROOT."index.php");            
+            require_once(VIEWS_PATH."addCine.php");            
         }
 
         public static function ShowLogIn($message = "")
@@ -110,6 +110,13 @@
         public static function ShowCartelera()
         {
             require_once(VIEWS_PATH."cartelera.php");
+        }
+
+        public static function ShowMovieDescription($pelicula, $trailerKey)
+        {
+            $generosDAO = new GeneroDAO();
+            $peliculasDAO = new PeliculaDAO();
+            require_once(VIEWS_PATH."descriptionMovies.php");
         }
     }
 
