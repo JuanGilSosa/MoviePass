@@ -44,7 +44,7 @@
         <button class="btn btn-secondary w-50 loginBoton" type="submit">Iniciar Sesión</button>
         <br>
       </form>
-      <form action="<?php echo FRONT_ROOT . 'Members\ShowRegisterForm' ?>" method="POST">
+      <form action="<?php echo FRONT_ROOT . 'Members\Registrando' ?>" method="POST">
         <label class="text-white" style="margin-right: 10px;">¿Aun no estas registrado?</label><button class="btn btn-secondary btn btn-success w-20">Registrate</button>
       </form>
       
