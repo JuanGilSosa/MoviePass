@@ -22,7 +22,7 @@
         #@param valueOfSelect tiene el id del genero
         
         public function ShowMovies($valueOfSelect=""){
-            if(SessionController::HayUsuario('userLogged')){
+            if(SessionController::HayUsuario('userLogged') || SessionController::HayUsuario('adminLogged')){
                 if($valueOfSelect != 0){
                     ViewsController::ShowMoviesListView($valueOfSelect);
                 }else{
