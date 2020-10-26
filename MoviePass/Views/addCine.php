@@ -68,14 +68,10 @@
                                    <input type="text" name="piso" value="" class="form-control" placeholder="Piso" >
                               </div>
                          </div>
-                         <div class="col-lg-1 d-none">
-                              <div class="form-group">
-                                   <label for="">Piso</label>
-                                   <input type="text" name="departamento" value="" class="form-control " placeholder="Dpto">
-                              </div>
-                         </div>
                     </div>
-                    
+
+
+               
                     
                     <div class="row">                         
                          <div class="col-lg-8">
@@ -85,10 +81,10 @@
                                    <?php
                                              foreach ($ciudades as $ciudad)
                                              {
-                                                  $name = $ciudad->getNameCiudad();
+                                                  $nameCiudad = $ciudad->getNameCiudad();
                                                   $idCiudad = $ciudad->getCodigoPostal();
                                                   ?>
-                                                  <option value="<?php echo $idCiudad?>"><?php echo $name?></option>
+                                                  <option value="<?php echo $idCiudad?>"><?php echo $nameCiudad?></option>
                                                   
                                              <?php 
                                              }
@@ -112,10 +108,10 @@
                                         <?php
                                              foreach ($paises as $pais)
                                              {
-                                                  $name = $pais->getNamePais();
+                                                  $namePais = $pais->getNamePais();
                                                   $idPais = $pais->getId();
                                                   ?>
-                                                  <option value="<?php echo $idPais?>"><?php echo $name?></option>
+                                                  <option value="<?php echo $idPais;?>"><?php echo $namePais;?></option>
                                                   
                                              <?php 
                                              }
@@ -132,12 +128,11 @@
 
                                              foreach ($provincias as $provincia)
                                              {
-                                                  if($provincia->getIdProvincia() == $_POST[$pais])
-                                                  $name = $provincia->getNameProvincia();
+                                                  $nameProvincia = $provincia->getNameProvincia();
                                                   $idProvincia = $provincia->getId();
                                                   
                                                   ?>
-                                                  <option value="<?php echo $idProvincia?>"><?php echo $name?></option>
+                                                  <option value="<?php echo $idProvincia;?>"><?php echo $nameProvincia;?></option>
                                              <?php 
                                              }
                                              ?>

@@ -8,6 +8,8 @@
         use DAO\ProvinciaDAO as ProvinciaDAO;
         use DAO\PaisDAO as PaisDAO;
         use DAO\SalaDAO as SalaDAO;
+        use DAO\PeliculaDAO as PeliculaDAO;
+        use DAO\GeneroDAO as GeneroDAO;
 
         use Models\Ubicacion\Direccion as Direccion;
         use Models\Ubicacion\Ciudad as Ciudad;
@@ -22,7 +24,7 @@
 
         public static function ShowIndex()
         {
-            require_once(FRONT_ROOT."index.php");            
+            require_once(VIEWS_PATH."addCine.php");            
         }
 
         public static function ShowLogIn($message = "")
@@ -40,10 +42,13 @@
         {
             $paisDAO = new PaisDAO(); 
             $paises = $paisDAO->GetAll();
+            
             $provinciaDAO = new ProvinciaDAO();
             $provincias = $provinciaDAO->GetAll();
+
             $ciudadDAO = new CiudadDAO();
             $ciudades = $ciudadDAO->GetAll();
+
             require_once(VIEWS_PATH."addCine.php");	         
         }
 
@@ -52,19 +57,31 @@
             if(SessionController::HayUsuario('adminLogged')){
                 $cineDAO = new CineDAO();
                 $cines = $cineDAO->GetAllActive();
-                $direccionDAO = new DireccionDAO(); 
-                $ciudadDAO = new CiudadDAO();
-                $provinciaDAO = new ProvinciaDAO();
-                $paisDAO = new PaisDAO();
             
                 require_once(VIEWS_PATH."cinesList.php");
             } else {
-               $this->ShowLogIn();
+               ViewsController::ShowLogIn();
             }
         }
 
-        public static function ShowMoviesListView()
+        public static function ShowMoviesNowPlaying()
         {
+            $generoDAO = new GeneroDAO();
+            $generos = $generoDAO->GetAll();
+            $peliculasDAO = new PeliculaDAO();
+            $peliculas = $peliculasDAO->GetAll();
+        
+            require_once(VIEWS_PATH."listMovies.php");
+        }
+
+
+        public static function ShowMoviesListView($valueOfSelect = "")
+        {
+            $generoDAO = new GeneroDAO();
+            $generos = $generoDAO->GetAll();
+            $peliculasDAO = new PeliculaDAO();
+            $peliculas = $peliculasDAO->GetMoviesByGenre($valueOfSelect);
+        
             require_once(VIEWS_PATH."listMovies.php");
         }
 
@@ -81,7 +98,7 @@
                 require_once(VIEWS_PATH."modifyCine.php");
             } else {
 
-                $this->ShowLogIn();
+                ViewsController::ShowLogIn();
             }
         }
         
@@ -93,6 +110,13 @@
         public static function ShowCartelera()
         {
             require_once(VIEWS_PATH."cartelera.php");
+        }
+
+        public static function ShowMovieDescription($pelicula, $trailerKey)
+        {
+            $generosDAO = new GeneroDAO();
+            $peliculasDAO = new PeliculaDAO();
+            require_once(VIEWS_PATH."descriptionMovies.php");
         }
     }
 

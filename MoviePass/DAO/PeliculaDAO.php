@@ -30,10 +30,7 @@
 
         }
 
-        
-
-        private function GetMoviesNowPlaying(){
-            /*
+        /*
                 example of how to get a json :: https://developers.themoviedb.org/3/movies/get-now-playing  section Try It out
                 --example of json--see footer of this file
             */    
@@ -46,6 +43,9 @@
 
                 Todo este proceso es similar para obtener los generos
             */
+
+        private function GetMoviesNowPlaying(){
+            
             $peliculas = file_get_contents(
                 API_URL.'now_playing?api_key='.API_KEY1.'&language=es-ES&page=1'
             );
@@ -141,6 +141,28 @@
       $trailerArray = ($trailerJson) ? json_decode($trailerJson, true) : array();
       return $trailerArray['results'][0]['key'];
     }
+
+    public function GetCast($idPelicula){
+      $castJson = file_get_contents(
+        API_URL."{$idPelicula}/credits?api_key=".API_KEY1."&language=es-ES"
+      );
+      $cast = array();
+      $castArray = ($castJson) ? json_decode($castJson, true) : array();
+      array_push($cast, $castArray['cast'][0]);
+      array_push($cast, $castArray['cast'][1]);
+      array_push($cast, $castArray['cast'][2]);
+
+      return $cast;
+
+    }
+
+    public function ShowCastDetails($cast){
+      foreach($cast as $actor){
+        echo $actor['name'] . " as '" . $actor['character'] . "'<br>";
+      }
+    }
+
+
   }
 ?>
 

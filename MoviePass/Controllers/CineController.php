@@ -35,7 +35,7 @@
         }
 
         public function AddViewCine($message = ""){
-            if($this->HayUsuario('adminLogged')){
+            if(SessionController::HayUsuario('adminLogged')){
                 ViewsController::ShowAddCineView();
             }else{
                 ViewsController::ShowLogIn();
@@ -67,10 +67,10 @@
             $cines = $this->cineDAO->GetAll();
             ViewsController::ShowCartelera();
         }
-
+/*
         public function Add(
             $nombre, $email, $numeroDeContacto,
-            $calle, $numero, $piso, $departamento, 
+            $calle, $numero, $piso,
             $ciudad, $codigoPostal, $pais, $provincia)
         {
             $message = "";
@@ -85,7 +85,7 @@
 
                     if(!$existeTelefono)
                     {
-                        $direccion = new Direccion($calle, $numero, $piso, $departamento, $codigoPostal);
+                        $direccion = new Direccion($calle, $numero, $piso, $codigoPostal);
                         $existeDireccion = $this->direccionDAO->FindDireccion($direccion);
                         if(!$existeDireccion)
                         {
@@ -111,6 +111,64 @@
                         }
                     }else{                              // Telefono repetido
                         $message = "El teléfono/celular ingresado ya se encuentra registrado.";
+                        ViewsController::ShowAddCineView($message);
+                    }
+                }else{                                  // Email repetido
+                    $message = "El email ingresado ya se encuentra registrado.";
+                    ViewsController::ShowAddCineView($message);
+                }
+            }else{                                      // Nombre repetido
+                $message = "El nombre ingresado ya se encuentra registrado.";
+                ViewsController::ShowAddCineView($message);
+            }
+        }
+*/
+        public function Add(
+            $nombre, $email, $numeroDeContacto,
+            $calle, $numero, $piso,
+            $ciudad, $codigoPostal, $pais, $provincia)
+        {
+            $message = "";
+            $existeCine = $this->cineDAO->FindCineByName($nombre);
+
+            if(!$existeCine)
+            {
+                $existeEmail = $this->cineDAO->FindCineByEmail($email);
+                if(!$existeEmail)
+                {
+                    $existeTelefono = $this->cineDAO->FindCineByTelefono($numeroDeContacto);
+
+                    if(!$existeTelefono)
+                    {                        
+                        $direccion = $this->direccionDAO->CreateDireccion($calle, $numero, $piso, $ciudad, $codigoPostal, $pais, $provincia);
+                   
+                        if(!is_string($direccion)){
+                            $existeDireccion = $this->direccionDAO->FindDireccion($direccion);
+                        
+                            if(!$existeDireccion)
+                            {
+                                //var_dump($direccion);
+                                    $this->direccionDAO->Add($direccion);
+                                    $dirWithId = $this->direccionDAO->FindDireccion($direccion);
+                                    $cine = new Cine($nombre, $email, $numeroDeContacto, $dirWithId);
+                                    $this->cineDAO->Add($cine);
+
+                                    //ACA SE GUARDARIA EN TABLA CINESxLOCALIDADxDIRECCION? 
+                                    
+                                    $message = "Cine agregado con éxito.";
+                                    ViewsController::ShowCinesList($message);
+                                
+                            }else{                          // Direccion repetida
+                                $message = "La dirección ingresada ya se encuentra registrada.";
+                                ViewsController::ShowAddCineView($message);
+                            }
+                        }else{
+                            $message = $direccion;
+                            ViewsController::ShowAddCineView($message);
+                        }
+
+                    }else{                              // Telefono repetido
+                        $message = "El teléfono ingresado ya se encuentra registrado.";
                         ViewsController::ShowAddCineView($message);
                     }
                 }else{                                  // Email repetido

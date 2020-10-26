@@ -299,17 +299,21 @@ span{
 
 /***********************************************************************************************/
 /**********************************MOVIES LIST STYLES*******************************************/
-.moviesTableContainer
-{
-  width:100%;
+
+
+.bigContainer {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto
 }
 
-.moviesTable{
-  width: 100%;
-  border: 5px solid #ffffff;
-  border-radius: 5px;
-  padding:25px;
-  margin-top: 10%;
+.zone {
+  cursor: pointer;
+  text-align: center;
+  font-size: 15px;
+  border: hidden;
+  margin: 5px;
 }
 
 /***********************************************************************************************/
@@ -323,4 +327,18 @@ span{
 
 th{
   padding: 50px;
+}
+
+/***********************************************************************************************/
+/********************************MOVIE DESCRIPTION VIEW*****************************************/
+/***********************************************************************************************/
+
+#headerPopup{
+  width:75%;
+  margin:0 auto;
+}
+
+#headerPopup iframe{
+  width:100%;
+  margin:0 auto;
 }

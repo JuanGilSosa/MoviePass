@@ -3,6 +3,8 @@
 
     use DAO\IDAO as IDAO;
     use Models\Ubicacion\Ciudad as Ciudad;
+    use Models\Ubicacion\Provincia as Provincia;
+    use Models\Ubicacion\Pais as Pais;
 
     class CiudadDAO implements IDAO
     {
@@ -12,6 +14,8 @@
         public function Add($ciudad)
         {
             $this->RetrieveData();
+
+            $ciudad->setId($this->GetNextId());
             
             array_push($this->ciudades, $ciudad);
 
@@ -25,21 +29,32 @@
             return $this->ciudades;
         }
 
+        public function GetByName($nameCiudad)
+        {
+            $this->RetrieveData();
+
+            foreach($this->ciudades as $ciudad){
+                if ($ciudad->getNameCiudad() == $nameCiudad)
+                    return $ciudad;
+            }
+
+            return false;            
+        }
+
+
         public function GetByCodigoPostal($codigoPostal)
         {
             $this->RetrieveData();
 
-            $ciudad = null;
-
-            foreach($this->ciudades as $ciudad){
+            foreach($this->ciudades as $ciudad){                
                 if ($ciudad->getCodigoPostal() == $codigoPostal)
                     return $ciudad; 
             }
 
-            return $ciudad;
-
+            return false;
         }
 
+        
         public function Delete($idCiudad){
 
         }
@@ -56,8 +71,9 @@
             {           
                 $valuesArray["codigoPostal"] = $ciudad->getCodigoPostal();     
                 $valuesArray["nameCiudad"] = $ciudad->getNameCiudad();
-                $valuesArray["idProvincia"] = $ciudad->getIdProvincia();
-                $valuesArray["idPais"] = $ciudad->getIdPais();
+                $provincia =$ciudad->getProvincia();
+                $valuesArray["provincia"] = $provincia->getCodigoPostal();
+
                 array_push($arrayToEncode, $valuesArray);
             }
 
@@ -81,8 +97,12 @@
                     $ciudad = new Ciudad();
                     $ciudad->setCodigoPostal($valuesArray["codigoPostal"]);
                     $ciudad->setNameCiudad($valuesArray["nameCiudad"]);
-                    $ciudad->setIdProvincia($valuesArray["idProvincia"]);
-                    $ciudad->setIdPais($valuesArray["idPais"]);
+                    $ciudad->setProvincia($valuesArray["provincia"]);
+
+                    $provinciaDAO = new ProvinciaDAO();
+                    $provincia= $provinciaDAO->GetById($ciudad->getProvincia());
+                    
+                    $ciudad->setProvincia($provincia);
 
                     array_push($this->ciudades, $ciudad);
                 }
