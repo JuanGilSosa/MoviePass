@@ -19,8 +19,11 @@
      <!-- Material Design Bootstrap -->
      <link href="<?php echo MDB_PATH ?>" rel="stylesheet">
 
+     <link href="<?php echo LITY_PATH . 'dist/lity.css' ?>" rel="stylesheet">
+
      <!-- Custom styles -->
      <link rel="stylesheet" type="text/css" href="<?php echo CSS_PATH ?>main.css">
+
 
      <title>MoviePass</title>
 </head>

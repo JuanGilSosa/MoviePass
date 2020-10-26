@@ -17,7 +17,7 @@ html, body{
 .row{    
    display: flex;
    justify-content: center;
-   align-items: center;
+   align-items: stretch;
    margin: 0px;
 }   
  
@@ -306,6 +306,28 @@ span{
   height: 100vh;
   display: grid;
   grid-template-columns: repeat(4, 250px);
+}
+
+@media screen and (max-width:1200px){ 
+  .grid-container{
+    grid-template-columns: repeat(3, 250px);
+  
+  }
+}   
+
+@media screen and (max-width:900px){ 
+  .grid-container{
+    grid-template-columns: repeat(2, 250px);
+  
+  }
+}   
+
+@media screen and (max-width:600px){
+
+  .grid-container{
+    grid-template-columns: repeat(1, 250px);
+  
+  }
 }
 
 .cell {

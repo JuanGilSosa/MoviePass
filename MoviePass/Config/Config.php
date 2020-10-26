@@ -8,6 +8,7 @@ define("CSS_PATH", FRONT_ROOT.VIEWS_PATH . "css/");
 define("JS_PATH", FRONT_ROOT.VIEWS_PATH . "js/");
 define("FONTAWESOME_PATH", FRONT_ROOT.VIEWS_PATH . "fontawesome/css/all.css");
 define("MDB_PATH", FRONT_ROOT.VIEWS_PATH . "BootstrapMaterialDesign/css/mdb.min.css");
+define("LITY_PATH", FRONT_ROOT.VIEWS_PATH . "lity/");
 //
 define("API_URL", "https://api.themoviedb.org/3/movie/");
 define("API_KEY1", "a67565019e2b3ed72b43911ab7692772");

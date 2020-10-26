@@ -32,9 +32,12 @@
       integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
       crossorigin="anonymous"
     ></script>
+
+    <script src="<?php echo LITY_PATH . 'vendor/jquery.js' ?>"></script>
+    <script src="<?php echo LITY_PATH . 'dist/lity.js' ?>"></script>
     
     
-  <script src="<?php echo JS_PATH . "tables.js" ?>"></script>
+    <script src="<?php echo JS_PATH . "tables.js" ?>"></script>
 
 </body>
 </html>
