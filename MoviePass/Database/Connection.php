@@ -1,5 +1,6 @@
-<?php 
+<?php namespace Database;
 	class Connection{
+		
 		private $pdo = null;
 		private $pdoStatement = null;
 		private static $instancia  = null;
