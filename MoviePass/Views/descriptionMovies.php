@@ -11,11 +11,12 @@
                 </section>
             </div>
         </div>
-        <div class="row container" style="margin-top:2vh;">
-                <div class="col-md-4 col-lg-4" style="margin-top:1vh;">
+
+        <div class="row container" style="margin-top:2vh;align-items:stretch;background-color: rgba(158, 140, 219, 0.4);">
+                <div class="col-md-4 col-lg-4" style="margin:2vh 0vh;">
                     <img src="https://image.tmdb.org/t/p/original<?php echo $pelicula->getPosterPath()?>" style=width:100%></img>
                 </div>
-                <div class="col-md-8 col-lg-8" style="height:100%;background-color: rgba(158, 140, 219, 0.4);margin-top:1vh;">
+                <div class="col-md-8 col-lg-8" style="height:100%;margin:2vh 0vh;">
                     <section class="container" style="width: 100%; height: 100%; margin:2vh 0vh;">
                         <h5><em>Descripcion</em></h5>
                         <p><?php echo $pelicula->GetOverview();    ?></p>

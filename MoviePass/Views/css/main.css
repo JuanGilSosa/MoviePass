@@ -17,7 +17,7 @@ html, body{
 .row{    
    display: flex;
    justify-content: center;
-   align-items: stretch;
+   align-items: center;
    margin: 0px;
 }   
  

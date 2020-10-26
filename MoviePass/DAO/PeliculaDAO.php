@@ -136,7 +136,7 @@
 
     public function getTrailerKey($idPelicula){
       $trailerJson = file_get_contents(
-        API_URL."{$idPelicula}/videos?api_key=".API_KEY1."&language=es-ES"
+        API_URL."{$idPelicula}/videos?api_key=".API_KEY1."&language=en-US"
       );
       $trailerArray = ($trailerJson) ? json_decode($trailerJson, true) : array();
       return $trailerArray['results'][0]['key'];
