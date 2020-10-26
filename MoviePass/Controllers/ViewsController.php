@@ -8,6 +8,7 @@
         use DAO\ProvinciaDAO as ProvinciaDAO;
         use DAO\PaisDAO as PaisDAO;
         use DAO\SalaDAO as SalaDAO;
+        use DAO\PeliculaDAO as PeliculaDAO;
 
         use Models\Ubicacion\Direccion as Direccion;
         use Models\Ubicacion\Ciudad as Ciudad;
@@ -38,13 +39,7 @@
 
         public static function ShowAddCineView($message = "")
         {
-            $paisDAO = new PaisDAO(); 
-            $paises = $paisDAO->GetAll();
-            $provinciaDAO = new ProvinciaDAO();
-            $provincias = $provinciaDAO->GetAll();
-            $ciudadDAO = new CiudadDAO();
-            $ciudades = $ciudadDAO->GetAll();
-            require_once(VIEWS_PATH."addCine.php");	         
+            require_once(VIEWS_PATH."addCine.php");
         }
 
         public static function ShowCinesList($message = "")
@@ -59,12 +54,14 @@
             
                 require_once(VIEWS_PATH."cinesList.php");
             } else {
-               $this->ShowLogIn();
+               ShowLogIn();
             }
         }
 
-        public static function ShowMoviesListView()
+        public static function ShowMoviesListView($peliculasParam = array(), $generoParams = array())
         {
+            $peliculas = $peliculasParam;
+            $generos = $generoParams;
             require_once(VIEWS_PATH."listMovies.php");
         }
 
@@ -81,7 +78,7 @@
                 require_once(VIEWS_PATH."modifyCine.php");
             } else {
 
-                $this->ShowLogIn();
+                ShowLogIn();
             }
         }
         
