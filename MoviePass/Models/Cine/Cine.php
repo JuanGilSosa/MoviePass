@@ -15,7 +15,7 @@
         private $salas;
         private $active;
 
-        public function __construct($id = "", $nombre = "", $email = "", $numeroDeContacto = "", $direccion="")
+        public function __construct($nombre = "", $email = "", $numeroDeContacto = "", $direccion="", $id = "")
         {
             
             $this->id = $id;

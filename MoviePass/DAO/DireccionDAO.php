@@ -66,6 +66,7 @@
             $this->RetrieveData();
 
             foreach($this->direcciones as $direccion){
+                
                 if ($direccion->getId() == $idDireccion)
                     return $direccion;
             }

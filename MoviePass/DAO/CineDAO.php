@@ -64,6 +64,7 @@
         public function Update($cineEditado){
             
             // buscar cine, actualizar array y grabar.
+            echo "Cine Editado: " . $cineEditado->getId();
             $cinesNuevos = array();
             $this->RetrieveData();
             
@@ -91,6 +92,7 @@
                 $valuesArray["email"] = $cine->getEmail();
                 $valuesArray["numeroDeContacto"] = $cine->getNumeroDeContacto();
                 $direccion = $cine->getDireccion();
+                
                 /*
                 echo "<br>";
                 var_dump($direccion);

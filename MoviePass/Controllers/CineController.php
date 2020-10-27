@@ -151,6 +151,7 @@
                                     $this->direccionDAO->Add($direccion);
                                     $dirWithId = $this->direccionDAO->FindDireccion($direccion);
                                     $cine = new Cine($nombre, $email, $numeroDeContacto, $dirWithId);
+                                    var_dump($cine);
                                     $this->cineDAO->Add($cine);
 
                                     //ACA SE GUARDARIA EN TABLA CINESxLOCALIDADxDIRECCION? 
@@ -196,7 +197,7 @@
 
                         if(!$existeTelefono || $cineViejo->getNumeroDeContacto() == $numeroDeContacto)
                         {
-                            $cine = new Cine($nombre, $email, $numeroDeContacto, $cineViejo->getIdDireccion());
+                            $cine = new Cine($nombre, $email, $numeroDeContacto, $cineViejo->getDireccion());
                             $cine->setId($id);
                             $this->cineDAO->Update($cine);
                             $message = "Cine modificado con éxito";

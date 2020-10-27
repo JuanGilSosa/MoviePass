@@ -4,7 +4,7 @@
         "nombre": "Finema Shopping Mdp",
         "email": "FinemaShopping@gmail.com",
         "numeroDeContacto": "1111111",
-        "direccion": "1",
+        "direccion": 1,
         "active": true
     },
     {
@@ -12,7 +12,7 @@
         "nombre": "Finema Carlos Paz",
         "email": "FinemaCarlosPaz@gmail.com",
         "numeroDeContacto": "2222222",
-        "direccion": "2",
+        "direccion": 2,
         "active": true
     },
     {
@@ -20,7 +20,7 @@
         "nombre": "Finema SantaFe",
         "email": "FinemaSantaFe@gmail.com",
         "numeroDeContacto": "3333333",
-        "direccion": "3",
+        "direccion": 3,
         "active": true
     },
     {
@@ -32,19 +32,19 @@
         "active": true
     },
     {
-        "id": 5,
-        "nombre": "recienSalido@delHorno.com",
-        "email": "555555",
-        "numeroDeContacto": [],
-        "direccion": 7,
-        "active": false
+        "id": 7,
+        "nombre": "Finema Madero",
+        "email": "FinemaMadero@gmail.com",
+        "numeroDeContacto": "4444444",
+        "direccion": 10,
+        "active": true
     },
     {
-        "id": 6,
-        "nombre": "cine@mail.com",
-        "email": "151515",
-        "numeroDeContacto": {},
-        "direccion": 7,
-        "active": true
+        "id": 8,
+        "nombre": "Finema Fiagonal",
+        "email": "FinemaFiagonal@gmail.com",
+        "numeroDeContacto": "5555555",
+        "direccion": 11,
+        "active": false
     }
 ]

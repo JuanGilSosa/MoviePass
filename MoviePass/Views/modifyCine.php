@@ -19,7 +19,7 @@
      $ciudades = $ciudadDAO->GetAll();
 
      $direccionDAO = new DireccionDAO();
-     $direccion = $direccionDAO->GetById($miCine->getIdDireccion());
+     $direccion = $direccionDAO->GetById($miCine->getDireccion());
 
 ?>
 <main id="page-top" class="no-nav py-5">
@@ -73,7 +73,7 @@
                          </div>
                     </div>
                     <div class="row justify-content-start" type="hidden">                         
-                         <input type="hidden" name="idDireccion" value="<?php echo $miCine->getIdDireccion()?>" class="form-control">
+                         <input type="hidden" name="idDireccion" value="<?php echo $miCine->getDireccion()?>" class="form-control">
                     </div>
 
                     </div>

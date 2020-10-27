@@ -104,7 +104,7 @@
                          <div class="col-lg-6">
                               <div class="form-group">
                                    <label for="">Pais</label>
-                                   <select name="pais" class="form-control" placeholder="Seleccione su Pais" onchange="this.form.submit()" required>
+                                   <select name="pais" class="form-control" placeholder="Seleccione su Pais" required>
                                         <?php
                                              foreach ($paises as $pais)
                                              {
