@@ -4,12 +4,13 @@
     {
         private $memberController;
         private $peliculaController;
+
         public function __construct(){
             $this->memberController = new MembersController();
             $this->peliculaController = new PeliculaController();
         }
 
-        public function Logeando ($email, $password)
+        public function LogIn ($email, $password)
         {
             $rta = $this->memberController->VerifyMemberAndPassword($email,$password);
             $this->RedirectLogIn($rta);
@@ -17,16 +18,18 @@
 
         public function RedirectLogIn ($message){
             if(SessionController::HayUsuario('userLogged')){
-                ViewsController::ShowMoviesListView($this->peliculaController->getPeliculaDAO()->GetMoviesByGenre(0),
-                 $this->peliculaController->getGeneroDAO()->GetAll());
+                
+                HomeController::Index();
+
             }else{
                 ViewsController::ShowLogIn($message);
             }
         }
 
-        public function LogOut(){
+        public function LogOut(){   
+            session_unset();
             session_destroy();
-            ViewsController::ShowIndex(); 
+            HomeController::Index();
         }
     }
 

@@ -24,7 +24,7 @@
             if($pw == PW_ADMIN){
                 SessionController::setOnSession('adminLogged',true);
                 #$_SESSION['adminLogged'] = true;
-                $this->ShowAddView();
+                HomeController::Index();
             }else{
                 ViewsController::ShowRegisterAdmin();
             }

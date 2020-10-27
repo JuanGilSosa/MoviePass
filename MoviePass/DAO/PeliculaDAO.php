@@ -136,11 +136,92 @@
 
     public function getTrailerKey($idPelicula){
       $trailerJson = file_get_contents(
-        API_URL."{$idPelicula}/videos?api_key=".API_KEY1."&language=es-ES"
+        API_URL."{$idPelicula}/videos?api_key=".API_KEY1."&language=en-US"
       );
       $trailerArray = ($trailerJson) ? json_decode($trailerJson, true) : array();
       return $trailerArray['results'][0]['key'];
     }
+
+    public function GetUpcomingMovies(){
+      $peliculas = file_get_contents(
+        API_URL.'upcoming?api_key='.API_KEY1.'&language=es-ES&page=1'
+      );
+
+      $upcomingMovies = array();
+
+      $decode = json_decode($peliculas, true);
+      /*
+          recorro el decode que tiene el arreglo asociativo con los datos de las peliculas accediendo al arreglo 'results' y recoriiendolo
+          siendo 'results' el arreglo con todas las peliculas devueltas por la API
+      */
+      foreach($decode['results'] as $allresults){
+          $movie = new Pelicula(
+              $allresults['poster_path'],
+              $allresults['backdrop_path'],
+              $allresults['id'],
+              $allresults['adult'],
+              $allresults['original_language'],
+              $allresults['original_title'],
+              $allresults['genre_ids'],
+              $allresults['vote_average'],
+              $allresults['overview'],
+              $allresults['release_date'],
+          );
+          array_push($upcomingMovies, $movie);
+      }
+
+      $randomUpcomingMovies = array();
+      $cantidadUpcomingMovies = 4;
+      $alguno = 5;
+
+      for($i = 0; $i< $cantidadUpcomingMovies; $i++){
+        array_push($randomUpcomingMovies, $upcomingMovies[$alguno]);
+        $alguno++;
+      }
+
+      return $randomUpcomingMovies;
+    }
+
+    public function GetPopular(){
+      $peliculas = file_get_contents(
+        API_URL.'popular?api_key='.API_KEY1.'&language=es-ES&page=1'
+      );
+
+      $popularMovies = array();
+
+      $decode = json_decode($peliculas, true);
+      /*
+          recorro el decode que tiene el arreglo asociativo con los datos de las peliculas accediendo al arreglo 'results' y recoriiendolo
+          siendo 'results' el arreglo con todas las peliculas devueltas por la API
+      */
+      foreach($decode['results'] as $allresults){
+          $movie = new Pelicula(
+              $allresults['poster_path'],
+              $allresults['backdrop_path'],
+              $allresults['id'],
+              $allresults['adult'],
+              $allresults['original_language'],
+              $allresults['original_title'],
+              $allresults['genre_ids'],
+              $allresults['vote_average'],
+              $allresults['overview'],
+              $allresults['release_date'],
+          );
+          array_push($popularMovies, $movie);
+      }
+
+      $randomPopularMovies = array();
+      $cantidadPopularMovies = 4;
+      $alguno = 5;
+
+      for($i = 0; $i< $cantidadPopularMovies; $i++){
+        array_push($randomPopularMovies, $popularMovies[$alguno]);
+        $alguno++;
+      }
+
+      return $randomPopularMovies;
+    }
+
 
     public function GetCast($idPelicula){
       $castJson = file_get_contents(

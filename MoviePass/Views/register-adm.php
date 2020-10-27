@@ -1,4 +1,4 @@
-<main class="height-100">
+<main class="">
     <div class="container"> 
         <div class="card">
             <div class="card-body px-lg-5 pt-0">

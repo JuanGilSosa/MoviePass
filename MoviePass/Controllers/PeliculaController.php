@@ -24,7 +24,7 @@
         #@param valueOfSelect tiene el id del genero
         
         public function ShowMovies($valueOfSelect=""){
-            if(SessionController::HayUsuario('userLogged')){
+            if(SessionController::HayUsuario('userLogged') || SessionController::HayUsuario('adminLogged')){
                 if($valueOfSelect != 0){
                     $peliculas = $this->peliculasDAO->GetMoviesByGenre($valueOfSelect);
                     $generos = $this->generosDAO->GetAll();
@@ -45,9 +45,11 @@
                 $trailerKey = $this->peliculasDAO->getTrailerKey($idPelicula);
              
                 ViewsController::ShowMovieDescription($pelicula, $trailerKey);
+            }else{
+                ViewsController::ShowMoviesNowPlaying(); 
             }
         }
-
+        
         public function getPeliculaDAO(){
             return $this->peliculasDAO;
         }

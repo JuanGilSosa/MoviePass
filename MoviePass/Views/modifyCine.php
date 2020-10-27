@@ -22,7 +22,7 @@
      $direccion = $direccionDAO->GetById($miCine->getIdDireccion());
 
 ?>
-<main id="page-top" class="no-nav py-5 height-100">
+<main id="page-top" class="no-nav py-5">
      <section id="listado" class="mb-5">
           <div class="container">
                <h2 class="mb-4">Modificar Cine</h2>

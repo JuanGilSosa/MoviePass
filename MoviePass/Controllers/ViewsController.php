@@ -24,13 +24,12 @@
 
         public static function ShowIndex()
         {
-            require_once(VIEWS_PATH."addCine.php");            
+            HomeController::Index();           
         }
 
         public static function ShowLogIn($message = "")
         {
-            $home = new HomeController();
-            $home->Index($message);
+            require_once(VIEWS_PATH."loginForm.php");
         }
 
         public static function ShowRegisterForm($message = "")
@@ -77,12 +76,18 @@
 
         public static function ShowMoviesListView($valueOfSelect = "")
         {
-            $generoDAO = new GeneroDAO();
-            $generos = $generoDAO->GetAll();
             $peliculasDAO = new PeliculaDAO();
-            $peliculas = $peliculasDAO->GetMoviesByGenre($valueOfSelect);
-        
-            require_once(VIEWS_PATH."listMovies.php");
+            if($valueOfSelect != 0){
+                $generoDAO = new GeneroDAO();
+                $generos = $generoDAO->GetAll();
+                $peliculas = $peliculasDAO->GetMoviesByGenre($valueOfSelect);
+                require_once(VIEWS_PATH."listMovies.php");
+            }else{
+                $peliculas = $peliculasDAO->GetAll();
+                require_once(VIEWS_PATH."listMovies.php");
+            }
+
+
         }
 
         public static function ShowRegisterAdmin()
@@ -114,9 +119,14 @@
 
         public static function ShowMovieDescription($pelicula, $trailerKey)
         {
-            $generosDAO = new GeneroDAO();
-            $peliculasDAO = new PeliculaDAO();
-            require_once(VIEWS_PATH."descriptionMovies.php");
+            if(SessionController::HayUsuario('adminLogged')){
+                $generosDAO = new GeneroDAO();
+                $peliculasDAO = new PeliculaDAO();
+                require_once(VIEWS_PATH."descriptionMovies.php");
+            } else {
+               ViewsController::ShowLogIn();
+            }
+            
         }
     }
 

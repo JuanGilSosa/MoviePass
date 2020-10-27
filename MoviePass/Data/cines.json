@@ -38,5 +38,13 @@
         "numeroDeContacto": [],
         "direccion": 7,
         "active": false
+    },
+    {
+        "id": 6,
+        "nombre": "cine@mail.com",
+        "email": "151515",
+        "numeroDeContacto": {},
+        "direccion": 7,
+        "active": true
     }
 ]

@@ -1,7 +1,7 @@
 <?php
 require_once('nav.php');
 ?>
-<main id="page-top" class="no-nav py-5 height-100">
+<main class="mx-auto">
      <section id="listado" class="mb-5">
           <div class="container">
                <table id="dt-vertical-scroll" class="table  table-striped bg-dark text-white" cellspacing="0">
