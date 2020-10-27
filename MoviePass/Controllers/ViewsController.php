@@ -2,7 +2,8 @@
 
         use Models\Cine\Cine as Cine;
 
-        use DAO\CineDAO as CineDAO;
+        #use DAO\CineDAO as CineDAO;
+        use Database\CineDAO as CineDAO;
         use DAO\DireccionDAO as DireccionDAO;
         use DAO\CiudadDAO as CiudadDAO;
         use DAO\ProvinciaDAO as ProvinciaDAO;
