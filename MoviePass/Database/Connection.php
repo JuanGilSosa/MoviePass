@@ -28,7 +28,6 @@
 				foreach($param as $paramName => $value){
 					$this->pdoStatement->bindParam(":$paramName", $param[$paramName]);
 				}
-				echo '<script>console.log("ACA");</script>';
 				$this->pdoStatement->execute();
 				
 				return $this->pdoStatement->rowCount(); #esto nos devuelve la cantidad de registros afectados

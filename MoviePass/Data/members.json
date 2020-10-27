@@ -22,5 +22,13 @@
         "password": "matias123",
         "firstName": "Matias",
         "lastName": "Portela"
+    },
+    {
+        "id": 4,
+        "dni": "0132910329",
+        "email": "salamandra@gmail.com",
+        "password": "sala1",
+        "firstName": "Carlito",
+        "lastName": "Salamandra"
     }
 ]
