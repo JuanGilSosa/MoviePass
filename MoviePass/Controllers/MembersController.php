@@ -3,20 +3,11 @@
     namespace Controllers;
 
     use DAO\AdminDAO as AdminDAO;
-<<<<<<< HEAD
     use DAO\MemberDAO as MemberDAO; #aca se cambia DAO\MemberDAO por Database\MemberDAO y funciona todo tal cual
     use Models\Users\Member as Member;
     use Models\Users\Admin as Admin;
 
     
-=======
-
-    use Models\Users\Member as Member;
-    use Models\Users\Admin as Admin;
-    
-    #use DAO\MemberDAO as MemberDAO;
-    use Database\MemberDAO as MemberDAO;
->>>>>>> master
 
     class MembersController
     {
@@ -27,11 +18,7 @@
 
         public function __construct(){
             $this->membersDAO = new MemberDAO(); 
-<<<<<<< HEAD
-            }
-=======
         }
->>>>>>> master
 
         public function AddMember($firstName, $lastName, $dni, $email, $password, $checkPassword)
         {
