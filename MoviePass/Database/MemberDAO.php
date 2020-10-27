@@ -9,7 +9,8 @@
 
         public function Add($member)
         {
-            $query = 'INSERT INTO members(dni,email,password,firstName,lastName,idTarjetaDeCredito) VALUES(:dni, :email, :password, :firstName, :lastName, :idTarjetaDeCredito);';
+            $query = 'INSERT INTO members(dni,email,password,firstName,lastName,idTarjetaDeCredito) VALUES
+                        (:dni, :email, :password, :firstName, :lastName, :idTarjetaDeCredito);';
             
             $params['dni'] = $member->getDni();
             $params['email'] = $member->getEmail();
@@ -59,8 +60,7 @@
             return $array;
         }
 
-		#HACER MAPEO PARA CADA DAO
-		private function mapping($value){
+		public function mapping($value){
 			$value = is_array($value) ? $value : [];
 			$resp = array_map(function ($p){
                 $member = new Member(
