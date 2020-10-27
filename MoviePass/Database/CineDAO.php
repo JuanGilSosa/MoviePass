@@ -125,8 +125,10 @@
 
         }
         public function Update($cine){
-
+            $query = 'SELECT c.idCine FROM cines as c WHERE c.idCine = '.$cine->getId().';';
         }
+
+ 
 
 
 
