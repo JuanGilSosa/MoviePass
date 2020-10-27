@@ -2,7 +2,7 @@
 require_once('nav.php');
 ?>
 
-<main class="py-5 mx-auto">
+<main class="mx-auto">
 	<section id="listado" class="mb-5 ">
 		<div class="container">
 			<h2 class="mb-4">Listado de Peliculas</h2>

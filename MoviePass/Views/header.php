@@ -21,6 +21,8 @@
 
      <link href="<?php echo LITY_PATH . 'dist/lity.css' ?>" rel="stylesheet">
 
+     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+
      <!-- Custom styles -->
      <link rel="stylesheet" type="text/css" href="<?php echo CSS_PATH ?>main.css">
 

@@ -1,7 +1,7 @@
 <?php 
     require_once("nav.php");
 ?>
-<main id="page-top" class="no-nav py-5">
+<main class="mx-auto h-75">
      <section id="listado" class="mb-5">
           <div class="container">
                <h2 class="mb-4">Agregar Sala</h2>

@@ -11,7 +11,7 @@
                     echo "<small>" . $message . "</small>";
                 }
             ?>
-            <h2 id="h2-registro">Ingresa tus datos</h2>
+            <h2 id="h2-registro"><strong>Ingresa tus datos</strong></h2>
             <div class="form-group"> 
                 <label class="p-registro text-white">Nombre</label><input class="input-registro text-white" name="firstName" type="text" placeholder="Mi nombre" required></input>
             </div>

@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600');
-
 
 html, body{
      font-family: 'Kumbh Sans', sans-serif;
@@ -22,7 +20,7 @@ html, body{
 }   
  
 body {
-    font-family: 'Montserrat', sans-serif;
+  font-family: 'Poppins', sans-serif;
     color: #ffffff;
     background: url("../img/space.jpg") no-repeat center center fixed; 
      -webkit-background-size: cover;
