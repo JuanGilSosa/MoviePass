@@ -4,10 +4,10 @@
       session_start();
     }*/
 ?>
-<main class="height-100">
+<main class="">
     <div class="container text-center table loginTable  w-100" style="padding:0px;">
       
-      <form action="<?php echo FRONT_ROOT . 'LogIn\Logeando' ?>" method="POST" class="login-form bg-dark-alpha p-5 mx-auto text-white">
+      <form action="<?php echo FRONT_ROOT . 'LogIn\LogIn' ?>" method="POST" class="login-form bg-dark-alpha p-5 mx-auto text-white">
 
         <div class="form-group" text-align="center">
           <div class="col userIconCol">

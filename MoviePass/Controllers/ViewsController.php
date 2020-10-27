@@ -24,13 +24,12 @@
 
         public static function ShowIndex()
         {
-            require_once(VIEWS_PATH."addCine.php");            
+            HomeController::Index();           
         }
 
         public static function ShowLogIn($message = "")
         {
-            $home = new HomeController();
-            $home->Index($message);
+            require_once(VIEWS_PATH."loginForm.php");
         }
 
         public static function ShowRegisterForm($message = "")
@@ -120,9 +119,14 @@
 
         public static function ShowMovieDescription($pelicula, $trailerKey)
         {
-            $generosDAO = new GeneroDAO();
-            $peliculasDAO = new PeliculaDAO();
-            require_once(VIEWS_PATH."descriptionMovies.php");
+            if(SessionController::HayUsuario('adminLogged')){
+                $generosDAO = new GeneroDAO();
+                $peliculasDAO = new PeliculaDAO();
+                require_once(VIEWS_PATH."descriptionMovies.php");
+            } else {
+               ViewsController::ShowLogIn();
+            }
+            
         }
     }
 

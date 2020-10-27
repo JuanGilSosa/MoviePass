@@ -1,7 +1,7 @@
 <?php 
     require_once('nav.php');
 ?>
-<section id="listado" class="mb-5 h-95">
+<section id="listado" class="mb-5">
 
     <div class="container" style="margin-top:10vh;">
         <div class="row container" style="margin:0px; padding:0px;background-color: rgba(158, 140, 219, 1);">

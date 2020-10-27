@@ -45,9 +45,11 @@
                 $trailerKey = $this->peliculasDAO->getTrailerKey($idPelicula);
              
                 ViewsController::ShowMovieDescription($pelicula, $trailerKey);
+            }else{
+                ViewsController::ShowMoviesNowPlaying(); 
             }
         }
-
+        
         public function getPeliculaDAO(){
             return $this->peliculasDAO;
         }

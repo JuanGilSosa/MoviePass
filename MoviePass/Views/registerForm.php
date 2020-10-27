@@ -1,9 +1,10 @@
 <?php 
     require_once('nav.php');
 ?>
-<main class="py-5 height-100">
-    <div class="text-center">
-        <form action="<?php echo FRONT_ROOT . 'Members/AddMember' ?>" class="form-registro p-5 mx-auto" method="POST">
+<main class="py-2">
+    <div class="row container mx-auto" >
+    <div class="col" style="width:50%">
+        <form action="<?php echo FRONT_ROOT . 'Members/AddMember' ?>" class="form-registro mx-auto" style="padding:0;" method="POST">
             <?php
                 if(isset($message))
                 {
@@ -29,9 +30,17 @@
             <div class="form-group"> 
                 <label class="p-registro">Repite constraseña</label><input class="input-registro text-white" name="checkPassword" type="password" placeholder="Repetir contraseña"></input>
             </div>
-            <div class="form-group"> 
+            <div class="form-group" style="display:flex; justify-content: center;"> 
                 <button class="btn btn-secondary w-50 loginBoton">Registrarse</button>
             </div>
         </form>
     </div>
+    <div class="col p-5 mx-auto" style="width:50%;">
+        <div class="container">
+            <img src="<?php echo IMG_PATH . 'bannerRegistro.jpg'; ?>" style="height: 90vh;">
+
+        </div>
+    </div>
+    </div>
+
 </main>

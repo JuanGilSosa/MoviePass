@@ -1,7 +1,7 @@
 <?php 
     require_once("nav.php");
 ?>
-<main id="page-top" class="no-nav py-5 height-100">
+<main id="page-top" class="no-nav py-5">
     <div class="row">
         <?php 
             foreach($cines as $cine){
