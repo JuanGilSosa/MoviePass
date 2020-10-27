@@ -228,12 +228,29 @@
         }
 
         public function AddSala($nombre, $idCine, $precio, $capacidad){
-            $sala = new Sala($this->salaDAO->GetNextId(),$nombre, $precio, $capacidad);
             $cine = $this->cineDAO->getCineById($idCine);
-            $salas = $cine->getSalas();
-            array_push($salas, $sala);
-            $cine->setSalas($salas);
-            $this->salaDAO->Add($sala);
+            if(!is_null($cine)){
+                if($this->FindSalaByNombre($cine,$nombre) == 0){
+                    $sala = new Sala($this->salaDAO->GetNextId(),$nombre, $precio, $capacidad);
+                    $salas = $cine->getSalas();
+                    array_push($salas, $sala);
+                    $cine->setSalas($salas);
+                    #deber de modificar donde esta el cine {hacer update}
+                    $this->salaDAO->Add($sala);
+                }else{
+                    #Es porque la sala existe 
+                }
+            }
+            /*
+            $salas = $this->salaDAO->getAll();
+            foreach($salas as $sala){
+                if(strcasecmp($sala->getNombre, $nombre) == 0){
+                    echo '<script>alert("sala con ese nombre ya existe");</script>';
+                    ViewsController::ShowAddSala();
+                }
+            }
+            */
+            
         }
 
         public function get_salaXcine(){
@@ -272,6 +289,18 @@
                 $cine->setSalas($salasCine);
                 array_push($allCines, $cine);
             }
+        }
+
+        public function FindSalaByNombre($cine, $nombreSala){
+            $existe = 0;
+            $salas = $cine->getSalas();
+            foreach($salas as $sala){
+                if(strcasecmp($sala->getNombre,$nombreSala)){
+                    $existe = 1;
+                    break;
+                }
+            }
+            return $existe; 
         }
 
     }
