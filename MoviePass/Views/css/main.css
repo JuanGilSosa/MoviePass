@@ -22,14 +22,13 @@ html, body{
 }   
  
 body {
-     font-family: 'Montserrat', sans-serif;
-     color: #ffffff;
-     background-color: #000000;
-     /* background: url(../img/alfombraCine.jpg) no-repeat center center fixed; 
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    background: url("../img/space.jpg") no-repeat center center fixed; 
      -webkit-background-size: cover;
         -moz-background-size: cover;
           -o-background-size: cover;
-             background-size: cover;*/
+             background-size: cover;
 }
 
 main
