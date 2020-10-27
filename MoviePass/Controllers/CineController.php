@@ -3,7 +3,9 @@
 
     use Models\Cine\Cine as Cine;
 
-    use DAO\CineDAO as CineDAO;
+    #use DAO\CineDAO as CineDAO;
+    use Database\CineDAO as CineDAO;
+
     use DAO\DireccionDAO as DireccionDAO;
     use DAO\CiudadDAO as CiudadDAO;
     use DAO\ProvinciaDAO as ProvinciaDAO;
@@ -16,6 +18,9 @@
     use Models\Ubicacion\Pais as Pais;
     use Models\Cine\Sala as Sala;
  
+
+    use Database\Connection as Connection;
+
     class CineController
     {
         private $cineDAO;
@@ -229,6 +234,44 @@
             array_push($salas, $sala);
             $cine->setSalas($salas);
             $this->salaDAO->Add($sala);
+        }
+
+        public function get_salaXcine(){
+            try {
+                $con = Connection::getInstance();
+
+                $query = 'SELECT * FROM salaXcine';
+                $salasXcines = $con->execute($query);
+            } catch (\PDOException $e) {
+                echo $e->getMessage();
+            }
+            return $salasXcines;
+        }
+
+
+        //Sin testear - solo testeado logicamente
+        public function recuperarCinesConSalas(){
+
+            $salaXcines = $this->get_salaXcine();
+            $salas = $this->salaDAO->GetAll();
+            $cines = $this->cineDAO->GetAll();
+
+            $allCines = array();
+            $salasCine = array();
+            foreach($cines as $cine){
+                foreach($salaXcines as $salaxcine){
+                    if($salaxcine['ID_CINE'] == $cine->getId()){
+                        foreach($salas as $sala){
+                            if($sala->getId() == $salaxcine['ID_SALA']){
+                                array_push($salasCine, $sala);
+                                #break; alguna forma para romper con el bucle de salas sin destrozar los otros
+                            }
+                        }
+                    }
+                }
+                $cine->setSalas($salasCine);
+                array_push($allCines, $cine);
+            }
         }
 
     }
