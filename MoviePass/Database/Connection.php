@@ -18,7 +18,7 @@
 		}
 		/*
 			Se usa para insertar datos
-			INSERT, UPDATE, DELETE
+			INSERT, UPDATE, DELETE & CREATE
 		*/
 		public function executeNonQuery($query, $param = array()){
 			
