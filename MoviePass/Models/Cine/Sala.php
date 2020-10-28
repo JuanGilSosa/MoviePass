@@ -6,6 +6,7 @@
         private $nombre;
         private $precio;
         private $capacidad;
+        private $tipoDeSala;    //2D, 3D, ATMOS
 
         public function __construct($id, $nombre, $precio, $capacidad){
             $this->id = $id;

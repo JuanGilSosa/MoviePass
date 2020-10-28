@@ -13,6 +13,7 @@
         private $numeroDeContacto;
         private $direccion; 
         private $salas;
+        private $cartelera;
         private $active;
 
         public function __construct($id = "", $nombre = "", $email = "", $numeroDeContacto = "", $direccion="")
