@@ -131,7 +131,7 @@
         public function Add(
             $nombre, $email, $numeroDeContacto,
             $calle, $numero, $piso,
-            $ciudad, $codigoPostal, $pais, $provincia)
+            $ciudad, $codigoPostal, $pais)
         {
             $message = "";
             $existeCine = $this->cineDAO->FindCineByName($nombre);
@@ -227,11 +227,39 @@
             ViewsController::ShowCinesList($message);
         }
 
-        public function AddSala($nombre, $idCine, $precio, $capacidad){
+        //Sin testear - solo testeado logicamente
+        public function recuperarCinesConSalas(){
+
+            $salaXcines = $this->get_salaXcine();
+            $salas = $this->salaDAO->GetAll();
+            $cines = $this->cineDAO->GetAll();
+
+            $allCines = array();
+            $salasCine = array();
+            foreach($cines as $cine){
+                foreach($salaXcines as $salaxcine){
+                    if($salaxcine['ID_CINE'] == $cine->getId()){
+                        foreach($salas as $sala){
+                            if($sala->getId() == $salaxcine['ID_SALA']){
+                                array_push($salasCine, $sala);
+                                #break; alguna forma para romper con el bucle de salas sin destrozar los otros
+                            }
+                        }
+                    }
+                }
+                $cine->setSalas($salasCine);
+                array_push($allCines, $cine);
+            }
+        }
+
+        /****************************************************
+                                    SALA CONTROLLER
+        *****************************************************/
+        public function AddSala($nombre, $idCine, $precio, $capacidad, $tipo){
             $cine = $this->cineDAO->getCineById($idCine);
             if(!is_null($cine)){
                 if($this->FindSalaByNombre($cine,$nombre) == 0){
-                    $sala = new Sala($this->salaDAO->GetNextId(),$nombre, $precio, $capacidad);
+                    $sala = new Sala($this->salaDAO->GetNextId(),$nombre, $precio, $capacidad, $tipo);
                     $salas = $cine->getSalas();
                     array_push($salas, $sala);
                     $cine->setSalas($salas);
@@ -266,30 +294,7 @@
         }
 
 
-        //Sin testear - solo testeado logicamente
-        public function recuperarCinesConSalas(){
-
-            $salaXcines = $this->get_salaXcine();
-            $salas = $this->salaDAO->GetAll();
-            $cines = $this->cineDAO->GetAll();
-
-            $allCines = array();
-            $salasCine = array();
-            foreach($cines as $cine){
-                foreach($salaXcines as $salaxcine){
-                    if($salaxcine['ID_CINE'] == $cine->getId()){
-                        foreach($salas as $sala){
-                            if($sala->getId() == $salaxcine['ID_SALA']){
-                                array_push($salasCine, $sala);
-                                #break; alguna forma para romper con el bucle de salas sin destrozar los otros
-                            }
-                        }
-                    }
-                }
-                $cine->setSalas($salasCine);
-                array_push($allCines, $cine);
-            }
-        }
+        
 
         public function FindSalaByNombre($cine, $nombreSala){
             $existe = 0;

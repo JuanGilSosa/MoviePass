@@ -119,12 +119,12 @@
                                    </select>
                               </div>
                          </div>
-                         
+                         <!--
                          <div class="col-lg-6">
                               <div class="form-group">
                                    <label for="">Provincia</label>
                                    <select name="provincia" class="form-control" placeholder="Seleccione su Provincia" required>
-                                   <?php
+                                   <#?php
 
                                              foreach ($provincias as $provincia)
                                              {
@@ -132,13 +132,14 @@
                                                   $idProvincia = $provincia->getId();
                                                   
                                                   ?>
-                                                  <option value="<?php echo $idProvincia;?>"><?php echo $nameProvincia;?></option>
-                                             <?php 
+                                                  <option value="<#?php echo $idProvincia;?>"><#?php echo $nameProvincia;?></option>
+                                             <#?php 
                                              }
                                              ?>
                                    </select>
                               </div>
                          </div>
+                         -->
                     </div>
                     
                     <button type="submit" name="button" class="btn btn-light ml-auto d-block">Agregar</button>

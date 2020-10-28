@@ -6,13 +6,14 @@
     {
         private $codigoPostal;
         private $nameCiudad;
-        private $provincia;
+        private $pais;
+        #private $provincia;
 
-        public function __construct($codigoPostal = "", $nameCiudad = "", $provincia = "")
+        public function __construct($codigoPostal = "", $nameCiudad = "", $pais = "")
         {
             $this->codigoPostal = $codigoPostal;
             $this->nameCiudad = $nameCiudad; 
-            $this->provincia = $provincia;
+            $this->pais = $pais;
         }        
 
         public function getCodigoPostal() {
@@ -23,8 +24,8 @@
             return $this->nameCiudad;
         }
 
-        public function getProvincia() {
-            return $this->provincia;
+        public function getPais() {
+            return $this->pais;
         }
 
         public function setCodigoPostal($codigoPostal)
@@ -36,9 +37,9 @@
             $this->nameCiudad = $nameCiudad;
         }
 
-        public function setProvincia($provincia)
+        public function setProvincia($pais)
         {
-            $this->provincia = $provincia;
+            $this->pais = $pais;
         }
 
     }

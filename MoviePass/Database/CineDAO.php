@@ -10,10 +10,10 @@
                 $query = 'CREATE TABLE IF NOT EXISTS 
                             cines(
                                 idCine INT NOT NULL AUTO_INCREMENT, 
-                                nombre varchar(30), 
-                                email varchar(30), 
-                                numeroDeContacto varchar(15), 
-                                direccion varchar(30), 
+                                nombre VARCHAR(30), 
+                                email VARCHAR(30), 
+                                numeroDeContacto VARCHAR(15), 
+                                direccion VARCHAR(30), 
                                 active BOOLEAN, 
                                 CONSTRAINT pk_idCine PRIMARY KEY(idCine)
                             );';
@@ -40,8 +40,8 @@
             try{
                 $con = Connection::getInstance();
 
-                $query = 'INSERT INTO cines(nombre,email,numeroDeContacto,direccion,salas,active) VALUES
-                            (:nombre,:email,:numeroDeContacto,:direccion,:salas,:active)';
+                $query = 'INSERT INTO cines(nombre,email,numeroDeContacto,direccion,active) VALUES
+                            (:nombre,:email,:numeroDeContacto,:direccion,:active)';
 
                 $params['nombre'] = $cine->getNombre();
                 $params['email'] = $cine->getEmail();

@@ -6,8 +6,9 @@
         private $nombre;
         private $precio;
         private $capacidad;
+        private $tipo;
 
-        public function __construct($id, $nombre, $precio, $capacidad){
+        public function __construct($id, $nombre, $precio, $capacidad, $tipo){
             $this->id = $id;
             $this->nombre = $nombre;
             $this->precio = $precio;
@@ -21,6 +22,8 @@
         public function setPrecio($precio){$this->precio = $precio;}
         
         public function setCapacidad($capacidad){$this->capacidad = $capacidad;}
+
+        public function setTipo($tipo){$this->tipo = $tipo;}
         
         public function getNombre(){return $this->nombre;}
         
@@ -28,6 +31,7 @@
         
         public function getCapacidad(){return $this->capacidad;}
 
+        public function getTipo(){return $this->tipo;}
     }
 
 ?>

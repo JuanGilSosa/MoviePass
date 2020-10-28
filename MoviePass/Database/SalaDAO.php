@@ -14,6 +14,7 @@
                                 nombre VARCHAR(30), 
                                 precio VARCHAR(5), 
                                 capacidad VARCHAR(3), 
+                                tipo(5),
                                 CONSTRAINT pk_idSala PRIMARY KEY(idSala),
                             );';
                 $con->executeNonQuery($query);
@@ -32,7 +33,8 @@
                 $params['nombre'] = $sala->getNombre();
                 $params['precio'] = $sala->getPrecio();
                 $params['capacidad'] = $sala->getCapacidad();
-                
+                $params['tipo'] = $sala->getTipo();
+
                 return $con->executeNonQuery($query, $params);
             }catch(PDOException $e){
                 throw $e;
@@ -54,7 +56,7 @@
             $value = \is_array($value) ? $value : [];
             $resp = array_map(function($a){
                 $sala = new Sala(
-                    $a['id'],$a['nombre'],$a['precio'],$a['capacidad']
+                    $a['id'],$a['nombre'],$a['precio'],$a['capacidad'],$a['tipo']
                 );
                 return $sala;
             },$value);
