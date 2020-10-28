@@ -9,19 +9,16 @@
 
         public function Add($member)
         {
-            $query = 'INSERT INTO members(dni,email,password,firstName,lastName,idTarjetaDeCredito) VALUES
-                        (:dni, :email, :password, :firstName, :lastName, :idTarjetaDeCredito);';
-            
-            $params['dni'] = $member->getDni();
-            $params['email'] = $member->getEmail();
-            $params['password'] = $member->getPassword();
-            $params['firstName'] = $member->getFirstName();
-            $params['lastName'] = $member->getLastName();
-            $params['idTarjetaDeCredito'] = '0';
-            
             try{
                 $con = Connection::getInstance();
-                
+                $query = 'INSERT INTO members(dni,email,password,firstName,lastName,idTarjetaDeCredito) VALUES(:dni, :email, :password, :firstName, :lastName, :idTarjetaDeCredito);';
+    
+                $params['dni'] = $member->getDni();
+                $params['email'] = $member->getEmail();
+                $params['password'] = $member->getPassword();
+                $params['firstName'] = $member->getFirstName();
+                $params['lastName'] = $member->getLastName();
+                $params['idTarjetaDeCredito'] = '0';
                 return $con->executeNonQuery($query, $params);
             }catch(PDOException $e){
                 throw $e;

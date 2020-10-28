@@ -15,7 +15,7 @@
                             );';
                 $con->executeNonQuery($query);
             }catch(PDOException $e){
-                echo $e->getMessage();
+                echo "<script>console.log('".$e->getMessage()."');</script>";
             }
         }
 
@@ -34,7 +34,7 @@
             try{
                 $con = Connection::getInstance();
 
-                $query = 'INSERT INTO pais(namePais) VALUES
+                $query = 'INSERT INTO paises(namePais) VALUES
                             (:namePais)';
 
                 $params['namePais'] = $cine->getNombre();
@@ -44,6 +44,7 @@
                 throw $e;
             }
         }
+
         function Delete($idObjeto){}
         function Update($objeto){}
 
@@ -53,6 +54,17 @@
                 return new Pais($p['idPais'], $p['namePais']);
             },$value);
         }
+
+        public function GetById($idPais){
+            $paises = $this->GetAll();
+            foreach($paises as $pais){
+                if ($pais->getId() == $idPais){
+                    return $pais;
+                }
+            }
+            return false;            
+        }
+
     }
 
 ?>

@@ -13,14 +13,15 @@
                                 nombre VARCHAR(30), 
                                 email VARCHAR(30), 
                                 numeroDeContacto VARCHAR(15), 
-                                direccion VARCHAR(30), 
+                                idDireccion INT NOT NULL, 
                                 active BOOLEAN, 
-                                CONSTRAINT pk_idCine PRIMARY KEY(idCine)
+                                CONSTRAINT pk_idCine PRIMARY KEY(idCine),
+                                CONSTRAINT fk_idDirecionn FOREIGN KEY(idDireccion) REFERENCES direccion(idDireccion)
                             );';
 
                 $con->executeNonQuery($query);
             }catch(PDOException $e){
-                echo $e->getMessage();
+                echo "<script>console.log('".$e->getMessage()."');</script>";
             }
         }
 
@@ -36,6 +37,7 @@
                 echo $e->getMessage();
             }
         }
+        
         public function Add($cine){
             try{
                 $con = Connection::getInstance();
@@ -77,7 +79,7 @@
             return $activos;
         }
 
-        public function getCineById ($cineId){
+        public function GetCineById ($cineId){
             $cines = $this->GetAll();
             $micine = null;
             foreach ($cines as $cine){

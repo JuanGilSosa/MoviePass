@@ -131,7 +131,7 @@
         public function Add(
             $nombre, $email, $numeroDeContacto,
             $calle, $numero, $piso,
-            $ciudad, $codigoPostal, $pais)
+            $ciudad, $codigoPostal, $idProvincia, $idPais)
         {
             $message = "";
             $existeCine = $this->cineDAO->FindCineByName($nombre);
@@ -145,7 +145,7 @@
 
                     if(!$existeTelefono)
                     {                        
-                        $direccion = $this->direccionDAO->CreateDireccion($calle, $numero, $piso, $ciudad, $codigoPostal, $pais, $provincia);
+                        $direccion = $this->direccionDAO->CreateDireccion($calle, $numero, $piso, $ciudad, $codigoPostal, $idPais, $idProvincia);
                    
                         if(!is_string($direccion)){
                             $existeDireccion = $this->direccionDAO->FindDireccion($direccion);
@@ -292,9 +292,7 @@
             }
             return $salasXcines;
         }
-
-
-        
+      
 
         public function FindSalaByNombre($cine, $nombreSala){
             $existe = 0;

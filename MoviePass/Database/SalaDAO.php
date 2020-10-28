@@ -14,12 +14,12 @@
                                 nombre VARCHAR(30), 
                                 precio VARCHAR(5), 
                                 capacidad VARCHAR(3), 
-                                tipo(5),
+                                tipo VARCHAR(5),
                                 CONSTRAINT pk_idSala PRIMARY KEY(idSala),
                             );';
                 $con->executeNonQuery($query);
             }catch(PDOException $e){
-                echo $e->getMessage();
+                echo "<script>console.log('".$e->getMessage()."');</script>";
             }
         }
 
@@ -48,7 +48,7 @@
                 $array = $con->execute($query);
                 return (!empty($array)) ? $this->mapping($array) : false;
             }catch(PDOException $e){
-                echo $e->getMessage();
+                throw $e;
             }
         }
         
