@@ -39,13 +39,13 @@
             try{
                 $con = Connection::getInstance();
 
-                $query = 'INSERT INTO direcciones(calle,numero,piso) VALUES
-                            (:calle,:numero,:piso)';
+                $query = 'INSERT INTO direcciones(calle,numero,piso,codigoPostal) VALUES
+                            (:calle,:numero,:piso,:codigoPostal)';
 
-                $params['calle'] = $direccion->getNombre();
+                $params['calle'] = $direccion->getCalle();
                 $params['numero'] = $direccion->getNumero();
                 $params['piso'] = $direccion->getPiso();
-                
+                $params['codigoPostal'] = $direccion->getCiudad()->getCodigoPostal();
                 return $con->executeNonQuery($query, $params);
             }catch(PDOException $e){
                 throw $e;
@@ -58,51 +58,48 @@
             $value = is_array($value) ? $value : [];
 			$resp = array_map(function ($p){
                 $dir = new Direccion(
-                    $p['id'],$p['calle'],$p['numero'],$p['piso']);
+                    $p['idDireccion'],$p['calle'],$p['numero'],$p['piso'],$p['codigoPostal']);
                 return $dir;
             },$value);
             return count($resp)>1 ? $resp : reset($resp);
         }
 
         public function CreateDireccion($calle, $numero, $piso, $idCiudad, $codigoPostal, $idPais, $idProvincia){
+
             $paisDAO = new PaisDAO();
             $pais = $paisDAO->GetById($idPais);
-
             if($pais != false){
                 $provinciaDAO = new ProvinciaDAO();
                 $provincia = $provinciaDAO->GetById($idProvincia);
-                
-            
                 if($provincia != false){
+                    $provincia->setPais($pais); #haciendo esto, estamos sacando el id que tiene y le asignamos un objeto
                     $ciudadDAO = new CiudadDAO();
                     $ciudad = $ciudadDAO->GetByCodigoPostal($codigoPostal);
-
-                    if($ciudad != false && $ciudad->getCodigoPostal() == $codigoPostal){
+                    if($ciudad != false){
+                        $ciudad->setProvincia($provincia); #mesmo - cambio el id por el objeto
                         $direccion = new Direccion(0, $calle, $numero, $piso, $ciudad);
-
                         return $direccion;
                     }else{
                         return ("Codigo Postal equivocado, intente nuevamente.");
                     }
-
                 }else{
                     return ("No encontramos la provincia en nuestra base de datos");
                 }
             }else{
                 return ("No encontramos el pais en nuestra base de datos");
             }
-
         }
+
+
         public function FindDireccion($objDireccion){
 
             $ciudad = $objDireccion->getCiudad();
             $ciudadDAO = new CiudadDAO();
 
             if($ciudadDAO->GetByCodigoPostal($ciudad->getCodigoPostal())){
-
-                $provincia = $ciudad->getProvincia();
                 $provinciaDAO = new ProvinciaDAO();
-
+                $provincia = $ciudad->getProvincia();
+                
                 if($provinciaDAO->GetByName($provincia->getNameProvincia())){
 
                     $pais = $provincia->getPais();
@@ -114,15 +111,14 @@
 
                         foreach($direccionesPorCodigoPostal as $direccion){
                             if (
-                                $direccion->getCalle() == $direccionIngresada->getCalle() && 
-                                $direccion->getNumero() == $direccionIngresada->getNumero() &&
-                                $direccion->getPiso() == $direccionIngresada->getPiso()
+                                ($direccion->getCalle() == $objDireccion->getCalle()) && 
+                                ($direccion->getNumero() == $objDireccion->getNumero()) &&
+                                ($direccion->getPiso() == $objDireccion->getPiso())
                             ){
                                 return $direccion;
                             }
                         }
                     }
-
                 }
 
             }
@@ -130,14 +126,15 @@
         }
 
         public function GetAllByCodigoPostal($codigoPostal){
-            $direcciones = $this->GetAll();
-            $direccionesPorCodigoPostal = array();
-            foreach($direcciones as $direccion){
-                $ciudad = $direccion->getCiudad();
-                if ($ciudad->getCodigoPostal() == $codigoPostal)
-                    array_push($direccionesPorCodigoPostal, $direccion);
+            try {
+                $query = 'SELECT * FROM direcciones WHERE codigoPostal = :codigoPostal';
+                $params['codigoPostal'] = (int)$codigoPostal;
+                $con = Connection::getInstance();
+                $direcciones = $con->execute($query,$params);
+                return (!empty($direcciones)) ? $this->mapping($direcciones) : false;
+            } catch (PDOException $e) {
+                echo "<script>console.log('".$e->getMessage()."');</script>";
             }
-            return $direccionesPorCodigoPostal;
         }
     }
 ?>

@@ -1,6 +1,7 @@
 <?php namespace Database; 
     
     use Models\Ubicacion\Provincia as Provincia;
+    use Models\Ubicacion\Direccion as Direccion;
 
     class ProvinciaDAO implements IDAO{
 /*
@@ -37,8 +38,8 @@
         function mapping($value){
             $value = is_array($value) ? $value : [];
 			$resp = array_map(function ($p){
-                $dir = new Direccion(
-                    $p['id'],$p['nameProvincia'],$p['pais']);
+                $dir = new Provincia(
+                    $p['idProvincia'],$p['nameProvincia'],$p['idPais']);
                 return $dir;
             },$value);
             return count($resp)>1 ? $resp : reset($resp);
@@ -46,14 +47,27 @@
 
         public function GetById($idProvincia){
             try {
-                $query = 'SELECT * FROM provincias as p 
-                            WHERE p.idProvincia =='.$idProvincia.';';
+                $query = 'SELECT * FROM provincias WHERE idProvincia = :idProvincia';
                 $con = Connection::getInstance();
-                $provincia = $con->execute($query);
-                return ((is_array($provincia))&&(!empty($provincia))) ? reset($provincia) : false;
+                $params['idProvincia'] = $idProvincia;
+                $provincia = $con->execute($query,$params);
+                return (!empty($provincia)) ? $this->mapping($provincia) : false;
             } catch (PDOException $e) {
                 echo "<script>console.log('".$e->getMessage()."');</script>";
             }     
+        }
+        
+        public function GetByName($nameProvincia){
+            try {
+                $query = 'SELECT * FROM provincias WHERE nameProvincia = :nameProvincia';
+                $params['nameProvincia'] = $nameProvincia;
+                $con = Connection::getInstance();
+                $provincia = $con->execute($query, $params);
+                return (!empty($provincia)) ? $this->mapping($provincia) : false;
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+  
         }
 
     }

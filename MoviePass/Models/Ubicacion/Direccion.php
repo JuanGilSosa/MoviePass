@@ -12,10 +12,10 @@
 
         public function __construct($id="", $calle = "", $numero = "", $piso = "", $ciudad = "")
         {
-            $this->id = $id;
+            $this->id = (int)$id;
             $this->calle = $calle;
-            $this->numero = $numero;
-            $this->piso = $piso;
+            $this->numero = (int)$numero;
+            $this->piso = (int)$piso;
             $this->ciudad = $ciudad;
         }
 
@@ -47,7 +47,7 @@
 
         public function setId($id)
         {
-            $this->id = $id;
+            $this->id = (int)$id;
         }
 
         public function setCalle($calle)
@@ -57,12 +57,12 @@
         
         public function setNumero($numero)
         {
-            $this->numero = $numero;
+            $this->numero = (int)$numero;
         }
 
         public function setPiso($piso)
         {
-            $this->piso = $piso;
+            $this->piso = (int)$piso;
         }
 
         public function setCiudad($ciudad)

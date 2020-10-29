@@ -19,7 +19,7 @@
                 $con = Connection::getInstance();
                 $query = 'SELECT * FROM paises';
                 $paises = $con->execute($query);
-                return $paises;
+                return $this->mapping($paises);
             }catch(PDOException $e){
                 throw $e;
             }
@@ -52,18 +52,28 @@
         }
 
         public function GetById($idPais){
-            
             try {
                 $query = 'SELECT * FROM paises WHERE idPais = :idPais';
                 $con = Connection::getInstance();
                 $params['idPais'] = $idPais;
                 
                 $pais = $con->execute($query,$params);
-                var_dump($pais);
                 return (!empty($pais)) ? $this->mapping($pais) : false;
             } catch (PDOException $e) {
                 echo "<script>console.log('".$e->getMessage()."');</script>";
             }           
+        }
+
+        public function GetByName($namePais){
+            try {
+                $query = 'SELECT * FROM paises WHERE namePais = :namePais';
+                $params['namePais'] = $namePais;
+                $con = Connection::getInstance();
+                $pais = $con->execute($query, $params);
+                return (!empty($pais)) ? $this->mapping($pais) : false;
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
         }
 
     }

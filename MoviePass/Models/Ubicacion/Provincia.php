@@ -10,7 +10,7 @@
 
         public function __construct($id = "", $nameProvincia = "", $pais = "")
         {
-            $this->id = $id;
+            $this->id = (int)$id;
             $this->nameProvincia = $nameProvincia;
             $this->pais = $pais;
         }       
@@ -28,7 +28,7 @@
         }
 
         public function setId($id) {
-            $this->id = $id;
+            $this->id = (int)$id;
         }
 
         public function setNameProvincia ($nameProvincia){

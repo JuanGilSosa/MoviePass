@@ -31,7 +31,7 @@
 				$this->pdoStatement->execute();
 				
 				return $this->pdoStatement->rowCount(); #esto nos devuelve la cantidad de registros afectados
-			}catch(Exception $e){
+			}catch(PDOException $e){
 				throw $e;
 			}
 		}
@@ -39,13 +39,14 @@
 		public function execute($query, $param = array()){
 			try{
 				$this->pdoStatement = $this->pdo->prepare($query);
+
 				foreach($param as $paramName => $value){
 					$this->pdoStatement->bindParam(":".$paramName, $value);
 				}
 				$this->pdoStatement->execute();
-				#retornamos en formato de array todos los registros que tenemos de la query
+				#retornamos en formato de array asocitativo todos los registros que tenemos de la query
 				return $this->pdoStatement->fetchAll();
-			}catch(Exception $e){
+			}catch(PDOException $e){
 				throw $e;
 			}
 		}

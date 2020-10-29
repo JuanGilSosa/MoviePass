@@ -94,12 +94,14 @@
                     $existeTelefono = $this->cineDAO->FindCineByTelefono($numeroDeContacto);
 
                     if(!$existeTelefono)
-                    {                        
+                    {                  
+                           
                         $direccion = $this->direccionDAO->CreateDireccion($calle, $numero, $piso, $ciudad, $codigoPostal, $idPais, $idProvincia);
-                   
+
                         if(!is_string($direccion)){
+
                             $existeDireccion = $this->direccionDAO->FindDireccion($direccion);
-                        
+                            
                             if(!$existeDireccion)
                             {
                                 //var_dump($direccion);

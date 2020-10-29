@@ -132,7 +132,7 @@
                                                   $idProvincia = $provincia->getId();
                                                   
                                                   ?>
-                                                  <option value="<#?php echo $idProvincia;?>"><?php echo $nameProvincia;?></option>
+                                                  <option value="<?php echo $idProvincia;?>"><?php echo $nameProvincia;?></option>
                                              <?php 
                                              }
                                              ?>

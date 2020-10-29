@@ -30,6 +30,7 @@
                 throw $e;
             }
         }
+
         function Add($ciudad){
             try {
                 $con = Connection::getInstance();
@@ -44,14 +45,14 @@
                 throw $e;
             }
         }
+        
         function Delete($idObjeto){}
         function Update($objeto){}
         
         function mapping($value){
             $value = is_array($value) ? $value : [];
             $resp = array_map(function($p){
-                $ciudad = new Ciudad($p['codigoPostal'],$p['nameCiudad'],$p['provincia']);
-                return $ciudad;
+                return new Ciudad((int)$p['codigoPostal'],$p['nameCiudad'],(int)$p['idProvincia']);
             },$value);
             return count($resp)>1 ? $resp : reset($resp);
         }
@@ -59,10 +60,11 @@
         public function GetByCodigoPostal($codigoPostal){
             try {
                 $query = 'SELECT * FROM ciudades as c 
-                            WHERE p.codigoPostal =='.$codigoPostal.';';
+                            WHERE c.codigoPostal = :codigoPostal';
                 $con = Connection::getInstance();
-                $ciudad = $con->execute($query);
-                return ((is_array($ciudad))&&(!empty($ciudad))) ? reset($ciudad) : false;
+                $params['codigoPostal'] = $codigoPostal;
+                $ciudad = $con->execute($query, $params);
+                return (!empty($ciudad)) ? $this->mapping($ciudad) : false;
             } catch (PDOException $e) {
                 echo "<script>console.log('".$e->getMessage()."');</script>";
             }    
