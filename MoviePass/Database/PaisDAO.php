@@ -3,22 +3,17 @@
     use Models\Ubicacion\Pais as Pais;
 
     class PaisDAO implements IDAO{
-
+/*
         public function __construct(){
             try{
                 $con = Connection::getInstance();
-                $query = 'CREATE TABLE IF NOT EXISTS 
-                            paises(
-                                idPais INT NOT NULL AUTO_INCREMENT, 
-                                namePais VARCHAR(30),  
-                                CONSTRAINT pk_idPais PRIMARY KEY(idPais),
-                            );';
+                $query = 'CREATE TABLE IF NOT EXISTS paises(idPais INT NOT NULL AUTO_INCREMENT, namePais VARCHAR(30), CONSTRAINT pk_idPais PRIMARY KEY(idPais));';
                 $con->executeNonQuery($query);
             }catch(PDOException $e){
                 echo "<script>console.log('".$e->getMessage()."');</script>";
             }
         }
-
+*/
         function GetAll(){
             try{
                 $con = Connection::getInstance();
@@ -53,16 +48,22 @@
             $return = array_map(function($p){
                 return new Pais($p['idPais'], $p['namePais']);
             },$value);
+            return count($return)>1 ? $return : $return[0];
         }
 
         public function GetById($idPais){
-            $paises = $this->GetAll();
-            foreach($paises as $pais){
-                if ($pais->getId() == $idPais){
-                    return $pais;
-                }
-            }
-            return false;            
+            
+            try {
+                $query = 'SELECT * FROM paises WHERE idPais = :idPais';
+                $con = Connection::getInstance();
+                $params['idPais'] = $idPais;
+                
+                $pais = $con->execute($query,$params);
+                var_dump($pais);
+                return (!empty($pais)) ? $this->mapping($pais) : false;
+            } catch (PDOException $e) {
+                echo "<script>console.log('".$e->getMessage()."');</script>";
+            }           
         }
 
     }

@@ -3,7 +3,7 @@
     use Models\Cine\Cine as Cine;
 
     class CineDAO implements IDAO{
-
+/*
         public function __construct(){
             try{
                 $con = Connection::getInstance();
@@ -24,14 +24,13 @@
                 echo "<script>console.log('".$e->getMessage()."');</script>";
             }
         }
-
+*/
         public function GetAll(){
             try{
                 $con = Connection::getInstance();
                 $query = 'SELECT * FROM cines';
-                $query1 = 'SELECT * FROM salas';
-                $query2 = 'SELECT * FROM salaXcine';
                 $array = $con->execute($query);
+                #echo "<script>console.log('CINE: ".empty($array)."');</script>";
                 return (!empty($array)) ? $this->mapping($array) : false;
             }catch(PDOException $e){
                 echo $e->getMessage();
@@ -66,6 +65,7 @@
                 );
                 return $cine;
             },$value);
+            return count($resp)>1 ? $resp : reset($resp);
         }
 
         public function GetAllActive(){
@@ -92,10 +92,13 @@
 
         public function FindCineByName ($name){
             $cines = $this->GetAll();
+            #echo "<script>console.log('CINE: ".print_r($cines)."');</script>";
             $micine = null;
-            foreach ($cines as $cine){
-                if($cine->getNombre() == $name){
-                    return $cine;
+            if(!empty($cines)){
+                foreach ($cines as $cine){
+                    if($cine->getNombre() == $name){
+                        $micine = $cine;
+                    }
                 }
             }
             return $micine;
@@ -104,9 +107,11 @@
         public function FindCineByEmail ($email){
             $cines = $this->GetAll();
             $micine = null;
-            foreach ($cines as $cine){
-                if($cine->getEmail() == $email){
-                    return $cine;
+            if(!empty($cines)){
+                foreach ($cines as $cine){
+                    if($cine->getEmail() == $email){
+                        $micine = $cine;
+                    }
                 }
             }
             return $micine;
@@ -115,9 +120,11 @@
         public function FindCineByTelefono ($telefono){
             $cines = $this->GetAll();
             $micine = null;
-            foreach ($cines as $cine){
-                if($cine->getNumeroDeContacto() == $telefono){
-                    return $cine;
+            if(!empty($cines)){
+                foreach ($cines as $cine){
+                    if($cine->getNumeroDeContacto() == $telefono){
+                        $micine = $cine;
+                    }
                 }
             }
             return $micine;

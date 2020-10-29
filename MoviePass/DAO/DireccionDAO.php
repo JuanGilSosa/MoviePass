@@ -162,10 +162,10 @@
             $ciudadDAO = new CiudadDAO();
 
             if($ciudadDAO->GetByCodigoPostal($ciudad->getCodigoPostal())) {
-                #$provincia = $ciudad->getProvincia();
-                #$provinciaDAO = new ProvinciaDAO();
+                $provincia = $ciudad->getProvincia();
+                $provinciaDAO = new ProvinciaDAO();
 
-                #if($provinciaDAO->GetByName($provincia->getNameProvincia())){
+                if($provinciaDAO->GetByName($provincia->getNameProvincia())){
                     $pais = $provincia->getPais();
                     $paisDAO = new PaisDAO();
 
@@ -184,7 +184,7 @@
                         }
                     }
 
-                #}
+                }
 
             }
 

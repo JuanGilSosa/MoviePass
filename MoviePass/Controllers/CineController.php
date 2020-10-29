@@ -2,15 +2,20 @@
     namespace Controllers;
 
     use Models\Cine\Cine as Cine;
-
-    #use DAO\CineDAO as CineDAO;
-    use Database\CineDAO as CineDAO;
-
+/*
+    use DAO\CineDAO as CineDAO;
     use DAO\DireccionDAO as DireccionDAO;
     use DAO\CiudadDAO as CiudadDAO;
     use DAO\ProvinciaDAO as ProvinciaDAO;
     use DAO\PaisDAO as PaisDAO;
     use DAO\SalaDAO as SalaDAO;
+*/
+    use Database\CineDAO as CineDAO;
+    use Database\DireccionDAO as DireccionDAO;
+    use Database\CiudadDAO as CiudadDAO;
+    use Database\ProvinciaDAO as ProvinciaDAO;
+    use Database\PaisDAO as PaisDAO;
+    use Database\SalaDAO as SalaDAO;
 
     use Models\Ubicacion\Direccion as Direccion;
     use Models\Ubicacion\Ciudad as Ciudad;
@@ -72,62 +77,7 @@
             $cines = $this->cineDAO->GetAll();
             ViewsController::ShowCartelera();
         }
-/*
-        public function Add(
-            $nombre, $email, $numeroDeContacto,
-            $calle, $numero, $piso,
-            $ciudad, $codigoPostal, $pais, $provincia)
-        {
-            $message = "";
-            $existeCine = $this->cineDAO->FindCineByName($nombre);
 
-            if(!$existeCine)
-            {
-                $existeEmail = $this->cineDAO->FindCineByEmail($email);
-                if(!$existeEmail)
-                {
-                    $existeTelefono = $this->cineDAO->FindCineByTelefono($numeroDeContacto);
-
-                    if(!$existeTelefono)
-                    {
-                        $direccion = new Direccion($calle, $numero, $piso, $codigoPostal);
-                        $existeDireccion = $this->direccionDAO->FindDireccion($direccion);
-                        if(!$existeDireccion)
-                        {
-                            $existeCodigoPostal = $this->ciudadDAO->GetByCodigoPostal($direccion->getCodigoPostal());
-                            if(isset($existeCodigoPostal) && $existeCodigoPostal->getCodigoPostal() == $codigoPostal
-                                                          && $existeCodigoPostal->getIdProvincia() == $provincia
-                                                          && $existeCodigoPostal->getIdPais() == $pais)
-                            { 
-                                $this->direccionDAO->Add($direccion);
-                                $dirWithId = $this->direccionDAO->FindDireccion($direccion);
-                                $cine = new Cine($nombre, $email, $numeroDeContacto,$dirWithId->getId());
-                                $this->cineDAO->Add($cine);
-                                //ACA SE GUARDARIA EN TABLA CINESxLOCALIDADxDIRECCION? 
-                                $message = "Cine agregado con éxito.";
-                                ViewsController::ShowCinesList($message);
-                            }else{                      // Codigo Postal incorrecto
-                                $message = "El código postal ingresado NO se encuentra registrado" ;
-                                ViewsController::ShowAddCineView($message);
-                            }
-                        }else{                          // Direccion repetida
-                            $message = "La direccón ingresada ya se encuentra registrada.";
-                            ViewsController::ShowAddCineView($message);
-                        }
-                    }else{                              // Telefono repetido
-                        $message = "El teléfono/celular ingresado ya se encuentra registrado.";
-                        ViewsController::ShowAddCineView($message);
-                    }
-                }else{                                  // Email repetido
-                    $message = "El email ingresado ya se encuentra registrado.";
-                    ViewsController::ShowAddCineView($message);
-                }
-            }else{                                      // Nombre repetido
-                $message = "El nombre ingresado ya se encuentra registrado.";
-                ViewsController::ShowAddCineView($message);
-            }
-        }
-*/
         public function Add(
             $nombre, $email, $numeroDeContacto,
             $calle, $numero, $piso,

@@ -3,7 +3,7 @@
     use Models\Ubicacion\Ciudad as Ciudad;
 
     class CiudadDAO implements IDAO{
-
+/*
         public function __construct(){
             try{
                 $con = Connection::getInstance();
@@ -19,7 +19,7 @@
                 echo "<script>console.log('".$e->getMessage()."');</script>";
             }
         }
-
+*/
         function GetAll(){
             try{
                 $con = Connection::getInstance();
@@ -53,17 +53,19 @@
                 $ciudad = new Ciudad($p['codigoPostal'],$p['nameCiudad'],$p['provincia']);
                 return $ciudad;
             },$value);
-            return $resp;
+            return count($resp)>1 ? $resp : reset($resp);
         }
 
         public function GetByCodigoPostal($codigoPostal){
-            $ciudades = $this->GetAll();
-            foreach($ciudades as $ciudad){                
-                if ($ciudad->getCodigoPostal() == $codigoPostal){
-                    return $ciudad; 
-                }
-            }
-            return false;
+            try {
+                $query = 'SELECT * FROM ciudades as c 
+                            WHERE p.codigoPostal =='.$codigoPostal.';';
+                $con = Connection::getInstance();
+                $ciudad = $con->execute($query);
+                return ((is_array($ciudad))&&(!empty($ciudad))) ? reset($ciudad) : false;
+            } catch (PDOException $e) {
+                echo "<script>console.log('".$e->getMessage()."');</script>";
+            }    
         }
     }
 

@@ -4,7 +4,7 @@
     use Models\Cine\Sala as Sala;
 
     class SalaDAO implements IDAO{
-
+/*
         public function __construct(){
             try{
                 $con = Connection::getInstance();
@@ -22,7 +22,7 @@
                 echo "<script>console.log('".$e->getMessage()."');</script>";
             }
         }
-
+*/
         public function Add($sala){
             try{
                 $con = Connection::getInstance();

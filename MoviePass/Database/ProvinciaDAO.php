@@ -3,7 +3,7 @@
     use Models\Ubicacion\Provincia as Provincia;
 
     class ProvinciaDAO implements IDAO{
-
+/*
         public function __construct(){
             try {
                 $con  = Connection::getInstance();
@@ -18,7 +18,7 @@
                 echo "<script>console.log('".$e->getMessage()."');</script>";
             }
         }
-
+*/
         function GetAll(){
             try{
                 $con = Connection::getInstance();
@@ -41,17 +41,19 @@
                     $p['id'],$p['nameProvincia'],$p['pais']);
                 return $dir;
             },$value);
-            return $resp;
+            return count($resp)>1 ? $resp : reset($resp);
         }
 
         public function GetById($idProvincia){
-            $provincias = $this->GetAll();
-            foreach($provincias as $provincia){
-                if ($provincia->getId() == $idProvincia){
-                    return $provincia;
-                }
-            }
-            return false;
+            try {
+                $query = 'SELECT * FROM provincias as p 
+                            WHERE p.idProvincia =='.$idProvincia.';';
+                $con = Connection::getInstance();
+                $provincia = $con->execute($query);
+                return ((is_array($provincia))&&(!empty($provincia))) ? reset($provincia) : false;
+            } catch (PDOException $e) {
+                echo "<script>console.log('".$e->getMessage()."');</script>";
+            }     
         }
 
     }

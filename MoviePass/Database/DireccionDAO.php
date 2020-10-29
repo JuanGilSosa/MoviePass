@@ -6,7 +6,7 @@
     use Models\Ubicacion\Pais as Pais;
 
     class DireccionDAO implements IDAO{
-
+/*
         public function __construct(){
             try{
                 $con = Connection::getInstance();
@@ -24,7 +24,7 @@
                 echo "<script>console.log('".$e->getMessage()."');</script>";
             }
         }
-
+*/
         function GetAll(){
             try{
                 $con = Connection::getInstance();
@@ -61,11 +61,10 @@
                     $p['id'],$p['calle'],$p['numero'],$p['piso']);
                 return $dir;
             },$value);
-            return $resp;
+            return count($resp)>1 ? $resp : reset($resp);
         }
 
         public function CreateDireccion($calle, $numero, $piso, $idCiudad, $codigoPostal, $idPais, $idProvincia){
-
             $paisDAO = new PaisDAO();
             $pais = $paisDAO->GetById($idPais);
 
@@ -76,7 +75,7 @@
             
                 if($provincia != false){
                     $ciudadDAO = new CiudadDAO();
-                    $ciudad = $ciudadDAO->GetByCodigoPostal($idCiudad);
+                    $ciudad = $ciudadDAO->GetByCodigoPostal($codigoPostal);
 
                     if($ciudad != false && $ciudad->getCodigoPostal() == $codigoPostal){
                         $direccion = new Direccion(0, $calle, $numero, $piso, $ciudad);
@@ -93,6 +92,52 @@
                 return ("No encontramos el pais en nuestra base de datos");
             }
 
+        }
+        public function FindDireccion($objDireccion){
+
+            $ciudad = $objDireccion->getCiudad();
+            $ciudadDAO = new CiudadDAO();
+
+            if($ciudadDAO->GetByCodigoPostal($ciudad->getCodigoPostal())){
+
+                $provincia = $ciudad->getProvincia();
+                $provinciaDAO = new ProvinciaDAO();
+
+                if($provinciaDAO->GetByName($provincia->getNameProvincia())){
+
+                    $pais = $provincia->getPais();
+                    $paisDAO = new PaisDAO();
+
+                    if($paisDAO->GetByName($pais->getNamePais())){
+
+                        $direccionesPorCodigoPostal = $this->GetAllByCodigoPostal($ciudad->getCodigoPostal());
+
+                        foreach($direccionesPorCodigoPostal as $direccion){
+                            if (
+                                $direccion->getCalle() == $direccionIngresada->getCalle() && 
+                                $direccion->getNumero() == $direccionIngresada->getNumero() &&
+                                $direccion->getPiso() == $direccionIngresada->getPiso()
+                            ){
+                                return $direccion;
+                            }
+                        }
+                    }
+
+                }
+
+            }
+            return false;
+        }
+
+        public function GetAllByCodigoPostal($codigoPostal){
+            $direcciones = $this->GetAll();
+            $direccionesPorCodigoPostal = array();
+            foreach($direcciones as $direccion){
+                $ciudad = $direccion->getCiudad();
+                if ($ciudad->getCodigoPostal() == $codigoPostal)
+                    array_push($direccionesPorCodigoPostal, $direccion);
+            }
+            return $direccionesPorCodigoPostal;
         }
     }
 ?>

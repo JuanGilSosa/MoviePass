@@ -1,5 +1,6 @@
 <?php namespace Database;
     class FuncionesDAO implements IDAO{
+        /*
         public function __costruct(){
             try{
                 $con = Connection::getInstance();
@@ -15,6 +16,6 @@
             }catch(PDOException $e){
                 echo "<script>console.log('".$e->getMessage()."');</script>";
             }
-        }
+        }*/
     }
 ?>

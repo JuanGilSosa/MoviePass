@@ -66,7 +66,7 @@
                 $member->setId($p['id']);
                 return $member;
             },$value);
-            return $resp;
+            return count($resp)>1 ? $resp : reset($resp);
         }
     }
 ?>
