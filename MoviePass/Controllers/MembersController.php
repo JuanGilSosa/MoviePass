@@ -3,7 +3,8 @@
     namespace Controllers;
 
     use DAO\AdminDAO as AdminDAO;
-    use DAO\MemberDAO as MemberDAO; #aca se cambia DAO\MemberDAO por Database\MemberDAO y funciona todo tal cual
+    #use DAO\MemberDAO as MemberDAO; #aca se cambia DAO\MemberDAO por Database\MemberDAO y funciona todo tal cual
+    use Database\MemberDAO as MemberDAO;
     use Models\Users\Member as Member;
     use Models\Users\Admin as Admin;
 

@@ -8,7 +8,7 @@
         private $namePais;
 
         public function __construct ($id="", $namePais = ""){
-            $this->id = $id;
+            $this->id = (int)$id;
             $this->namePais = $namePais;
         }        
 
@@ -21,7 +21,7 @@
         }
 
         public function setId($id) {
-            $this->id = $id;
+            $this->id = (int)$id;
         }
 
         public function setNamePais($namePais){

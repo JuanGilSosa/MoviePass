@@ -43,7 +43,9 @@ require_once('nav.php');
                                    //var_dump($cine);
                                    $name = $cine->getNombre();
                                    $direccion = $cine->getDireccion();
-                                   $ciudad = $direccion->getCiudad();
+                                   if(!is_string($ciudad)){
+                                        $ciudad = $direccion->getCiudad();
+                                   }
                                    $provincia = $ciudad->getProvincia();
                                    $pais = $provincia->getPais();
                          ?>

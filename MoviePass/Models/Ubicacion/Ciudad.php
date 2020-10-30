@@ -10,7 +10,7 @@
 
         public function __construct($codigoPostal = "", $nameCiudad = "", $provincia = "")
         {
-            $this->codigoPostal = $codigoPostal;
+            $this->codigoPostal = (int)$codigoPostal;
             $this->nameCiudad = $nameCiudad; 
             $this->provincia = $provincia;
         }        
@@ -29,7 +29,7 @@
 
         public function setCodigoPostal($codigoPostal)
         {
-            $this->codigoPostal = $codigoPostal;
+            $this->codigoPostal = (int)$codigoPostal;
         }
 
         public function setNameCiudad($nameCiudad){
