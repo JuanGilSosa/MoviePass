@@ -12,7 +12,7 @@
 
         public function __construct($id="", $calle = "", $numero = "", $piso = "", $ciudad = "")
         {
-            $this->id = (int)$id;
+            $this->id = $id;
             $this->calle = $calle;
             $this->numero = (int)$numero;
             $this->piso = (int)$piso;
@@ -47,7 +47,7 @@
 
         public function setId($id)
         {
-            $this->id = (int)$id;
+            $this->id = $id;
         }
 
         public function setCalle($calle)

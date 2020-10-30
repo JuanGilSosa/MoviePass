@@ -25,7 +25,7 @@
                 $con = Connection::getInstance();
                 $query = 'SELECT * FROM provincias';
                 $provincias = $con->execute($query);
-                return $provincias;
+                return (!empty($provincias)) ? $this->mapping($provincias) : false;
             }catch(PDOException $e){
                 throw $e;
             }

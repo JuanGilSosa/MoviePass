@@ -96,8 +96,8 @@
                     if(!$existeTelefono)
                     {                  
                            
-                        $direccion = $this->direccionDAO->CreateDireccion($calle, $numero, $piso, $ciudad, $codigoPostal, $idPais, $idProvincia);
-
+                        $direccion = $this->direccionDAO->CreateDireccion($calle, (int)$numero, (int)$piso, $ciudad, (int)$codigoPostal, (int)$idPais, (int)$idProvincia);
+                            
                         if(!is_string($direccion)){
 
                             $existeDireccion = $this->direccionDAO->FindDireccion($direccion);
@@ -106,8 +106,8 @@
                             {
                                 //var_dump($direccion);
                                     $this->direccionDAO->Add($direccion);
-                                    $dirWithId = $this->direccionDAO->FindDireccion($direccion);
-                                    $cine = new Cine($nombre, $email, $numeroDeContacto, $dirWithId);
+                                    $dirWithId = $this->direccionDAO->ChangeObjectById($direccion);#$this->direccionDAO->FindDireccion($direccion);
+                                    $cine = new Cine(0,$nombre, $email, $numeroDeContacto, $dirWithId);
                                     $this->cineDAO->Add($cine);
 
                                     //ACA SE GUARDARIA EN TABLA CINESxLOCALIDADxDIRECCION? 

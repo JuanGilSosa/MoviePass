@@ -77,7 +77,7 @@
                     $ciudad = $ciudadDAO->GetByCodigoPostal($codigoPostal);
                     if($ciudad != false){
                         $ciudad->setProvincia($provincia); #mesmo - cambio el id por el objeto
-                        $direccion = new Direccion(0, $calle, $numero, $piso, $ciudad);
+                        $direccion = new Direccion("0", $calle, $numero, $piso, $ciudad);
                         return $direccion;
                     }else{
                         return ("Codigo Postal equivocado, intente nuevamente.");
@@ -109,13 +109,17 @@
 
                         $direccionesPorCodigoPostal = $this->GetAllByCodigoPostal($ciudad->getCodigoPostal());
 
-                        foreach($direccionesPorCodigoPostal as $direccion){
-                            if (
-                                ($direccion->getCalle() == $objDireccion->getCalle()) && 
-                                ($direccion->getNumero() == $objDireccion->getNumero()) &&
-                                ($direccion->getPiso() == $objDireccion->getPiso())
-                            ){
-                                return $direccion;
+                        if($direccionesPorCodigoPostal != false){
+                            foreach($direccionesPorCodigoPostal as $direccion){
+                                if (
+                                    ($direccion->getCalle() == $objDireccion->getCalle()) && 
+                                    ($direccion->getNumero() == $objDireccion->getNumero()) &&
+                                    ($direccion->getPiso() == $objDireccion->getPiso())
+                                ){
+                                    $codPostalSTR = $direccion->getCiudad()->getCodigoPostal();
+                                    $direccion->getCiudad()->setCodigoPostal((int)$codPostalSTR);
+                                    return $direccion;
+                                }
                             }
                         }
                     }
@@ -123,6 +127,16 @@
 
             }
             return false;
+        }
+
+        public function ChangeObjectById($direccion){
+            $ciudadDAO = new CiudadDAO();
+            $ciudad = $ciudadDAO->GetByCodigoPostal($direccion->getCiudad()->getCodigoPostal());
+            #var_dump($ciudad);
+            if($ciudad != false){
+                $direccion->setCiudad($ciudad);
+                return $direccion;
+            }
         }
 
         public function GetAllByCodigoPostal($codigoPostal){

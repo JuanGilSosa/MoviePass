@@ -19,7 +19,7 @@
                 $con = Connection::getInstance();
                 $query = 'SELECT * FROM paises';
                 $paises = $con->execute($query);
-                return $this->mapping($paises);
+                return (!empty($paises)) ? $this->mapping($paises) : false;
             }catch(PDOException $e){
                 throw $e;
             }

@@ -30,7 +30,6 @@
                 $con = Connection::getInstance();
                 $query = 'SELECT * FROM cines';
                 $array = $con->execute($query);
-                #echo "<script>console.log('CINE: ".empty($array)."');</script>";
                 return (!empty($array)) ? $this->mapping($array) : false;
             }catch(PDOException $e){
                 echo $e->getMessage();
@@ -41,16 +40,16 @@
             try{
                 $con = Connection::getInstance();
 
-                $query = 'INSERT INTO cines(nombre,email,numeroDeContacto,direccion,active) VALUES
-                            (:nombre,:email,:numeroDeContacto,:direccion,:active)';
+                $query = 'INSERT INTO cines(nombre,email,numeroDeContacto,idDireccion,active) VALUES
+                            (:nombre,:email,:numeroDeContacto,:idDireccion,:active)';
 
                 $params['nombre'] = $cine->getNombre();
                 $params['email'] = $cine->getEmail();
                 $params['numeroDeContacto'] = $cine->getNumeroDeContacto();
-                $params['direccion'] = $cine->getDireccion();
-                $params['salas'] = $cine->getSalas();
+                $params['idDireccion'] = $cine->getDireccion()->getId();
+                #$params['salas'] = $cine->getSalas();
                 $params['active'] = $cine->getActive();
-                
+
                 return $con->executeNonQuery($query, $params);
             }catch(PDOException $e){
                 throw $e;
@@ -61,7 +60,7 @@
             $value = is_array($value) ? $value : [];
             $resp = array_map(function($a){
                 $cine = new Cine(
-                    $a['id'],$a['nombre'],$a['email'],$a['numeroDeContacto'],$a['direccion'],$a['salas'],$a['active']
+                    $a['id'],$a['nombre'],$a['email'],$a['numeroDeContacto'],$a['idDireccion'],array(),$a['active']
                 );
                 return $cine;
             },$value);
@@ -69,65 +68,64 @@
         }
 
         public function GetAllActive(){
-            $activos = array();
-            $this->GetAll();
-            foreach($this->cines as $cine){ 
-                if($cine->getActive()){
-                    array_push($activos, $cine);
-                }
-            }
-            return $activos;
+            try {
+                $query = 'SELECT * FROM paises WHERE active = :active';
+                $con = Connection::getInstance();
+                $params['active'] = true;
+                $allActive = $con->execute($query,$params);
+                return (!empty($allActive)) ? $this->mapping($allActive) : false;
+            } catch (PDOException $e) {
+                echo "<script>console.log('".$e->getMessage()."');</script>";
+            }       
         }
 
         public function GetCineById ($cineId){
-            $cines = $this->GetAll();
-            $micine = null;
-            foreach ($cines as $cine){
-                if($cine->getId() == $cineId){
-                    return $cine;
-                }
-            }
-            return $micine;
+            try {
+                $query = 'SELECT * FROM cines WHERE cineId = :cineId';
+                $con = Connection::getInstance();
+                $params['cineId'] = $cineId;
+                
+                $cines = $con->execute($query,$params);
+                return (!empty($cines)) ? $this->mapping($cines) : false;
+            } catch (PDOException $e) {
+                echo "<script>console.log('".$e->getMessage()."');</script>";
+            }       
         }
 
         public function FindCineByName ($name){
-            $cines = $this->GetAll();
-            #echo "<script>console.log('CINE: ".print_r($cines)."');</script>";
-            $micine = null;
-            if(!empty($cines)){
-                foreach ($cines as $cine){
-                    if($cine->getNombre() == $name){
-                        $micine = $cine;
-                    }
-                }
+            try{
+                $query = 'SELECT * FROM cines WHERE nombre = :nombre';
+                $params['nombre'] = $name;
+                $con = Connection::getInstance();
+                $cines = $con->execute($query,$params);
+                return (!empty($cines)) ? $this->mapping($cines) : false;
+            }catch(PDOException $e){    
+                echo 'Excepcion en : '.$e->getMessage();
             }
-            return $micine;
         }
 
         public function FindCineByEmail ($email){
-            $cines = $this->GetAll();
-            $micine = null;
-            if(!empty($cines)){
-                foreach ($cines as $cine){
-                    if($cine->getEmail() == $email){
-                        $micine = $cine;
-                    }
-                }
+            try{
+                $query = 'SELECT * FROM cines WHERE email = :email';
+                $params['email'] = $email;
+                $con = Connection::getInstance();
+                $cines = $con->execute($query,$params);
+                return (!empty($cines)) ? $this->mapping($cines) : false;
+            }catch(PDOException $e){    
+                echo 'Excepcion en : '.$e->getMessage();
             }
-            return $micine;
         }
 
         public function FindCineByTelefono ($telefono){
-            $cines = $this->GetAll();
-            $micine = null;
-            if(!empty($cines)){
-                foreach ($cines as $cine){
-                    if($cine->getNumeroDeContacto() == $telefono){
-                        $micine = $cine;
-                    }
-                }
+            try{
+                $query = 'SELECT * FROM cines WHERE numeroDeContacto = :numeroDeContacto';
+                $params['numeroDeContacto'] = $telefono;
+                $con = Connection::getInstance();
+                $cines = $con->execute($query,$params);
+                return (!empty($cines)) ? $this->mapping($cines) : false;
+            }catch(PDOException $e){    
+                echo 'Excepcion en : '.$e->getMessage();
             }
-            return $micine;
         }
 
         public function Delete($idCine){

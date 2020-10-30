@@ -25,7 +25,7 @@
                 $con = Connection::getInstance();
                 $query = 'SELECT * FROM ciudades';
                 $paises = $con->execute($query);
-                return $paises;
+                return (!empty($paises)) ? $this->mapping($paises) : false;
             }catch(PDOException $e){
                 throw $e;
             }
