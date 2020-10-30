@@ -72,19 +72,17 @@
                               </div>
                          </div>
                     </div>
+                    
                     <div class="row justify-content-start" type="hidden">                         
-                         <input type="hidden" name="idDireccion" value="<?php echo $miCine->getDireccion()?>" class="form-control">
+                         <input type="hidden" name="idDireccion" value="<?php echo $miCine->getDireccion()?>" class="form-control">   
                     </div>
 
-                    </div>
                     <div class="row">    
-                         
                          <div class="col">
                               <div class="form-group">
                                    <button type="submit" name="button" class="btn btn-success">Modificar</button>
                               </div>
                          </div>
-
                     </div>
                     
                     

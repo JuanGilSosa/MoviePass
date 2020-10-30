@@ -67,6 +67,10 @@
 
             foreach($this->direcciones as $direccion){
                 
+                if(!is_int($idDireccion)){
+                    $idDireccion = $idDireccion->getId();
+                }
+
                 if ($direccion->getId() == $idDireccion)
                     return $direccion;
             }
