@@ -156,7 +156,6 @@
                 #$query = 'SELECT @@identity AS id';
                 $query = 'SELECT MAX(d.idDireccion) as lastID FROM direcciones as d;';
                 $id = $con->execute($query);
-                #var_dump($id);
 
                 $ID = ($id[0]['lastID'] == null) ? 1 : (int)$id[0]['lastID'];
                 

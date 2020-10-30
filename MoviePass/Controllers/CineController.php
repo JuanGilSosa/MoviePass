@@ -104,13 +104,9 @@
                             
                             if(!$existeDireccion)
                             {
-                                //var_dump($direccion);
                                     $this->direccionDAO->Add($direccion);
                                     $dirWithId = $this->direccionDAO->ChangeObjectById($direccion);#$this->direccionDAO->FindDireccion($direccion);
-                                    #echo '[LINEA 110 CineController]';
-                                    #var_dump($dirWithId);
                                     $cine = new Cine(0,$nombre, $email, (int)$numeroDeContacto, $dirWithId);
-                                    #var_dump($cine);
                                     $this->cineDAO->Add($cine);
 
                                     //ACA SE GUARDARIA EN TABLA CINESxLOCALIDADxDIRECCION? 
