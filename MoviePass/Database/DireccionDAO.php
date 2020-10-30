@@ -77,7 +77,7 @@
                     $ciudad = $ciudadDAO->GetByCodigoPostal($codigoPostal);
                     if($ciudad != false){
                         $ciudad->setProvincia($provincia); #mesmo - cambio el id por el objeto
-                        $direccion = new Direccion("0", $calle, $numero, $piso, $ciudad);
+                        $direccion = new Direccion($this->GetLastId()+1, $calle, $numero, $piso, $ciudad);
                         return $direccion;
                     }else{
                         return ("Codigo Postal equivocado, intente nuevamente.");
@@ -132,7 +132,6 @@
         public function ChangeObjectById($direccion){
             $ciudadDAO = new CiudadDAO();
             $ciudad = $ciudadDAO->GetByCodigoPostal($direccion->getCiudad()->getCodigoPostal());
-            #var_dump($ciudad);
             if($ciudad != false){
                 $direccion->setCiudad($ciudad);
                 return $direccion;
@@ -148,6 +147,19 @@
                 return (!empty($direcciones)) ? $this->mapping($direcciones) : false;
             } catch (PDOException $e) {
                 echo "<script>console.log('".$e->getMessage()."');</script>";
+            }
+        }
+        
+        private function GetLastId():?int{
+            try{
+                $con = Connection::getInstance();
+                #$query = 'SELECT @@identity AS id';
+                $query = 'SELECT MAX(d.idDireccion) as lastID FROM direcciones as d;';
+                $id = $con->execute($query);
+                $ID = (int)$id[0];
+                return (!empty($id) && $ID!=1) ? $ID : 1;
+            }catch(PDOException $e){
+                echo $e->getMessage();
             }
         }
     }

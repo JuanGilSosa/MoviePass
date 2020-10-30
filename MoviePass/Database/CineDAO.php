@@ -60,7 +60,7 @@
             $value = is_array($value) ? $value : [];
             $resp = array_map(function($a){
                 $cine = new Cine(
-                    $a['id'],$a['nombre'],$a['email'],$a['numeroDeContacto'],$a['idDireccion'],array(),$a['active']
+                    $a['idCine'],$a['nombre'],$a['email'],$a['numeroDeContacto'],$a['idDireccion'],array(),$a['active']
                 );
                 return $cine;
             },$value);
@@ -69,11 +69,15 @@
 
         public function GetAllActive(){
             try {
-                $query = 'SELECT * FROM paises WHERE active = :active';
+                $query = 'SELECT * FROM cines WHERE active = :active';
                 $con = Connection::getInstance();
-                $params['active'] = true;
+                $params['active'] = 1;
                 $allActive = $con->execute($query,$params);
-                return (!empty($allActive)) ? $this->mapping($allActive) : false;
+
+                echo 'CINE DAO LINE 76 -> <br>';
+                var_dump($this->mapping($allActive));
+                
+                return (!empty($allActive)) ? $this->mapping($allActive) : array();
             } catch (PDOException $e) {
                 echo "<script>console.log('".$e->getMessage()."');</script>";
             }       

@@ -57,7 +57,7 @@
             if(SessionController::HayUsuario('adminLogged')){
                 $cineDAO = new CineDAO();
                 $cines = $cineDAO->GetAllActive();
-            
+                
                 require_once(VIEWS_PATH."cinesList.php");
             } else {
                ViewsController::ShowLogIn();
