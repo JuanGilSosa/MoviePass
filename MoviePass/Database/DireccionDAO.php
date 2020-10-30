@@ -77,7 +77,7 @@
                     $ciudad = $ciudadDAO->GetByCodigoPostal($codigoPostal);
                     if($ciudad != false){
                         $ciudad->setProvincia($provincia); #mesmo - cambio el id por el objeto
-                        $direccion = new Direccion($this->GetLastId()+1, $calle, $numero, $piso, $ciudad);
+                        $direccion = new Direccion($this->GetLastId(), $calle, $numero, $piso, $ciudad);
                         return $direccion;
                     }else{
                         return ("Codigo Postal equivocado, intente nuevamente.");
@@ -156,11 +156,16 @@
                 #$query = 'SELECT @@identity AS id';
                 $query = 'SELECT MAX(d.idDireccion) as lastID FROM direcciones as d;';
                 $id = $con->execute($query);
-                $ID = (int)$id[0];
-                return (!empty($id) && $ID!=1) ? $ID : 1;
+                #var_dump($id);
+
+                $ID = ($id[0]['lastID'] == null) ? 1 : (int)$id[0]['lastID'];
+                
+                return ($con->rowsOfTable('direcciones') > 0) ? $ID+1 : 1;
             }catch(PDOException $e){
                 echo $e->getMessage();
             }
         }
+
+    
     }
 ?>

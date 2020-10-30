@@ -72,11 +72,7 @@
                 $query = 'SELECT * FROM cines WHERE active = :active';
                 $con = Connection::getInstance();
                 $params['active'] = 1;
-                $allActive = $con->execute($query,$params);
-
-                echo 'CINE DAO LINE 76 -> <br>';
-                var_dump($this->mapping($allActive));
-                
+                $allActive = $con->execute($query,$params); 
                 return (!empty($allActive)) ? $this->mapping($allActive) : array();
             } catch (PDOException $e) {
                 echo "<script>console.log('".$e->getMessage()."');</script>";

@@ -50,5 +50,12 @@
 				throw $e;
 			}
 		}
+
+		public function rowsOfTable($tableName){
+			$query = "SELECT COUNT(*) total FROM ".$tableName;
+			$result = $this->pdo->query($query);
+			$total = $result->fetchColumn(); #supongo que retorna la cantidad de columnas
+			return $total;
+		}
 	}
 ?>

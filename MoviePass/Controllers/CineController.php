@@ -81,8 +81,8 @@
         public function Add(
             $nombre, $email, $numeroDeContacto,
             $calle, $numero, $piso,
-            $ciudad, $codigoPostal, $idProvincia, $idPais)
-        {
+            $ciudad, $codigoPostal, $idProvincia, $idPais
+        ){
             $message = "";
             $existeCine = $this->cineDAO->FindCineByName($nombre);
 
@@ -107,7 +107,10 @@
                                 //var_dump($direccion);
                                     $this->direccionDAO->Add($direccion);
                                     $dirWithId = $this->direccionDAO->ChangeObjectById($direccion);#$this->direccionDAO->FindDireccion($direccion);
-                                    $cine = new Cine(0,$nombre, $email, $numeroDeContacto, $dirWithId);
+                                    #echo '[LINEA 110 CineController]';
+                                    #var_dump($dirWithId);
+                                    $cine = new Cine(0,$nombre, $email, (int)$numeroDeContacto, $dirWithId);
+                                    #var_dump($cine);
                                     $this->cineDAO->Add($cine);
 
                                     //ACA SE GUARDARIA EN TABLA CINESxLOCALIDADxDIRECCION? 
