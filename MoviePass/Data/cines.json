@@ -1,7 +1,7 @@
 [
     {
-        "id": 1,
-        "nombre": "Finema Shopping Mdp",
+        "id": "1",
+        "nombre": "Finema ShoppingMdp",
         "email": "FinemaShopping@gmail.com",
         "numeroDeContacto": "1111111",
         "direccion": 1,
