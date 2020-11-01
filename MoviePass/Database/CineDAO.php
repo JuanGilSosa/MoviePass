@@ -1,6 +1,8 @@
 <?php namespace Database;
 
     use Models\Cine\Cine as Cine;
+    use Models\Ubicacion\Direccion as Direccion;
+    use Database\DireccionDAO as DireccionDAO;
 
     class CineDAO implements IDAO{
 /*
@@ -60,8 +62,10 @@
             $value = is_array($value) ? $value : [];
             $resp = array_map(function($a){
                 $cine = new Cine(
-                    $a['idCine'],$a['nombre'],$a['email'],$a['numeroDeContacto'],$a['idDireccion'],array(),$a['active']
-                );
+                    #$a['idCine'],
+                    $a['nombre'],$a['email'],$a['numeroDeContacto'],
+                    $a['idDireccion'],array(),$a['active']
+                );                
                 return $cine;
             },$value);
             return count($resp)>1 ? $resp : reset($resp);
@@ -136,7 +140,7 @@
         }
 
  
-
+        
 
 
     }

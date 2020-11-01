@@ -64,7 +64,7 @@
                 $con = Connection::getInstance();
                 $params['codigoPostal'] = $codigoPostal;
                 $ciudad = $con->execute($query, $params);
-                return (!empty($ciudad)) ? $this->mapping($ciudad) : false;
+                return (!empty($ciudad)) ? $this->mapping($ciudad) : array();
             } catch (PDOException $e) {
                 echo "<script>console.log('".$e->getMessage()."');</script>";
             }    

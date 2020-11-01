@@ -132,6 +132,7 @@
         public function ChangeObjectById($direccion){
             $ciudadDAO = new CiudadDAO();
             $ciudad = $ciudadDAO->GetByCodigoPostal($direccion->getCiudad()->getCodigoPostal());
+            
             if($ciudad != false){
                 $direccion->setCiudad($ciudad);
                 return $direccion;
@@ -162,6 +163,18 @@
                 return ($con->rowsOfTable('direcciones') > 0) ? $ID+1 : 1;
             }catch(PDOException $e){
                 echo $e->getMessage();
+            }
+        }
+
+        public function GetDireccionById($idDireccion){
+            try {
+                $query = 'SELECT * FROM direcciones WHERE idDireccion = :idDireccion';
+                $params['idDireccion'] = $idDireccion;
+                $con = Connection::getInstance();
+                $direccion = $con->execute($query,$params);
+                return (!empty($direccion)) ? $this->mapping($direccion) : array();
+            } catch (PDOException $e) {
+                echo "<script>console.log('".$e->getMessage()."');</script>";
             }
         }
 

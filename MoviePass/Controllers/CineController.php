@@ -54,7 +54,16 @@
 
         public function ListViewCine($message = ""){
             if(SessionController::HayUsuario('adminLogged')){
-                ViewsController::ShowCinesList();
+                $cines = $this->cineDAO->GetAllActive();
+                $cineConObjeto;
+                $cinesConObjetos = array();
+                foreach($cines as $cine)
+                {
+                    $cineConObjeto = $this->CreateCine($cine);
+                    array_push($cinesConObjetos, $cineConObjeto);
+                }
+                ViewsController::ShowCinesList($cinesConObjetos);
+
             }else{
                 ViewsController::ShowLogIn();
             }
@@ -255,6 +264,24 @@
                 }
             }
             return $existe; 
+        }
+
+        public function CreateCine ($cineMapeado){
+            
+            // Busco objetoDireccion y lo seteo
+            $objDireccion = $this->direccionDAO->GetDireccionById($cineMapeado->getDireccion());
+            $cineMapeado->setDireccion($objDireccion);
+            // Busco la ciudad y la seteo en la direccion del cine mapeado
+            $objCiudad = $this->ciudadDAO->GetByCodigoPostal($objDireccion->getCiudad());
+            $cineMapeado->getDireccion()->setCiudad($objCiudad);
+            // Busco la provincia y la seteo en la ciudad del cine seteado
+            $objProvincia = $this->provinciaDAO->GetById($objCiudad->getProvincia());
+            $cineMapeado->getDireccion()->getCiudad()->setProvincia($objProvincia);
+            // Busco el pais y lo seteo en la provincia del cine seteado
+            $objPais = $this->paisDAO->GetById($objProvincia->getPais());
+            $cineMapeado->getDireccion()->getCiudad()->getProvincia()->setPais($objPais);
+
+            return $cineMapeado;
         }
 
     }

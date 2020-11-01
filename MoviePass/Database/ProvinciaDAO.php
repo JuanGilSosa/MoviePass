@@ -51,7 +51,7 @@
                 $con = Connection::getInstance();
                 $params['idProvincia'] = $idProvincia;
                 $provincia = $con->execute($query,$params);
-                return (!empty($provincia)) ? $this->mapping($provincia) : false;
+                return (!empty($provincia)) ? $this->mapping($provincia) : array();
             } catch (PDOException $e) {
                 echo "<script>console.log('".$e->getMessage()."');</script>";
             }     

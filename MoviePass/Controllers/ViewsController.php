@@ -52,12 +52,9 @@
             require_once(VIEWS_PATH."addCine.php");	         
         }
 
-        public static function ShowCinesList($message = "")
+        public static function ShowCinesList($cines, $message = "")
         {
             if(SessionController::HayUsuario('adminLogged')){
-                $cineDAO = new CineDAO();
-                $cines = $cineDAO->GetAllActive();
-                
                 require_once(VIEWS_PATH."cinesList.php");
             } else {
                ViewsController::ShowLogIn();
