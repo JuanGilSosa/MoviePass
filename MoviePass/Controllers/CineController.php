@@ -184,7 +184,7 @@
         public function Delete($idCine){
             $this->cineDAO->Delete($idCine);
             $message = "Cine eliminado con éxito";
-            ViewsController::ShowCinesList($message);
+            $this->ListViewCine($message);
         }
 
         //Sin testear - solo testeado logicamente
@@ -229,16 +229,6 @@
                     #Es porque la sala existe 
                 }
             }
-            /*
-            $salas = $this->salaDAO->getAll();
-            foreach($salas as $sala){
-                if(strcasecmp($sala->getNombre, $nombre) == 0){
-                    echo '<script>alert("sala con ese nombre ya existe");</script>';
-                    ViewsController::ShowAddSala();
-                }
-            }
-            */
-            
         }
 
         public function get_salaXcine(){
@@ -267,7 +257,6 @@
         }
 
         public function CreateCine ($cineMapeado){
-            
             // Busco objetoDireccion y lo seteo
             $objDireccion = $this->direccionDAO->GetDireccionById($cineMapeado->getDireccion());
             $cineMapeado->setDireccion($objDireccion);

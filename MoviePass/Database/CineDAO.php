@@ -62,7 +62,7 @@
             $value = is_array($value) ? $value : [];
             $resp = array_map(function($a){
                 $cine = new Cine(
-                    #$a['idCine'],
+                    $a['idCine'],
                     $a['nombre'],$a['email'],$a['numeroDeContacto'],
                     $a['idDireccion'],array(),$a['active']
                 );                
@@ -83,14 +83,14 @@
             }       
         }
 
-        public function GetCineById ($cineId){
+        public function GetCineById ($idCine){
             try {
-                $query = 'SELECT * FROM cines WHERE cineId = :cineId';
+                $query = 'SELECT * FROM cines WHERE idCine = :idCine';
                 $con = Connection::getInstance();
-                $params['cineId'] = $cineId;
+                $params['idCine'] = $idCine;
                 
                 $cines = $con->execute($query,$params);
-                return (!empty($cines)) ? $this->mapping($cines) : false;
+                return (!empty($cines)) ? $this->mapping($cines) : array();
             } catch (PDOException $e) {
                 echo "<script>console.log('".$e->getMessage()."');</script>";
             }       
@@ -133,7 +133,19 @@
         }
 
         public function Delete($idCine){
+            try{
+                $con = Connection::getInstance();
 
+                $query = 'UPDATE cines as c SET c.active = 0 WHERE idCine = :idCine';
+                $params['idCine'] = $idCine;
+                
+                echo '<script>console.log("Delete: before con->executeNonQuery($query, $params)");</script>';
+                $con->executeNonQuery($query, $params);
+                echo '<script>console.log("Delete: after con->executeNonQuery($query, $params)");</script>';
+            
+            }catch(PDOException $e){
+                echo 'Excepcion en : '.$e->getMessage();
+            }
         }
         public function Update($cine){
             $query = 'SELECT c.idCine FROM cines as c WHERE c.idCine = '.$cine->getId().';';
