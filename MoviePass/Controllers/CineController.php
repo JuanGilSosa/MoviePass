@@ -55,14 +55,21 @@
         public function ListViewCine($message = ""){
             if(SessionController::HayUsuario('adminLogged')){
                 $cines = $this->cineDAO->GetAllActive();
-                $cineConObjeto;
                 $cinesConObjetos = array();
-                foreach($cines as $cine)
-                {
-                    $cineConObjeto = $this->CreateCine($cine);
-                    array_push($cinesConObjetos, $cineConObjeto);
+                if(is_array($cines) and count($cines) > 1){
+                    foreach($cines as $cine)
+                    {
+                        $cineConObjeto = $this->CreateCine($cine);
+                        array_push($cinesConObjetos, $cineConObjeto);
+                    }
+                    ViewsController::ShowCinesList($cinesConObjetos);
+                }else{
+                    $objCine = $this->CreateCine($cines);
+                    array_push($cinesConObjetos, $objCine);
+                    ViewsController::ShowCinesList($cinesConObjetos);
                 }
-                ViewsController::ShowCinesList($cinesConObjetos);
+
+                
 
             }else{
                 ViewsController::ShowLogIn();
@@ -121,7 +128,7 @@
                                     //ACA SE GUARDARIA EN TABLA CINESxLOCALIDADxDIRECCION? 
                                     
                                     $message = "Cine agregado con éxito.";
-                                    ViewsController::ShowCinesList($message);
+                                    $this->ListViewCine($message);
                                 
                             }else{                          // Direccion repetida
                                 $message = "La dirección ingresada ya se encuentra registrada.";

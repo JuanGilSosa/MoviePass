@@ -68,7 +68,7 @@
                 );                
                 return $cine;
             },$value);
-            return count($resp)>1 ? $resp : reset($resp);
+            return count($resp)>1 ? $resp : $resp[0];
         }
 
         public function GetAllActive(){
