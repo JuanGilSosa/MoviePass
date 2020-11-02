@@ -22,9 +22,6 @@
     use Models\Ubicacion\Provincia as Provincia;
     use Models\Ubicacion\Pais as Pais;
     use Models\Cine\Sala as Sala;
- 
-
-    use Database\Connection as Connection;
 
     class CineController
     {
@@ -56,7 +53,10 @@
             if(SessionController::HayUsuario('adminLogged')){
                 $cines = $this->cineDAO->GetAllActive();
                 $cinesConObjetos = array();
-                if(is_array($cines) and count($cines) > 1){
+                if( (is_array($cines))  and 
+                    (count($cines) > 1) and 
+                    ($cines != null)
+                ){
                     foreach($cines as $cine)
                     {
                         $cineConObjeto = $this->CreateCine($cine);
@@ -64,8 +64,10 @@
                     }
                     ViewsController::ShowCinesList($cinesConObjetos);
                 }else{
-                    $objCine = $this->CreateCine($cines);
-                    array_push($cinesConObjetos, $objCine);
+                    if($cines != null){
+                        $objCine = $this->CreateCine($cines);
+                        array_push($cinesConObjetos, $objCine);
+                    }
                     ViewsController::ShowCinesList($cinesConObjetos);
                 }
 
@@ -78,7 +80,7 @@
         
         public function ShowModify($cineId, $message = ""){
             if(SessionController::HayUsuario('adminLogged')){     
-                ViewsController::ShowModifyCine($cineId, $message);
+                ViewsController::ShowModifyCine(strval($cineId), $message);
             }else{
                 ViewsController::ShowLogIn();
             }
@@ -154,26 +156,29 @@
         }
 
         public function Update($id, $nombre, $email, $numeroDeContacto){
-            
-            $cineViejo = $this->cineDAO->getCineById($id);
+
+            $cineViejo = $this->cineDAO->GetCineById(strval($id));
             $existeNombre = $this->cineDAO->FindCineByName($nombre);
-            
-            if(!$existeNombre || $cineViejo->getNombre() == $nombre)
-                {
+
+            if( !empty($cineViejo) &&
+                strcmp($cineViejo->getNombre(), $nombre) != 0 && 
+                strcmp($cineViejo->getEmail,$email) != 0 && 
+                $cineViejo->getNumeroDeContacto() != $numeroDeContacto
+            ){
+                if(!$existeNombre || $cineViejo->getNombre() == $nombre){
+                    
                     $existeEmail = $this->cineDAO->FindCineByEmail($email);
-                    if (!$existeEmail || $cineViejo->getEmail() == $email)
-                    {
+
+                    if (!$existeEmail || $cineViejo->getEmail() == $email){
                         $existeTelefono = $this->cineDAO->FindCineByTelefono($numeroDeContacto);
                         #echo "<script>console.log('$numeroDeContacto'); </script>";
 
-                        if(!$existeTelefono || $cineViejo->getNumeroDeContacto() == $numeroDeContacto)
-                        {
-                            $cine = new Cine($nombre, $email, $numeroDeContacto, $cineViejo->getDireccion());
-                            $cine->setId($id);
+                        if(!$existeTelefono || $cineViejo->getNumeroDeContacto() == $numeroDeContacto){
+                            $cine = new Cine($cineViejo->getId(),$nombre, $email, $numeroDeContacto, $cineViejo->getDireccion());
+                            #$cine->setId($id);
                             $this->cineDAO->Update($cine);
                             $message = "Cine modificado con éxito";
-                            ViewsController::ShowCinesList($message);
-
+                            $this->ListViewCine($message);
                         }else{
                             $message = "El teléfono ingresado ya se encuentra registrado";
                             ViewsController::ShowModifyCine($id, $message);
@@ -186,6 +191,10 @@
                     $message = "El nombre ingresado ya se encuentra registrado";
                     ViewsController::ShowModifyCine($id, $message);
                 }
+            }else{
+                $this->ListViewCine();
+            }
+
         }
 
         public function Delete($idCine){

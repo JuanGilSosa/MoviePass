@@ -28,11 +28,11 @@
         public function CreateDireccion($calle, $numero, $piso, $idCiudad, $codigoPostal, $pais, $provincia){
 
             $paisDAO = new PaisDAO();
-            $pais = $paisDAO->GetById($pais);
+            $pais = $paisDAO->GetDireccionById($pais);
 
             if($pais != false){
                 $provinciaDAO = new ProvinciaDAO();
-                $provincia = $provinciaDAO->GetById($provincia);
+                $provincia = $provinciaDAO->GetDireccionById($provincia);
                 
             
                 if($provincia != false){
@@ -62,15 +62,15 @@
             return $this->direcciones;
         }
 
-        public function GetById ($idDireccion){
+        public function GetDireccionById ($idDireccion){
             $this->RetrieveData();
-
+            $idDirLocal = \strval($idDireccion);
             foreach($this->direcciones as $direccion){
-                
+                /*                
                 if(!is_int($idDireccion)){
                     $idDireccion = $idDireccion->getId();
                 }
-
+                */
                 if ($direccion->getId() == $idDireccion)
                     return $direccion;
             }

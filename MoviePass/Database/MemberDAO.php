@@ -1,6 +1,5 @@
 <?php namespace Database; 
 
-    use Database\IDAO;
     use Models\Users\Member as Member;
     use Database\Connection as Connection;
 
@@ -11,14 +10,14 @@
         {
             try{
                 $con = Connection::getInstance();
-                $query = 'INSERT INTO members(dni,email,password,firstName,lastName,idTarjetaDeCredito) VALUES(:dni, :email, :password, :firstName, :lastName, :idTarjetaDeCredito);';
+                $query = 'INSERT INTO members(dni,email,password,firstName,lastName,numeroTarjetaDeCredito) VALUES(:dni, :email, :password, :firstName, :lastName, :numeroTarjetaDeCredito);';
     
                 $params['dni'] = $member->getDni();
                 $params['email'] = $member->getEmail();
                 $params['password'] = $member->getPassword();
                 $params['firstName'] = $member->getFirstName();
                 $params['lastName'] = $member->getLastName();
-                $params['idTarjetaDeCredito'] = '0';
+                $params['numeroTarjetaDeCredito'] = $member->getNumeroTarjetaDeCredito();
                 return $con->executeNonQuery($query, $params);
             }catch(PDOException $e){
                 throw $e;
@@ -61,9 +60,9 @@
 			$value = is_array($value) ? $value : [];
 			$resp = array_map(function ($p){
                 $member = new Member(
-                    $p['dni'],$p['email'],$p['password'],$p['firstName'], $p['lastName'],$p['idTarjetaDeCredito']
+                    $p['DNI'],$p['email'],$p['password'],$p['firstName'], $p['lastName'],$p['numeroTarjetaDeCredito']
                 );
-                $member->setId($p['id']);
+                $member->setId($p['idMember']);
                 return $member;
             },$value);
             return count($resp)>1 ? $resp : reset($resp);

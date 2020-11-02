@@ -135,20 +135,26 @@
         public function Delete($idCine){
             try{
                 $con = Connection::getInstance();
-
                 $query = 'UPDATE cines as c SET c.active = 0 WHERE idCine = :idCine';
                 $params['idCine'] = $idCine;
-                
-                echo '<script>console.log("Delete: before con->executeNonQuery($query, $params)");</script>';
                 $con->executeNonQuery($query, $params);
-                echo '<script>console.log("Delete: after con->executeNonQuery($query, $params)");</script>';
             
             }catch(PDOException $e){
                 echo 'Excepcion en : '.$e->getMessage();
             }
         }
         public function Update($cine){
-            $query = 'SELECT c.idCine FROM cines as c WHERE c.idCine = '.$cine->getId().';';
+            try{
+                $query = 'UPDATE cines SET nombre = :nombre, email = :email, numeroDeContacto = :numeroDeContacto WHERE idCine = :idCine;';
+                $con = Connection::getInstance();
+                $params['idCine'] = $cine->getId();
+                $params['nombre'] = $cine->getNombre();
+                $params['email'] = $cine->getEmail();
+                $params['numeroDeContacto'] = $cine->getNumeroDeContacto();
+                $con->executeNonQuery($query, $params);
+            }catch(PDOException $e){
+                echo 'Exception en Update='.$e->getMessage();
+            }
         }
 
  
