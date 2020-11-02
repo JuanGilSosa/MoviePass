@@ -1,5 +1,7 @@
 USE moviepass;
 
+#CREACION DE TABLAS
+
 CREATE TABLE Paises(
     idPais INT NOT NULL AUTO_INCREMENT,
     namePais VARCHAR(30),
@@ -67,6 +69,18 @@ CREATE TABLE salaXfunciones(
     CONSTRAINT fk_idFuncion FOREIGN KEY(idFuncion) REFERENCES Funciones(idFuncion)
 );
 
+CREATE TABLE members(
+    idMember INT NOT NULL AUTO_INCREMENT,
+    DNI INT NOT NULL,
+    email varchar(30) NOT NULL,
+    password varchar(30) NOT NULL,
+    firstName varchar(30) NOT NULL,
+    lastName varchar(30) NOT NULL,
+    numeroTarjetaDeCredito INT,
+    CONSTRAINT pk_idMember PRIMARY KEY(idMember)
+);
+
+#########OTRAS QUERIES#########
 
 #AGREGANDO PAIES
 INSERT INTO Paises(namePais) VALUES('Argentina'),('Brasil'),('Chile'),('Uruguay');

@@ -48,7 +48,6 @@
                 $params['nombre'] = $cine->getNombre();
                 $params['email'] = $cine->getEmail();
                 $params['numeroDeContacto'] = $cine->getNumeroDeContacto();
-                var_dump($cine);
                 $params['idDireccion'] = $cine->getDireccion()->getId();
                 #$params['salas'] = $cine->getSalas();
                 $params['active'] = $cine->getActive();
