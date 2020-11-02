@@ -162,7 +162,7 @@
 
             if( !empty($cineViejo) &&
                 strcmp($cineViejo->getNombre(), $nombre) != 0 && 
-                strcmp($cineViejo->getEmail,$email) != 0 && 
+                strcmp($cineViejo->getEmail(),$email) != 0 && 
                 $cineViejo->getNumeroDeContacto() != $numeroDeContacto
             ){
                 if(!$existeNombre || $cineViejo->getNombre() == $nombre){
