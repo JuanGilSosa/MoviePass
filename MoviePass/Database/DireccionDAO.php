@@ -4,8 +4,12 @@
     use Models\Ubicacion\Ciudad as Ciudad;
     use Models\Ubicacion\Provincia as Provincia;
     use Models\Ubicacion\Pais as Pais;
+    use Database\CiudadDAO as CiudadDAO;
 
     class DireccionDAO implements IDAO{
+    
+        private $ciudadDAO;
+        
 /*
         public function __construct(){
             try{
@@ -116,8 +120,11 @@
                                     ($direccion->getNumero() == $objDireccion->getNumero()) &&
                                     ($direccion->getPiso() == $objDireccion->getPiso())
                                 ){
-                                    $codPostalSTR = $direccion->getCiudad()->getCodigoPostal();
-                                    $direccion->getCiudad()->setCodigoPostal((int)$codPostalSTR);
+                                    //var_dump($direccion);
+                                    //$codPostalSTR = $direccion->getCiudad();
+                                    $this->ciudadDAO = new CiudadDAO();
+                                    $ciudad = $this->ciudadDAO->GetByCodigoPostal($direccion->getCiudad());
+                                    $direccion->setCiudad($ciudad);
                                     return $direccion;
                                 }
                             }

@@ -48,6 +48,7 @@
                 $params['nombre'] = $cine->getNombre();
                 $params['email'] = $cine->getEmail();
                 $params['numeroDeContacto'] = $cine->getNumeroDeContacto();
+                var_dump($cine);
                 $params['idDireccion'] = $cine->getDireccion()->getId();
                 #$params['salas'] = $cine->getSalas();
                 $params['active'] = $cine->getActive();
@@ -62,7 +63,7 @@
             $value = is_array($value) ? $value : [];
             $resp = array_map(function($a){
                 $cine = new Cine(
-                    #$a['idCine'],
+                    $a['idCine'],
                     $a['nombre'],$a['email'],$a['numeroDeContacto'],
                     $a['idDireccion'],array(),$a['active']
                 );                
