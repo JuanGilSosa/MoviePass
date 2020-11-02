@@ -85,9 +85,10 @@
 
         public function GetCineById ($cineId){
             try {
-                $query = 'SELECT * FROM cines WHERE cineId = :cineId';
+                echo "Linea 88 de CineDAO: idCine: " . $cineId;
+                $query = 'SELECT * FROM cines WHERE idCine = :cineId';
                 $con = Connection::getInstance();
-                $params['cineId'] = $cineId;
+                $params['idCine'] = $cineId;
                 
                 $cines = $con->execute($query,$params);
                 return (!empty($cines)) ? $this->mapping($cines) : false;

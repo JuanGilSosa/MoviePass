@@ -96,8 +96,13 @@
         public static function ShowModifyCine($cineId, $message = "")
         {
             if(SessionController::HayUsuario('adminLogged')){
+                Echo "linea 99 ViewsContro";
                 $cineDAO = new CineDAO();
                 $miCine = $cineDAO->getCineById($cineId);
+                echo "MiCine:" ;
+                var_dump($miCine);
+
+
                 require_once(VIEWS_PATH."modifyCine.php");
             } else {
 
