@@ -15,7 +15,7 @@
 
             $member->setId($this->GetNextId());
             array_push($this->members, $member);
-            echo "Aca" . count($this->members);
+            #echo "Aca" . count($this->members);
             $bytes = $this->SaveData();
 
             return $bytes;

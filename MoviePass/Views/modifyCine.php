@@ -1,9 +1,14 @@
 <?php require_once('nav.php');
-
+     /*
      use DAO\PaisDAO as PaisDAO;
      use DAO\ProvinciaDAO as ProvinciaDAO;
      use DAO\CiudadDAO as CiudadDAO;
      use DAO\DireccionDAO as DireccionDAO;
+     */
+     use Database\PaisDAO as PaisDAO;
+     use Database\ProvinciaDAO as ProvinciaDAO;
+     use Database\CiudadDAO as CiudadDAO;
+     use Database\DireccionDAO as DireccionDAO;
 
      use Models\Ubicacion\Provincia as Provincia;
      use Models\Ubicacion\Pais as Pais;
@@ -19,7 +24,7 @@
      $ciudades = $ciudadDAO->GetAll();
 
      $direccionDAO = new DireccionDAO();
-     $direccion = $direccionDAO->GetById($miCine->getIdDireccion());
+     $direccion = $direccionDAO->GetDireccionById($miCine->getDireccion());
 
 ?>
 <main id="page-top" class="no-nav py-5">
@@ -72,19 +77,17 @@
                               </div>
                          </div>
                     </div>
+                    
                     <div class="row justify-content-start" type="hidden">                         
-                         <input type="hidden" name="idDireccion" value="<?php echo $miCine->getIdDireccion()?>" class="form-control">
+                         <input type="hidden" name="idDireccion" value="<?php echo $miCine->getDireccion()?>" class="form-control">   
                     </div>
 
-                    </div>
                     <div class="row">    
-                         
                          <div class="col">
                               <div class="form-group">
                                    <button type="submit" name="button" class="btn btn-success">Modificar</button>
                               </div>
                          </div>
-
                     </div>
                     
                     

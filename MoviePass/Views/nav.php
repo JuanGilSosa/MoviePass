@@ -34,8 +34,9 @@
       </li>
 
       <!-- Dropdown -->
-      <?php if (isset($_SESSION['userLogged']) || isset($_SESSION['adminLogged'])){ ?>
-
+      <?php #isset($_SESSION['userLogged']) 
+            if (isset($_SESSION['adminLogged'])){ ?>
+                
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">Admins</a>

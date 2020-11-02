@@ -77,7 +77,7 @@
                          <div class="col-lg-8">
                               <div class="form-group">
                                    <label for="">Ciudad</label>
-                                   <select name="ciudad" class="form-control" placeholder="Seleccione su Ciudad" required>
+                                   <select name="ciudad" class="form-control" placeholder="Seleccione su Ciudad" " required>
                                    <?php
                                              foreach ($ciudades as $ciudad)
                                              {
@@ -119,7 +119,7 @@
                                    </select>
                               </div>
                          </div>
-                         
+
                          <div class="col-lg-6">
                               <div class="form-group">
                                    <label for="">Provincia</label>

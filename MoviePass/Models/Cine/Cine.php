@@ -19,7 +19,7 @@
         public function __construct($id = "", $nombre = "", $email = "", $numeroDeContacto = "", $direccion="")
         {
             
-            $this->id = $id;
+            $this->id = strval($id);
             $this->nombre = $nombre;
             $this->email = $email;
             $this->numeroDeContacto = $numeroDeContacto;

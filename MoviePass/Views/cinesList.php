@@ -40,7 +40,6 @@ require_once('nav.php');
                          <?php
                          if (isset($cines)) {
                               foreach ($cines as $cine) {
-                                   //var_dump($cine);
                                    $name = $cine->getNombre();
                                    $direccion = $cine->getDireccion();
                                    $ciudad = $direccion->getCiudad();

@@ -24,6 +24,7 @@
         #@param valueOfSelect tiene el id del genero
         
         public function ShowMovies($valueOfSelect=""){
+            #ACA TENEMOS QUE VER SI LA LISTA DE PELICULAS SE PUEDEN VER SIN ESTAR LOGEADO O SOLAMENTE LOS ADMIN
             if(SessionController::HayUsuario('userLogged') || SessionController::HayUsuario('adminLogged')){
                 if($valueOfSelect != 0){
                     $peliculas = $this->peliculasDAO->GetMoviesByGenre($valueOfSelect);

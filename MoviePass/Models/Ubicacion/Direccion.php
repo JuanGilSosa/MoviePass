@@ -14,8 +14,8 @@
         {
             $this->id = $id;
             $this->calle = $calle;
-            $this->numero = $numero;
-            $this->piso = $piso;
+            $this->numero = (int)$numero;
+            $this->piso = (int)$piso;
             $this->ciudad = $ciudad;
         }
 
@@ -57,12 +57,12 @@
         
         public function setNumero($numero)
         {
-            $this->numero = $numero;
+            $this->numero = (int)$numero;
         }
 
         public function setPiso($piso)
         {
-            $this->piso = $piso;
+            $this->piso = (int)$piso;
         }
 
         public function setCiudad($ciudad)

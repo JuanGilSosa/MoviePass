@@ -18,7 +18,7 @@
 		}
 		/*
 			Se usa para insertar datos
-			INSERT, UPDATE, DELETE
+			INSERT, UPDATE, DELETE & CREATE
 		*/
 		public function executeNonQuery($query, $param = array()){
 			
@@ -31,7 +31,7 @@
 				$this->pdoStatement->execute();
 				
 				return $this->pdoStatement->rowCount(); #esto nos devuelve la cantidad de registros afectados
-			}catch(Exception $e){
+			}catch(PDOException $e){
 				throw $e;
 			}
 		}
@@ -39,15 +39,23 @@
 		public function execute($query, $param = array()){
 			try{
 				$this->pdoStatement = $this->pdo->prepare($query);
+
 				foreach($param as $paramName => $value){
 					$this->pdoStatement->bindParam(":".$paramName, $value);
 				}
 				$this->pdoStatement->execute();
-				#retornamos en formato de array todos los registros que tenemos de la query
+				#retornamos en formato de array asocitativo todos los registros que tenemos de la query
 				return $this->pdoStatement->fetchAll();
-			}catch(Exception $e){
+			}catch(PDOException $e){
 				throw $e;
 			}
+		}
+
+		public function rowsOfTable($tableName){
+			$query = "SELECT COUNT(*) total FROM ".$tableName;
+			$result = $this->pdo->query($query);
+			$total = $result->fetchColumn(); #supongo que retorna la cantidad de columnas
+			return $total;
 		}
 	}
 ?>
