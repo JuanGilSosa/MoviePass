@@ -157,7 +157,17 @@
                 echo 'Exception en Update='.$e->getMessage();
             }
         }
-
+        
+        public function GetCineById_SALAXCINE($idCine){
+            try{
+                $con = Connection::getInstance();
+                $query = 'SELECT c.* FROM cines as c JOIN salaxcine as sxc ON sxc.idCine = c.idCine';
+                $cine = $con->execute($query);
+                return $cine;
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
+        }
  
         
 
