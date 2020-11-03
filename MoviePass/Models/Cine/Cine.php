@@ -12,6 +12,7 @@
         private $email;
         private $numeroDeContacto;
         private $direccion; 
+        /** @var array || null */
         private $salas;
         private $cartelera;
         private $active;

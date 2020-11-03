@@ -28,7 +28,8 @@ require_once("nav.php");
                         <div class="form-group">
                             <select name="select-movies" class="form-control" onchange="this.form.submit();">
                                 <option selected="true" disabled="disabled">Seleccione Cine</option>
-                                <?php foreach ($cines as $cine) { ?>
+                                <?php foreach ($cines as $cine) { var_dump($cine);?>
+                                
                                     <option value="<?php echo $cine->getId() ?>" required><?php echo $cine->getNombre() ?></option>
                                 <?php } ?>
                             </select>
@@ -54,7 +55,19 @@ require_once("nav.php");
                     <div class="col-lg-6">
                         <label for="">Horario de funcion</label>
                         <div class="form-group">
-                            <input type="time" name="horaInicio" min="17:00" max="23:00" class="w-100" required />
+                            <input type="time" name="horaInicio" min="17:00" max="23:00" class="w-100" class="form-control" required />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="">En cartelera desde:</label>
+                            <input type="date" name="fechaInicio" class="w-100"  class="form-control" required />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="">En cartelera hasta:</label>
+                        <div class="form-group">
+                            <input type="date" name="fechaFin" class="w-100" class="form-control" required />
                         </div>
                     </div>
                 </div>

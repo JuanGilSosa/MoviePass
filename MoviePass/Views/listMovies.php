@@ -65,7 +65,6 @@ require_once('nav.php');
 						</div>
 						<form action="<?php echo FRONT_ROOT . 'Funcion/AddFuncion' ?>" method="POST">
 							<button class="btn btn-outline-primary w-100" name="peliculaId" value="<?php echo $pelicula->getId(); ?>" type="submit">+Funcion</button>
-							<?php var_dump($pelicula->getId()); ?>
 						</form>
 
 					</div>
