@@ -28,11 +28,11 @@
         public function CreateDireccion($calle, $numero, $piso, $idCiudad, $codigoPostal, $pais, $provincia){
 
             $paisDAO = new PaisDAO();
-            $pais = $paisDAO->GetDireccionById($pais);
+            $pais = $paisDAO->GetById($pais);
 
             if($pais != false){
                 $provinciaDAO = new ProvinciaDAO();
-                $provincia = $provinciaDAO->GetDireccionById($provincia);
+                $provincia = $provinciaDAO->GetById($provincia);
                 
             
                 if($provincia != false){
