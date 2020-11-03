@@ -111,6 +111,16 @@ class ViewsController
         require_once(VIEWS_PATH . 'addSala.php');
     }
 
+    public static function ShowSalasPorCine($idCine)
+    {
+        $cineDAO = new CineDAO();
+        $cine = $cineDAO->GetCineById($idCine);
+        $salas = $cine->getSalas();
+
+        require_once(VIEWS_PATH . 'salasPorCine.php');
+    }
+
+
     public static function ShowCartelera()
     {
         require_once(VIEWS_PATH . "cartelera.php");

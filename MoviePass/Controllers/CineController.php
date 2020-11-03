@@ -238,6 +238,18 @@ class CineController
         }
     }
 
+    public function get_salaXcine()
+    {
+        try {
+            $con = Connection::getInstance();
+
+            $query = 'SELECT * FROM salaXcine';
+            $salasXcines = $con->execute($query);
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
+        return $salasXcines;
+    }
   
 
     public function CreateCine($cineMapeado)

@@ -49,20 +49,32 @@ class SalaController
         ViewsController::ShowAddSala($idCine);
     }
 
-    public function AddSala($idCine="", $nombre="", $precio="", $capacidad="", $tipo="")
+    public function ShowSalasPorCine($idCine)
     {
-        $cine = $this->cineDAO->getCineById($idCine);
-        if (!is_null($cine)) {
-            if ($this->FindSalaByNombre($cine, $nombre) == 0) {
-                $sala = new Sala(0, $nombre, $precio, $capacidad, $tipo);
-                $salas = $cine->getSalas();
-                array_push($salas, $sala);
-                $cine->setSalas($salas);
-                #deber de modificar donde esta el cine {hacer update}
-                $this->salaDAO->Add($sala);
-            } else {
-                #Es porque la sala existe 
+        ViewsController::ShowSalasPorCine($idCine);
+    }
+
+    public function AddSala($idCine = "", $nombre = "", $tipo = "", $precio = "", $capacidad = "")
+    {
+        try{
+            $cine = $this->cineDAO->getCineById($idCine);
+            if (!is_null($cine)) {
+                if ($this->FindSalaByNombre($cine, $nombre) == 0) {
+                    $sala = new Sala(0, $nombre, $precio, $capacidad, $tipo);
+                    $salas = $cine->getSalas();
+                    array_push($salas, $sala);
+                    $cine->setSalas($salas);
+                    #deber de modificar donde esta el cine {hacer update}
+                    $this->salaDAO->Add($sala);
+
+                    $cineController = new CineController();
+                    $cineController->ListViewCine();
+                } else {
+                    #Es porque la sala existe 
+                }
             }
+        }catch (PDOException $ex){
+            
         }
     }
 
@@ -84,13 +96,14 @@ class SalaController
     {
         $existe = 0;
         $salas = $cine->getSalas();
-        foreach ($salas as $sala) {
-            if (strcasecmp($sala->getNombre, $nombreSala)) {
-                $existe = 1;
-                break;
+        if (is_array($salas)) {
+            foreach ($salas as $sala) {
+                if (strcasecmp($sala->getNombre, $nombreSala)) {
+                    $existe = 1;
+                    break;
+                }
             }
         }
         return $existe;
     }
-
 }
