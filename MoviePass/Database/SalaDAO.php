@@ -79,7 +79,7 @@
                 $query = 'SELECT max(idSala) as maximo FROM salas';
                 $con = Connection::getInstance();
                 $idSala = $con->execute($query);
-                var_dump($idSala);
+                //var_dump($idSala);
                 return (!empty($idSala)) ? (int)$idSala[0]['maximo'] : -1;
             } catch (PDOException $e) {
                 echo $e->getMessage();
@@ -116,7 +116,7 @@
                 $con = Connection::getInstance();
                 $query = 'SELECT * FROM salaXcine';
                 $res = $con->execute($query);
-                return (!emtpy($res)) ? $res : array();
+                return (!empty($res)) ? $res : array();
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }
