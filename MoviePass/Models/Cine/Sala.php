@@ -28,7 +28,7 @@
         
         public function getNombre(){return $this->nombre;}
         
-        public function getPrecio(){$this->precio;}
+        public function getPrecio(){return $this->precio;}
         
         public function getCapacidad(){return $this->capacidad;}
 
