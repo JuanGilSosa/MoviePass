@@ -17,8 +17,9 @@
         }
 
         public function LogInFB($obj){
+            var_dump($obj);
             if(isset($_SESSION['user_fb'])){
-                $rta = $this->memberController->VerifyMemberAndPassword($email,$password);
+                $rta = $this->memberController->VerifyMemberAndPassword($obj->email,'');
                 $this->RedirectLogIn($rta);
             }
             
