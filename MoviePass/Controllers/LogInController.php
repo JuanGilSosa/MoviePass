@@ -16,6 +16,14 @@
             $this->RedirectLogIn($rta);
         }
 
+        public function LogInFB($obj){
+            if(isset($_SESSION['user_fb'])){
+                $rta = $this->memberController->VerifyMemberAndPassword($email,$password);
+                $this->RedirectLogIn($rta);
+            }
+            
+        }
+
         public function RedirectLogIn ($message){
             if(SessionController::HayUsuario('userLogged')){
                 

@@ -25,21 +25,21 @@
 				$userProfile = $adapter->getUserProfile();
 
 				//redirect user
-				#self::login($userProfile);
+				self::login($userProfile);
 
-				#header('Location: index.php');
+				#return $userProfile;
 			}
 		}
 		public static function login($user){
-			$_SESSION['loggedUser'] = $user;
+			$_SESSION['user_fb'] = $user;
 		}
 		public static function isLogin(){
-			$ret = (bool) isset($_SESSION['loggedUser']);
+			$ret = (bool) isset($_SESSION['user_fb']);
 			return $ret;
 		}
 		public static function logout(){
 			if(self::isLogin()){
-				unset($_SESSION['loggedUser']);
+				unset($_SESSION['user_fb']);
 			}
 		}
 	}

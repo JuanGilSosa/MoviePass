@@ -1,8 +1,5 @@
 <?php
     require_once('nav.php');
-    /*if($_SESSION){
-      session_start();
-    }*/
 ?>
 <main class="">
     <div class="container text-center table loginTable  w-100" style="padding:0px;">
@@ -51,5 +48,7 @@
         <a href="<?php echo FRONT_ROOT.'Views/ShowRegisterAdmin'?>" class="text-warning" style="font-size:12px;">Ingresa como Administrador</a>
       
     </div>
-    <?php include('Login-Facebook\index.php');?>
+    <form action="<?php echo FRONT_ROOT.'LogIn/LogInFB';?>" method="POST">
+      <?php include('Login-Facebook\index.php');?>
+    </form>
 </main>
