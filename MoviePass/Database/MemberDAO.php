@@ -28,11 +28,10 @@
         {
             try{
                 $array = $this->RetrieveData();
-                
+                return (!empty($array)) ? $this->mapping($array) : array();
             }catch(PDOException $e){
                 echo $e->getMessage();
             }
-            return (!empty($array)) ? $this->mapping($array) : false;
         }
         
 
@@ -46,14 +45,14 @@
 
         public function RetrieveData()
         {
-            $query = 'SELECT * FROM Members;';
+            $query = 'SELECT * FROM members;';
             try{
                 $con = Connection::getInstance();
                 $array = $con->execute($query);
+                return $array;
             }catch(PDOException $e){
                 throw $e;
             }
-            return $array;
         }
 
 		public function mapping($value){
@@ -65,7 +64,7 @@
                 $member->setId($p['idMember']);
                 return $member;
             },$value);
-            return count($resp)>1 ? $resp : reset($resp);
+            return count($resp)>1 ? $resp : $resp[0];
         }
     }
 ?>

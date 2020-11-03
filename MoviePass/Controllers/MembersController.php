@@ -65,13 +65,18 @@
             $loggedMember = null;
 
             $members = $this->membersDAO->GetAll();
-            if(!empty($members)){
+            if(is_array($members) && !empty($members)){
                 foreach ($members as $member)
                 {
                     if($member->getEmail() == $email)
                     {
                         return $member;
                     }
+                }
+            }else{
+                if($members->getEmail() == $email)
+                {
+                    return $members;
                 }
             }
             return $loggedMember;
