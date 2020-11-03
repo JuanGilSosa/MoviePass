@@ -48,8 +48,8 @@ CREATE TABLE Cines(
 CREATE TABLE Salas(
     idSala INT NOT NULL AUTO_INCREMENT, 
     nombre VARCHAR(30), 
-    precio VARCHAR(5), 
-    capacidad VARCHAR(3), 
+    precio INT, 
+    capacidad INT,
     tipo VARCHAR(5),
     CONSTRAINT pk_idSala PRIMARY KEY(idSala)
 );
@@ -67,6 +67,13 @@ CREATE TABLE salaXfunciones(
     idFuncion INT,
     CONSTRAINT fk_idSala FOREIGN KEY(idSala) REFERENCES Salas(idSala),
     CONSTRAINT fk_idFuncion FOREIGN KEY(idFuncion) REFERENCES Funciones(idFuncion)
+);
+
+CREATE TABLE salaXcine(
+    idSala INT NOT NULL,
+    idCine INT NOT NULL,
+    CONSTRAINT pk_idSala FOREIGN KEY(idSala) REFERENCES salas(idSala),
+    CONSTRAINT pk_idCine FOREIGN KEY(idCine) REFERENCES cines(idCine)
 );
 
 CREATE TABLE members(

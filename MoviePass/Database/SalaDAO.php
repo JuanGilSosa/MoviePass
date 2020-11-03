@@ -2,6 +2,7 @@
 
     use Database\Connection as Connection;
     use Models\Cine\Sala as Sala;
+    use PDOException as PDOException;
 
     class SalaDAO implements IDAO{
 /*
@@ -27,8 +28,8 @@
             try{
                 $con = Connection::getInstance();
 
-                $query = 'INSERT INTO salas(nombre,precio,capacidad) VALUES
-                            (:nombre,:precio,:capacidad)';
+                $query = 'INSERT INTO salas(nombre,precio,capacidad,tipo) VALUES
+                            (:nombre,:precio,:capacidad,:tipo)';
 
                 $params['nombre'] = $sala->getNombre();
                 $params['precio'] = $sala->getPrecio();

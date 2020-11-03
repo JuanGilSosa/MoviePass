@@ -3,6 +3,7 @@
     use Models\Cine\Cine as Cine;
     use Models\Ubicacion\Direccion as Direccion;
     use Database\DireccionDAO as DireccionDAO;
+    use PDOException as PDOException;
 
     class CineDAO implements IDAO{
 /*

@@ -1,5 +1,7 @@
 <?php namespace Database;
     class FuncionesDAO implements IDAO{
+         
+        
         /*
         public function __costruct(){
             try{
@@ -17,5 +19,25 @@
                 echo "<script>console.log('".$e->getMessage()."');</script>";
             }
         }*/
+
+        public function GetAll(){
+
+        }
+
+        public function Add($cine){
+
+        }
+
+        public function Delete($cineId){
+
+        }
+
+        public function Update($cine){
+
+        }
+
+        public function mapping($value){
+
+        }
     }
 ?>

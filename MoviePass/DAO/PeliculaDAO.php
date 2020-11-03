@@ -170,14 +170,8 @@
           array_push($upcomingMovies, $movie);
       }
 
-      $randomUpcomingMovies = array();
       $cantidadUpcomingMovies = 4;
-      $alguno = 5;
-
-      for($i = 0; $i< $cantidadUpcomingMovies; $i++){
-        array_push($randomUpcomingMovies, $upcomingMovies[$alguno]);
-        $alguno++;
-      }
+      $randomUpcomingMovies = $this->RandomMovies($upcomingMovies, $cantidadUpcomingMovies);
 
       return $randomUpcomingMovies;
     }
@@ -210,18 +204,25 @@
           array_push($popularMovies, $movie);
       }
 
-      $randomPopularMovies = array();
       $cantidadPopularMovies = 4;
-      $alguno = 5;
-
-      for($i = 0; $i< $cantidadPopularMovies; $i++){
-        array_push($randomPopularMovies, $popularMovies[$alguno]);
-        $alguno++;
-      }
+      $randomPopularMovies = $this->RandomMovies($popularMovies, $cantidadPopularMovies);
 
       return $randomPopularMovies;
     }
 
+    public function RandomMovies($array, $randomAmount){
+      $randomMovies = array();
+      for($i = 0; $i < $randomAmount; $i++){
+        array_push($randomMovies, $this->RandomElementOfArray($array));
+      }
+      return $randomMovies;
+    }
+
+    public function RandomElementOfArray($array){
+
+      $elementPosition = rand(0, count($array)-1);
+      return $array[$elementPosition];
+    }
 
     public function GetCast($idPelicula){
       $castJson = file_get_contents(
