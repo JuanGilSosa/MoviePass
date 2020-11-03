@@ -26,7 +26,8 @@
                 #$_SESSION['adminLogged'] = true;
                 HomeController::Index();
             }else{
-                ViewsController::ShowRegisterAdmin();
+                $message = "Contraseña incorrecta";
+                ViewsController::ShowRegisterAdmin($message);
             }
         }
         

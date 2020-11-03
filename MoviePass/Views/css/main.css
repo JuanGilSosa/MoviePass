@@ -1,76 +1,82 @@
-
-html, body{
-     font-family: 'Kumbh Sans', sans-serif;
-     height: 100%;
-     width: 100%;
-}
-   
-.col{
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     margin:0px;
-}
-   
-.row{    
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   margin: 0px;
-}   
- 
+html,
 body {
-  font-family: 'Poppins', sans-serif;
-    color: #ffffff;
-    background: url("../img/space.jpg") no-repeat center center fixed; 
-     -webkit-background-size: cover;
-        -moz-background-size: cover;
-          -o-background-size: cover;
-             background-size: cover;
+  font-family: "Kumbh Sans", sans-serif;
+  height: 100%;
+  width: 100%;
 }
 
-main
-{
-     margin-top: 5vh;
+.col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: #ffffff;
+  background: url("../img/space.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+main {
+  margin-top: 5vh;
 }
 
 .height-100 {
-     height: 100%;
+  height: 100%;
 }
 
 .bg-dark-alpha {
-     background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 .bg-light-alpha {
-     background-color: rgba(255,255,255,0.2);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
-.nameHeader{
-     margin-left: 0.5vw;
+.nameHeader {
+  margin-left: 0.5vw;
 }
 
-@media screen and (max-width:600px){
-
-     .nameHeader{
-          margin-left: 1vw;
-     }
+@media screen and (max-width: 600px) {
+  .nameHeader {
+    margin-left: 1vw;
+  }
 }
 
-.fixed-top{
-     background-color:#000000;
+.fixed-top {
+  background-color: #000000;
 }
 
-nav div a span{
-     text-align: center;
-     font-size: 2vh;
-     color: rgb(184, 184, 184);
+nav div a span {
+  text-align: center;
+  font-size: 2vh;
+  color: rgb(184, 184, 184);
 }
-   
-.fixed-top.scrolled { 
-     background-color: #000000 !important; 
-     transition: background-color 1200ms linear; 
-} 
 
+.fixed-top.scrolled {
+  background-color: #000000 !important;
+  transition: background-color 1200ms linear;
+}
+
+#footer {
+  background-color: #000000;
+  height: 10vh;
+  width: 100%;
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+}
 
 /*********************************************************************************************************************************************/
 /*********************************************************************************************************************************************/
@@ -85,196 +91,186 @@ nav div a span{
 /*********************************************************************************************************************************************/
 /*********************************************************************************************************************************************/
 
-.userIconCol{
-     height: 50px;
- }
- 
- #userIcon{
-   text-align: center;
-   font-size:8vh;
-   color:#ffffff;
- }
- 
- .loginTable{
-     max-width: 35%;
-     border: none;
-     border-radius: 5px;
-     padding:25px;
-     margin-top: 10%;
- }
- 
- @media screen and (max-width:1800px){
- 
- 
-   .loginTable{
-       max-width: 35%;
-   }
- 
- }
- 
- @media screen and (max-width:1200px){
- 
-   .loginTable{
-       max-width: 70%;
-   }
-   
- }   
- 
- @media screen and (max-width:600px){
- 
-   .loginTable{
-       max-width: 100%;
-   }
- }
- 
- form
- {
-   width: 100%;
- }
- 
- .usernameRow, .passwordRow{
-     background-color: none;
-     margin: 30px 0px ;
-     width: 100%;
-     
- }
+.userIconCol {
+  height: 50px;
+}
 
- .inputContainer
- {
-   border-bottom: 1px solid #ffffff;
- }
- 
- .logInInputs, .logInInputs:focus{
-   color: #ffffff;
-   background-color: transparent;
-   border: none;
-   border-bottom: 2px solid #000000;
-   text-align: center;
- 
- }
- 
- .logInInputs::placeholder { /* Most modern browsers support this now. */
-   color:#ffffff;
-   font-size: 0.8em;
- }
- 
- 
- .inputLogin:focus {
-   border: 1px solid #ffffff;
- }
- 
- .loginInputContainer{
-     width: 100%;
- }
- 
- .loginInputContainer input{
-     width: 100%;
-     margin: 0px;
-     padding: 5px 0px;
-     border-radius: 5px;
- }
- 
- .loginBoton {
-   color: #ffffff;
-   background-color: #000000; 
-   border: 1px solid #000000;
- }
- 
- .loginBoton:hover {
-     color: #ffffff;
-     background-color: transparent; 
-     border: 1px solid white;
- }
+#userIcon {
+  text-align: center;
+  font-size: 8vh;
+  color: #ffffff;
+}
 
- .link{    
-     color: rgb(77, 105, 248);
- }
- .link:hover{
-     color: rgb(0, 255, 255);
- }
- 
+.loginTable {
+  max-width: 35%;
+  border: none;
+  border-radius: 5px;
+  padding: 25px;
+  margin-top: 10%;
+}
+
+@media screen and (max-width: 1800px) {
+  .loginTable {
+    max-width: 35%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .loginTable {
+    max-width: 70%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .loginTable {
+    max-width: 100%;
+  }
+}
+
+form {
+  width: 100%;
+}
+
+.usernameRow,
+.passwordRow {
+  background-color: none;
+  margin: 30px 0px;
+  width: 100%;
+}
+
+.inputContainer {
+  border-bottom: 1px solid #ffffff;
+}
+
+.logInInputs,
+.logInInputs:focus {
+  color: #ffffff;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #000000;
+  text-align: center;
+}
+
+.logInInputs::placeholder {
+  /* Most modern browsers support this now. */
+  color: #ffffff;
+  font-size: 0.8em;
+}
+
+.inputLogin:focus {
+  border: 1px solid #ffffff;
+}
+
+.loginInputContainer {
+  width: 100%;
+}
+
+.loginInputContainer input {
+  width: 100%;
+  margin: 0px;
+  padding: 5px 0px;
+  border-radius: 5px;
+}
+
+.loginBoton {
+  color: #ffffff;
+  background-color: #000000;
+  border: 1px solid #000000;
+}
+
+.loginBoton:hover {
+  color: #ffffff;
+  background-color: transparent;
+  border: 1px solid white;
+}
+
+.link {
+  color: rgb(77, 105, 248);
+}
+.link:hover {
+  color: rgb(0, 255, 255);
+}
+
 /*********************************************************************************************************************************************/
 /**********************************************  FIN ***  LOG *** IN *** FORM  *** STYLES*****************************************************/
 /*********************************************************************************************************************************************/
 
-
 /*FORMULARIO DE REGISTRO*/
-   
-.form-registro{
-  width:800px;
-  height:650px;
+
+.form-registro {
+  width: 800px;
+  height: 650px;
   background: transparent;
   color: white;
-  border-radius:8px;
+  border-radius: 8px;
   /*box-shadow:0 0 40px -10px #000;*/
   /*margin:calc(50vh - 220px) auto;*/
-  padding:20px 30px;
+  padding: 20px 30px;
   /*max-width:calc(100vw - 40px);*/
-  box-sizing:border-box;
-  font-family:'Montserrat',sans-serif;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
 }
 
-
-@media screen and (max-width:1200px){ 
-  .form-registro{
-      max-width: 70%;
-  }
-  
-}   
-
-@media screen and (max-width:600px){
-
-  .form-registro{
-      max-width: 100%;
+@media screen and (max-width: 1200px) {
+  .form-registro {
+    max-width: 70%;
   }
 }
 
-.h2-registro{
-  margin:10px 0;
-  padding-bottom:10px;
-  width:300px;
-  color:#78788c;
-  border-bottom:3px solid #78788c
+@media screen and (max-width: 600px) {
+  .form-registro {
+    max-width: 100%;
+  }
 }
 
-.input-registro{
-  width:100%;
-  padding:10px;
-  box-sizing:border-box;
-  background:none;
-  outline:none;
-  resize:none;
-  border:0;
-  font-family:'Montserrat',sans-serif;
-  transition:all .3s;
-  border-bottom:2px solid #bebed2
+.h2-registro {
+  margin: 10px 0;
+  padding-bottom: 10px;
+  width: 300px;
+  color: #78788c;
+  border-bottom: 3px solid #78788c;
 }
 
-.input-registro:focus{border-bottom:2px solid #78788c}
-
-p.p-registro:before{
-  content:attr(type);
-  display:block;
-  margin:28px 0 0;
-  font-size:14px;
-  color:#5a5a5a
+.input-registro {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  background: none;
+  outline: none;
+  resize: none;
+  border: 0;
+  font-family: "Montserrat", sans-serif;
+  transition: all 0.3s;
+  border-bottom: 2px solid #bebed2;
 }
 
-#button-registro{
-  float:right;
-  padding:8px 12px;
-  margin:8px 0 0;
-  font-family:'Montserrat',sans-serif;
-  border:2px solid #78788c;
-  background:0;
-  color:#5a5a6e;
-  cursor:pointer;
-  transition:all .3s
+.input-registro:focus {
+  border-bottom: 2px solid #78788c;
 }
 
-#button-registro:hover{
-  background:#78788c;
-  color:#fff
+p.p-registro:before {
+  content: attr(type);
+  display: block;
+  margin: 28px 0 0;
+  font-size: 14px;
+  color: #5a5a5a;
+}
+
+#button-registro {
+  float: right;
+  padding: 8px 12px;
+  margin: 8px 0 0;
+  font-family: "Montserrat", sans-serif;
+  border: 2px solid #78788c;
+  background: 0;
+  color: #5a5a6e;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+#button-registro:hover {
+  background: #78788c;
+  color: #fff;
 }
 /*
 div.div-registro{
@@ -290,46 +286,40 @@ div.div-registro{
   box-shadow:10px 10px 40px -14px #000
 }
 */
-span{
-  margin:0 5px 0 15px
+span {
+  margin: 0 5px 0 15px;
 }
-
 
 /***********************************************************************************************/
 /**********************************MOVIES LIST STYLES*******************************************/
 
-
-.grid-container{
+.grid-container {
   height: 100vh;
   display: grid;
   grid-template-columns: repeat(4, 250px);
 }
 
-@media screen and (max-width:1200px){ 
-  .grid-container{
+@media screen and (max-width: 1200px) {
+  .grid-container {
     grid-template-columns: repeat(3, 250px);
-  
   }
-}   
+}
 
-@media screen and (max-width:900px){ 
-  .grid-container{
+@media screen and (max-width: 900px) {
+  .grid-container {
     grid-template-columns: repeat(2, 250px);
-  
   }
-}   
+}
 
-@media screen and (max-width:600px){
-
-  .grid-container{
+@media screen and (max-width: 600px) {
+  .grid-container {
     grid-template-columns: repeat(1, 250px);
-  
   }
 }
 
 .cell {
-  margin:1rem;
-  padding:0px;
+  margin: 1rem;
+  padding: 0px;
   text-align: center;
 }
 
@@ -337,12 +327,11 @@ span{
 /***********************************CINE LIST VIEW**********************************************/
 /***********************************************************************************************/
 
-
-.tableHeader{
+.tableHeader {
   padding: 15px;
 }
 
-th{
+th {
   padding: 50px;
 }
 
@@ -350,12 +339,12 @@ th{
 /********************************MOVIE DESCRIPTION VIEW*****************************************/
 /***********************************************************************************************/
 
-#headerPopup{
-  width:75%;
-  margin:0 auto;
+#headerPopup {
+  width: 75%;
+  margin: 0 auto;
 }
 
-#headerPopup iframe{
-  width:100%;
-  margin:0 auto;
+#headerPopup iframe {
+  width: 100%;
+  margin: 0 auto;
 }

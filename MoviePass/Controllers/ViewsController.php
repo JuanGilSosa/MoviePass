@@ -85,7 +85,7 @@
             require_once(VIEWS_PATH."listMovies.php");
         }
 
-        public static function ShowRegisterAdmin()
+        public static function ShowRegisterAdmin($message = "")
         {
             require_once(VIEWS_PATH."register-adm.php");
         }
