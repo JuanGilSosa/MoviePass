@@ -27,6 +27,7 @@
             {
                 $peliculaDAO = new PeliculaDAO();
                 $pelicula = $peliculaDAO->getMovieById($peliculaId);
+                //var_dump($pelicula);
                 
                 if(!empty($pelicula)){
                     ViewsController::ShowAddFuncion("", $peliculaId);
@@ -34,8 +35,12 @@
                     $message = "No encontramos la pelicula seleccionada, intente nuevamente.";
                     ViewsController::ShowAddFuncion($message);
                 }
-            } else {
-                var_dump($peliculaId);
+            }else if (!empty($peliculaId) && empty($horario) && !empty($cineId) && empty($salaId)){
+                $cineDAO = new CineDAO();
+                $cine = $cineDAO->getCineById($cineId);
+                $salas = $cine->getSalas();
+                ViewsController::ShowAddFuncion("", $peliculaId, $cine, $salas);
+
             }
         }
             

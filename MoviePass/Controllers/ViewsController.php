@@ -104,8 +104,10 @@ class ViewsController
         }
     }
 
-    public static function ShowAddSala()
+    public static function ShowAddSala($idCine)
     {
+        $cineDAO = new CineDAO();
+        $cine = $cineDAO->GetCineById($idCine);
         require_once(VIEWS_PATH . 'addSala.php');
     }
 
@@ -125,7 +127,7 @@ class ViewsController
         }
     }
 
-    public static function ShowAddFuncion($message = "", $peliculaId = "")
+    public static function ShowAddFuncion($message = "", $peliculaId = "", $cine = "", $salas = "")
     {
         if (!empty($peliculaId)) {
             $peliculasDAO = new PeliculaDAO();
@@ -135,6 +137,8 @@ class ViewsController
             
 
             require_once(VIEWS_PATH . "addFuncion.php");
+        }else if(!empty($peliculaId) && !empty($cine) && !empty($salas)){
+
         }
     }
 }
