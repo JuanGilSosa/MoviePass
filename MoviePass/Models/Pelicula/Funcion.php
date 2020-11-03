@@ -1,13 +1,29 @@
 <?php 
 
-    namespace Models\Pelicula;
+    namespace Models\Pelicula\Pelicula;
+    namespace Models\Cine\Sala;
 
     class Funcion{
 
+        private $id;
+        /** @var Pelicula || null */
         private $pelicula;
+        private $horaInicio;
+        private $horaFin;
+        /** @var Sala || null */
+        private $sala;
+
+        public function __construct($id = "",$pelicula="", $horaInicio = "", $horaFin ="", $sala = ""){
+            $this->id = $id;
+            $this->pelicula = $pelicula;
+            $this->horaInicio = $horaInicio;
+            $this->horaFin = $horaFin;
+            $this->sala = $sala;
+        }
+
         /**
             * ! LA LISTA DE PELICULAS TIENE QUE MOSTRAR +FUNCION, NO +CARTELERA 
-            * ? se muestra vista 'agregarfuncion.php' mostrando los datos de la peliculas
+            * ? se muestra vista 'agregarfuncion.php' mostrando los datos de la pelicula seleccionada
                 // *  nombrePelicula, elegir cine, elegir dia y hora
             * ? esto lleva a 'moviepass.com/Funcion/AgregarFuncion'
             * * esta funcion ademas de crear la funcion agrega 
@@ -22,8 +38,15 @@
          // TODO :  class CarteleraController -> en la vista de la Cartelera hacer un filtro BuscarCarteleraPorFecha($hoy){ $cartelera = BuscarCarteleraPorFecha($hoy); } 
                     // * mostrar un select con los dias de inicio y fin de  las carteleras existentes en la vista
          // TODO :  en ViewsController agregar ShowCartelera($hoy){ $cartelera = $this->carteleraDAO->BuscarCarteleraPorFecha($hoy); } 
-    
-    
+
+        public function getId(){return $this->id;}
+        public function getPelicula(){return $this->pelicula;}
+        public function getHoraInicio(){return $this->horaInicio;}
+        public function getHoraFin(){return $this->horaFin;}
+        public function getSala(){return $this->sala;}
+        
     }
+
+    
 
 ?>
