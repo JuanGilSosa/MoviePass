@@ -6,17 +6,14 @@
         private $nombre;
         private $precio;
         private $capacidad;
-<<<<<<< HEAD
-        private $tipoDeSala;    //2D, 3D, ATMOS
-=======
         private $tipo;
->>>>>>> origin
 
         public function __construct($id, $nombre, $precio, $capacidad, $tipo){
             $this->id = $id;
             $this->nombre = $nombre;
             $this->precio = $precio;
             $this->capacidad = $capacidad;
+            $this->tipo = $tipo;
         }
         
         public function getId(){return $this->id;}
