@@ -11,7 +11,7 @@ require_once("nav.php");
                          <div class="col-lg-12">
                               <div class="form-group">
                                    <label for="">Cine</label>
-                                   <input type="text" placeholder="<?php echo $cine->getNombre() ?>" value="<?php echo $cine->getId() ?>" required></input>
+                                   <input type="text" name="idCine" placeholder="<?php echo $cine->getNombre() ?>" value="<?php echo $cine->getId() ?>" required></input>
                               </div>
                          </div>
                          
@@ -24,7 +24,7 @@ require_once("nav.php");
                          <div class="col-lg-6">
                               <label for="">Tipo de Sala</label>
                               <div class="form-group">
-                                   <select name="select-movies" class="form-control">
+                                   <select name="tipo" class="form-control">
                                         <option selected="true" disabled="disabled">Seleccione Tipo</option>
                                         <option value="2D" required>2D BALATO</option>
                                         <option value="3D" required>3D MEDIO CARO</option>
@@ -37,13 +37,13 @@ require_once("nav.php");
                          <div class="col-lg-6">
                               <div class="form-group">
                                    <label for="">Precio</label>
-                                   <input type="number" name="precio-sala" value="" class="form-control" placeholder="$" required>
+                                   <input type="number" name="precio-sala" value="" min="1" class="form-control" placeholder="$" required>
                               </div>
                          </div>
                          <div class="col-lg-6">
                               <div class="form-group">
                                    <label for="">Capacidad</label>
-                                   <input type="number" name="capacidad-sala" value="" class="form-control" placeholder="#####" required>
+                                   <input type="number" name="capacidad-sala" value="" min="1" class="form-control" placeholder="#####" required>
                               </div>
                          </div>
                     </div>

@@ -32,6 +32,8 @@ require_once('nav.php');
                               </th>
                               <th class="th-sm">Salas
                               </th>
+                              <th class="th-sm">
+                              </th>
                               <th class="th-sm">Modificar
                               </th>
                               <th class="th-sm">Eliminar
@@ -55,14 +57,17 @@ require_once('nav.php');
                                                   $direccion->getNumero();
                                              if ($direccion->getPiso() != "") {
                                                   echo ", " . $direccion->getPiso();
-                                             }?>
+                                             } ?>
                                         </td>
 
 
                                         <td><?php echo $ciudad->getNameCiudad() . ", " . $provincia->getNameProvincia() . ", " . $pais->getNamePais() ?> </td>
-                                        
+
                                         <form action="<?php echo FRONT_ROOT . 'Sala/AddViewSala' ?>" method="POST">
                                              <td><button type="submit" value="<?php echo $cine->getId() ?>" class="btn btn-secondary btn-info w-20" name="idCine">+Sala</button></td>
+                                        </form>
+                                        <form action="<?php echo FRONT_ROOT . 'Sala/ShowSalasPorCine' ?>" method="POST">
+                                             <td><button type="submit" value="<?php echo $cine->getId() ?>" class="btn btn-secondary btn-info w-20" name="idCine">Lista</button></td>
                                         </form>
                                         <form action="<?php echo FRONT_ROOT . 'Cine/ShowModify' ?>" method="POST">
                                              <td><button type="submit" value="<?php echo $cine->getId() ?>" class="btn btn-info w-20" name="idCine">Modificar</button></td>
