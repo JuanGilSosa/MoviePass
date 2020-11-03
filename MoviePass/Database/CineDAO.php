@@ -68,7 +68,7 @@
                 );                
                 return $cine;
             },$value);
-            return count($resp)>1 ? $resp : reset($resp);
+            return count($resp)>1 ? $resp : $resp[0];
         }
 
         public function GetAllActive(){
@@ -83,15 +83,14 @@
             }       
         }
 
-        public function GetCineById ($cineId){
+        public function GetCineById ($idCine){
             try {
-                echo "Linea 88 de CineDAO: idCine: " . $cineId;
-                $query = 'SELECT * FROM cines WHERE idCine = :cineId';
+                $query = 'SELECT * FROM cines WHERE idCine = :idCine';
                 $con = Connection::getInstance();
-                $params['idCine'] = $cineId;
+                $params['idCine'] = $idCine;
                 
                 $cines = $con->execute($query,$params);
-                return (!empty($cines)) ? $this->mapping($cines) : false;
+                return (!empty($cines)) ? $this->mapping($cines) : array();
             } catch (PDOException $e) {
                 echo "<script>console.log('".$e->getMessage()."');</script>";
             }       
@@ -134,10 +133,28 @@
         }
 
         public function Delete($idCine){
-
+            try{
+                $con = Connection::getInstance();
+                $query = 'UPDATE cines as c SET c.active = 0 WHERE idCine = :idCine';
+                $params['idCine'] = $idCine;
+                $con->executeNonQuery($query, $params);
+            
+            }catch(PDOException $e){
+                echo 'Excepcion en : '.$e->getMessage();
+            }
         }
         public function Update($cine){
-            $query = 'SELECT c.idCine FROM cines as c WHERE c.idCine = '.$cine->getId().';';
+            try{
+                $query = 'UPDATE cines SET nombre = :nombre, email = :email, numeroDeContacto = :numeroDeContacto WHERE idCine = :idCine;';
+                $con = Connection::getInstance();
+                $params['idCine'] = $cine->getId();
+                $params['nombre'] = $cine->getNombre();
+                $params['email'] = $cine->getEmail();
+                $params['numeroDeContacto'] = $cine->getNumeroDeContacto();
+                $con->executeNonQuery($query, $params);
+            }catch(PDOException $e){
+                echo 'Exception en Update='.$e->getMessage();
+            }
         }
 
  
