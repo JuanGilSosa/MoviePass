@@ -65,10 +65,10 @@ require_once('nav.php');
                                              <td><button type="submit" value="<?php echo $cine->getId() ?>" class="btn btn-secondary btn-info w-20" name="idCine">+Sala</button></td>
                                         </form>
                                         <form action="<?php echo FRONT_ROOT . 'Cine/ShowModify' ?>" method="POST">
-                                             <td><button type="submit" value="<?php echo $cine->getId() ?>" class="btn btn-secondary btn-info w-20" name="idCine">Modificar</button></td>
+                                             <td><button type="submit" value="<?php echo $cine->getId() ?>" class="btn btn-info w-20" name="idCine">Modificar</button></td>
                                         </form>
                                         <form action="<?php echo FRONT_ROOT . 'Cine/Delete' ?>" method="post">
-                                             <td><button type="submit" value="<?php echo $cine->getId() ?>" class="btn btn-secondary btn-danger w-20" name="eliminar">Eliminar</button></td>
+                                             <td><button type="submit" value="<?php echo $cine->getId() ?>" class="btn btn-danger w-20" name="eliminar">Eliminar</button></td>
                                         </form>
 
                                    </tr>
