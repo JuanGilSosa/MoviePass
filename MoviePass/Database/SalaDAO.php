@@ -35,7 +35,6 @@
                 $params['precio'] = $sala->getPrecio();
                 $params['capacidad'] = $sala->getCapacidad();
                 $params['tipo'] = $sala->getTipo();
-
                 return $con->executeNonQuery($query, $params);
             }catch(PDOException $e){
                 throw $e;
@@ -70,6 +69,57 @@
         
         public function Update($idSala){
 
+        }
+        /* 
+            Se usa este metodo para insertar en la tabla salaXcine ya que como agrego en la tabla salaxcine
+            luego de insertar la sala en la base de datos este ultimo id seria el id de la sala que quiero usar
+        */
+        public function GetLastId(){
+            try {
+                $query = 'SELECT max(idSala) as maximo FROM salas';
+                $con = Connection::getInstance();
+                $idSala = $con->execute($query);
+                var_dump($idSala);
+                return (!empty($idSala)) ? (int)$idSala[0]['maximo'] : -1;
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+
+
+        ////TRATAR PARA SALAXCINE////
+        public function GetSalaById_SALAXCINE($idSala){
+
+        }
+
+        public function Add_SALAXCINE($idSala, $idCine){
+            try{
+                $con = Connection::getInstance();
+
+                $query = 'INSERT INTO salaXcine(idSala, idCine) VALUES(:idSala, :idCine)';
+
+                $params['idSala'] = $idSala;
+                $params['idCine'] = $idCine;
+
+                return $con->executeNonQuery($query, $params); 
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
+        }
+
+        /*
+            Esto retornaria solo un arreglo con los id de sala y id de cine 
+            Si es necesario que retorne un Objeto que tenga como atrib cine & sala, hay que hacer el mapeo y hacer consultas
+        */
+        public function GetAll_SALAXCINE(){
+            try {
+                $con = Connection::getInstance();
+                $query = 'SELECT * FROM salaXcine';
+                $res = $con->execute($query);
+                return (!emtpy($res)) ? $res : array();
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
         }
     }
 ?>

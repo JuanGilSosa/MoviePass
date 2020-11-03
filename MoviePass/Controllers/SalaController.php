@@ -18,6 +18,7 @@ use Database\CiudadDAO as CiudadDAO;
 use Database\ProvinciaDAO as ProvinciaDAO;
 use Database\PaisDAO as PaisDAO;
 use Database\SalaDAO as SalaDAO;
+use Database\salaXcineDAO as salaXcineDAO;
 
 use Models\Ubicacion\Direccion as Direccion;
 use Models\Ubicacion\Ciudad as Ciudad;
@@ -33,7 +34,7 @@ class SalaController
     private $ciudadDAO;
     private $provinciaDAO;
     private $paisDAO;
-
+    private $salaxcineDAO;
     public function __construct()
     {
         $this->cineDAO = new CineDAO();
@@ -42,6 +43,7 @@ class SalaController
         $this->ciudadDAO = new CiudadDAO();
         $this->provinciaDAO = new ProvinciaDAO();
         $this->paisDAO = new PaisDAO();
+        $this->salaxcineDAO = new salaXcineDAO();
     }
 
     public function AddViewSala($idCine)
@@ -66,6 +68,11 @@ class SalaController
                     $cine->setSalas($salas);
                     #deber de modificar donde esta el cine {hacer update}
                     $this->salaDAO->Add($sala);
+                    
+                    $lastIdSala = $this->salaDAO->GetLastId(); #uso esto porque como el objeto tiene 0 - no sirve
+                    $idCine = $cine->getId();
+
+                    $this->salaDAO->Add_SALAXCINE($lastIdSala, $idCine);
 
                     $cineController = new CineController();
                     $cineController->ListViewCine();
@@ -77,20 +84,6 @@ class SalaController
             
         }
     }
-
-    public function get_salaXcine()
-    {
-        try {
-            $con = Connection::getInstance();
-
-            $query = 'SELECT * FROM salaXcine';
-            $salasXcines = $con->execute($query);
-        } catch (\PDOException $e) {
-            echo $e->getMessage();
-        }
-        return $salasXcines;
-    }
-
 
     public function FindSalaByNombre($cine, $nombreSala)
     {
