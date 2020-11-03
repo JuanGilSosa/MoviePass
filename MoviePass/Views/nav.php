@@ -38,8 +38,8 @@
           <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">Admins</a>
           <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="<?php  echo FRONT_ROOT . "Admin/ShowAddView "   ?>">Agregar Cine</a>
-            <a class="dropdown-item" href="<?php  echo FRONT_ROOT . "Cine/ListViewCine"   ?>">Listar Cines</a>
+            <a class="dropdown-item" href="<?php  echo FRONT_ROOT . "Admin/ShowAddView "?>">Agregar Cine</a>
+            <a class="dropdown-item" href="<?php  echo FRONT_ROOT . "Cine/ListViewCine"?>">Listar Cines</a>
             <a class="dropdown-item" href="<?php echo FRONT_ROOT. "Pelicula/ShowMovies"?>">Lista Peliculas</a>
           </div>
         </li>
