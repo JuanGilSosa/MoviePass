@@ -62,13 +62,13 @@
                         $cineConObjeto = $this->CreateCine($cine);
                         array_push($cinesConObjetos, $cineConObjeto);
                     }
-                    ViewsController::ShowCinesList($cinesConObjetos);
+                    ViewsController::ShowCinesList($cinesConObjetos,$message);
                 }else{
                     if($cines != null){
                         $objCine = $this->CreateCine($cines);
                         array_push($cinesConObjetos, $objCine);
                     }
-                    ViewsController::ShowCinesList($cinesConObjetos);
+                    ViewsController::ShowCinesList($cinesConObjetos, $message);
                 }
 
                 
@@ -157,12 +157,15 @@
 
         public function Update($id, $nombre, $email, $numeroDeContacto){
 
+            
             $cineViejo = $this->cineDAO->GetCineById(strval($id));
             $existeNombre = $this->cineDAO->FindCineByName($nombre);
 
             if( !empty($cineViejo) &&
-                strcmp($cineViejo->getNombre(), $nombre) != 0 && 
-                strcmp($cineViejo->getEmail,$email) != 0 && 
+                //strcmp($cineViejo->getNombre(), $nombre) != 0 && 
+                //strcmp($cineViejo->getEmail(), $email) != 0 && 
+                $cineViejo->getNombre() != $nombre ||
+                $cineViejo->getEmail() != $email ||
                 $cineViejo->getNumeroDeContacto() != $numeroDeContacto
             ){
                 if(!$existeNombre || $cineViejo->getNombre() == $nombre){
