@@ -1,4 +1,6 @@
 <?php
+
+	use Database\Connection as Connection;
 	class Auth{
 
 		protected static $miServicio = "Facebook"; #servicio que se va a utilizar
@@ -22,25 +24,43 @@
 				->authenticate() permite autenticar en el servicio en el que el usuario esta procesando
 					la peticion
 				*/
-				$userProfile = $adapter->getUserProfile();
-
+				try{
+					$userProfile = $adapter->getUserProfile();
+					self::insertUser($userProfile);
+				}catch(Exception $e){
+					echo "Hay un error en : " . $e->getMessage();
+     				echo " Error code: " . $e->getCode();
+				}
 				//redirect user
 				#self::login($userProfile);
-
 				#header('Location: index.php');
+				
+				die();
 			}
 		}
 		public static function login($user){
-			$_SESSION['loggedUser'] = $user;
+			$_SESSION['fb_user'] = $user;
 		}
 		public static function isLogin(){
-			$ret = (bool) isset($_SESSION['loggedUser']);
+			$ret = (bool) isset($_SESSION['fb_user']);
 			return $ret;
 		}
 		public static function logout(){
 			if(self::isLogin()){
-				unset($_SESSION['loggedUser']);
+				unset($_SESSION['fb_user']);
 			}
+		}
+		private static function insertUser($user){
+			try{
+				$con = Connection::getInstance();
+				$query = 'INSERT INTO members(email,firstName,lastName) VALUES(:email,:firstName, :lastName)';
+				$params['email'] = $user->email;
+				$params['firstName'] = $user->firstName;
+				$params['lastName'] = $user->lastName;
+				$con->executeNonQuery($query, $params);
+			}catch(PDOException $e){
+				echo $e->getMessage();
+			}		
 		}
 	}
  ?>
