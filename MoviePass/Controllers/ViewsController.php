@@ -118,6 +118,7 @@ class ViewsController
         $salaDAO = new SalaDAO();
         $salasPorCine = $salaDAO->GetSalasByCineId($idCine);
         $salas = $salaDAO->ConvertToArray($salasPorCine);
+        
         require_once(VIEWS_PATH . 'salasPorCine.php');
     }
 

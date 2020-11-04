@@ -71,7 +71,7 @@ require_once('nav.php');
                          } else {
                               ?>
                               <tr>
-                                   <td><?php echo "No hay cines para mostrar" ?> </td>
+                                   <td><?php echo "No hay salas para mostrar" ?> </td>
                               </tr>
                          <?php } ?>
 
