@@ -143,8 +143,12 @@ class ViewsController
         if (!empty($peliculaId)) {
             $peliculasDAO = new PeliculaDAO();
             $pelicula = $peliculasDAO->getMovieById($peliculaId);
-            $cineDAO = new CineDAO();
-            $cines = $cineDAO->GetAllActive();
+            if(empty($cine)){
+                $cineDAO = new CineDAO();
+                $cines = $cineDAO->GetAllActive();
+            }else{
+                $cines = $cine;
+            }
             
 
             require_once(VIEWS_PATH . "addFuncion.php");

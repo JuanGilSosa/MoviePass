@@ -27,12 +27,7 @@ require_once("nav.php");
                         <label for="">Elegi el Cine</label>
                         <div class="form-group">
 
-                            <select name="select-movies" class="form-control" onchange="this.form.submit();">
-
-                                <option selected="true" disabled="disabled">Seleccione Cine</option>
-                                <?php foreach ($cines as $cine) { ?>
-                                    <option value="<?php echo $cine->getId() ?>" required><?php echo $cine->getNombre() ?></option>
-                                <?php } ?>
+                            
                                 <select name="idCine" class="form-control" onchange="this.form.submit()" required>
                                     <option selected disabled>Seleccione Cine</option>
                                     <?php
@@ -45,20 +40,20 @@ require_once("nav.php");
                                         ?>
                                         <option value="<?php echo $cines->getId() ?>" selected required><?php echo $cines->getNombre() ?></option>
                                     <?php } ?>
-                    
+
                                 </select>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <label for="">Elegi la Sala</label>
                         <div class="form-group">
-                                    <select name="select-movies" class="form-control" onchange="">
-                                        <option selected="true" disabled="disabled">Seleccione Sala</option>
-                          
-                                        <?php foreach ($salas as $sala) { ?>
-                                            <option name="salaId" value="<?php echo $sala->getId() ?>" required><?php echo $sala->getNombre() ?></option>
-                                        <?php } ?>
-                                    </select>
+                            <select name="select-movies" class="form-control" onchange="">
+                                <option selected="true" disabled="disabled">Seleccione Sala</option>
+
+                                <?php foreach ($salas as $sala) { ?>
+                                    <option name="salaId" value="<?php echo $sala->getId() ?>" required><?php echo $sala->getNombre() ?></option>
+                                <?php } ?>
+                            </select>
                         </div>
                     </div>
                     <div class="col-lg-6">

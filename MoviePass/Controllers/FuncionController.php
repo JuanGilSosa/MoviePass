@@ -27,13 +27,14 @@
         }
 
         public function AddFuncion($idCine, $idSala, $idPelicula="", $horaInicio="", $startCartelera="", $endCartelera=""){
-
             if(!empty($idCine) && !empty($idSala) && empty($idPelicula) && empty($horaInicio) && empty($startCartelera) && empty($endCartelera)){
                 $idPelicula = $idSala;
                 $pelicula = $this->peliculaDAO->getMovieById($idPelicula);
                 $cine = $this->cineDAO->GetCineById($idCine);
                 $salas=$this->salaDAO->GetSalasByCineId($idCine);
-                ViewsController::ShowAddFuncionView($pelicula, $cine, $salas);
+                
+
+                ViewsController::ShowAddFuncionView("", $pelicula->getId(), $cine, $salas);
             }else{
                 $pelicula = $this->peliculaDAO->getMovieById($idPelicula);
                 $duracion = $this->peliculaDAO->GetDuracion($idPelicula);
@@ -64,12 +65,12 @@
             }
         }
 
-        public function ShowAddFuncion($idPelicula){
-            $pelicula = $this->peliculaDAO->getMovieById($idPelicula);
+        public function ShowAddFuncion($peliculaId){
+            $pelicula = $this->peliculaDAO->getMovieById($peliculaId);
             if(!is_null($pelicula)){
                 $cines = $this->cineDAO->GetAll();
                 $salas = $this->salaDAO->GetAll();
-                ViewsController::ShowAddFuncionView($pelicula, $cines, $salas);
+                ViewsController::ShowAddFuncionView("", $peliculaId, $cines, $salas);
             }
         }
 

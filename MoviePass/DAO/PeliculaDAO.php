@@ -125,7 +125,7 @@
 
       while(($flag==false) && ($i<count($this->peliculas))){
         $aux = $this->peliculas[$i];
-        if($aux->getId() == $idMovie){
+        if(strval($aux->getId()) == $idMovie){
           $return = $aux;
           $flag = true;
         }
