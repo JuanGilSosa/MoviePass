@@ -212,46 +212,6 @@ class CineController
         $this->ListViewCine($message);
     }
 
-    //Sin testear - solo testeado logicamente
-    public function recuperarCinesConSalas()
-    {
-
-        $salaXcines = $this->get_salaXcine();
-        $salas = $this->salaDAO->GetAll();
-        $cines = $this->cineDAO->GetAll();
-
-        $allCines = array();
-        $salasCine = array();
-        foreach ($cines as $cine) {
-            foreach ($salaXcines as $salaxcine) {
-                if ($salaxcine['ID_CINE'] == $cine->getId()) {
-                    foreach ($salas as $sala) {
-                        if ($sala->getId() == $salaxcine['ID_SALA']) {
-                            array_push($salasCine, $sala);
-                            #break; alguna forma para romper con el bucle de salas sin destrozar los otros
-                        }
-                    }
-                }
-            }
-            $cine->setSalas($salasCine);
-            array_push($allCines, $cine);
-        }
-    }
-
-    public function get_salaXcine()
-    {
-        try {
-            $con = Connection::getInstance();
-
-            $query = 'SELECT * FROM salaXcine';
-            $salasXcines = $con->execute($query);
-        } catch (\PDOException $e) {
-            echo $e->getMessage();
-        }
-        return $salasXcines;
-    }
-  
-
     public function CreateCine($cineMapeado)
     {
         // Busco objetoDireccion y lo seteo
