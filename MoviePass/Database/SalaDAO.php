@@ -35,6 +35,7 @@
                 $params['precio'] = $sala->getPrecio();
                 $params['capacidad'] = $sala->getCapacidad();
                 $params['tipo'] = $sala->getTipo();
+
                 return $con->executeNonQuery($query, $params);
             }catch(PDOException $e){
                 throw $e;
@@ -44,7 +45,18 @@
         public function GetAll(){
             try{
                 $con = Connection::getInstance();
-                $query = 'SELECT * FROM sala';
+                $query = 'SELECT * FROM salas';
+                $array = $con->execute($query);
+                return (!empty($array)) ? $this->mapping($array) : false;
+            }catch(PDOException $e){
+                throw $e;
+            }
+        }
+
+        public function GetSalaById($idSala){
+            try{
+                $con = Connection::getInstance();
+                $query = 'SELECT * FROM salas WHERE idSala='.$idSala . ";";
                 $array = $con->execute($query);
                 return (!empty($array)) ? $this->mapping($array) : false;
             }catch(PDOException $e){
@@ -52,11 +64,12 @@
             }
         }
         
+        
         public function mapping($value){
-            $value = \is_array($value) ? $value : [];
+            $value = is_array($value) ? $value : [];
             $resp = array_map(function($a){
                 $sala = new Sala(
-                    $a['id'],$a['nombre'],$a['precio'],$a['capacidad'],$a['tipo']
+                    $a['idSala'],$a['nombre'],$a['precio'],$a['capacidad'],$a['tipo']
                 );
                 return $sala;
             },$value);
@@ -76,7 +89,7 @@
         */
         public function GetLastId(){
             try {
-                $query = 'SELECT max(idSala) as maximo FROM salas';
+                $query = 'SELECT max(idSala) as maximo FROM salas;';
                 $con = Connection::getInstance();
                 $idSala = $con->execute($query);
                 //var_dump($idSala);
@@ -86,10 +99,28 @@
             }
         }
 
+        public function GetSalasFromSalasPorCine($salasPorCine){
+            $salasArray = array();
+            if(!empty($salasPorCine)){
+                foreach($salasPorCine as $sala){
+                    $salaDelCine = $this->GetSalaById($sala['idSala']);
+                    array_push($salasArray, $salaDelCine);
+                }
+            }
+            //var_dump($salasArray);
+            return $salasArray;
+        }
 
         ////TRATAR PARA SALAXCINE////
-        public function GetSalaById_SALAXCINE($idSala){
-
+        public function GetSalasByCineId($idCine){
+            try {
+                $con = Connection::getInstance();
+                $query = 'SELECT * FROM salaXcine WHERE idCine=' . $idCine . ";";
+                $res = $con->execute($query);
+                return (!empty($res)) ? $res : array();
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
         }
 
         public function Add_SALAXCINE($idSala, $idCine){

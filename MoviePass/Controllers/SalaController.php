@@ -25,6 +25,7 @@ use Models\Ubicacion\Ciudad as Ciudad;
 use Models\Ubicacion\Provincia as Provincia;
 use Models\Ubicacion\Pais as Pais;
 use Models\Cine\Sala as Sala;
+use PDOException as PDOException;
 
 class SalaController
 {

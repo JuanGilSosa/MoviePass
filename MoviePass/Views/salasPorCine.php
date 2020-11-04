@@ -42,9 +42,9 @@ require_once('nav.php');
                     </thead>
                     <tbody>
                          <?php
-                         if (isset($salas)) {
+                         if (isset($salasPorCine)) {
                               
-                              foreach ($salas as $sala) {
+                              foreach ($salasPorCine as $sala) {
                                    $cineName = $cine->getNombre();
                                    $salaName = $sala->getNombre();
                                    $tipoDeSala = $sala->getTipo();
