@@ -1,4 +1,7 @@
 <?php namespace Database;
+
+    use Models\Pelicula\Funcion as Funcion;
+
     class FuncionesDAO implements IDAO{
          
         
@@ -21,23 +24,55 @@
         }*/
 
         public function GetAll(){
+            try {
+                $con = Connection::getInstance();
+                $query = 'SELECT * FROM funciones';
+                $funciones = $con->execute($query); 
+                return (!empty($funciones)) ? $this->mapping($funciones) : array();
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+
+        public function GetAllActive(){
+            try {
+                $con = Connection::getInstance();
+                $query = 'SELECT * FROM funciones WHERE active = :active';
+                $params['active'] = 1;
+                $funciones = $con->execute($query, $params); 
+                return (!empty($funciones)) ? $this->mapping($funciones) : array();
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+
+        public function Add($funcion){
+            try {
+                $con = Connection::getInstance();
+                $query = 'INSERT INTO funciones(horaInicio, horaFin, idPelicula, active) VALUES(:horaInicio, :horaFin, :idPelicula, :active)';
+                $params['horaInicio'] = $funcion->getHoraInicio();
+                $params['horaFin'] = $funcion->getHoraFin();
+                $params['idPelicula'] = $funcion->getPelicula()->getId();
+                $params['active'] = 1;
+                return $con->executeNonQuery($query, $params);
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+
+        public function Delete($funcionId){
 
         }
 
-        public function Add($cine){
-
-        }
-
-        public function Delete($cineId){
-
-        }
-
-        public function Update($cine){
+        public function Update($funcion){
 
         }
 
         public function mapping($value){
-
+            $value = is_array($value) ? $value : [];
+            $resp = array_map(function($p){
+                return new Funcion($p['idFuncion'], $p['horaInicio'], $p['horaFin'], null, $p['idPelicula'], $p['active']);
+            }, $value);
         }
     }
 ?>

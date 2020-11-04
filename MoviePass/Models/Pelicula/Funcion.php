@@ -12,6 +12,7 @@
         private $horaFin;
         /** @var Sala || null */
         private $sala;
+        private $active;
 
         public function __construct($id = "",$pelicula="", $horaInicio = "", $horaFin ="", $sala = ""){
             $this->id = $id;
@@ -19,6 +20,7 @@
             $this->horaInicio = $horaInicio;
             $this->horaFin = $horaFin;
             $this->sala = $sala;
+            $this->active = true;
         }
 
         /**
@@ -44,6 +46,8 @@
         public function getHoraInicio(){return $this->horaInicio;}
         public function getHoraFin(){return $this->horaFin;}
         public function getSala(){return $this->sala;}
+        public function isActive(){return $this->active;}
+        public function setActive($active){$this->active = $active;}
         
     }
 

@@ -38,11 +38,9 @@
             }
         }
 
-        public function ShowMovieDescription(){
-            if(isset($_GET['idPelicula'])){
-                $idPelicula = $_GET["idPelicula"];
+        public function ShowMovieDescription($idPelicula){
+            if(isset($idPelicula)){
                 $pelicula = $this->peliculasDAO->getMovieById($idPelicula);
-
                 $trailerKey = $this->peliculasDAO->getTrailerKey($idPelicula);
              
                 ViewsController::ShowMovieDescription($pelicula, $trailerKey);
