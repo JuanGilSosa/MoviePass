@@ -1,8 +1,7 @@
 <?php
+	  require_once('Login-Facebook/vendor/autoload.php');
+	  require_once('Login-Facebook/App/Auth/Auth.php');
     require_once('nav.php');
-    /*if($_SESSION){
-      session_start();
-    }*/
 ?>
 <main class="">
     <div class="container text-center table loginTable  w-100" style="padding:0px;">
@@ -51,5 +50,26 @@
         <a href="<?php echo FRONT_ROOT.'Views/ShowRegisterAdmin'?>" class="text-warning" style="font-size:12px;">Ingresa como Administrador</a>
       
     </div>
-    <?php include('Login-Facebook\index.php');?>
+
+    <form action="<?php echo FRONT_ROOT.'LogIn/LogInFB';?>" method="POST">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <br> 
+             <!-- 
+              Donde la variable login que se usa el los script de php sea igual a Facebook si presiona el boton
+              -->
+            <a 
+              value="<?php echo Auth::getUserAuth(); ?>"
+              href="?login=Facebook" 
+              type="submit" 
+              class="btn blue-gradient btn-block fab fa-facebook-f"
+            >
+              &nbsp;&nbsp;Ingresa con Facebook
+            </a>
+          </div>
+        </div>
+      </div>
+      <!--<#?php include('Login-Facebook\index.php');?>-->
+    </form>
 </main>

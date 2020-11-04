@@ -112,13 +112,14 @@
         }
 
         ////TRATAR PARA SALAXCINE////
-        public function GetSalasByCineId($idCine){
-            try {
+        public function GetSalasByCineId($idSala){
+            try{
                 $con = Connection::getInstance();
-                $query = 'SELECT * FROM salaXcine WHERE idCine=' . $idCine . ";";
-                $res = $con->execute($query);
-                return (!empty($res)) ? $res : array();
-            } catch (PDOException $e) {
+                $query = 'SELECT s.* FROM salas as s JOIN salaxcine as sxc ON sxc.idSala = s.idSala AND s.idSala = :idSala';
+                $params['idSala'] = $idSala;
+                $cine = $con->execute($query, $params);
+                return (!empty($cine)) ? $this->mapping($cine) : array();
+            }catch(PDOException $e){
                 echo $e->getMessage();
             }
         }
