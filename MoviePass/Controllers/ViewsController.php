@@ -118,7 +118,6 @@ class ViewsController
         $salaDAO = new SalaDAO();
         $salasPorCine = $salaDAO->GetSalasByCineId($idCine);
         $salas = $salaDAO->ConvertToArray($salasPorCine);
-        
         require_once(VIEWS_PATH . 'salasPorCine.php');
     }
 
@@ -139,7 +138,20 @@ class ViewsController
         }
     }
 
-    public static function ShowAddFuncionView($pelicula, $cines, $salas){
-        require_once(VIEWS_PATH . "addFuncion.php");
+    public static function ShowAddFuncionView($message = "", $peliculaId = "", $cine = "", $salas = "")
+    {
+        if (!empty($peliculaId)) {
+            $peliculasDAO = new PeliculaDAO();
+            $pelicula = $peliculasDAO->getMovieById($peliculaId);
+            if(empty($cine)){
+                $cineDAO = new CineDAO();
+                $cines = $cineDAO->GetAllActive();
+            }else{
+                $cines = $cine;
+            }
+            
+
+            require_once(VIEWS_PATH . "addFuncion.php");
+        }
     }
 }

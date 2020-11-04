@@ -18,7 +18,7 @@
         public function ShowMoviesNowPlaying(){
             $peliculas = $this->peliculasDAO->GetAll();
             $generos = $this->generosDAO->GetAll();
-            ViewsController::ShowMoviesListView($peliculas,$generos);
+            ViewsController::ShowMoviesListView("",$peliculas,$generos);
         }
 
         #@param valueOfSelect tiene el id del genero
@@ -29,7 +29,7 @@
                 if($valueOfSelect != 0){
                     $peliculas = $this->peliculasDAO->GetMoviesByGenre($valueOfSelect);
                     $generos = $this->generosDAO->GetAll();
-                    ViewsController::ShowMoviesListView($peliculas,$generos);
+                    ViewsController::ShowMoviesListView("",$peliculas,$generos);
                 }else{
                     ViewsController::ShowMoviesNowPlaying();
                 }

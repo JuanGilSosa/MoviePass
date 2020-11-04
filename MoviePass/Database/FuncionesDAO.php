@@ -69,6 +69,34 @@
 
         }
 
+        public function GetLastId(){
+            try {
+                $query = 'SELECT max(idFuncion) as maximo FROM funciones;';
+                $con = Connection::getInstance();
+                $idFuncion = $con->execute($query);
+                //var_dump($idSala);
+                return (!empty($idFuncion)) ? (int)$idFuncion[0]['maximo'] : -1;
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+
+        public function Add_FUNCIONESXSALA($idSala, $idFuncion){
+            try{
+                $con = Connection::getInstance();
+
+                $query = 'INSERT INTO salaxfunciones(idSala, idFuncion) VALUES(:idSala, :idFuncion)';
+
+                $params['idSala'] = $idSala;
+                $params['idFuncion'] = $idFuncion;
+
+                return $con->executeNonQuery($query, $params); 
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
+        }
+
+
         public function mapping($value){
             $value = is_array($value) ? $value : [];
             $resp = array_map(function($p){
