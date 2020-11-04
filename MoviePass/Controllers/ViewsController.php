@@ -139,18 +139,7 @@ class ViewsController
         }
     }
 
-    public static function ShowAddFuncion($message = "", $peliculaId = "", $cine = "", $salas = "")
-    {
-        if (!empty($peliculaId) && empty($cine) && empty($salas))    {
-            $peliculasDAO = new PeliculaDAO();
-            $pelicula = $peliculasDAO->getMovieById($peliculaId);
-            $cineDAO = new CineDAO();
-            $cines = $cineDAO->GetAllActive();
-
-            require_once(VIEWS_PATH . "addFuncion.php");
-        }else if(!empty($peliculaId) && !empty($cine) && !empty($salas)){
-            require_once(VIEWS_PATH . "addFuncion.php");
-
-        }
+    public static function ShowAddFuncionView($pelicula, $cines, $salas){
+        require_once(VIEWS_PATH . "addFuncion.php");
     }
 }

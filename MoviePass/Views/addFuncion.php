@@ -26,11 +26,16 @@ require_once("nav.php");
                     <div class="col-lg-6">
                         <label for="">Elegi el Cine</label>
                         <div class="form-group">
-                            <select name="select-movies" class="form-control" onchange="this.form.submit();">
+                            <select name="select-movies" class="form-control" onchange="">
                                 <option selected="true" disabled="disabled">Seleccione Cine</option>
+<<<<<<< HEAD
                                 <?php 
                                 foreach ($cines as $cine) { ?>
                                         <option name=cineId value="<?php echo $cine->getId() ?>" required><?php echo $cine->getNombre() ?></option>
+=======
+                                <?php foreach ($cines as $cine) {?>
+                                    <option value="<?php echo $cine->getId() ?>" required><?php echo $cine->getNombre() ?></option>
+>>>>>>> 7769e63f54d2940b3e497eddda7f6055b9341c3c
                                 <?php } ?>
                             </select>
                         </div>
@@ -38,8 +43,8 @@ require_once("nav.php");
                     <div class="col-lg-6">
                         <label for="">Elegi la Sala</label>
                         <div class="form-group">
-                            <select name="select-movies" class="form-control" onchange="this.form.submit();">
-                                <option selected="true" disabled="disabled">Seleccione Cine</option>
+                            <select name="select-movies" class="form-control" onchange="">
+                                <option selected="true" disabled="disabled">Seleccione Sala</option>
                                 <?php foreach ($salas as $sala) { ?>
                                     <option name="salaId" value="<?php echo $sala->getId() ?>" required><?php echo $sala->getNombre() ?></option>
                                 <?php } ?>

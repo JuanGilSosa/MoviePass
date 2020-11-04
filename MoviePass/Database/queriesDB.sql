@@ -49,11 +49,7 @@ CREATE TABLE Salas(
     idSala INT NOT NULL AUTO_INCREMENT, 
     nombre VARCHAR(30), 
     precio INT, 
-<<<<<<< HEAD
     capacidad INT,
-=======
-    capacidad INT, 
->>>>>>> master
     tipo VARCHAR(5),
     CONSTRAINT pk_idSala PRIMARY KEY(idSala)
 );
@@ -63,6 +59,7 @@ CREATE TABLE Funciones(
     horaInicio VARCHAR(30) NOT NULL,
     horaFin VARCHAR(30) NOT NULL,
     idPelicula INT,
+    active BOOLEAN,
     CONSTRAINT pk_idFuncion PRIMARY KEY(idFuncion)
 );
 
@@ -74,13 +71,8 @@ CREATE TABLE salaXfunciones(
 );
 
 CREATE TABLE salaXcine(
-<<<<<<< HEAD
-    idSala INT NOT NULL,
-    idCine INT NOT NULL,
-=======
     idSala INT,
     idCine INT,
->>>>>>> master
     CONSTRAINT pk_idSala FOREIGN KEY(idSala) REFERENCES salas(idSala),
     CONSTRAINT pk_idCine FOREIGN KEY(idCine) REFERENCES cines(idCine)
 );
