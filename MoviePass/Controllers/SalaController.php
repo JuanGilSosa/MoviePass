@@ -54,6 +54,7 @@ class SalaController
 
     public function ShowSalasPorCine($idCine)
     {
+        
         ViewsController::ShowSalasPorCine($idCine);
     }
 

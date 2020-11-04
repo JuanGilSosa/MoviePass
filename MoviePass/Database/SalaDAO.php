@@ -73,7 +73,7 @@
                 );
                 return $sala;
             },$value);
-            return $resp;
+            return count($resp)>1 ? $resp : $resp[0];
         }
 
         public function Delete($sala){
@@ -99,24 +99,22 @@
             }
         }
 
-        public function GetSalasFromSalasPorCine($salasPorCine){
+        public function ConvertToArray($salasPorCine){
             $salasArray = array();
-            if(!empty($salasPorCine)){
-                foreach($salasPorCine as $sala){
-                    $salaDelCine = $this->GetSalaById($sala['idSala']);
-                    array_push($salasArray, $salaDelCine);
-                }
-            }
-            //var_dump($salasArray);
+            if(is_object($salasPorCine)):
+                array_push($salasArray, $salasPorCine);
+            else:
+                return $salasPorCine;
+            endif;
             return $salasArray;
         }
 
         ////TRATAR PARA SALAXCINE////
-        public function GetSalasByCineId($idSala){
+        public function GetSalasByCineId($idCine){
             try{
                 $con = Connection::getInstance();
-                $query = 'SELECT s.* FROM salas as s JOIN salaxcine as sxc ON sxc.idSala = s.idSala AND s.idSala = :idSala';
-                $params['idSala'] = $idSala;
+                $query = 'SELECT s.* FROM salas as s JOIN salaxcine as sxc ON sxc.idSala = s.idSala AND sxc.idCine = :idCine';
+                $params['idCine'] = $idCine;
                 $cine = $con->execute($query, $params);
                 return (!empty($cine)) ? $this->mapping($cine) : array();
             }catch(PDOException $e){
