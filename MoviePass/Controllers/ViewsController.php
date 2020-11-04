@@ -138,7 +138,7 @@ class ViewsController
         }
     }
 
-    public static function ShowAddFuncion($message = "", $peliculaId = "", $cine = "", $salas = "")
+    public static function ShowAddFuncionView($message = "", $peliculaId = "", $cine = "", $salas = "")
     {
         if (!empty($peliculaId)) {
             $peliculasDAO = new PeliculaDAO();
@@ -148,8 +148,6 @@ class ViewsController
             
 
             require_once(VIEWS_PATH . "addFuncion.php");
-        }else if(!empty($peliculaId) && !empty($cine) && !empty($salas)){
-
         }
     }
 }

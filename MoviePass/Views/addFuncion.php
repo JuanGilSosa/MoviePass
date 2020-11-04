@@ -26,42 +26,39 @@ require_once("nav.php");
                     <div class="col-lg-6">
                         <label for="">Elegi el Cine</label>
                         <div class="form-group">
-<<<<<<< Updated upstream
+
                             <select name="select-movies" class="form-control" onchange="this.form.submit();">
+
                                 <option selected="true" disabled="disabled">Seleccione Cine</option>
-                                <?php foreach ($cines as $cine) { var_dump($cine);?>
-                                
+                                <?php foreach ($cines as $cine) { ?>
                                     <option value="<?php echo $cine->getId() ?>" required><?php echo $cine->getNombre() ?></option>
                                 <?php } ?>
-=======
-                            <select name="idCine" class="form-control" onchange="this.form.submit()" required>
-                                <option selected disabled>Seleccione Cine</option>
-                                <?php 
-                                    if(is_array($cines)){ foreach ($cines as $cine) { 
-                                ?>
-                                    <option value="<?php echo $cine->getId() ?>" ><?php echo $cine->getNombre() ?></option>
-                                <?php } }else{
+                                <select name="idCine" class="form-control" onchange="this.form.submit()" required>
+                                    <option selected disabled>Seleccione Cine</option>
+                                    <?php
+                                    if (is_array($cines)) {
+                                        foreach ($cines as $cine) {
                                     ?>
-                                    <option value="<?php echo $cines->getId() ?>" selected required><?php echo $cines->getNombre() ?></option>
+                                            <option value="<?php echo $cine->getId() ?>"><?php echo $cine->getNombre() ?></option>
+                                        <?php }
+                                    } else {
+                                        ?>
+                                        <option value="<?php echo $cines->getId() ?>" selected required><?php echo $cines->getNombre() ?></option>
                                     <?php } ?>
->>>>>>> Stashed changes
-                            </select>
+                    
+                                </select>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <label for="">Elegi la Sala</label>
                         <div class="form-group">
-<<<<<<< Updated upstream
-                            <select name="select-movies" class="form-control" onchange="this.form.submit();">
-                                <option selected="true" disabled="disabled">Seleccione Cine</option>
-=======
-                            <select name="idSala" class="form-control">
-                                <option selected disabled>Seleccione Sala</option>
->>>>>>> Stashed changes
-                                <?php foreach ($salas as $sala) { ?>
-                                    <option value="<?php echo $sala->getId() ?>" required><?php echo $sala->getNombre() ?></option>
-                                <?php } ?>
-                            </select>
+                                    <select name="select-movies" class="form-control" onchange="">
+                                        <option selected="true" disabled="disabled">Seleccione Sala</option>
+                          
+                                        <?php foreach ($salas as $sala) { ?>
+                                            <option name="salaId" value="<?php echo $sala->getId() ?>" required><?php echo $sala->getNombre() ?></option>
+                                        <?php } ?>
+                                    </select>
                         </div>
                     </div>
                     <div class="col-lg-6">
