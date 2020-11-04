@@ -42,9 +42,9 @@ require_once('nav.php');
                     </thead>
                     <tbody>
                          <?php
-                         if (isset($salasPorCine)) {
+                         if (isset($salas)) {
                               
-                              foreach ($salasPorCine as $sala) {
+                              foreach ($salas as $sala) {
                                    $cineName = $cine->getNombre();
                                    $salaName = $sala->getNombre();
                                    $tipoDeSala = $sala->getTipo();
@@ -55,7 +55,7 @@ require_once('nav.php');
                                         <td><?php echo $cineName ?> </td>
                                         <td><?php echo $salaName ?> </td>
                                         <td><?php echo $tipoDeSala ?> </td>
-                                        <td><?php echo $precio ?> </td>
+                                        <td><?php echo '$'.$precio ?> </td>
                                         <td><?php echo $capacidad ?> </td>
                                        
                                         <form action="<?php echo FRONT_ROOT . 'Sala/ShowModify' ?>" method="POST">
