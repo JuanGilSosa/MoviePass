@@ -244,6 +244,16 @@
       }
     }
 
+    public function GetDuracion($idPelicula){
+      $movieJson = file_get_contents(
+        API_URL ."{$idPelicula}?api_key=".API_KEY1
+      );
+
+      $movie = array();
+      $movieArray = ($movieJson) ? json_decode($movieJson, true) : array();
+      return $movieArray["runtime"];
+    }
+
 
   }
 ?>
