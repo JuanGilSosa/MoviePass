@@ -1,7 +1,7 @@
 <?php 
 
-    namespace Models\Pelicula\Pelicula;
-    namespace Models\Cine\Sala;
+    namespace Models\Pelicula;
+   
 
     class Funcion{
 

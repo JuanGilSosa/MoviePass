@@ -28,14 +28,8 @@ require_once("nav.php");
                         <div class="form-group">
                             <select name="select-movies" class="form-control" onchange="">
                                 <option selected="true" disabled="disabled">Seleccione Cine</option>
-<<<<<<< HEAD
-                                <?php 
-                                foreach ($cines as $cine) { ?>
-                                        <option name=cineId value="<?php echo $cine->getId() ?>" required><?php echo $cine->getNombre() ?></option>
-=======
                                 <?php foreach ($cines as $cine) {?>
                                     <option value="<?php echo $cine->getId() ?>" required><?php echo $cine->getNombre() ?></option>
->>>>>>> 7769e63f54d2940b3e497eddda7f6055b9341c3c
                                 <?php } ?>
                             </select>
                         </div>
