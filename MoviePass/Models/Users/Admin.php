@@ -7,14 +7,15 @@
         protected $employeeType;
 
         public function __construct ($employeeType = ""){
+            //parent::__construct($dni, $email, $password, $firstName, $lastName);
             $this->employeeType = $employeeType;
         }
 
-        public function getEmployeeType(){
+        public function GetEmployeeType(){
             return $this->employeeType;
         }
 
-        public function setEmployeeType($employeeType){
+        public function SetEmployeeType($employeeType){
             $this->employeeType = $employeeType;
         }
 
