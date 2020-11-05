@@ -3,12 +3,14 @@
 #cartelera es billboard, funcion es showtime
 
     namespace Models\Theatre;
+    use Models\Movie\Billboard as Billboard;
 
     use Models\Ubicacion\Direccion as Direccion;
     use Models\Ubicacion\Localidad as Localidad;
 
     class Theatre 
     {
+        /** @var int */
         private $id;
         private $name;
         private $email;
@@ -28,7 +30,7 @@
             $this->phoneNumber = $phoneNumber;
             $this->adress = $adress;
             $this->auditorium = array();
-            $this->billboard = array();
+            $this->billboard = new Billboard();
             $this->active = true;
         }
 

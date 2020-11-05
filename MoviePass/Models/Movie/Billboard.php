@@ -1,4 +1,4 @@
-<?php namespace Models\Pelicula;
+<?php namespace Models\Movie;
     
     class Billboard{
 
@@ -7,7 +7,7 @@
         private $date;
         private $active;
 
-        public function __construct($id ="", $functions ="", $date){
+        public function __construct($id ="", $functions ="", $date = ""){
             $this->id = $id;
             $this->funciones = array();
             $this->date = $date;
