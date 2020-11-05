@@ -1,8 +1,8 @@
 <?php
 
-    namespace Models\Pelicula;
+    namespace Models\Movie;
 
-    class Pelicula
+    class Movie
     {
         private $id;
         private $poster_path;
@@ -35,25 +35,25 @@
             $this->release_date = $release_date;
         }
 
-        public function getPosterPath(){return $this->poster_path;}
+        public function GetPosterPath(){return $this->poster_path;}
         
-        public function getBackdropPath(){return $this->backdrop_path;}
+        public function GetBackdropPath(){return $this->backdrop_path;}
 
-        public function getId(){return $this->id;}
+        public function GetId(){return $this->id;}
         
         public function isAdult(){return $this->adult;}
         
-        public function getOriginalLanguage(){return $this->original_language;}
+        public function GetOriginalLanguage(){return $this->original_language;}
         
-        public function getTitle(){return $this->title;}
+        public function GetTitle(){return $this->title;}
         
-        public function getGenres(){return $this->genres;}
+        public function GetGenres(){return $this->genres;}
         
-        public function getVoteAverage(){return $this->vote_average;}
+        public function GetVoteAverage(){return $this->vote_average;}
         
-        public function getOverview(){return $this->overview;}
+        public function GetOverview(){return $this->overview;}
         
-        public function getReleaseDate(){return $this->release_date;}
+        public function GetReleaseDate(){return $this->release_date;}
     }
     
 

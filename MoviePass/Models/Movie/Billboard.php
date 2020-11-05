@@ -3,23 +3,23 @@
     class Billboard{
 
         private $id;
-        private $functions;
+        private $showtime;
         private $date;
         private $active;
 
-        public function __construct($id ="", $functions ="", $date = ""){
+        public function __construct($id ="", $date = ""){
             $this->id = $id;
-            $this->funciones = array();
+            $this->showtime = array();
             $this->date = $date;
             $this->active = 1;
         }
 
-        public function setId($id){$this->id = $id;}
-        public function setFunctions($functions){$this->functions = $functions;}
-        public function setDate($date){$this->date = $date;}
-        public function getId(){return $this->id;}
-        public function getFunctions(){return $this->funciones;}
-        public function getDate(){return $this->date;}
+        public function SetId($id){$this->id = $id;}
+        public function SetShowtime($showtimes){$this->showtime = $showtimes;}
+        public function SetDate($date){$this->date = $date;}
+        public function GetId(){return $this->id;}
+        public function GetShowtime(){return $this->showtime;}
+        public function GetDate(){return $this->date;}
         public function isActive(){return $this->active;}
 
     }

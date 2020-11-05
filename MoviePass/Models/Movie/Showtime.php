@@ -1,31 +1,30 @@
 <?php 
 
-    namespace Models\Pelicula;
+    namespace Models\Movie;
    
 
-    class Funcion{
+    class Showtime
+    {
 
         private $id;
-        /** @var Pelicula || null */
-        private $pelicula;
-        private $horaInicio;
-        private $horaFin;
-        /** @var Sala || null */
-        private $sala;
+        private $movie;
+        private $startTime;
+        private $endTime;
+        private $auditorium;
         private $active;
 
-        public function __construct($id = "",$pelicula="", $horaInicio = "", $horaFin ="", $sala = ""){
+        public function __construct($id = "",$movie="", $startTime = "", $endTime ="", $auditorium = ""){
             $this->id = $id;
-            $this->pelicula = $pelicula;
-            $this->horaInicio = $horaInicio;
-            $this->horaFin = $horaFin;
-            $this->sala = $sala;
+            $this->movie = $movie;
+            $this->startTime = $startTime;
+            $this->endTime = $endTime;
+            $this->auditorium = $auditorium;
             $this->active = true;
         }
 
         /**
             * ! LA LISTA DE PELICULAS TIENE QUE MOSTRAR +FUNCION, NO +CARTELERA 
-            * ? se muestra vista 'agregarfuncion.php' mostrando los datos de la pelicula seleccionada
+            * ? se muestra vista 'agregarfuncion.php' mostrando los datos de la movie seleccionada
                 // *  nombrePelicula, elegir cine, elegir dia y hora
             * ? esto lleva a 'moviepass.com/Funcion/AgregarFuncion'
             * * esta funcion ademas de crear la funcion agrega 
@@ -41,14 +40,14 @@
                     // * mostrar un select con los dias de inicio y fin de  las carteleras existentes en la vista
          // TODO :  en ViewsController agregar ShowCartelera($hoy){ $cartelera = $this->carteleraDAO->BuscarCarteleraPorFecha($hoy); } 
 
-        public function getId(){return $this->id;}
-        public function getPelicula(){return $this->pelicula;}
-        public function getHoraInicio(){return $this->horaInicio;}
-        public function getHoraFin(){return $this->horaFin;}
-        public function getSala(){return $this->sala;}
+        public function GetId(){return $this->id;}
+        public function GetMovie(){return $this->movie;}
+        public function GetStartTime(){return $this->startTime;}
+        public function GetEndTime(){return $this->endTime;}
+        public function GetAuditorium(){return $this->auditorium;}
         public function isActive(){return $this->active;}
-        public function setActive($active){$this->active = $active;}
-        public function setRoom($room){$this->sala = $room;}
+        public function SetActive($active){$this->active = $active;}
+        public function SetAuditorium($auditorium){$this->auditorium = $auditorium;}
         
     }
 
