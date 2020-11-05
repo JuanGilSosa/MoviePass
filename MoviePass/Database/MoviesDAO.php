@@ -248,7 +248,7 @@
       }
     }
 
-    public function GetDuracion($idPelicula){
+    public function GetRuntime($idPelicula){
       $movieJson = file_get_contents(
         API_URL ."{$idPelicula}?api_key=".API_KEY1
       );
