@@ -19,7 +19,7 @@ use Models\Theatre\Sala as Sala;
 
 use Helpers\SessionHelper as SessionHelper;
 
-class CineController
+class TheatreController
 {
     private $theatreDAO;
     private $cinemaDAO;
