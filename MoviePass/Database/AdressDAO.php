@@ -195,4 +195,5 @@ class DireccionDAO implements IDAO
             echo "<script>console.log('" . $e->getMessage() . "');</script>";
         }
     }
+    
 }
