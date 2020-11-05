@@ -48,6 +48,7 @@
         public function getSala(){return $this->sala;}
         public function isActive(){return $this->active;}
         public function setActive($active){$this->active = $active;}
+        public function setRoom($room){$this->sala = $room;}
         
     }
 
