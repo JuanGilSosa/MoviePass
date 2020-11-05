@@ -2,7 +2,7 @@
 
     use Models\Pelicula\Billboard as Billboard;
 
-    class CinemaBillboardDAO implements IDAO{
+    class BillboardDAO implements IDAO{
         
         private $billboards;
 

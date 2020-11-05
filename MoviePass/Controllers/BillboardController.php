@@ -1,10 +1,10 @@
 <?php namespace Controllers; 
     
-    use Database\CinemaBillboardDAO as CinemaBillboardDAO;
+    use Database\BillboardDAO as BillboardDAO;
     use Database\FunctionsDAO as FunctionsDAO;
     use Database\SalaDAO as SalaDAO;
 
-    class CinemaBillboardController{
+    class BillboardController{
         
         private $cinemaListingsDAO;
         private $functionsDAO;
@@ -16,11 +16,16 @@
             $this->roomDAO = new SalaDAO();
         }
 
+        public function AddBillboard(){
+
+        }
+
         public function CreateCinemaBillboard($billboard){
             $functions = $this->functionsDAO->GetFunction_CARTELERAXFUNCION($billboard->getId());
             $rooms = $this->roomDAO->GetRoom_SALAXFUNCION($functions->getId()); #mando asi porque se que carteleraxfuncion va a retornar solo un objeto
             $functions->setRoom($rooms);
             $billboard->setFunctions($functions);
+            return $billboard;
         }
 
     }
