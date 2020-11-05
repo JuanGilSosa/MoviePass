@@ -164,10 +164,10 @@
             }
         }
         
-        public function GetTheatreById_SALAXCINE($theatreId){
+        public function GetTheatreById_cinemasXtheatres($theatreId){
             try{
                 $con = Connection::getInstance();
-                $query = 'SELECT c.* FROM theatres as c JOIN salaxcine as sxc ON sxc.theatreId = c.theatreId AND c.theatreId = :theatreId';
+                $query = 'SELECT c.* FROM theatres as c JOIN cinemasXtheatres as sxc ON sxc.theatreId = c.theatreId AND c.theatreId = :theatreId';
                 $params['theatreId'] = $theatreId;
                 $theatre = $con->execute($query,$params);
                 return (!empty($theatre)) ? $this->mapping($theatre) : array();
