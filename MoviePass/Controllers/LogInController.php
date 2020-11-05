@@ -1,5 +1,7 @@
 <?php namespace Controllers;
     
+    use Helpers\SessionHelper as SessionHelper;
+
     class LogInController
     {
         private $memberController;
@@ -17,8 +19,7 @@
         }
 
         public function LogInFB($obj){
-            var_dump($obj);
-            if(isset($_SESSION['user_fb'])){
+            if(SessionHelper::HayUsuario('user_fb')){
                 $rta = $this->memberController->VerifyMemberAndPassword($obj->email,'');
                 $this->RedirectLogIn($rta);
             }
@@ -26,7 +27,7 @@
         }
 
         public function RedirectLogIn ($message){
-            if(SessionController::HayUsuario('userLogged')){
+            if(SessionHelper::HayUsuario('userLogged')){
                 
                 HomeController::Index();
 

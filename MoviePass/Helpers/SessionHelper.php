@@ -1,6 +1,6 @@
-<?php namespace Controllers;
+<?php namespace Helpers;
 
-    class SessionController{
+    class SessionHelper{
 
         public static function HayUsuario($key = ""){
             if(!isset($_SESSION[$key])){

@@ -25,6 +25,8 @@ use Models\Ubicacion\Provincia as Provincia;
 use Models\Ubicacion\Pais as Pais;
 use Models\Cine\Sala as Sala;
 
+use Helpers\SessionHelper as SessionHelper;
+
 class CineController
 {
     private $cineDAO;
@@ -46,7 +48,7 @@ class CineController
 
     public function AddViewCine($message = "")
     {
-        if (SessionController::HayUsuario('adminLogged')) {
+        if (SessionHelper::HayUsuario('adminLogged')) {
             ViewsController::ShowAddCineView();
         } else {
             ViewsController::ShowLogIn();
@@ -55,7 +57,7 @@ class CineController
 
     public function ListViewCine($message = "")
     {
-        if (SessionController::HayUsuario('adminLogged')) {
+        if (SessionHelper::HayUsuario('adminLogged')) {
             $cines = $this->cineDAO->GetAllActive();
             $cinesConObjetos = array();
             if ((is_array($cines))  and
@@ -81,7 +83,7 @@ class CineController
 
     public function ShowModify($cineId, $message = "")
     {
-        if (SessionController::HayUsuario('adminLogged')) {
+        if (SessionHelper::HayUsuario('adminLogged')) {
             ViewsController::ShowModifyCine(strval($cineId), $message);
         } else {
             ViewsController::ShowLogIn();

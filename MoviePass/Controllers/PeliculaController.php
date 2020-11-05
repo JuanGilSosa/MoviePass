@@ -1,5 +1,6 @@
 <?php  namespace Controllers;
     
+    use Helpers\SessionHelper as SessionHelper;
     use Models\Pelicula\Pelicula as Pelicula;
     use Models\Pelicula\Genero as Genero;
     use DAO\PeliculaDAO as PeliculaDAO;
@@ -25,7 +26,7 @@
         
         public function ShowMovies($valueOfSelect=""){
             #ACA TENEMOS QUE VER SI LA LISTA DE PELICULAS SE PUEDEN VER SIN ESTAR LOGEADO O SOLAMENTE LOS ADMIN
-            if(SessionController::HayUsuario('userLogged') || SessionController::HayUsuario('adminLogged')){
+            if(SessionHelper::HayUsuario('userLogged') || SessionHelper::HayUsuario('adminLogged')){
                 if($valueOfSelect != 0){
                     $peliculas = $this->peliculasDAO->GetMoviesByGenre($valueOfSelect);
                     $generos = $this->generosDAO->GetAll();
