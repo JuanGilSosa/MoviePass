@@ -5,7 +5,7 @@ namespace Database;
 use Models\Location\Adress as Adress;
 use PDOException as PDOException;
 
-class DireccionDAO implements IDAO
+class AdressDAO implements IDAO
 {
     /*
         public function __construct(){

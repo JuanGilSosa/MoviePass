@@ -3,8 +3,6 @@
     namespace Database;
 
     use Models\Theatre\Theatre as Theatre;
-    use Models\Location\Adress as Adress;
-    use Database\AdressDAO as AdressDAO;
     use PDOException as PDOException;
 
     class TheatreDAO implements IDAO{

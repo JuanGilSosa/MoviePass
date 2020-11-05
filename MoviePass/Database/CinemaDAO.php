@@ -6,7 +6,7 @@
     use Models\Theatre\Cinema as Cinema;
     use PDOException as PDOException;
 
-    class SalaDAO implements IDAO{
+    class CinemaDAO implements IDAO{
 /*
         public function __construct(){
             try{
