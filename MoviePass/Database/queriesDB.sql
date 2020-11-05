@@ -88,6 +88,20 @@ CREATE TABLE members(
     CONSTRAINT pk_idMember PRIMARY KEY(idMember)
 );
 
+CREATE TABLE Cartelera(
+    idCartelera INT NOT NULL AUTO_INCREMENT,
+    fecha VARCHAR(30) NOT NULL,
+    active BOOLEAN NOT NULL,
+    CONSTRAINT pk_idCartelera PRIMARY KEY(idCartelera)
+);
+
+CREATE TABLE carteleraXfuncion(
+    idCartelera INT,
+    idFuncion INT,
+    CONSTRAINT fk__idCartelera FOREIGN KEY(idCartelera) REFERENCES Cartelera(idCartelera),
+    CONSTRAINT fk__idFuncion FOREIGN KEY(idFuncion) REFERENCES Funciones(idFuncion)
+);
+
 #########OTRAS QUERIES#########
 
 #AGREGANDO PAIES
