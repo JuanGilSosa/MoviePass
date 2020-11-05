@@ -1,5 +1,6 @@
 <?php 
-    namespace DAO;
+    namespace Database;
+
     use Models\Movie\Movie as Movie;
     use Models\Movie\Genre as Genre;
     
@@ -26,6 +27,10 @@
         
         }
         public function Update($pelicula){
+
+        }
+
+        public function mapping($value){
 
         }
 
