@@ -125,7 +125,7 @@
             }
         }
 
-        public function FindTheatreByTelefono ($phoneNumber){
+        public function FindTheatreByPhoneNumber ($phoneNumber){
             try{
                 $query = 'SELECT * FROM theatres WHERE phoneNumber = :phoneNumber';
                 $params['phoneNumber'] = $phoneNumber;
