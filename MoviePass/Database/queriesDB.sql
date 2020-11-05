@@ -62,7 +62,7 @@ CREATE TABLE Billboard(
     CONSTRAINT pk_billboardId PRIMARY KEY(billboardId)
 );
 
-CREATE TABLE carteleraXfuncion(
+CREATE TABLE showtimesXbillboard(
     billboardId INT,
     showtimeId INT,
     CONSTRAINT fk_billboardId FOREIGN KEY(billboardId) REFERENCES Billboard(billboardId) ON DELETE CASCADE,
