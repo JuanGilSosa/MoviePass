@@ -19,24 +19,24 @@
             return $this->zipCode;
         }
 
-        public function getNameCiudad() {
+        public function GetName() {
             return $this->name;
         }
 
-        public function getProvincia() {
+        public function GetProvince() {
             return $this->province;
         }
 
-        public function setCodigoPostal($zipCode)
+        public function SetZipCode($zipCode)
         {
             $this->zipCode = (int)$zipCode;
         }
 
-        public function setNameCiudad($name){
+        public function SetName($name){
             $this->name = $name;
         }
 
-        public function setProvincia($province)
+        public function SetProvince($province)
         {
             $this->province = $province;
         }
