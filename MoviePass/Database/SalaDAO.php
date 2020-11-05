@@ -151,5 +151,20 @@
                 echo $e->getMessage();
             }
         }
+        public function GetRoom_SALAXFUNCION($idFunction){
+            try {
+                $con = Connection::getInstance();
+                $query = 'SELECT s.* 
+                            FROM salaxfuncion as sxf 
+                            INNER JOIN salas as s 
+                                ON sxf.idSala = s.idSala 
+                                    AND s.idSala = :idFuncion;';
+                $params['idFuncion'] = $idFunction;
+                $rooms = $con->execute($query, $params);
+                return (!emtpy($rooms)) ? $this->mapping($rooms) : array();
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
     }
 ?>
