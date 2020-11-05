@@ -156,4 +156,8 @@ class ViewsController
             require_once(VIEWS_PATH . "addFuncion.php");
         }
     }
+
+    public static function ShowListFunctionsView(){
+        require_once(VIEWS_PATH . "listFunctions.php");
+    }
 }
