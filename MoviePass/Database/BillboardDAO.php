@@ -1,8 +1,9 @@
 <?php namespace Database;
 
-    use Models\Pelicula\Billboard as Billboard;
+    use Models\Movie\Billboard as Billboard;
+    use PDOException as PDOException;
 
-    class CinemaBillboardDAO implements IDAO{
+    class BillboardDAO implements IDAO{
         
         private $billboards;
 
@@ -13,21 +14,29 @@
         public function Add($billboard){
             try {
                 $con = Connection::getInstance();
-                $query = 'INSERT INTO cartelera(fecha, active) VALUES(:fecha, :active)';
-                $params['fecha'] = $billboard->getDate();
+                $query = 'INSERT INTO billboards(date, active) VALUES(:date, :active)';
+                $params['date'] = $billboard->GetDate();
                 $params['active'] = $billboard->isActive();
                 return $con->executeNonQuery($query, $params);
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }
         }
+
+        public function Delete($billboardId){
+
+        }
+
+        public function Update($billboard){
+     
+        }
     
         public function RetrieveData(){
             try {
                 $con = Connection::getInstance();
-                $query = 'SELECT * FROM cartelera;';
+                $query = 'SELECT * FROM billboards;';
                 $array = $con->execute($query);
-                return (!emtpy($array)) ? $this->mapping($array) : array();
+                return (!empty($array)) ? $this->mapping($array) : array();
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }
@@ -44,7 +53,7 @@
         public function mapping($value){
             $value = is_array($value) ? $value : [];
             $ans = array_map(function($p){
-                return new Billboard($p['idCartelera'], $p['fecha'], $p['active']);
+                return new Billboard($p['id'], $p['date'], $p['active']);
             },$value);
         }
 
