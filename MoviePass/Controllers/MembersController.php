@@ -58,7 +58,8 @@
         {
             $loggedMember = null;
 
-            $members = $this->membersDAO->GetAll();
+            $members = $this->membersDAO->GetAll($email);
+            
             if(is_array($members) && !empty($members)){
                 foreach ($members as $member)
                 {
@@ -67,11 +68,8 @@
                         return $member;
                     }
                 }
-            }else{
-                if($members->GetEmail() == $email)
-                {
-                    return $members;
-                }
+            }else if(!empty($members)){ #si solo hay un miembro en la base de datos, se devuelve un objeto y no un array
+                return $members;    
             }
             return $loggedMember;
         }
@@ -80,9 +78,10 @@
         {
             $rta = "";
             $loggedMember = $this->FindMemberByEmail($email);
+            
             if ($loggedMember != null && $loggedMember->GetPassword() == $password) 
             {
-                    SessionHelper::SetSession('userLogged',$loggedMember);
+                SessionHelper::SetSession('userLogged',$loggedMember);
             }
             else
             {

@@ -28,13 +28,17 @@
         public function GetAll()
         {
             try{
-                $array = $this->RetrieveData();
+                $query = 'SELECT * FROM members;';
+            
+                $con = Connection::getInstance();
+                $array = $con->execute($query);
+                
                 return (!empty($array)) ? $this->mapping($array) : array();
             }catch(PDOException $e){
                 echo $e->getMessage();
             }
         }
-        
+      
 
         public function Delete($idUser){
 
@@ -42,18 +46,6 @@
 
         public function Update($user){
             
-        }
-
-        public function RetrieveData()
-        {
-            $query = 'SELECT * FROM members;';
-            try{
-                $con = Connection::getInstance();
-                $array = $con->execute($query);
-                return $array;
-            }catch(PDOException $e){
-                throw $e;
-            }
         }
 
 		public function mapping($value){
