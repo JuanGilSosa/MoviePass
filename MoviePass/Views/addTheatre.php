@@ -74,6 +74,35 @@
                
                     
                    
+                   
+
+                    <div class="row">                         
+                         <div class="col-lg-8">
+                              <div class="form-group">
+                                   <label for="">Ciudad</label>
+                                   <select name="ciudad" class="form-control" placeholder="Seleccione su Ciudad" " required>
+                                   <?php
+                                             foreach ($cities as $city)
+                                             {
+                                                  $cityName = $city->GetName();
+                                                  $cityId = $city->GetZipCode();
+                                                  ?>
+                                                  <option value="<?php echo $cityId?>"><?php echo $cityName?></option>
+                                                  
+                                             <?php 
+                                             }
+                                             ?>
+                                   </select>
+                              </div>
+                         </div>
+                         <div class="col-lg-4">
+                              <div class="form-group">
+                                   <label for="">Cod. Postal</label>
+                                   <input type="text" name="codigoPostal" value="" class="form-control" placeholder="e.g. 7600" required>
+                              </div>
+                         </div>
+                    </div>
+
                     <div class="row">    
                          
                          <div class="col-lg-6">
@@ -103,42 +132,12 @@
 
                                              foreach ($provinces as $province)
                                              {
-                                                  $provinceName = $province->GetName();
-                                                  $provinceID = $province->GetId();
-                                                  
                                                   ?>
-                                                  <option value="<?php echo $provinceId;?>"><?php echo $provinceName;?></option>
+                                                  <option value="<?php echo $province->GetId();?>"><?php echo $province->GetName();?></option>
                                              <?php 
                                              }
                                              ?>
                                    </select>
-                              </div>
-                         </div>
-                    </div>
-
-                    <div class="row">                         
-                         <div class="col-lg-8">
-                              <div class="form-group">
-                                   <label for="">Ciudad</label>
-                                   <select name="ciudad" class="form-control" placeholder="Seleccione su Ciudad" " required>
-                                   <?php
-                                             foreach ($cities as $city)
-                                             {
-                                                  $cityName = $city->GetName();
-                                                  $cityId = $city->GetZipCode();
-                                                  ?>
-                                                  <option value="<?php echo $cityId?>"><?php echo $cityName?></option>
-                                                  
-                                             <?php 
-                                             }
-                                             ?>
-                                   </select>
-                              </div>
-                         </div>
-                         <div class="col-lg-4">
-                              <div class="form-group">
-                                   <label for="">Cod. Postal</label>
-                                   <input type="text" name="codigoPostal" value="" class="form-control" placeholder="e.g. 7600" required>
                               </div>
                          </div>
                     </div>

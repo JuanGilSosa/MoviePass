@@ -4,7 +4,7 @@
     use Models\Movie\Movie as Movie;
     use Models\Movie\Genre as Genre;
     use Database\MoviesDAO as MoviesDAO;
-    use DAO\GeneroDAO as GeneroDAO;
+    use Database\GenreDAO as GenreDAO;
 
     class MovieController{
 
@@ -13,7 +13,7 @@
 
         public function __construct(){
             $this->moviesDAO = new MoviesDAO();
-            $this->genresDAO = new GeneroDAO();
+            $this->genresDAO = new GenreDAO();
         }
         
         public function ShowMoviesNowPlaying(){

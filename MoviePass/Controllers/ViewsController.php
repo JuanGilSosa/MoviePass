@@ -10,7 +10,7 @@ use Database\ProvinceDAO as ProvinceDAO;
 use Database\CountryDAO as CountryDAO;
 use Database\CinemaDAO as CinemaDAO;
 use Database\MoviesDAO as MoviesDAO;
-use DAO\GeneroDAO as GeneroDAO;
+use Database\GenreDAO as GenreDAO;
 
 use Helpers\SessionHelper as SessionHelper;
 
@@ -59,7 +59,7 @@ class ViewsController
 
     public static function ShowMoviesNowPlaying()
     {
-        $genreDAO = new GeneroDAO();
+        $genreDAO = new GenreDAO();
         $genres = $genreDAO->GetAll();
         $moviesDAO = new MoviesDAO();
         $movies = $moviesDAO->GetAll();
@@ -130,7 +130,7 @@ class ViewsController
     public static function ShowMovieDescription($movie, $trailerKey)
     {
         if (SessionHelper::isSession('adminLogged')) {
-            $genresDAO = new GeneroDAO();
+            $genresDAO = new GenreDAO();
             $moviesDAO = new MoviesDAO();
             require_once(VIEWS_PATH . "moviesDescription.php");
         } else {

@@ -1,15 +1,17 @@
-<?php namespace Controllers;
+<?php 
+    
+    namespace Controllers;
     
     use Helpers\SessionHelper as SessionHelper;
 
     class LogInController
     {
         private $memberController;
-        private $peliculaController;
+        private $movieController;
 
         public function __construct(){
             $this->memberController = new MembersController();
-            $this->peliculaController = new PeliculaController();
+            $this->movieController = new MovieController();
         }
 
         public function LogIn ($email, $password)
@@ -19,7 +21,7 @@
         }
 
         public function LogInFB($obj){
-            if(SessionHelper::HayUsuario('user_fb')){
+            if(SessionHelper::isSession('user_fb')){
                 $rta = $this->memberController->VerifyMemberAndPassword($obj->email,'');
                 $this->RedirectLogIn($rta);
             }
@@ -27,7 +29,7 @@
         }
 
         public function RedirectLogIn ($message){
-            if(SessionHelper::HayUsuario('userLogged')){
+            if(SessionHelper::isSession('userLogged')){
                 
                 HomeController::Index();
 

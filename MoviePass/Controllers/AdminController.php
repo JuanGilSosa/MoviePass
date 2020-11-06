@@ -2,14 +2,6 @@
 
     use Models\Users\Admin as Admin;
 
-    use DAO\MovieDAO as MovieDAO;
-    use Model\Theatre\Theatre as Theatre;
-    use DAO\CountryDAO as CountryDAO;
-    use Models\Location\Country as Country;
-    use DAO\ProvinceDAO as ProvinceDAO;
-    use Models\Location\Province as Province;
-    use DAO\CityDAO as CityDAO;
-    use Models\Location\City as City;
 
     use Helpers\SessionHelper as SessionHelper;
 
@@ -38,7 +30,7 @@
                 $ciudadDAO = new CityDAO();
                 $ciudades = $ciudadDAO->GetAll();
                 */
-                ViewsController::ShowAddCineView();
+                ViewsController::ShowAddTheatre();
             }else{
                 ViewsController::ShowLogIn();
             }

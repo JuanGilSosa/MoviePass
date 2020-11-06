@@ -47,7 +47,7 @@
         function mapping($value){
             $value = is_array($value) ? $value : [];
             $return = array_map(function($p){
-                return new Country($p['id'], $p['name']);
+                return new Country($p['countryId'], $p['name']);
             },$value);
             return count($return)>1 ? $return : $return[0];
         }

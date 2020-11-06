@@ -11,11 +11,6 @@ use Database\ProvinceDAO as ProvinceDAO;
 use Database\CountryDAO as CountryDAO;
 use Database\CinemaDAO as CinemaDAO;
 
-use Models\Ubicacion\Direccion as Direccion;
-use Models\Ubicacion\Ciudad as Ciudad;
-use Models\Ubicacion\Provincia as Provincia;
-use Models\Ubicacion\Pais as Pais;
-use Models\Theatre\Sala as Sala;
 
 use Helpers\SessionHelper as SessionHelper;
 
@@ -97,7 +92,7 @@ class TheatreController
         $name,
         $email,
         $phoneNumber,
-        $calle,
+        $street,
         $number,
         $floor,
         $city,
@@ -114,8 +109,8 @@ class TheatreController
                 $phoneNumber = $this->theatreDAO->FindTheatreByPhoneNumber($phoneNumber);
 
                 if (!$phoneNumber) {
-
-                    $adress = $this->adressDAO->CreateDireccion($calle, (int)$number, (int)$floor, $city, (int)$zipCode, (int)$countryId, (int)$provinceId);
+                    var_dump($countryId);
+                    $adress = $this->adressDAO->CreateDireccion($street, (int)$number, (int)$floor, $city, (int)$zipCode, (int)$countryId, (int)$provinceId);
 
                     if (!is_string($adress)) {
 
@@ -148,7 +143,7 @@ class TheatreController
                 ViewsController::ShowAddTheatre($message);
             }
         } else {                                      // Nombre repetido
-            $message = "El name ingresado ya se encuentra registrado.";
+            $message = "El nombre ingresado ya se encuentra registrado.";
             ViewsController::ShowAddTheatre($message);
         }
     }

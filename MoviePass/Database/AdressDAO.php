@@ -79,7 +79,7 @@ class AdressDAO implements IDAO
 
     public function CreateDireccion($street, $number, $floor, $idCiudad, $zipCode, $countryId, $provinceId)
     {
-
+        //var_dump($countryId);
         $countryDAO = new CountryDAO();
         $country = $countryDAO->GetById($countryId);
         if ($country != false) {
@@ -100,7 +100,7 @@ class AdressDAO implements IDAO
                 return ("No encontramos la province en nuestra base de datos");
             }
         } else {
-            return ("No encontramos el country en nuestra base de datos");
+            return ("No encontramos el pais en nuestra base de datos");
         }
     }
 

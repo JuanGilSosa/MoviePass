@@ -39,7 +39,7 @@
             $value = is_array($value) ? $value : [];
 			$resp = array_map(function ($p){
                 $dir = new Province(
-                    $p['id'],$p['name'],$p['countryId']);
+                    $p['provinceId'],$p['name'],$p['countryId']);
                 return $dir;
             },$value);
             return count($resp)>1 ? $resp : reset($resp);
