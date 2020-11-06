@@ -166,7 +166,6 @@ class ViewsController
         }else{
             array_push($billboards, $cinemas->getBillboard());
         }
-    
         require_once(VIEWS_PATH . "listFunctions.php");
     }
 }

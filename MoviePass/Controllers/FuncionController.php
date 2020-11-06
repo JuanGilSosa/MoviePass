@@ -85,7 +85,6 @@
         }
 
         
-
         public function ShowFunctions(){
             $cines = $this->cineDAO->GetAllActive();
             $cinemaAux = array();
@@ -99,39 +98,52 @@
                     if(!is_array($roomAux) && !empty($roomAux)){
                         $func = $this->functionDAO->GetFunction_SALAXFUNCION($roomAux->getId());
                         if(!is_array($func) && !empty($func)){
+                            $movie = $this->movieDAO->getMovieById($func->getMovie());
                             $func->setRoom($roomAux);
-                            array_push($arrFunc, $func);
+                            $func->setMovie($movie);
+                            $objBillboard->PushFunction($func);
+                            #array_push($arrFunc, $func);
                         }elseif(is_array($func) && !empty($func)){
                             foreach($func as $f){
+                                $movie = $this->movieDAO->getMovieById($f->getMovie());
+                                $f->setMovie($movie);
                                 $f->setRoom($roomAux);
-                                array_push($arrFunc, $f);
+                                $objBillboard->PushFunction($f);
+                                #array_push($arrFunc, $f);
                             }
                         }
                     }elseif(is_array($roomAux) && !empty($roomAux)){
                         foreach($roomAux as $room){
                             $func = $this->functionDAO->GetFunction_SALAXFUNCION($room->getId());
-                            if(!is_array($func)){
+                            if(!is_array($func) && !empty($func)){
+                                $movie = $this->movieDAO->getMovieById($func->getMovie());
+                                $func->setMovie($movie);
                                 $func->setRoom($room);
-                                array_push($arrFunc, $func);
-                            }else{
+                                $objBillboard->PushFunction($func);
+                                #array_push($arrFunc, $func);
+                            }elseif(is_array($func) && !empty($func)){
                                 foreach($func as $f){
-                                    $f->setRoom($roomAux);
-                                    array_push($arrFunc, $f);
+                                    $movie = $this->movieDAO->getMovieById($f->getMovie());
+                                    $f->setMovie($movie);
+                                    $f->setRoom($room);
+                                    $objBillboard->PushFunction($f);
+                                    #array_push($arrFunc, $f);
                                 }
                             }
                         }
                     }
-                    $objBillboard->setFunctions($arrFunc);
 
+                    #$objBillboard->setFunctions($arrFunc);
                     $cine->setBillboard($objBillboard);
                     array_push($cinemaAux, $cine);
+
                 }
             }else{
                 if(is_object($cines)){
                     $cines = $this->cineController->CreateCine($cines);
                     $roomAux = $this->roomDAO->GetSalasByCineId($cines->getId());
                     $cines->setSalas($roomAux);
-                    $objBillboard = $cinemaAux->getBillboard();
+                    $objBillboard = $cines->getBillboard();
                     $arrFunctions = array();
 
                     if(!is_array($roomAux) && !empty($roomAux)){
@@ -139,82 +151,85 @@
                         $func = $this->functionDAO->GetFunction_SALAXFUNCION($roomAux->getId());
                         
                         if(!is_array($func) && !empty($func)){
+                            $movie = $this->movieDAO->getMovieById($func->getMovie());
+                            $func->setMovie($movie);
                             $func->setRoom($roomAux);
-                            array_push($arrFunc, $func);
+                            $objBillboard->PushFunction($func);
+                            #array_push($arrFunc, $func);
                         }elseif(is_array($func) && !empty($func)){
                             foreach($func as $f){
+                                $movie = $this->movieDAO->getMovieById($f->getMovie());
+                                $f->setMovie($movie);
                                 $f->setRoom($roomAux);
-                                array_push($arrFunc, $f);
+                                $objBillboard->PushFunction($f);
+                                #array_push($arrFunc, $f);
                             }
                         }
                     }elseif(!empty($roomAux) && is_array($roomAux)){
                         foreach($roomAux as $room){
                             $func = $this->functionDAO->GetFunction_SALAXFUNCION($room->getId());
                             if(!is_array($func) && !empty($func)){
-                                $func->setRoom($roomAux);
-                                array_push($arrFunc, $func);
+                                $movie = $this->movieDAO->getMovieById($func->getMovie());
+                                $func->setMovie($movie);
+                                $func->setRoom($room);
+                                $objBillboard->PushFunction($func);
+                                #array_push($arrFunc, $func);
                             }elseif(is_array($func) && !empty($func)){
                                 foreach($func as $f){
-                                    $f->setRoom($roomAux);
-                                    array_push($arrFunc, $f);
+                                    $movie = $this->movieDAO->getMovieById($f->getMovie());
+                                    $f->setMovie($movie);
+                                    $f->setRoom($room);
+                                    $objBillboard->PushFunction($f);
+                                    #array_push($arrFunc, $f);
                                 }
                             }
                         }
                     }
-                    $objBillboard->setFunctions($arrFunc);
+                    /*
                     if(!is_array($roomAux)){
                         $func = $this->functionDAO->GetFunction_SALAXFUNCION($roomAux->getId());
                         if(!is_array($func) && !empty($func)){
-                                $func->setRoom($roomAux);
-                                array_push($arrFunc, $func);
-                            }elseif(is_array($func) && !empty($func)){
-                                foreach($func as $f){
-                                    $f->setRoom($roomAux);
-                                    array_push($arrFunc, $f);
-                                }
+                            $movie = $this->movieDAO->getMovieById($func->getMovie());
+                            $func->setMovie($movie);
+                            $func->setRoom($roomAux);
+                            array_push($arrFunc, $func);
+                        }elseif(is_array($func) && !empty($func)){
+                            foreach($func as $f){
+                                $movie = $this->movieDAO->getMovieById($f->getMovie());
+                                $f->setMovie($movie);
+                                $f->setRoom($roomAux);
+                                array_push($arrFunc, $f);
                             }
                         }
-                    }else{
+                    }elseif(is_array($roomAux) && !emtpy($roomAux)){
                         foreach($roomAux as $room){
                             $func = $this->functionDAO->GetFunction_SALAXFUNCION($room->getId());
                             if(!is_array($func) && !empty($func)){
+                                $movie = $this->movieDAO->getMovieById($func->getMovie());
+                                $func->setMovie($movie);
                                 $func->setRoom($roomAux);
                                 array_push($arrFunc, $func);
                             }elseif(is_array($func) && !empty($func)){
                                 foreach($func as $f){
+                                    $movie = $this->movieDAO->getMovieById($f->getMovie());
+                                    $f->setMovie($movie);
                                     $f->setRoom($roomAux);
                                     array_push($arrFunc, $f);
                                 }
                             }
                         }
-                    }
+                    }*/
+
+
                     $objBillboard->setFunctions($arrFunc);
-                    $cinemaAux->setBillboard($objBillboard);    
+                    $cines->setBillboard($objBillboard);    
                     array_push($cinemaAux, $cines);
                 }
+                
+            }
             ViewsController::ShowListFunctionsView($cinemaAux);   
+
         }
-
-    }
         
-            
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 ?>

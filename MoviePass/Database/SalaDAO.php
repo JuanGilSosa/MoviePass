@@ -161,7 +161,7 @@
                                     AND sxf.idFuncion =  :idFuncion;';
                 $params['idFuncion'] = $idFunction;
                 $rooms = $con->execute($query, $params);
-                return (!emtpy($rooms)) ? $this->mapping($rooms) : array();
+                return (!empty($rooms)) ? $this->mapping($rooms) : array();
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }

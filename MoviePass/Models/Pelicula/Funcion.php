@@ -7,16 +7,16 @@
 
         private $id;
         /** @var Pelicula || null */
-        private $pelicula;
+        private $movie;
         private $horaInicio;
         private $horaFin;
         /** @var Sala || null */
         private $sala;
         private $active;
 
-        public function __construct($id = "",$pelicula="", $horaInicio = "", $horaFin ="", $sala = ""){
+        public function __construct($id = "",$movie="", $horaInicio = "", $horaFin ="", $sala = ""){
             $this->id = $id;
-            $this->pelicula = $pelicula;
+            $this->movie = $movie;
             $this->horaInicio = $horaInicio;
             $this->horaFin = $horaFin;
             $this->sala = $sala;
@@ -42,13 +42,18 @@
          // TODO :  en ViewsController agregar ShowCartelera($hoy){ $cartelera = $this->carteleraDAO->BuscarCarteleraPorFecha($hoy); } 
 
         public function getId(){return $this->id;}
-        public function getPelicula(){return $this->pelicula;}
+        public function getMovie(){return $this->movie;}
         public function getHoraInicio(){return $this->horaInicio;}
         public function getHoraFin(){return $this->horaFin;}
         public function getSala(){return $this->sala;}
         public function isActive(){return $this->active;}
         public function setActive($active){$this->active = $active;}
         public function setRoom($room){$this->sala = $room;}
+        public function setMovie($movie){$this->movie = $movie;}
+
+        public function PushRoom($room){
+            array_push($this->sala, $room);
+        }
         
     }
 
