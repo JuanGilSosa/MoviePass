@@ -154,26 +154,20 @@ class TheatreController
     {
 
 
-        $oldCine = $this->theatreDAO->GetTheatreById(strval($id));
-        $theatre = $this->theatreDAO->FindTheatreByName($name);
+        $oldCine = $this->theatreDAO->GetTheatreById(strval($id)); #busca y guarda la informacion vieja del cine
+        $isTheatre = $this->theatreDAO->FindTheatreByName($name);     #verifica que el nombre nuevo no exista en la base de datos
 
-        if (
-            !empty($oldCine) &&
-            //strcmp($oldCine->GetName(), $name) != 0 && 
-            //strcmp($oldCine->GetEmail(), $email) != 0 && 
-            $oldCine->GetName() != $name ||
-            $oldCine->GetEmail() != $email ||
-            $oldCine->GetPhoneNumber() != $phoneNumber
-        ) {
-            if (!$theatre || $oldCine->GetName() == $name) {
+        if (!empty($oldCine) && $oldCine->GetName() != $name || $oldCine->GetEmail() != $email || $oldCine->GetPhoneNumber() != $phoneNumber) {
 
-                $email = $this->theatreDAO->FindTheatreByEmail($email);
+            if (!$isTheatre || $oldCine->GetName() == $name) {
 
-                if (!$email || $oldCine->GetEmail() == $email) {
-                    $phoneNumber = $this->theatreDAO->FindTheatreByPhoneNumber($phoneNumber);
+                $isEmail = $this->theatreDAO->FindTheatreByEmail($email);
+
+                if (!$isEmail || $oldCine->GetEmail() == $email) {
+                    $isPhoneNumber = $this->theatreDAO->FindTheatreByPhoneNumber($phoneNumber);
                     #echo "<script>console.log('$phoneNumber'); </script>";
 
-                    if (!$phoneNumber || $oldCine->GetPhoneNumber() == $phoneNumber) {
+                    if (!$isPhoneNumber || $oldCine->GetPhoneNumber() == $phoneNumber) {
                         $theatre = new Theatre($oldCine->getId(), $name, $email, $phoneNumber, $oldCine->GetAdress());
                         #$theatre->setId($id);
                         $this->theatreDAO->Update($theatre);
