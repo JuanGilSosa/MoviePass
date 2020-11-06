@@ -131,7 +131,7 @@
                     $cine->setDireccion($valuesArray["direccion"]);
 
                     $direccionDAO = new DireccionDAO();
-                    $direccion = $direccionDAO->GetById($valuesArray["direccion"]);
+                    $direccion = $direccionDAO->GetDireccionById($valuesArray["direccion"]);
 
                     $cine->setDireccion($direccion);
 

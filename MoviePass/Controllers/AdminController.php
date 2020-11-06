@@ -12,6 +12,8 @@
     use DAO\CiudadDAO as CiudadDAO;
     use Models\Ubicacion\Ciudad as Ciudad;
 
+    use Helpers\SessionHelper as SessionHelper;
+
     class AdminController{
 
         private $adminDAO;
@@ -22,16 +24,17 @@
 
         public function LoginAdmin($pw){
             if($pw == PW_ADMIN){
-                SessionController::setOnSession('adminLogged',true);
+                SessionHelper::setOnSession('adminLogged',true);
                 #$_SESSION['adminLogged'] = true;
                 HomeController::Index();
             }else{
-                ViewsController::ShowRegisterAdmin();
+                $message = "Contraseña incorrecta";
+                ViewsController::ShowRegisterAdmin($message);
             }
         }
         
         public function ShowAddView(){
-            if(SessionController::HayUsuario('adminLogged')){
+            if(SessionHelper::HayUsuario('adminLogged')){
                /* $paisDAO = new PaisDAO(); 
                 $paises = $paisDAO->GetAll();
                 $provinciaDAO = new ProvinciaDAO();
@@ -43,13 +46,6 @@
             }else{
                 ViewsController::ShowLogIn();
             }
-        }
-
-        public function HayAdmin(){
-            if($_SESSION["adminLogged"])
-                return true;
-            else
-                return false;
         }
     }
 ?>

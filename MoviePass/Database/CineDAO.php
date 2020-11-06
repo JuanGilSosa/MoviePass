@@ -3,6 +3,7 @@
     use Models\Cine\Cine as Cine;
     use Models\Ubicacion\Direccion as Direccion;
     use Database\DireccionDAO as DireccionDAO;
+    use PDOException as PDOException;
 
     class CineDAO implements IDAO{
 /*
@@ -156,7 +157,18 @@
                 echo 'Exception en Update='.$e->getMessage();
             }
         }
-
+        
+        public function GetCineById_SALAXCINE($idCine){
+            try{
+                $con = Connection::getInstance();
+                $query = 'SELECT c.* FROM cines as c JOIN salaxcine as sxc ON sxc.idCine = c.idCine AND c.idCine = :idCine';
+                $params['idCine'] = $idCine;
+                $cine = $con->execute($query,$params);
+                return (!empty($cine)) ? $this->mapping($cine) : array();
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
+        }
  
         
 
