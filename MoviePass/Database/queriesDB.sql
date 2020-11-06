@@ -2,13 +2,13 @@ USE moviepass;
 
 #CREACION DE TABLAS
 
-CREATE TABLE Countries(
+CREATE TABLE if not exists Countries(
     countryId INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(30),
     CONSTRAINT pk_countryId PRIMARY KEY(countryId)
 );
 
-CREATE TABLE Provinces(
+CREATE TABLE if not exists  Provinces(
     provinceId INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(30) NOT NULL,
     countryId INT,
@@ -16,15 +16,15 @@ CREATE TABLE Provinces(
     CONSTRAINT fk_countryId FOREIGN KEY(countryId) REFERENCES Countries(countryId) ON DELETE CASCADE
 );
 
-CREATE TABLE Cities(
-    zipCodes INT NOT NULL,
+CREATE TABLE if not exists  Cities(
+    zipCode INT NOT NULL,
     name VARCHAR(30) NOT NULL,
     provinceId INT,
     CONSTRAINT pk_zipCode PRIMARY KEY(zipCode),
     CONSTRAINT fk_provinceId FOREIGN KEY(provinceId) REFERENCES Provinces(provinceId) ON DELETE CASCADE
 );
 
-CREATE TABLE Adresses(
+CREATE TABLE if not exists  Adresses(
     adressId INT NOT NULL AUTO_INCREMENT,
     street VARCHAR(30) NOT NULL,
     number INT NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE Adresses(
     CONSTRAINT fk_zipCode FOREIGN KEY(zipCode) REFERENCES Cities(zipCode) ON DELETE CASCADE
 );
 
-CREATE TABLE Theatres(
+CREATE TABLE if not exists  Theatres(
     theatreID INT NOT NULL AUTO_INCREMENT, 
     name VARCHAR(30), 
     email VARCHAR(30), 
@@ -45,54 +45,39 @@ CREATE TABLE Theatres(
     CONSTRAINT fk_adressId FOREIGN KEY(adressId) REFERENCES adresses(adressId) ON DELETE CASCADE
 );
 
-CREATE TABLE Cinemas(
+CREATE TABLE if not exists  Cinemas(
     cinemaId INT NOT NULL AUTO_INCREMENT, 
     name VARCHAR(30), 
     price INT, 
     capacity INT,
     type VARCHAR(5),
-    CONSTRAINT pk_cinemaId PRIMARY KEY(cinemaId) ON DELETE CASCADE
+    CONSTRAINT pk_cinemaId PRIMARY KEY(cinemaId)
 );
 
-CREATE TABLE Billboard(
-    billboardId INT NOT NULL AUTO_INCREMENT,
-    startDate date NOT NULL,
-    endDate date NOT NULL,
-    active BOOLEAN NOT NULL,
-    CONSTRAINT pk_billboardId PRIMARY KEY(billboardId)
-);
-
-CREATE TABLE showtimesXbillboard(
-    billboardId INT,
-    showtimeId INT,
-    CONSTRAINT fk_billboardId FOREIGN KEY(billboardId) REFERENCES Billboard(billboardId) ON DELETE CASCADE,
-    CONSTRAINT fk_showtimeId FOREIGN KEY(showtimeId) REFERENCES Showtimes(showtimeId) ON DELETE CASCADE
-);
-
-CREATE TABLE Showtimes(
+CREATE TABLE if not exists  Showtimes(
     showtimeId INT NOT NULL AUTO_INCREMENT,
     startTime VARCHAR(30) NOT NULL,
     endTime VARCHAR(30) NOT NULL,
     movieId INT,
     active BOOLEAN,
-    CONSTRAINT pk_showtimeId PRIMARY KEY(showtimeId) ON DELETE CASCADE
+    CONSTRAINT pk_showtimeId PRIMARY KEY(showtimeId)
 );
 
-CREATE TABLE showtimesXcinemas(
+CREATE TABLE  showtimesXcinemas(
     showtimeId INT,
     cinemaId INT,
-    CONSTRAINT fk_showtimeId FOREIGN KEY(showtimeId) REFERENCES Cinemas(showtimeId),
-    CONSTRAINT fk_showtimeId FOREIGN KEY(showtimeId) REFERENCES Showtimes(showtimeId)
+    CONSTRAINT fk_showtimeId FOREIGN KEY(showtimeId) REFERENCES Showtimes(showtimeId),
+    CONSTRAINT fk_cinemaId FOREIGN KEY(cinemaId) REFERENCES Cinemas(cinemaId)
 );
 
 CREATE TABLE cinemasXtheatres(
     cinemaId INT,
     theatreId INT,
     CONSTRAINT pk_cinemaId FOREIGN KEY(cinemaId) REFERENCES cinemas(cinemaId),
-    CONSTRAINT pk_theatreId FOREIGN KEY(theatreId) REFERENCES thatres(theatreId)
+    CONSTRAINT pk_theatreId FOREIGN KEY(theatreId) REFERENCES theatres(theatreId)
 );
 
-CREATE TABLE members(
+CREATE TABLE if not exists  members(
     idMember INT NOT NULL AUTO_INCREMENT,
     DNI INT NOT NULL,
     email varchar(30) NOT NULL,
@@ -123,6 +108,6 @@ INSERT INTO Provinces(name, countryId) VALUES('Buenos Aires',1),
 
 #AGREGANDO CIUDADES
 INSERT INTO Cities(zipCode, name, provinceId) VALUES(7600,'Mar del Plata',1),
-                                                                            (1016,'Ciudad Autonoma de Buenos Aires',1),
+                                                                            (1016,'CABA',1),
                                                                             (4555,'Santa Fe',2),
-                                                                            (5468,'Caros Paz',3);
+                                                                            (5468,'Carlos Paz',3);
