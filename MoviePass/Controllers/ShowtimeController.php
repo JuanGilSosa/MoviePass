@@ -24,50 +24,52 @@
         }
 
         public function AddShowtime($theatreId, $cinemaId, $movieId="", $startTime="", $releaseDate="", $endDate=""){
+
             if(!empty($theatreId) && !empty($cinemaId) && empty($movieId) && empty($startTime) && empty($startCartelera) && empty($endCartelera)){
                 $movieId = $cinemaId;
-                $pelicula = $this->movieDAO->GetMovieById($movieId);
-                $cine = $this->theatreDAO->GetTheatreById($theatreId);
-                $salas=$this->cinemaDAO->GetCinemasByTheatreId($theatreId);
+                $movie = $this->movieDAO->GetMovieById($movieId);
+                $theatre = $this->theatreDAO->GetTheatreById($theatreId);
+                $cinemas=$this->cinemaDAO->GetCinemasByTheatreId($theatreId);
                 
 
-                ViewsController::ShowAddFuncionView("", $pelicula->getId(), $cine, $salas);
+                ViewsController::ShowAddFuncionView("", $movie->getId(), $theatre, $cinemas);
             }else{
-                $pelicula = $this->movieDAO->GetMovieById($movieId);
-                $duracion = $this->movieDAO->GetDuracion($movieId);
+                $movie = $this->movieDAO->GetMovieById($movieId);
+                $runtime = $this->movieDAO->GetRuntime($movieId);
 
-                $segundosHoraInicio = strtotime($startTime);
-                $segundosDuracion = $duracion*60;
-                $horaFin=date("H:i",$segundosHoraInicio+$segundosDuracion);
+                $startTimeSeconds = strtotime($startTime);
+                $runtimeSeconds = $runtime*60;
+                $endTime=date("H:i", $startTimeSeconds+$runtimeSeconds);
 
 
-                $cine = $this->theatreDAO->GetTheatreById($theatreId);
-                $sala=$this->cinemaDAO->GetSalaById($cinemaId);
+                $theatre = $this->theatreDAO->GetTheatreById($theatreId);
+                $cinema=$this->cinemaDAO->GetCinemaById($cinemaId);
 
-                $funcion = new Showtime(0, $pelicula, $startTime, $horaFin, $sala);
-                //var_dump($funcion); HASTA ACA OK
+                $showtime = new Showtime(0, $movie, $startTime, $endTime, $cinema);
+                //var_dump($showtime); HASTA ACA OK
 
-                $this->showtimeDAO->Add($funcion);
+                $this->showtimeDAO->Add($showtime);
 
                 
-                $lastIdFuncion = $this->showtimeDAO->GetLastId(); #uso esto porque como el objeto tiene 0 - no sirve
-                $cinemaId = $sala->getId();
+                $showtimeLastId = $this->showtimeDAO->GetLastId(); #uso esto porque como el objeto tiene 0 - no sirve
+                $cinemaId = $cinema->GetId();
 
-                $this->showtimeDAO->Add_FUNCIONESXSALA($cinemaId, $lastIdFuncion);
+                $this->showtimeDAO->Add_showtimesXcinemas($cinemaId, $showtimeLastId);
 
                 ViewsController::ShowMoviesNowPlaying();
-
-                array_push($cine->getCartelera(), $pelicula);
-                var_dump($cine);
+/*
+                array_push($theatre->GetCartelera(), $movie);
+                var_dump($theatre);*/
             }
         }
 
-        public function ShowAddFuncion($peliculaId){
-            $pelicula = $this->movieDAO->GetMovieById($peliculaId);
-            if(!is_null($pelicula)){
+        public function ShowAddShowtime($movieId){
+            $movie = $this->movieDAO->GetMovieById($movieId);
+            if(!is_null($movie)){
                 $cines = $this->theatreDAO->GetAll();
-                $salas = $this->cinemaDAO->GetAll();
-                ViewsController::ShowAddFuncionView("", $peliculaId, $cines, $salas);
+                $cinemas = $this->cinemaDAO->GetAll();
+                
+                ViewsController::ShowAddFuncionView("", $movieId, $cines, $cinemas);
             }
         }
 
