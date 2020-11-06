@@ -5,7 +5,7 @@
      <section id="listado" class="mb-5">
           <div class="container">
                <h2 class="mb-4">Agregar Cine</h2>
-               <form action="<?php echo FRONT_ROOT.'Cine/Add'?>" method="POST" class="bg-light-alpha p-5">
+               <form action="<?php echo FRONT_ROOT.'Theatre/Add'?>" method="POST" class="bg-light-alpha p-5">
                     
                <?php
                          if(isset($message) && !empty($message))
@@ -73,32 +73,7 @@
 
                
                     
-                    <div class="row">                         
-                         <div class="col-lg-8">
-                              <div class="form-group">
-                                   <label for="">Ciudad</label>
-                                   <select name="ciudad" class="form-control" placeholder="Seleccione su Ciudad" " required>
-                                   <?php
-                                             foreach ($ciudades as $ciudad)
-                                             {
-                                                  $nameCiudad = $ciudad->getNameCiudad();
-                                                  $idCiudad = $ciudad->getCodigoPostal();
-                                                  ?>
-                                                  <option value="<?php echo $idCiudad?>"><?php echo $nameCiudad?></option>
-                                                  
-                                             <?php 
-                                             }
-                                             ?>
-                                   </select>
-                              </div>
-                         </div>
-                         <div class="col-lg-4">
-                              <div class="form-group">
-                                   <label for="">Cod. Postal</label>
-                                   <input type="text" name="codigoPostal" value="" class="form-control" placeholder="e.g. 7600" required>
-                              </div>
-                         </div>
-                    </div>
+                   
                     <div class="row">    
                          
                          <div class="col-lg-6">
@@ -106,12 +81,12 @@
                                    <label for="">Pais</label>
                                    <select name="pais" class="form-control" placeholder="Seleccione su Pais" required>
                                         <?php
-                                             foreach ($paises as $pais)
+                                             foreach ($countries as $country)
                                              {
-                                                  $namePais = $pais->getNamePais();
-                                                  $idPais = $pais->getId();
+                                                  $countryName = $country->GetName();
+                                                  $countryId = $country->GetId();
                                                   ?>
-                                                  <option value="<?php echo $idPais;?>"><?php echo $namePais;?></option>
+                                                  <option value="<?php echo $countryId;?>"><?php echo $countryName;?></option>
                                                   
                                              <?php 
                                              }
@@ -126,17 +101,44 @@
                                    <select name="provincia" class="form-control" placeholder="Seleccione su Provincia" required>
                                    <?php
 
-                                             foreach ($provincias as $provincia)
+                                             foreach ($provinces as $province)
                                              {
-                                                  $nameProvincia = $provincia->getNameProvincia();
-                                                  $idProvincia = $provincia->getId();
+                                                  $provinceName = $province->GetName();
+                                                  $provinceID = $province->GetId();
                                                   
                                                   ?>
-                                                  <option value="<?php echo $idProvincia;?>"><?php echo $nameProvincia;?></option>
+                                                  <option value="<?php echo $provinceId;?>"><?php echo $provinceName;?></option>
                                              <?php 
                                              }
                                              ?>
                                    </select>
+                              </div>
+                         </div>
+                    </div>
+
+                    <div class="row">                         
+                         <div class="col-lg-8">
+                              <div class="form-group">
+                                   <label for="">Ciudad</label>
+                                   <select name="ciudad" class="form-control" placeholder="Seleccione su Ciudad" " required>
+                                   <?php
+                                             foreach ($cities as $city)
+                                             {
+                                                  $cityName = $city->GetName();
+                                                  $cityId = $city->GetZipCode();
+                                                  ?>
+                                                  <option value="<?php echo $cityId?>"><?php echo $cityName?></option>
+                                                  
+                                             <?php 
+                                             }
+                                             ?>
+                                   </select>
+                              </div>
+                         </div>
+                         <div class="col-lg-4">
+                              <div class="form-group">
+                                   <label for="">Cod. Postal</label>
+                                   <input type="text" name="codigoPostal" value="" class="form-control" placeholder="e.g. 7600" required>
                               </div>
                          </div>
                     </div>

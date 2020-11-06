@@ -20,7 +20,7 @@ require_once("nav.php");
             }
             ?>
             <h2 class="mb-4">Agregar Funcion</h2>
-            <form action="<?php echo FRONT_ROOT . 'Funcion/AddFuncion' ?>" method="POST" class="bg-light-alpha p-5">
+            <form action="<?php echo FRONT_ROOT . 'Showtime/AddShowtime' ?>" method="POST" class="bg-light-alpha p-5">
                 <div class="row justify-content-start">
 
                     <div class="col-lg-6">
@@ -31,14 +31,14 @@ require_once("nav.php");
                                 <select name="idCine" class="form-control" onchange="this.form.submit()" required>
                                     <option selected disabled>Seleccione Cine</option>
                                     <?php
-                                    if (is_array($cines)) {
-                                        foreach ($cines as $cine) {
+                                    if (is_array($theatres)) {
+                                        foreach ($theatres as $theatre) {
                                     ?>
-                                            <option value="<?php echo $cine->getId() ?>"><?php echo $cine->getNombre() ?></option>
+                                            <option value="<?php echo $theatre->GetId() ?>"><?php echo $theatre->GetName() ?></option>
                                         <?php }
                                     } else {
                                         ?>
-                                        <option value="<?php echo $cines->getId() ?>" selected required><?php echo $cines->getNombre() ?></option>
+                                        <option value="<?php echo $theatres->GetId() ?>" selected required><?php echo $theatres->GetName() ?></option>
                                     <?php } ?>
 
                                 </select>
@@ -50,8 +50,8 @@ require_once("nav.php");
                             <select name="select-movies" class="form-control" onchange="">
                                 <option selected="true" disabled="disabled">Seleccione Sala</option>
 
-                                <?php foreach ($salas as $sala) { ?>
-                                    <option name="salaId" value="<?php echo $sala->getId() ?>" required><?php echo $sala->getNombre() ?></option>
+                                <?php foreach ($cinemas as $cinema) { ?>
+                                    <option name="salaId" value="<?php echo $cinema->GetId() ?>" required><?php echo $cinema->GetName() ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -59,7 +59,7 @@ require_once("nav.php");
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="">Pelicula</label>
-                            <input type="text" name="peliculaId" placeholder="<?php echo $pelicula->getTitle() ?>" value="<?php echo $pelicula->getId() ?>" class="form-control" required>
+                            <input type="text" name="peliculaId" placeholder="<?php echo $pelicula->GetTitle() ?>" value="<?php echo $pelicula->GetId() ?>" class="form-control" required>
                         </div>
                     </div>
                     <div class="col-lg-6">

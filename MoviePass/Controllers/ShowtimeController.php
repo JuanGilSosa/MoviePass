@@ -32,7 +32,7 @@
                 $cinemas=$this->cinemaDAO->GetCinemasByTheatreId($theatreId);
                 
 
-                ViewsController::ShowAddFuncionView("", $movie->getId(), $theatre, $cinemas);
+                ViewsController::ShowAddShowtimeView("", $movie->getId(), $theatre, $cinemas);
             }else{
                 $movie = $this->movieDAO->GetMovieById($movieId);
                 $runtime = $this->movieDAO->GetRuntime($movieId);
@@ -69,7 +69,7 @@
                 $cines = $this->theatreDAO->GetAll();
                 $cinemas = $this->cinemaDAO->GetAll();
                 
-                ViewsController::ShowAddFuncionView("", $movieId, $cines, $cinemas);
+                ViewsController::ShowAddShowtimeView("", $movieId, $cines, $cinemas);
             }
         }
 

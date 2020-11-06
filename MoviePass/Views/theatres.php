@@ -42,38 +42,38 @@ require_once('nav.php');
                     </thead>
                     <tbody>
                          <?php
-                         if (isset($cines)) {
-                              foreach ($cines as $cine) {
-                                   $name = $cine->getNombre();
-                                   $direccion = $cine->getDireccion();
-                                   $ciudad = $direccion->getCiudad();
-                                   $provincia = $ciudad->getProvincia();
-                                   $pais = $provincia->getPais();
+                         if (isset($theatres)) {
+                              foreach ($theatres as $theatre) {
+                                   $name = $theatre->GetName();
+                                   $adress = $theatre->GetAdress();
+                                   $city = $adress->GetCity();
+                                   $province = $city->GetProvince();
+                                   $country = $province->GetCountry();
                          ?>
                                    <tr>
                                         <td><?php echo $name ?> </td>
                                         <td><?php
-                                             echo $direccion->getCalle() . ", " .
-                                                  $direccion->getNumero();
-                                             if ($direccion->getPiso() != "") {
-                                                  echo ", " . $direccion->getPiso();
+                                             echo $adress->GetStreet() . ", " .
+                                                  $adress->GetNumber() ;
+                                             if ($adress->GetFloor() != "") {
+                                                  echo ", " . $adress->getPiso();
                                              } ?>
                                         </td>
 
 
-                                        <td><?php echo $ciudad->getNameCiudad() . ", " . $provincia->getNameProvincia() . ", " . $pais->getNamePais() ?> </td>
+                                        <td><?php echo $city->GetName() . ", " . $province->GetName() . ", " . $country->GetName() ?> </td>
 
-                                        <form action="<?php echo FRONT_ROOT . 'Sala/AddViewSala' ?>" method="POST">
-                                             <td><button type="submit" value="<?php echo $cine->getId() ?>" class="btn btn-secondary btn-info w-20" name="idCine">+Sala</button></td>
+                                        <form action="<?php echo FRONT_ROOT . 'Cinema/ViewAddCinema' ?>" method="POST">
+                                             <td><button type="submit" value="<?php echo $theatre->GetId() ?>" class="btn btn-secondary btn-info w-20" name="idCine">+Cinema</button></td>
                                         </form>
-                                        <form action="<?php echo FRONT_ROOT . 'Sala/ShowSalasPorCine' ?>" method="POST">
-                                             <td><button type="submit" value="<?php echo $cine->getId() ?>" class="btn btn-secondary btn-info w-20" name="idCine">Lista</button></td>
+                                        <form action="<?php echo FRONT_ROOT . 'Cinema/ShowCinemasByTheatre' ?>" method="POST">
+                                             <td><button type="submit" value="<?php echo $theatre->GetId() ?>" class="btn btn-secondary btn-info w-20" name="idCine">Lista</button></td>
                                         </form>
-                                        <form action="<?php echo FRONT_ROOT . 'Cine/ShowModify' ?>" method="POST">
-                                             <td><button type="submit" value="<?php echo $cine->getId() ?>" class="btn btn-info w-20" name="idCine">Modificar</button></td>
+                                        <form action="<?php echo FRONT_ROOT . 'Theatre/ShowModify' ?>" method="POST">
+                                             <td><button type="submit" value="<?php echo $theatre->GetId() ?>" class="btn btn-info w-20" name="idCine">Modificar</button></td>
                                         </form>
-                                        <form action="<?php echo FRONT_ROOT . 'Cine/Delete' ?>" method="post">
-                                             <td><button type="submit" value="<?php echo $cine->getId() ?>" class="btn btn-danger w-20" name="eliminar">Eliminar</button></td>
+                                        <form action="<?php echo FRONT_ROOT . 'Theatre/Delete' ?>" method="post">
+                                             <td><button type="submit" value="<?php echo $theatre->GetId() ?>" class="btn btn-danger w-20" name="eliminar">Eliminar</button></td>
                                         </form>
 
                                    </tr>

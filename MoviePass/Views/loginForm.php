@@ -51,7 +51,7 @@
       
     </div>
 
-    <form action="<?php echo FRONT_ROOT.'LogIn/LogInFB';?>" method="POST">
+    <form action="<?php echo FRONT_ROOT.'LogIn/LogInFB';?>" method="POST" style="margin-bottom:20px;">
       <div class="container">
         <div class="row">
           <div class="col-md-4">

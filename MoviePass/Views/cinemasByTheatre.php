@@ -26,9 +26,9 @@ require_once('nav.php');
                          <tr>
                               <th class="th-sm">Cine
                               </th>
-                              <th class="th-sm">Nombre Sala
+                              <th class="th-sm">Nombre Cinema
                               </th>
-                              <th class="th-sm">Tipo de Sala
+                              <th class="th-sm">Tipo de Cinema
                               </th>
                               <th class="th-sm">Precio
                               </th>
@@ -42,27 +42,27 @@ require_once('nav.php');
                     </thead>
                     <tbody>
                          <?php
-                         if (isset($salas) && !empty($salas)) {
-                              
-                              foreach ($salas as $sala) {
-                                   $cineName = $cine->getNombre();
-                                   $salaName = $sala->getNombre();
-                                   $tipoDeSala = $sala->getTipo();
-                                   $precio = $sala->getPrecio();
-                                   $capacidad= $sala->getCapacidad();
+                         if (isset($cinemas) && !empty($cinemas)) {
+
+                              foreach ($cinemas as $cinema) {
+                                   $theatreName = $theatre->GetName();
+                                   $cinemaName = $cinema->GetName();
+                                   $cinemaType = $cinema->GetType();
+                                   $price = $cinema->GetPrice();
+                                   $capacity = $cinema->GetCapacity();
                          ?>
                                    <tr>
-                                        <td><?php echo $cineName ?> </td>
-                                        <td><?php echo $salaName ?> </td>
+                                        <td><?php echo $theatreName ?> </td>
+                                        <td><?php echo $cinemaName ?> </td>
                                         <td><?php echo $tipoDeSala ?> </td>
-                                        <td><?php echo '$'.$precio ?> </td>
-                                        <td><?php echo $capacidad ?> </td>
-                                       
-                                        <form action="<?php echo FRONT_ROOT . 'Sala/ShowModify' ?>" method="POST">
-                                             <td><button type="submit" value="<?php echo $cine->getId() ?>" class="btn  btn-info w-20" name="idCine">Modificar</button></td>
+                                        <td><?php echo '$' . $price ?> </td>
+                                        <td><?php echo $capacity ?> </td>
+
+                                        <form action="<?php echo FRONT_ROOT . 'Cinema/ShowModify' ?>" method="POST">
+                                             <td><button type="submit" value="<?php echo $theatre->getId() ?>" class="btn  btn-info w-20" name="idCine">Modificar</button></td>
                                         </form>
-                                        <form action="<?php echo FRONT_ROOT . 'Sala/Delete' ?>" method="post">
-                                             <td><button type="submit" value="<?php echo $cine->getId() ?>" class="btn btn-danger w-20" name="eliminar">Eliminar</button></td>
+                                        <form action="<?php echo FRONT_ROOT . 'Cinema/Delete' ?>" method="post">
+                                             <td><button type="submit" value="<?php echo $theatre->getId() ?>" class="btn btn-danger w-20" name="eliminar">Eliminar</button></td>
                                         </form>
 
                                    </tr>

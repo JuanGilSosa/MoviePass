@@ -33,15 +33,15 @@ class CinemaController
        // $this->salaxcineDAO = new salaXcineDAO();
     }
 
-    public function AddViewSala($theatreId)
+    public function ViewAddCinema($theatreId)
     {
-        ViewsController::ShowAddSala($theatreId);
+        ViewsController::ShowAddCinema($theatreId);
     }
 
-    public function ShowSalasPorCine($theatreId)
+    public function ShowCinemasByTheatre($theatreId)
     {
         
-        ViewsController::ShowSalasPorCine($theatreId);
+        ViewsController::ShowCinemasByTheatre($theatreId);
     }
 
     public function AddCinema($theatreId = "", $name = "", $type = "", $price = "", $capacity = "")
@@ -63,7 +63,7 @@ class CinemaController
                     $this->cinemaDAO->Add_cinemasXtheatre($lastIdSala, $theatreId);
 
                     $theatreController = new TheatreController();
-                    $theatreController->ListViewCine();
+                    $theatreController->ShowTheatres();
 
                 } else {
                     #Es porque la sala isCinema 
@@ -77,7 +77,7 @@ class CinemaController
     public function FindCinemaByName($theatre, $cinemaName)
     {
         $isCinema = 0;
-        $cinemas = $theatre->getSalas();
+        $cinemas = $theatre->GetCinemas();
         if (is_array($cinemas)) {
             foreach ($cinemas as $cinema) {
                 if (strcasecmp($cinema->GetName, $cinemaName)) {

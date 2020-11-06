@@ -38,16 +38,16 @@ class TheatreController
         $this->countryDAO = new CountryDAO();
     }
 
-    public function AddViewCine($message = "")
+    public function ViewAddTheatre($message = "")
     {
         if (SessionHelper::isSession('adminLogged')) {
-            ViewsController::ShowAddCineView();
+            ViewsController::ShowAddTheatre();
         } else {
             ViewsController::ShowLogIn();
         }
     }
 
-    public function ListViewCine($message = "")
+    public function ShowTheatres($message = "")
     {
         if (SessionHelper::isSession('adminLogged')) {
             $theatres = $this->theatreDAO->GetAllActive();
@@ -60,13 +60,13 @@ class TheatreController
                     $theatreWithObject = $this->CreateCine($theatre);
                     array_push($theatresWithObjects, $theatreWithObject);
                 }
-                ViewsController::ShowCinesList($theatresWithObjects , $message);
+                ViewsController::ShowTheatres($theatresWithObjects , $message);
             } else {
                 if ($theatres != null) {
                     $theatreObject = $this->CreateCine($theatres);
                     array_push($theatresWithObjects , $theatreObject);
                 }
-                ViewsController::ShowCinesList($theatresWithObjects , $message);
+                ViewsController::ShowTheatres($theatresWithObjects , $message);
             }
         } else {
             ViewsController::ShowLogIn();
@@ -76,7 +76,7 @@ class TheatreController
     public function ShowModify($theatreId, $message = "")
     {
         if (SessionHelper::isSession('adminLogged')) {
-            ViewsController::ShowModifyCine(strval($theatreId), $message);
+            ViewsController::ShowModifyTheatre(strval($theatreId), $message);
         } else {
             ViewsController::ShowLogIn();
         }
@@ -84,13 +84,13 @@ class TheatreController
 
     public function AddViewSala($theatreId)
     {
-        ViewsController::ShowAddSala($theatreId);
+        ViewsController::ShowAddCinema($theatreId);
     }
 
-    public function ShowCartelera()
+    public function ShowBillboard()
     {
         #$theatres = $this->theatreDAO->GetAll();
-        ViewsController::ShowCartelera();
+        ViewsController::ShowBillboard();
     }
 
     public function Add(
@@ -130,26 +130,26 @@ class TheatreController
                             //ACA SE GUARDARIA EN TABLA CINESxLOCALIDADxDIRECCION? 
 
                             $message = "Cine agregado con éxito.";
-                            $this->ListViewCine($message);
+                            $this->ShowTheatres($message);
                         } else {                          // Direccion repetida
                             $message = "La dirección ingresada ya se encuentra registrada.";
-                            ViewsController::ShowAddCineView($message);
+                            ViewsController::ShowAddTheatre($message);
                         }
                     } else {
                         $message = $adress;
-                        ViewsController::ShowAddCineView($message);
+                        ViewsController::ShowAddTheatre($message);
                     }
                 } else {                              // Telefono repetido
                     $message = "El teléfono ingresado ya se encuentra registrado.";
-                    ViewsController::ShowAddCineView($message);
+                    ViewsController::ShowAddTheatre($message);
                 }
             } else {                                  // Email repetido
                 $message = "El email ingresado ya se encuentra registrado.";
-                ViewsController::ShowAddCineView($message);
+                ViewsController::ShowAddTheatre($message);
             }
         } else {                                      // Nombre repetido
             $message = "El name ingresado ya se encuentra registrado.";
-            ViewsController::ShowAddCineView($message);
+            ViewsController::ShowAddTheatre($message);
         }
     }
 
@@ -181,21 +181,21 @@ class TheatreController
                         #$theatre->setId($id);
                         $this->theatreDAO->Update($theatre);
                         $message = "Cine modificado con éxito";
-                        $this->ListViewCine($message);
+                        $this->ShowTheatres($message);
                     } else {
                         $message = "El teléfono ingresado ya se encuentra registrado";
-                        ViewsController::ShowModifyCine($id, $message);
+                        ViewsController::ShowModifyTheatre($id, $message);
                     }
                 } else {
                     $message = "El email ingresado ya se encuentra registrado";
-                    ViewsController::ShowModifyCine($id, $message);
+                    ViewsController::ShowModifyTheatre($id, $message);
                 }
             } else {
                 $message = "El nombre ingresado ya se encuentra registrado";
-                ViewsController::ShowModifyCine($id, $message);
+                ViewsController::ShowModifyTheatre($id, $message);
             }
         } else {
-            $this->ListViewCine();
+            $this->ShowTheatres();
         }
     }
 
@@ -203,7 +203,7 @@ class TheatreController
     {
         $this->theatreDAO->Delete($theatreId);
         $message = "Cine eliminado con éxito";
-        $this->ListViewCine($message);
+        $this->ShowTheatres($message);
     }
 
     public function CreateCine($mappedTheatre)

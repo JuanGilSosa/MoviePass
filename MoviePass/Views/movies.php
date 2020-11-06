@@ -24,7 +24,7 @@ require_once('nav.php');
 
 			<div class="row container">
 				<div class="col">
-					<form action="<?php echo FRONT_ROOT . 'Pelicula/ShowMovies' ?>" method="POST">
+					<form action="<?php echo FRONT_ROOT . 'Movies/ShowMovies' ?>" method="POST">
 
 						<div class="form-group form-group-lg inputContainer" style="width:50%">
 
@@ -32,7 +32,7 @@ require_once('nav.php');
 								<!-- 
 									onchange="this.form.submit()"  y asi es mas dinamico sin necesidad de presionar el boton Filtrar
 									Funciona para el select pero cuando tiene que 
-									mostrar todas las peliculas no lo hace
+									mostrar todas las movies no lo hace
 								-->
 								<option selected="true" disabled="disabled" style="background-color: #000000;">Filtrar por Generos</option>
 								<option value="0" style="background-color: #000000;">Todos</option>
@@ -50,21 +50,21 @@ require_once('nav.php');
 			<div class="grid-container text-center" style="justify-content:center">
 
 				<?php
-				foreach ($peliculas as $pelicula) {
+				foreach ($movies as $movie) {
 				?>
 					<div class="cell">
 						<div class="container">
-							<a href="<?php echo FRONT_ROOT . 'Pelicula/ShowMovieDescription?idPelicula=' . $pelicula->getId() ?>">
-								<img style="width: 188px; height: 282px;" src="https://image.tmdb.org/t/p/original<?php echo $pelicula->getPosterPath() ?>" alt="Imagen">
+							<a href="<?php echo FRONT_ROOT . 'Pelicula/ShowMovieDescription?idPelicula=' . $movie->GetId() ?>">
+								<img style="width: 188px; height: 282px;" src="https://image.tmdb.org/t/p/original<?php echo $movie->getPosterPath() ?>" alt="Imagen">
 							</a>
 						</div>
 						<div class="container" style="margin:5px;">
 							<section>
-								<p class="title" style="font-size:12px;	"><?php echo $pelicula->getTitle() ?></p>
+								<p class="title" style="font-size:12px;	"><?php echo $movie->GetTitle() ?></p>
 							</section>
 						</div>
-						<form action="<?php echo FRONT_ROOT . 'Funcion/ShowAddFuncion' ?>" method="POST">
-							<button class="btn btn-outline-primary w-100" name="peliculaId" value="<?php echo $pelicula->getId(); ?>" type="submit">+Funcion</button>
+						<form action="<?php echo FRONT_ROOT . 'Showtime/ShowAddShowtime' ?>" method="POST">
+							<button class="btn btn-outline-primary w-100" name="peliculaId" value="<?php echo $movie->GetId(); ?>" type="submit">+Funcion</button>
 						</form>
 
 					</div>
