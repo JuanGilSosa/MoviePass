@@ -39,6 +39,8 @@ class AdressDAO implements IDAO
     }
     function Add($adress)
     {
+
+        //var_dump($adress);
         try {
             $con = Connection::getInstance();
 
@@ -66,7 +68,7 @@ class AdressDAO implements IDAO
         $value = is_array($value) ? $value : [];
         $resp = array_map(function ($p) {
             $dir = new Adress(
-                $p['id'],
+                $p['adressId'],
                 $p['street'],
                 $p['number'],
                 $p['floor'],
@@ -115,12 +117,12 @@ class AdressDAO implements IDAO
             $provinceDAO = new ProvinceDAO();
             $province = $city->GetProvince();
 
-            if ($provinceDAO->GetByName($province->getNameProvincia())) {
+            if ($provinceDAO->GetByName($province->GetName())) {
 
                 $country = $province->GetCountry();
                 $countryDAO = new CountryDAO();
 
-                if ($countryDAO->GetByName($country->getNamePais())) {
+                if ($countryDAO->GetByName($country->GetName())) {
 
                     $adressesByZipCode = $this->GetAllByZipCode($city->GetZipCode());
 
@@ -172,7 +174,7 @@ class AdressDAO implements IDAO
         try {
             $con = Connection::getInstance();
             #$query = 'SELECT @@identity AS id';
-            $query = 'SELECT MAX(d.id) as lastID FROM adresses as d;';
+            $query = 'SELECT MAX(a.adressId) as lastID FROM adresses as a;';
             $id = $con->execute($query);
 
             $ID = ($id[0]['lastID'] == null) ? 1 : (int)$id[0]['lastID'];
@@ -186,8 +188,8 @@ class AdressDAO implements IDAO
     public function GetAdressById($id)
     {
         try {
-            $query = 'SELECT * FROM adresses WHERE id = :id';
-            $params['id'] = $id;
+            $query = 'SELECT * FROM adresses WHERE adressId = :adressId';
+            $params['adressId'] = $id;
             $con = Connection::getInstance();
             $adress = $con->execute($query, $params);
             return (!empty($adress)) ? $this->mapping($adress) : array();

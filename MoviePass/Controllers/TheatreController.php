@@ -101,22 +101,24 @@ class TheatreController
         $countryId
     ) {
         $message = "";
-        $theatre = $this->theatreDAO->FindTheatreByName($name);
+        var_dump($name);
+        $isTheatre = $this->theatreDAO->FindTheatreByName($name);
 
-        if (!$theatre) {
-            $email = $this->theatreDAO->FindTheatreByEmail($email);
-            if (!$email) {
-                $phoneNumber = $this->theatreDAO->FindTheatreByPhoneNumber($phoneNumber);
+        if (!$isTheatre) {
+            $isEmail = $this->theatreDAO->FindTheatreByEmail($email);
 
-                if (!$phoneNumber) {
-                    var_dump($countryId);
+            if (!$isEmail) {
+                $isPhoneNumber = $this->theatreDAO->FindTheatreByPhoneNumber($phoneNumber);
+
+                if (!$isPhoneNumber) {
+                    //var_dump($countryId);
                     $adress = $this->adressDAO->CreateDireccion($street, (int)$number, (int)$floor, $city, (int)$zipCode, (int)$countryId, (int)$provinceId);
-
+                    
                     if (!is_string($adress)) {
 
-                        $adress = $this->adressDAO->FindAdress($adress);
-
-                        if (!$adress) {
+                        $isAdress = $this->adressDAO->FindAdress($adress);
+                        //var_dump($adress);
+                        if (!$isAdress) {
                             $this->adressDAO->Add($adress);
                             $dirWithId = $this->adressDAO->ChangeObjectById($adress); #$this->adressDAO->FindAdress($adress);
                             $theatre = new Theatre(0, $name, $email, (int)$phoneNumber, $dirWithId);

@@ -63,7 +63,7 @@
             $value = is_array($value) ? $value : [];
             $resp = array_map(function($a){
                 $theatre = new Theatre(
-                    $a['theatreId'],
+                    $a['theatreID'],
                     $a['name'],
                     $a['email'],
                     $a['phoneNumber'],
@@ -90,9 +90,9 @@
 
         public function GetTheatreById ($theatreId){
             try {
-                $query = 'SELECT * FROM theatres WHERE theatreId = :theatreId';
+                $query = 'SELECT * FROM theatres WHERE theatreID = :theatreID';
                 $con = Connection::getInstance();
-                $params['theatreId'] = $theatreId;
+                $params['theatreID'] = $theatreId;
                 
                 $theatres = $con->execute($query,$params);
                 return (!empty($theatres)) ? $this->mapping($theatres) : array();
@@ -140,8 +140,8 @@
         public function Delete($theatreId){
             try{
                 $con = Connection::getInstance();
-                $query = 'UPDATE theatres as c SET c.active = 0 WHERE theatreId = :theatreId';
-                $params['theatreId'] = $theatreId;
+                $query = 'UPDATE theatres as c SET c.active = 0 WHERE theatreID = :theatreID';
+                $params['theatreID'] = $theatreId;
                 $con->executeNonQuery($query, $params);
             
             }catch(PDOException $e){
@@ -150,9 +150,9 @@
         }
         public function Update($theatre){
             try{
-                $query = 'UPDATE theatres SET name = :name, email = :email, phoneNumber = :phoneNumber WHERE theatreId = :theatreId;';
+                $query = 'UPDATE theatres SET name = :name, email = :email, phoneNumber = :phoneNumber WHERE theatreID = :theatreID;';
                 $con = Connection::getInstance();
-                $params['theatreId'] = $theatre->GetId();
+                $params['theatreID'] = $theatre->GetId();
                 $params['name'] = $theatre->GetName();
                 $params['email'] = $theatre->GetEmail();
                 $params['phoneNumber'] = $theatre->GetPhoneNumber();
@@ -165,8 +165,8 @@
         public function GetTheatreById_cinemasXtheatres($theatreId){
             try{
                 $con = Connection::getInstance();
-                $query = 'SELECT c.* FROM theatres as c JOIN cinemasXtheatres as sxc ON sxc.theatreId = c.theatreId AND c.theatreId = :theatreId';
-                $params['theatreId'] = $theatreId;
+                $query = 'SELECT c.* FROM theatres as c JOIN cinemasXtheatres as sxc ON sxc.theatreID = c.theatreID AND c.theatreID = :theatreId';
+                $params['theatreID'] = $theatreId;
                 $theatre = $con->execute($query,$params);
                 return (!empty($theatre)) ? $this->mapping($theatre) : array();
             }catch(PDOException $e){
