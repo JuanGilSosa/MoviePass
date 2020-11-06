@@ -157,7 +157,16 @@ class ViewsController
         }
     }
 
-    public static function ShowListFunctionsView(){
+    public static function ShowListFunctionsView($cinemas){
+        $billboards = array();
+        if(is_array($cinemas)){
+            foreach($cinemas as $cinema){
+                array_push($billboards,$cinema->getBillboard());
+            }
+        }else{
+            array_push($billboards, $cinemas->getBillboard());
+        }
+    
         require_once(VIEWS_PATH . "listFunctions.php");
     }
 }

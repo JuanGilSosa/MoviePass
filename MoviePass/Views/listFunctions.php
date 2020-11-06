@@ -1,6 +1,7 @@
 <?php 
 require_once('nav.php');
-foreach($billboard->getFunctions() as $function):
+foreach($billboards as $billboard):
+    foreach($billboard->getFunctions() as $function):
 ?>
 <div class="border box-large col-lg-3 col-md-4 col-sm-6 col-xs-12 no-p">
     <article class="data-sheet new">
@@ -20,4 +21,7 @@ foreach($billboard->getFunctions() as $function):
         </div>
     </article>
 </div>
-<?php endforeach; ?>
+<?php 
+    endforeach;
+endforeach; 
+?>
