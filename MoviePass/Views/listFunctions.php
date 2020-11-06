@@ -2,6 +2,7 @@
 require_once('nav.php');
 foreach($billboards as $billboard):
     foreach($billboard->getFunctions() as $function):
+        if(!empty($function)):
 ?>
 <div class="border box-large col-lg-3 col-md-4 col-sm-6 col-xs-12 no-p">
     <article class="data-sheet new">
@@ -13,7 +14,11 @@ foreach($billboards as $billboard):
         </a>
         <div class="mt form-group">
             <a href="/espectaculos/cine/la-parte-oscura_9733.html">
-            <h4><?php echo $function->getPelicula()->getTitle();?></h4>
+            <h4><?php 
+                    $title = $function->getPelicula->getTitle();
+                    echo $title; 
+                 ?>
+            </h4>
             </a>
             <p>Genero: <span>OBTENER DE PHP</span></p>
             <p class="clase">Votos: <?php echo $function->getPelicula()->getVoteAverage();?></p>
@@ -22,6 +27,7 @@ foreach($billboards as $billboard):
     </article>
 </div>
 <?php 
+        endif;
     endforeach;
 endforeach; 
 ?>

@@ -5,11 +5,11 @@
         private $functions;
 
         public function __construct(){
-            $this->funciones = array();
+            $this->functions = array();
         }
         
         public function setFunctions($functions){$this->functions = $functions;}
-        public function getFunctions(){return $this->funciones;}
+        public function getFunctions(){return $this->functions;}
         public function PushFunction($function){array_push($this->functions, $function);}
 
     }
