@@ -125,7 +125,7 @@
 
       while(($flag==false) && ($i<count($this->peliculas))){
         $aux = $this->peliculas[$i];
-        if($aux->getId() == $idMovie){
+        if(strval($aux->getId()) == $idMovie){
           $return = $aux;
           $flag = true;
         }
@@ -242,6 +242,16 @@
       foreach($cast as $actor){
         echo $actor['name'] . " as '" . $actor['character'] . "'<br>";
       }
+    }
+
+    public function GetDuracion($idPelicula){
+      $movieJson = file_get_contents(
+        API_URL ."{$idPelicula}?api_key=".API_KEY1
+      );
+
+      $movie = array();
+      $movieArray = ($movieJson) ? json_decode($movieJson, true) : array();
+      return $movieArray["runtime"];
     }
 
 

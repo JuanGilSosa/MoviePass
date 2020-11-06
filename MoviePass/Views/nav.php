@@ -27,9 +27,6 @@
         <a class="nav-link" href="#">Entradas</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo FRONT_ROOT. "Pelicula/ShowMovies"?>">Lista Peliculas</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="<?php echo FRONT_ROOT. "Pelicula/ShowMovieDescription"?>">Funciones</a>
       </li>
 
@@ -41,9 +38,10 @@
           <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">Admins</a>
           <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="<?php  echo FRONT_ROOT . "Admin/ShowAddView "   ?>">Agregar Cine</a>
-            <a class="dropdown-item" href="<?php  echo FRONT_ROOT . "Cine/ListViewCine"   ?>">Listar Cines</a>
+            <a class="dropdown-item" href="<?php  echo FRONT_ROOT . "Admin/ShowAddView "?>">Agregar Cine</a>
+            <a class="dropdown-item" href="<?php  echo FRONT_ROOT . "Cine/ListViewCine"?>">Listar Cines</a>
             <a class="dropdown-item" href="<?php echo FRONT_ROOT. "Pelicula/ShowMovies"?>">Lista Peliculas</a>
+            <a class="dropdown-item" href="<?php echo FRONT_ROOT. "Funcion/ShowFunctions"?>">Lista Funciones</a>
           </div>
         </li>
       <?php } ?>

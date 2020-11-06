@@ -90,7 +90,7 @@
             {
                 if ($loggedMember->getPassword() == $password)
                 {
-                    $_SESSION["userLogged"] = $loggedMember;
+                    SessionHelper::setOnSession('userLogged',$loogedMember);
                 }
                 else
                 {

@@ -25,6 +25,8 @@ use Models\Ubicacion\Provincia as Provincia;
 use Models\Ubicacion\Pais as Pais;
 use Models\Cine\Sala as Sala;
 
+use Helpers\SessionHelper as SessionHelper;
+
 class CineController
 {
     private $cineDAO;
@@ -46,7 +48,7 @@ class CineController
 
     public function AddViewCine($message = "")
     {
-        if (SessionController::HayUsuario('adminLogged')) {
+        if (SessionHelper::HayUsuario('adminLogged')) {
             ViewsController::ShowAddCineView();
         } else {
             ViewsController::ShowLogIn();
@@ -55,7 +57,7 @@ class CineController
 
     public function ListViewCine($message = "")
     {
-        if (SessionController::HayUsuario('adminLogged')) {
+        if (SessionHelper::HayUsuario('adminLogged')) {
             $cines = $this->cineDAO->GetAllActive();
             $cinesConObjetos = array();
             if ((is_array($cines))  and
@@ -81,7 +83,7 @@ class CineController
 
     public function ShowModify($cineId, $message = "")
     {
-        if (SessionController::HayUsuario('adminLogged')) {
+        if (SessionHelper::HayUsuario('adminLogged')) {
             ViewsController::ShowModifyCine(strval($cineId), $message);
         } else {
             ViewsController::ShowLogIn();
@@ -211,46 +213,6 @@ class CineController
         $message = "Cine eliminado con éxito";
         $this->ListViewCine($message);
     }
-
-    //Sin testear - solo testeado logicamente
-    public function recuperarCinesConSalas()
-    {
-
-        $salaXcines = $this->get_salaXcine();
-        $salas = $this->salaDAO->GetAll();
-        $cines = $this->cineDAO->GetAll();
-
-        $allCines = array();
-        $salasCine = array();
-        foreach ($cines as $cine) {
-            foreach ($salaXcines as $salaxcine) {
-                if ($salaxcine['ID_CINE'] == $cine->getId()) {
-                    foreach ($salas as $sala) {
-                        if ($sala->getId() == $salaxcine['ID_SALA']) {
-                            array_push($salasCine, $sala);
-                            #break; alguna forma para romper con el bucle de salas sin destrozar los otros
-                        }
-                    }
-                }
-            }
-            $cine->setSalas($salasCine);
-            array_push($allCines, $cine);
-        }
-    }
-
-    public function get_salaXcine()
-    {
-        try {
-            $con = Connection::getInstance();
-
-            $query = 'SELECT * FROM salaXcine';
-            $salasXcines = $con->execute($query);
-        } catch (\PDOException $e) {
-            echo $e->getMessage();
-        }
-        return $salasXcines;
-    }
-  
 
     public function CreateCine($cineMapeado)
     {

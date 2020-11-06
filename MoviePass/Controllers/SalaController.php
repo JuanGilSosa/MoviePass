@@ -18,13 +18,14 @@ use Database\CiudadDAO as CiudadDAO;
 use Database\ProvinciaDAO as ProvinciaDAO;
 use Database\PaisDAO as PaisDAO;
 use Database\SalaDAO as SalaDAO;
-use Database\salaXcineDAO as salaXcineDAO;
+//use Database\salaXcineDAO as salaXcineDAO;
 
 use Models\Ubicacion\Direccion as Direccion;
 use Models\Ubicacion\Ciudad as Ciudad;
 use Models\Ubicacion\Provincia as Provincia;
 use Models\Ubicacion\Pais as Pais;
 use Models\Cine\Sala as Sala;
+use PDOException as PDOException;
 
 class SalaController
 {
@@ -34,7 +35,7 @@ class SalaController
     private $ciudadDAO;
     private $provinciaDAO;
     private $paisDAO;
-    private $salaxcineDAO;
+   // private $salaxcineDAO;
     public function __construct()
     {
         $this->cineDAO = new CineDAO();
@@ -43,7 +44,7 @@ class SalaController
         $this->ciudadDAO = new CiudadDAO();
         $this->provinciaDAO = new ProvinciaDAO();
         $this->paisDAO = new PaisDAO();
-        $this->salaxcineDAO = new salaXcineDAO();
+       // $this->salaxcineDAO = new salaXcineDAO();
     }
 
     public function AddViewSala($idCine)
@@ -53,6 +54,7 @@ class SalaController
 
     public function ShowSalasPorCine($idCine)
     {
+        
         ViewsController::ShowSalasPorCine($idCine);
     }
 

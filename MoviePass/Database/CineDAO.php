@@ -161,9 +161,10 @@
         public function GetCineById_SALAXCINE($idCine){
             try{
                 $con = Connection::getInstance();
-                $query = 'SELECT c.* FROM cines as c JOIN salaxcine as sxc ON sxc.idCine = c.idCine';
-                $cine = $con->execute($query);
-                return $cine;
+                $query = 'SELECT c.* FROM cines as c JOIN salaxcine as sxc ON sxc.idCine = c.idCine AND c.idCine = :idCine';
+                $params['idCine'] = $idCine;
+                $cine = $con->execute($query,$params);
+                return (!empty($cine)) ? $this->mapping($cine) : array();
             }catch(PDOException $e){
                 echo $e->getMessage();
             }

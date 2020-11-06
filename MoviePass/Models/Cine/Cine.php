@@ -4,7 +4,7 @@
 
     use Models\Ubicacion\Direccion as Direccion;
     use Models\Ubicacion\Localidad as Localidad;
-
+    use Models\Pelicula\Billboard as Billboard;
     class Cine 
     {
         private $id;
@@ -14,7 +14,7 @@
         private $direccion; 
         /** @var array || null */
         private $salas;
-        private $cartelera;
+        private $billboard;
         private $active;
 
         public function __construct($id = "", $nombre = "", $email = "", $numeroDeContacto = "", $direccion="")
@@ -27,6 +27,7 @@
             $this->direccion = $direccion;
             $this->salas = array();
             $this->active = true;
+            $this->billboard = new Billboard();
         }
 
         public function getId(){
@@ -57,6 +58,10 @@
             return $this->active;
         }
 
+        public function getBillboard(){
+            return $this->billboard;
+        }
+        
         public function setId($id){
             $this->id = $id;
         }
@@ -82,6 +87,9 @@
         public function setActive($active)
         {
             $this->active = $active;
+        }
+        public function setBillboard($billboard){
+            $this->billboard = $billboard;
         }
 
 

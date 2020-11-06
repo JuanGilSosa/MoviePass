@@ -49,7 +49,7 @@ CREATE TABLE Salas(
     idSala INT NOT NULL AUTO_INCREMENT, 
     nombre VARCHAR(30), 
     precio INT, 
-    capacidad INT, 
+    capacidad INT,
     tipo VARCHAR(5),
     CONSTRAINT pk_idSala PRIMARY KEY(idSala)
 );
@@ -59,6 +59,7 @@ CREATE TABLE Funciones(
     horaInicio VARCHAR(30) NOT NULL,
     horaFin VARCHAR(30) NOT NULL,
     idPelicula INT,
+    active BOOLEAN,
     CONSTRAINT pk_idFuncion PRIMARY KEY(idFuncion)
 );
 
@@ -85,6 +86,20 @@ CREATE TABLE members(
     lastName varchar(30) NOT NULL,
     numeroTarjetaDeCredito INT,
     CONSTRAINT pk_idMember PRIMARY KEY(idMember)
+);
+
+CREATE TABLE Cartelera(
+    idCartelera INT NOT NULL AUTO_INCREMENT,
+    fecha VARCHAR(30) NOT NULL,
+    active BOOLEAN NOT NULL,
+    CONSTRAINT pk_idCartelera PRIMARY KEY(idCartelera)
+);
+
+CREATE TABLE carteleraXfuncion(
+    idCartelera INT,
+    idFuncion INT,
+    CONSTRAINT fk__idCartelera FOREIGN KEY(idCartelera) REFERENCES Cartelera(idCartelera),
+    CONSTRAINT fk__idFuncion FOREIGN KEY(idFuncion) REFERENCES Funciones(idFuncion)
 );
 
 #########OTRAS QUERIES#########
