@@ -1,0 +1,22 @@
+[
+    {
+        "codigoPostal": 7600,
+        "nameCiudad": "Mar del Plata",
+        "provincia": 1
+    },
+    {
+        "codigoPostal": 1016,
+        "nameCiudad": "Ciudad Autónoma de Buenos Aires",
+        "provincia": 1
+    },
+    {
+        "codigoPostal": 4555,
+        "nameCiudad": "Santa Fé",
+        "provincia": 2
+    },
+    {
+        "codigoPostal": 5486,
+        "nameCiudad": "Carlos Paz",
+        "provincia": 3
+    }
+]

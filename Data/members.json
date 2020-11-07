@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "dni": "37098210",
+        "email": "arielcervigni@gmail.com",
+        "password": "ariel123",
+        "firstName": "ariel",
+        "lastName": "cervigni"
+    },
+    {
+        "id": 2,
+        "dni": "43386896",
+        "email": "juanmanuels499@gmail.com",
+        "password": "juan123",
+        "firstName": "Juan",
+        "lastName": "Gil Sosa"
+    },
+    {
+        "id": 3,
+        "dni": "38406741",
+        "email": "matiasportela94@gmail.com",
+        "password": "matias123",
+        "firstName": "Matias",
+        "lastName": "Portela"
+    },
+    {
+        "id": 4,
+        "dni": "0132910329",
+        "email": "salamandra@gmail.com",
+        "password": "sala1",
+        "firstName": "Carlito",
+        "lastName": "Salamandra"
+    }
+]

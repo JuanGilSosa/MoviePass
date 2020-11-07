@@ -1,0 +1,19 @@
+[
+    {
+        "id": 1,
+        "namePais": "Argentina"
+    },
+    {
+        "id": 2,
+        "namePais": "Brasil"
+    },
+    {
+        "id": 3,
+        "namePais": "Chile"
+    },
+    {
+        "id": 4,
+        "namePais": "Uruguay"
+    }
+
+]

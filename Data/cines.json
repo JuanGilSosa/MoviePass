@@ -1,0 +1,50 @@
+[
+    {
+        "id": "1",
+        "nombre": "Finema ShoppingMdp",
+        "email": "FinemaShopping@gmail.com",
+        "numeroDeContacto": "1111111",
+        "direccion": 1,
+        "active": true
+    },
+    {
+        "id": 2,
+        "nombre": "Finema Carlos Paz",
+        "email": "FinemaCarlosPaz@gmail.com",
+        "numeroDeContacto": "2222222",
+        "direccion": 2,
+        "active": true
+    },
+    {
+        "id": 3,
+        "nombre": "Finema SantaFe",
+        "email": "FinemaSantaFe@gmail.com",
+        "numeroDeContacto": "3333333",
+        "direccion": 3,
+        "active": true
+    },
+    {
+        "id": 4,
+        "nombre": "Finema Mardel",
+        "email": "FinemaMardel@gmail.com",
+        "numeroDeContacto": "444444",
+        "direccion": 7,
+        "active": true
+    },
+    {
+        "id": 7,
+        "nombre": "Finema Madero",
+        "email": "FinemaMadero@gmail.com",
+        "numeroDeContacto": "4444444",
+        "direccion": 10,
+        "active": true
+    },
+    {
+        "id": 8,
+        "nombre": "Finema Fiagonal",
+        "email": "FinemaFiagonal@gmail.com",
+        "numeroDeContacto": "5555555",
+        "direccion": 11,
+        "active": false
+    }
+]

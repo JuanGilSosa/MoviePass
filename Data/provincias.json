@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "nameProvincia": "Buenos Aires",
+        "pais": 1
+    },
+    {
+        "id": 2,
+        "nameProvincia": "Santa Fe",
+        "pais": 1
+    },
+    {
+        "id": 3,
+        "nameProvincia": "Córdoba",
+        "pais": 1
+    },
+    {
+        "id": 4,
+        "nameProvincia": "Paysandú",
+        "pais": 4
+    },
+    {
+        "id": 5,
+        "nameProvincia": "Salto",
+        "pais": 1
+    },
+    {
+        "id": 6,
+        "nameProvincia": "Una provincia de Chile",
+        "pais": 3
+    },
+    {
+        "id": 7,
+        "nameProvincia": "Otra provincia de Chile",
+        "pais": 3
+    },
+    {
+        "id": 8,
+        "nameProvincia": "Santa Catarina",
+        "pais": 2
+    },
+    {
+        "id": 9,
+        "nameProvincia": "Rio Grande del Sur",
+        "pais": 2
+    }
+]
