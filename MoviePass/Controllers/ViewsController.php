@@ -151,4 +151,18 @@ class ViewsController
             require_once(VIEWS_PATH . "addShowtime.php");
         }
     }
+
+    public static function ShowShowtimesView($cinemas){
+        $billboards = array();
+        if(is_array($cinemas)){
+            foreach($cinemas as $cinema){
+                array_push($billboards, $cinema->GetBillboard());
+            }
+        }else{
+            array_push($billboards, $cinemas->GetBillboard());
+        }
+
+        var_dump($billboards);
+        require_once(VIEWS_PATH . "showtimes.php");
+    }
 }

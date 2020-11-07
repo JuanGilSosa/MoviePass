@@ -23,7 +23,7 @@
         <a class="nav-link" href="#">Entradas</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo FRONT_ROOT. "Movie/ShowMovieDescription"?>">Funciones</a>
+        <a class="nav-link" href="<?php echo FRONT_ROOT. "Showtime/ShowShowtimes"?>">Funciones</a>
       </li>
 
       <!-- Dropdown -->

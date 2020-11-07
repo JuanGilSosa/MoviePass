@@ -74,7 +74,7 @@
             $this->name= $name;
         }
 
-        public function setEmail($email){
+        public function SetEmail($email){
             $this->email = $email;
         }
 
@@ -94,7 +94,7 @@
             $this->billboard = $billboard;
         }
         
-        public function setActive($active)
+        public function SetActive($active)
         {
             $this->active = $active;
         }

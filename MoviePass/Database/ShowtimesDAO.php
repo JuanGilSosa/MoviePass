@@ -100,7 +100,7 @@
         public function mapping($value){
             $value = is_array($value) ? $value : [];
             $ans = array_map(function($p){
-                return new Showtime($p['showtimeId'], $p['startTime'], $p['endTime'], null, $p['movieId'], $p['active']);
+                return new Showtime($p['showtimeId'], $p['movieId'], $p['startTime'], $p['endTime'], $p['active']);
             }, $value);
             return (count($ans)>1) ? $ans : $ans[0];
         }
@@ -109,7 +109,7 @@
             try {
                 $con = Connection::getInstance();
                 $query = 'SELECT f.* 
-                            FROM showtimesxcinema as sxf 
+                            FROM showtimesxcinemas as sxf 
                             INNER JOIN showtimes as f 
                                 ON sxf.showtimeId = f.showtimeId 
                                     AND sxf.cinemaId = :cinemaId 

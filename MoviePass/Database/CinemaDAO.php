@@ -160,8 +160,8 @@
                             FROM showtimesXcinema as sxf 
                             INNER JOIN cinemas as s 
                                 ON sxf.cinemaId = s.cinemaId 
-                                    AND s.cinemaId = :idFuncion;';
-                $params['idFuncion'] = $showtimeId;
+                                    AND s.cinemaId = :showtimeId;';
+                $params['showtimeId'] = $showtimeId;
                 $cinema = $con->execute($query, $params);
                 return (!empty($cinema)) ? $this->mapping($cinema) : array();
             } catch (PDOException $e) {

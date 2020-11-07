@@ -6,6 +6,7 @@
     use Database\MoviesDAO as MoviesDAO;
     use Database\TheatreDAO as TheatreDAO;
     use Controllers\ViewsController as ViewsController;
+    use Controllers\TheatreController as TheatreController;
     use Database\CinemaDAO as CinemaDAO;
     use Models\Movie\Showtime as Showtime;
 
@@ -32,7 +33,7 @@
                 $cinemas=$this->cinemaDAO->GetCinemasByTheatreId($theatreId);
                 
 
-                ViewsController::ShowAddShowtimeView("", $movie->getId(), $theatre, $cinemas);
+                ViewsController::ShowAddShowtimeView("", $movie->GetId(), $theatre, $cinemas);
             }else{
                 $movie = $this->movieDAO->GetMovieById($movieId);
                 $runtime = $this->movieDAO->GetRuntime($movieId);
@@ -66,12 +67,161 @@
         public function ShowAddShowtime($movieId){
             $movie = $this->movieDAO->GetMovieById($movieId);
             if(!is_null($movie)){
-                $cines = $this->theatreDAO->GetAll();
+                $theatres = $this->theatreDAO->GetAll();
                 $cinemas = $this->cinemaDAO->GetAll();
                 
-                ViewsController::ShowAddShowtimeView("", $movieId, $cines, $cinemas);
+                ViewsController::ShowAddShowtimeView("", $movieId, $theatres, $cinemas);
             }
         }
+
+        
+        public function AddFunctionToBillboard($theatre, $showtime){
+            $billboard = $theatre->GetBillboard();
+            $billboard->PushShowtime($showtime);
+            $theatre->SetBillboard($billboard);
+
+            return $theatre;
+        }
+
+        
+        public function ShowShowtimes(){
+
+            $theatreController = new TheatreController();
+
+            $theatres = $this->theatreDAO->GetAllActive();
+            $theatreAux = array();
+            #$arrFunc = array();
+            if(is_array($theatres) && !empty($theatres)){
+
+                foreach ($theatres as $theatre) {
+
+                    $theatre = $theatreController->CreateCine($theatre);
+                    $roomAux = $this->cinemaDAO->GetCinemasByTheatreId($theatre->GetId()); #no verifico nada porque sea lo que sea, se va a setear en las salas del theatre
+                    $theatre->SetCinemas($roomAux);
+                    $objBillboard = $theatre->GetBillboard();
+                   
+                    if(!is_array($roomAux) && !empty($roomAux)){
+                      
+                        $func = $this->showtimeDAO->GetShowtime_showtimesxcinema($roomAux->GetId());
+                       
+                        if(!is_array($func) && !empty($func)){
+                            $movie = $this->movieDAO->GetMovieById($func->GetMovie());
+                            $func->SetCinema($roomAux);
+                            $func->SetMovie($movie);
+                            $objBillboard->PushShowtime($func);
+                            #array_push($arrFunc, $func);
+                       
+                        }elseif(is_array($func) && !empty($func)){
+                       
+                            foreach($func as $f){
+                                $movie = $this->movieDAO->GetMovieById($f->GetMovie());
+                                $f->SetMovie($movie);
+                                $f->SetCinema($roomAux);
+                                $objBillboard->PushShowtime($f);
+                                #array_push($arrFunc, $f);
+                            }
+                        }
+                    
+                    }elseif(is_array($roomAux) && !empty($roomAux)){
+                    
+                        foreach($roomAux as $cinema){
+                            $func = $this->functionDAO->GetShowtime_showtimesxcinema($cinema->GetId());
+                         
+                            if(!is_array($func) && !empty($func)){
+                                $movie = $this->movieDAO->GetMovieById($func->GetMovie());
+                                $func->SetMovie($movie);
+                                $func->SetCinema($cinema);
+                                $objBillboard->PushShowtime($func);
+                                #array_push($arrFunc, $func);
+                         
+                            }elseif(is_array($func) && !empty($func)){
+                         
+                                foreach($func as $f){
+                                    $movie = $this->movieDAO->GetMovieById($f->GetMovie());
+                                    $f->SetMovie($movie);
+                                    $f->SetCinema($cinema);
+                                    $objBillboard->PushShowtime($f);
+                                    #array_push($arrFunc, $f);
+                                }
+                            }
+                        }
+                    }
+
+                    #$objBillboard->setFunctions($arrFunc);
+                    $theatre->SetBillboard($objBillboard);
+                    array_push($theatreAux, $theatre);
+
+                }
+            
+            }else{
+            
+                if(is_object($theatres)){
+                    $theatres = $theatreController->CreateCine($theatres);
+                    $roomAux = $this->cinemaDAO->GetCinemasByTheatreId($theatres->GetId());
+                    $theatres->SetCinemas($roomAux);
+                    $objBillboard = $theatres->GetBillboard();
+                    $arrFunctions = array();
+
+                    if(!is_array($roomAux) && !empty($roomAux)){
+
+                        $func = $this->functionDAO->GetShowtime_showtimesxcinema($roomAux->GetId());
+                        
+                        if(!is_array($func) && !empty($func)){
+                            $movie = $this->movieDAO->GetMovieById($func->GetMovie());
+                            $func->SetMovie($movie);
+                            $func->SetCinema($roomAux);
+                            $objBillboard->PushShowtime($func);
+                            #array_push($arrFunc, $func);
+                   
+                        }elseif(is_array($func) && !empty($func)){
+                   
+                            foreach($func as $f){
+                                $movie = $this->movieDAO->GetMovieById($f->GetMovie());
+                                $f->SetMovie($movie);
+                                $f->SetCinema($roomAux);
+                                $objBillboard->PushShowtime($f);
+                                #array_push($arrFunc, $f);
+                            }
+                        }
+                   
+                    }elseif(!empty($roomAux) && is_array($roomAux)){
+                   
+                        foreach($roomAux as $cinema){
+                            $func = $this->functionDAO->GetShowtime_showtimesxcinema($cinema->GetId());
+                   
+                            if(!is_array($func) && !empty($func)){
+                                $movie = $this->movieDAO->GetMovieById($func->GetMovie());
+                                $func->SetMovie($movie);
+                                $func->SetCinema($cinema);
+                                $objBillboard->PushShowtime($func);
+                                #array_push($arrFunc, $func);
+                   
+                            }elseif(is_array($func) && !empty($func)){
+                   
+                                foreach($func as $f){
+                                    $movie = $this->movieDAO->GetMovieById($f->GetMovie());
+                                    $f->SetMovie($movie);
+                                    $f->SetCinema($cinema);
+                                    $objBillboard->PushShowtime($f);
+                                    #array_push($arrFunc, $f);
+                                }
+                   
+                            }
+                   
+                        }
+                   
+                    }
+
+                    #$objBillboard->SetShowtime($arrFunc);
+                    $theatres->SetBillboard($objBillboard);    
+                    array_push($theatreAux, $theatres);
+                }
+                
+            }
+            ViewsController::ShowShowtimesView($theatreAux);   
+
+        }
+        
 
     }
         
