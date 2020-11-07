@@ -19,15 +19,15 @@
                               <?php
                          } 
                     ?>
-                    <div class="row justify-content-start">      
-                         <div class="col-lg-2 d-none">
+                    <div class="row justify-content-start" >      
+                         <div class="col-lg-2" hidden>
                               <div class="form-group">
                                    <label for="">I.D. Cine</label>
                                    <input type="text" name="id" value="<?php echo $theatre->GetId() ?>" class="form-control" placeholder="<?php $idCine; ?>" required>
                               </div>
                          </div>                   
 
-                         <div class="col-lg-10 ">
+                         <div class="col-lg-6 ">
                               <div class="form-group">
                                    <label for="">Nombre</label>
                                    <input type="text" name="nombre" class="form-control" value="<?php echo $theatre->GetName() ?>" required>

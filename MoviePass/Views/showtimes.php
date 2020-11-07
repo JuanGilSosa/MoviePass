@@ -25,8 +25,8 @@
                         <p class="card-text">Comienzo: <?php echo $showtime->GetStartTime();?></p>
                         <p class="card-text">Generos: <?php echo '{los generos}';?></p>
                     
-                        <a value="<?php echo ''; ?>" href="<?php echo FRONT_ROOT . 'Pelicula/ShowMovieDescription?idPelicula=' ?>" type="button" class="btn btn-unique">Reservar</a>
-                        <a href="<?php echo FRONT_ROOT . 'Pelicula/ShowMovieDescription?idPelicula='.$showtime->GetMovie()->GetId(); ?>" type="button" class="btn btn-unique">Ver Info</a>        
+                        <a value="<?php echo ''; ?>" href="<?php echo FRONT_ROOT . 'Movie/ShowMovieDescription?idPelicula=' ?>" type="button" class="btn btn-unique">Reservar</a>
+                        <a href="<?php echo FRONT_ROOT . 'Movie/ShowMovieDescription?idPelicula='.$showtime->GetMovie()->GetId(); ?>" type="button" class="btn btn-unique">Ver Info</a>        
                     </div>
                 </div>
     <?php 

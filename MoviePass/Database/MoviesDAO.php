@@ -174,8 +174,7 @@
           array_push($upcomingMovies, $movie);
       }
 
-      $cantidadUpcomingMovies = 4;
-      $randomUpcomingMovies = $this->RandomMovies($upcomingMovies, $cantidadUpcomingMovies);
+      $randomUpcomingMovies = $this->RandomMovies($upcomingMovies, MOVIES_TO_DISPLAY);
 
       return $randomUpcomingMovies;
     }
@@ -208,8 +207,7 @@
           array_push($popularMovies, $movie);
       }
 
-      $cantidadPopularMovies = 4;
-      $randomPopularMovies = $this->RandomMovies($popularMovies, $cantidadPopularMovies);
+      $randomPopularMovies = $this->RandomMovies($popularMovies, MOVIES_TO_DISPLAY);
 
       return $randomPopularMovies;
     }

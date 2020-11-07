@@ -162,7 +162,7 @@ class ViewsController
             array_push($billboards, $cinemas->GetBillboard());
         }
 
-        var_dump($billboards);
+        //var_dump($billboards);
         require_once(VIEWS_PATH . "showtimes.php");
     }
 }

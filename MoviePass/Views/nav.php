@@ -19,11 +19,9 @@
     <!-- Links -->
     <ul class="navbar-nav ml-auto">
   
+      
       <li class="nav-item">
-        <a class="nav-link" href="#">Entradas</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<?php echo FRONT_ROOT. "Showtime/ShowShowtimes"?>">Funciones</a>
+        <a class="nav-link" href="<?php echo FRONT_ROOT. "Showtime/ShowShowtimes"?>">Cartelera</a>
       </li>
 
       <!-- Dropdown -->
@@ -40,6 +38,10 @@
           </div>
         </li>
       <?php } ?>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#">Carrito</a>
+      </li>
 
       <?php if (isset($_SESSION['userLogged']) || isset($_SESSION['adminLogged'])){ ?>
               <li class="nav-item active">

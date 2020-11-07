@@ -24,7 +24,7 @@ require_once('nav.php');
 
 			<div class="row container">
 				<div class="col">
-					<form action="<?php echo FRONT_ROOT . 'Movies/ShowMovies' ?>" method="POST">
+					<form action="<?php echo FRONT_ROOT . 'Movie/ShowMovies' ?>" method="POST">
 
 						<div class="form-group form-group-lg inputContainer" style="width:50%">
 
@@ -36,7 +36,7 @@ require_once('nav.php');
 								-->
 								<option selected="true" disabled="disabled" style="background-color: #000000;">Filtrar por Generos</option>
 								<option value="0" style="background-color: #000000;">Todos</option>
-								<?php foreach ($generos as $g) { ?>
+								<?php foreach ($genres as $g) { ?>
 									<option style="background-color: #000000;" value="<?php echo $g['id'] ?>" required><?php echo $g['name']; ?></option>
 								<?php } ?>
 							</select>

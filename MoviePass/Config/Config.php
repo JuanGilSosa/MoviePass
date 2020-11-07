@@ -23,6 +23,8 @@ define("DB_PASS" , "");
 
 define("PW_ADMIN" , "holamundo");
 
+define("MOVIES_TO_DISPLAY", 4);
+
 ?>
 
 
