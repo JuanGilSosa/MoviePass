@@ -114,8 +114,8 @@ class TheatreController
                     
                     if (!is_string($adress)) {
 
-                        
                         $isAdress = $this->adressDAO->FindAdress($adress);
+
                         if (!$isAdress) {
                             $this->adressDAO->Add($adress);
                             $dirWithId = $this->adressDAO->ChangeObjectById($adress); #$this->adressDAO->FindAdress($adress);
