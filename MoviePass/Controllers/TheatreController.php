@@ -110,7 +110,7 @@ class TheatreController
                 $isPhoneNumber = $this->theatreDAO->FindTheatreByPhoneNumber($phoneNumber);
 
                 if (!$isPhoneNumber) {
-                    $adress = $this->adressDAO->CreateDireccion($street, (int)$number, (int)$floor, $city, (int)$zipCode, (int)$countryId, (int)$provinceId);
+                    $adress = $this->adressDAO->CreateAdress($street, (int)$number, (int)$floor, $city, (int)$zipCode, (int)$countryId, (int)$provinceId);
                     
                     if (!is_string($adress)) {
 

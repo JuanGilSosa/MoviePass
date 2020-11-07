@@ -64,7 +64,7 @@ require_once('nav.php');
                                         <td><?php echo $city->GetName() . ", " . $province->GetName() . ", " . $country->GetName() ?> </td>
 
                                         <form action="<?php echo FRONT_ROOT . 'Cinema/ViewAddCinema' ?>" method="POST">
-                                             <td><button type="submit" value="<?php echo $theatre->GetId() ?>" class="btn btn-secondary btn-info w-20" name="idCine">+Cinema</button></td>
+                                             <td><button type="submit" value="<?php echo $theatre->GetId() ?>" class="btn btn-secondary btn-info w-20" name="idCine">+Sala</button></td>
                                         </form>
                                         <form action="<?php echo FRONT_ROOT . 'Cinema/ShowCinemasByTheatre' ?>" method="POST">
                                              <td><button type="submit" value="<?php echo $theatre->GetId() ?>" class="btn btn-secondary btn-info w-20" name="idCine">Lista</button></td>

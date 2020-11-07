@@ -33,24 +33,22 @@ class CinemaController
        // $this->salaxcineDAO = new salaXcineDAO();
     }
 
-    public function ViewAddCinema($theatreId)
+    public function ViewAddCinema($theatreId, $message="")
     {
-        ViewsController::ShowAddCinema($theatreId);
+        ViewsController::ShowAddCinema($theatreId, $message);
     }
 
-    public function ShowCinemasByTheatre($theatreId)
+    public function ShowCinemasByTheatre($theatreId, $message="")
     {
         
-        ViewsController::ShowCinemasByTheatre($theatreId);
+        ViewsController::ShowCinemasByTheatre($theatreId, $message);
     }
 
     public function AddCinema($theatreId = "", $name = "", $type = "", $price = "", $capacity = "")
     {
         try{
-            //var_dump($theatreId);
-            //var_dump($name);
             $theatre = $this->theatreDAO->GetTheatreById($theatreId);
-            //var_dump($theatre);
+
             if (!is_null($theatre)) {
                 if ($this->FindCinemaByName($theatre, $name) == 0) {
                     $cinema = new Cinema(0, $name, $price, $capacity, $type);
@@ -64,12 +62,13 @@ class CinemaController
                     $theatreId = $theatre->GetId();
 
                     $this->cinemaDAO->Add_cinemasXtheatre($lastIdSala, $theatreId);
+                    $message = "Sala agregada con éxito.";
+                    $this->ShowCinemasByTheatre($theatreId, $message);
 
-                    $theatreController = new TheatreController();
-                    $theatreController->ShowTheatres();
 
                 } else {
-                    #Es porque la sala isCinema 
+                    $message = "El nombre de la sala ya se encuentra registrado.";
+                    $this->ViewAddCinema($theatreId, $message);
                 }
             }
         }catch (PDOException $ex){
@@ -80,10 +79,12 @@ class CinemaController
     public function FindCinemaByName($theatre, $cinemaName)
     {
         $isCinema = 0;
-        $cinemas = $theatre->GetCinemas();
+        $cinemaDAO = new CinemaDAO();
+        $cinemas = $cinemaDAO->GetCinemasByTheatreId($theatre->GetId());
+
         if (is_array($cinemas)) {
             foreach ($cinemas as $cinema) {
-                if (strcasecmp($cinema->GetName, $cinemaName)) {
+                if ($cinema->GetName() == $cinemaName) {
                     $isCinema = 1;
                     break;
                 }

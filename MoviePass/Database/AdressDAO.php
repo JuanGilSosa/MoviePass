@@ -83,7 +83,7 @@ class AdressDAO implements IAdressDAO
         return count($resp) > 1 ? $resp : reset($resp);
     }
 
-    public function CreateDireccion($street, $number, $floor, $idCiudad, $zipCode, $countryId, $provinceId)
+    public function CreateAdress($street, $number, $floor, $idCiudad, $zipCode, $countryId, $provinceId)
     {
         // Armo la ciudad con el codigo postal que viene en el select. 
         $cityDAO = new CityDAO();

@@ -8,12 +8,30 @@ require_once("nav.php");
                <form action="<?php echo FRONT_ROOT . 'Cinema/AddCinema' ?>" method="POST" class="bg-light-alpha p-5">
                     <div class="row justify-content-start">
 
+                    <?php
+                         if(isset($message) && !empty($message))
+                         {
+                              ?>
+                              <div class="container">
+                                   <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <?php echo $message ?>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                             <span aria-hidden="true">&times;</span>
+                                        </button>
+                                   </div>
+                              </div>
+                              <?php
+                         } 
+                    ?>
+                    
                          <div class="col-lg-12">
                               <div class="form-group">
                                    <label for="">Cine</label>
                                    <br>
                                    <input type="text" placeholder="<?php echo $theatre->GetName() ?>"  disabled required></input>
+                                   
                               </div>
+                              
                          </div>
 
                          <div class="col-lg-12 " hidden>

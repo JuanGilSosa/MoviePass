@@ -103,14 +103,14 @@ class ViewsController
         }
     }
 
-    public static function ShowAddCinema($theatreId)
+    public static function ShowAddCinema($theatreId, $message="")
     {
         $theatreDAO = new TheatreDAO();
         $theatre = $theatreDAO->GetTheatreById($theatreId);
         require_once(VIEWS_PATH . 'addCinema.php');
     }
 
-    public static function ShowCinemasByTheatre($theatreId)
+    public static function ShowCinemasByTheatre($theatreId, $message="")
     {
         $theatreDAO = new TheatreDAO();
         $theatre = $theatreDAO->GetTheatreById($theatreId);
