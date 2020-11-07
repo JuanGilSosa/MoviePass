@@ -138,18 +138,15 @@ class ViewsController
         }
     }
 
-    public static function ShowAddShowtimeView($message = "", $movieId = "", $theatre = "", $cinemas = "")
+    public static function ShowAddShowtimeView($message = "", $movieId = "", $theatres = "", $cinemas = "")
     {
         if (!empty($movieId)) {
             $moviesDAO = new MoviesDAO();
             $movie = $moviesDAO->GetMovieById($movieId);
-            if (empty($theatre)) {
+            if (empty($theatres)) {
                 $theatreDAO = new TheatreDAO();
                 $theatres = $theatreDAO->GetAllActive();
-            } else {
-                $theatres = $theatre;
             }
-
 
             require_once(VIEWS_PATH . "addShowtime.php");
         }

@@ -49,17 +49,25 @@ require_once("nav.php");
                         <div class="form-group">
                             <select name="select-movies" class="form-control" onchange="">
                                 <option selected="true" disabled="disabled">Seleccione Sala</option>
-
-                                <?php foreach ($cinemas as $cinema) { ?>
-                                    <option name="salaId" value="<?php echo $cinema->GetId() ?>" required><?php echo $cinema->GetName() ?></option>
-                                <?php } ?>
+                                <?php
+                                    if (is_array($cinemas)) {
+                                        foreach ($cinemas as $cinema) {
+                                    ?>
+                                        <option name="salaId" value="<?php echo $cinema->GetId() ?>" required><?php echo $cinema->GetName() ?></option>
+                                        <?php }
+                                    } else {
+                                        ?>
+                                        <option name="salaId" value="<?php echo $cinemas->GetId() ?>" required><?php echo $cinemas->GetName() ?></option>
+                                    <?php } ?>
+                                
+                            
                             </select>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="">Pelicula</label>
-                            <input type="text" name="peliculaId" placeholder="<?php echo $pelicula->GetTitle() ?>" value="<?php echo $pelicula->GetId() ?>" class="form-control" required>
+                            <input type="text" name="peliculaId" placeholder="<?php echo $movie->GetTitle() ?>" value="<?php echo $movie->GetId() ?>" class="form-control" required>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -81,7 +89,7 @@ require_once("nav.php");
                         </div>
                     </div>
                 </div>
-                <button type="submit" name="button" class="btn btn-light ml-auto d-block">Cargar Sala</button>
+                <button type="submit" name="button" class="btn btn-light ml-auto d-block">Cargar Función</button>
             </form>
         </div>
     </section>

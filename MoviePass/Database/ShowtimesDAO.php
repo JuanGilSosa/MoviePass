@@ -51,9 +51,9 @@
             try {
                 $con = Connection::getInstance();
                 $query = 'INSERT INTO showtimes(startTime, endTime, movieId, active) VALUES(:startTime, :endTime, :movieId, :active)';
-                $params['startTime'] = $funcion->getHoraInicio();
-                $params['endTime'] = $funcion->getHoraFin();
-                $params['movieId'] = $funcion->getPelicula()->getId();
+                $params['startTime'] = $funcion->GetStartTime();
+                $params['endTime'] = $funcion->GetEndTime();
+                $params['movieId'] = $funcion->GetMovie()->GetId();
                 $params['active'] = 1;
                 return $con->executeNonQuery($query, $params);
             } catch (PDOException $e) {
@@ -74,20 +74,20 @@
                 $query = 'SELECT max(showtimeId) as maximo FROM showtimes;';
                 $con = Connection::getInstance();
                 $showtimeId = $con->execute($query);
-                //var_dump($idCinema);
+                //var_dump($cinemaId);
                 return (!empty($showtimeId)) ? (int)$showtimeId[0]['maximo'] : -1;
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }
         }
 
-        public function Add_showtimesXcinemas($idCinema, $showtimeId){
+        public function Add_showtimesXcinemas($cinemaId, $showtimeId){
             try{
                 $con = Connection::getInstance();
 
-                $query = 'INSERT INTO showtimesXcinemas(idCinema, showtimeId) VALUES(:idCinema, :showtimeId)';
+                $query = 'INSERT INTO showtimesXcinemas(cinemaId, showtimeId) VALUES(:cinemaId, :showtimeId)';
 
-                $params['idCinema'] = $idCinema;
+                $params['cinemaId'] = $cinemaId;
                 $params['showtimeId'] = $showtimeId;
 
                 return $con->executeNonQuery($query, $params); 
@@ -105,34 +105,16 @@
             return (count($ans)>1) ? $ans : $ans[0];
         }
 
-        public function GetShowtime_showtimeXbillboard($showtimeId){
+        public function GetShowtime_showtimesxcinema($cinemaId){
             try {
                 $con = Connection::getInstance();
                 $query = 'SELECT f.* 
-                            FROM carteleraxfuncion as cxf 
-                            INNER JOIN showtimes as f 
-                                ON cxf.showtimeId = f.showtimeId 
-                                    AND f.showtimeId = :showtimeId 
-                                    AND f.active = 1;
-                            ';
-                $params['showtimeId'] = $showtimeId;
-                $showtimes = $con->execute($query, $params);
-                return (!empty($showtimes)) ? $this->mapping($showtimes) : array();
-            } catch (PDOException $e) {
-                echo $e->getMessage();
-            }
-        }
-
-        public function GetFunction_SALAXFUNCION($idRoom){
-            try {
-                $con = Connection::getInstance();
-                $query = 'SELECT f.* 
-                            FROM salaxfuncion as sxf 
+                            FROM showtimesxcinema as sxf 
                             INNER JOIN showtimes as f 
                                 ON sxf.showtimeId = f.showtimeId 
-                                    AND sxf.idCinema = :idCinema 
+                                    AND sxf.cinemaId = :cinemaId 
                             ';
-                $params['idCinema'] = $idRoom;
+                $params['cinemaId'] = $cinemaId;
                 $showtimes = $con->execute($query, $params);
                 return (!empty($showtimes)) ? $this->mapping($showtimes) : array();
             } catch (PDOException $e) {
