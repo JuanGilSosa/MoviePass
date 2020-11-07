@@ -41,6 +41,7 @@
             <a class="dropdown-item" href="<?php  echo FRONT_ROOT . "Admin/ShowAddView "?>">Agregar Cine</a>
             <a class="dropdown-item" href="<?php  echo FRONT_ROOT . "Cine/ListViewCine"?>">Listar Cines</a>
             <a class="dropdown-item" href="<?php echo FRONT_ROOT. "Pelicula/ShowMovies"?>">Lista Peliculas</a>
+            <a class="dropdown-item" href="<?php echo FRONT_ROOT. "Funcion/ShowFunctions"?>">Lista Funciones</a>
           </div>
         </li>
       <?php } ?>

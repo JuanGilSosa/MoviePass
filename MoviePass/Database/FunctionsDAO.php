@@ -53,7 +53,7 @@
                 $query = 'INSERT INTO funciones(horaInicio, horaFin, idPelicula, active) VALUES(:horaInicio, :horaFin, :idPelicula, :active)';
                 $params['horaInicio'] = $funcion->getHoraInicio();
                 $params['horaFin'] = $funcion->getHoraFin();
-                $params['idPelicula'] = $funcion->getPelicula()->getId();
+                $params['idPelicula'] = $funcion->getMovie()->getId();
                 $params['active'] = 1;
                 return $con->executeNonQuery($query, $params);
             } catch (PDOException $e) {
@@ -85,7 +85,7 @@
             try{
                 $con = Connection::getInstance();
 
-                $query = 'INSERT INTO salaxfunciones(idSala, idFuncion) VALUES(:idSala, :idFuncion)';
+                $query = 'INSERT INTO salaxfuncion(idSala, idFuncion) VALUES(:idSala, :idFuncion)';
 
                 $params['idSala'] = $idSala;
                 $params['idFuncion'] = $idFuncion;
@@ -100,11 +100,13 @@
         public function mapping($value){
             $value = is_array($value) ? $value : [];
             $ans = array_map(function($p){
-                return new Funcion($p['idFuncion'], $p['horaInicio'], $p['horaFin'], null, $p['idPelicula'], $p['active']);
+                $func = new Funcion($p['idFuncion'], $p['idPelicula'], $p['horaInicio'], $p['horaFin'], 0);
+                $func->setActive($p['active']);
+                return $func;
             }, $value);
             return (count($ans)>1) ? $ans : $ans[0];
         }
-
+/*
         public function GetFunction_CARTELERAXFUNCION($idBillboard){
             try {
                 $con = Connection::getInstance();
@@ -122,7 +124,7 @@
                 echo $e->getMessage();
             }
         }
-
+*/
         public function GetFunction_SALAXFUNCION($idRoom){
             try {
                 $con = Connection::getInstance();
@@ -134,7 +136,7 @@
                             ';
                 $params['idSala'] = $idRoom;
                 $functions = $con->execute($query, $params);
-                return (!emtpy($functions)) ? $this->mapping($functions) : array();
+                return (!empty($functions)) ? $this->mapping($functions) : array();
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }
