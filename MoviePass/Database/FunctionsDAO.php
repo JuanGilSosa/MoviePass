@@ -53,7 +53,7 @@
                 $query = 'INSERT INTO funciones(horaInicio, horaFin, idPelicula, active) VALUES(:horaInicio, :horaFin, :idPelicula, :active)';
                 $params['horaInicio'] = $funcion->getHoraInicio();
                 $params['horaFin'] = $funcion->getHoraFin();
-                $params['idPelicula'] = $funcion->getPelicula()->getId();
+                $params['idPelicula'] = $funcion->getMovie()->getId();
                 $params['active'] = 1;
                 return $con->executeNonQuery($query, $params);
             } catch (PDOException $e) {
@@ -85,7 +85,7 @@
             try{
                 $con = Connection::getInstance();
 
-                $query = 'INSERT INTO salaxfunciones(idSala, idFuncion) VALUES(:idSala, :idFuncion)';
+                $query = 'INSERT INTO salaxfuncion(idSala, idFuncion) VALUES(:idSala, :idFuncion)';
 
                 $params['idSala'] = $idSala;
                 $params['idFuncion'] = $idFuncion;

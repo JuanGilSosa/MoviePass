@@ -8,7 +8,7 @@
     use Database\CineDAO as CineDAO;
     use Controllers\ViewsController as ViewsController;
     use Database\SalaDAO as SalaDAO;
-    use Models\movie\Funcion as Funcion;
+    use Models\Pelicula\Funcion as Funcion;
 
     class FuncionController{
 
@@ -34,7 +34,7 @@
                 $idMovie = $idRoom;
                 $movie = $this->movieDAO->getMovieById($idMovie);
                 $cine = $this->cineDAO->GetCineById($idCine);
-                $rooms=$this->salaDAO->GetSalasByCineId($idCine);
+                $rooms=$this->roomDAO->GetSalasByCineId($idCine);
                 
 
                 ViewsController::ShowAddFuncionView("", $movie->getId(), $cine, $rooms);
@@ -53,18 +53,15 @@
                 $funcion = new Funcion(0, $movie, $horaInicio, $horaFin, $room);
                 //var_dump($funcion); HASTA ACA OK
 
-                $this->funcionDAO->Add($funcion);
+                $this->functionDAO->Add($funcion);
 
                 
-                $lastIdFuncion = $this->funcionDAO->GetLastId(); #uso esto porque como el objeto tiene 0 - no sirve
-                $idRoom = $sala->getId();
+                $lastIdFuncion = $this->functionDAO->GetLastId(); #uso esto porque como el objeto tiene 0 - no sirve
+                $idRoom = $room->getId();
 
-                $this->funcionDAO->Add_FUNCIONESXSALA($idRoom, $lastIdFuncion);
+                $this->functionDAO->Add_FUNCIONESXSALA($idRoom, $lastIdFuncion);
 
                 ViewsController::ShowMoviesNowPlaying();
-
-                array_push($cine->getCartelera(), $movie);
-                var_dump($cine);
             }
         }
 
