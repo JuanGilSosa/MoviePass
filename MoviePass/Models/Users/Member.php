@@ -4,24 +4,25 @@
 
     class Member extends User{
 
-        private $numeroTarjetaDeCredito;
+        private $creditCardNumber;
 
-        public function __construct ($dni= "", $email= "", $password= "", $firstName= "", $lastName= "",$numeroTarjetaDeCredito = "")
+        public function __construct ($dni= "", $email= "", $password= "", $firstName= "", $lastName= "",$creditCardNumber = "")
         {
+            //parent::__construct($dni, $email, $password, $firstName, $lastName);
             $this->dni = $dni;
             $this->email= $email;
             $this->password = $password;
             $this->firstName = $firstName;
             $this->lastName = $lastName;
-            $this->numeroTarjetaDeCredito = $numeroTarjetaDeCredito;
+            $this->creditCardNumber = $creditCardNumber;
         }
 
-        public function getNumeroTarjetaDeCredito(){
-            return $this->numeroTarjetaDeCredito;
+        public function GetCreditCardNumber(){
+            return $this->creditCardNumber;
         }
         
-        public function setNumeroTarjetaDeCredito($numeroTarjetaDeCredito){
-            $this->numeroTarjetaDeCredito = $numeroTarjetaDeCredito;
+        public function SetCreditCardNumber($creditCardNumber){
+            $this->creditCardNumber = $creditCardNumber;
         }
 
     }

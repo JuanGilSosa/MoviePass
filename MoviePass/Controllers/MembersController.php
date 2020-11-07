@@ -1,20 +1,14 @@
 <?php
 
     namespace Controllers;
-
-    use DAO\AdminDAO as AdminDAO;
-    #use DAO\MemberDAO as MemberDAO; #aca se cambia DAO\MemberDAO por Database\MemberDAO y funciona todo tal cual
+    
     use Database\MemberDAO as MemberDAO;
     use Models\Users\Member as Member;
-    use Models\Users\Admin as Admin;
 
-    
+    use Helpers\SessionHelper as SessionHelper;
 
     class MembersController
     {
-
-        //FIJENSE SI QUIEREN CONTROLAR TODO EN UNO O DIVIDIRLO EN DOS, CREO QUE SERIA MEJOR TENER DOS CONTROLES, AHORA LO DEJO ACA PARA NO OLVIDAR DE HACERLO
-        //DE DIVIDIRLO EN DOS VAMOS A TENER QUE PONER LAS FUNCIONES DE LOGIN EN OTRO CONTROLLER, 
         private $membersDAO; 
 
         public function __construct(){
@@ -26,8 +20,8 @@
 
             $message = "";
 
-            $existeUsuario = $this->FindMemberByEmail($email);
-            if(!$existeUsuario)
+            $member = $this->FindMemberByEmail($email);
+            if(!$member)
             {
                 if($password == $checkPassword)
                 {
@@ -64,20 +58,18 @@
         {
             $loggedMember = null;
 
-            $members = $this->membersDAO->GetAll();
+            $members = $this->membersDAO->GetAll($email);
+            
             if(is_array($members) && !empty($members)){
                 foreach ($members as $member)
                 {
-                    if($member->getEmail() == $email)
+                    if($member->GetEmail() == $email)
                     {
                         return $member;
                     }
                 }
-            }else{
-                if($members->getEmail() == $email)
-                {
-                    return $members;
-                }
+            }else if(!empty($members)){ #si solo hay un miembro en la base de datos, se devuelve un objeto y no un array
+                return $members;    
             }
             return $loggedMember;
         }
@@ -86,20 +78,14 @@
         {
             $rta = "";
             $loggedMember = $this->FindMemberByEmail($email);
-            if ($loggedMember != null) 
+            
+            if ($loggedMember != null && $loggedMember->GetPassword() == $password) 
             {
-                if ($loggedMember->getPassword() == $password)
-                {
-                    SessionHelper::setOnSession('userLogged',$loogedMember);
-                }
-                else
-                {
-                    $rta = "Datos incorrecta";
-                }
+                SessionHelper::SetSession('userLogged',$loggedMember);
             }
             else
             {
-                $rta = "Datos Incorrecto"; 
+                $rta = "Datos incorrectos"; 
             }
                          
             return $rta;

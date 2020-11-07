@@ -14,13 +14,16 @@ define("LITY_PATH", FRONT_ROOT.VIEWS_PATH . "lity/");
 define("API_URL", "https://api.themoviedb.org/3/movie/");
 define("API_KEY1", "a67565019e2b3ed72b43911ab7692772");
 define("API_KEY2", "48621040dbb9c7f28355bff08c002197");
-
+define("REQUEST_IMG","https://image.tmdb.org/t/p/");
+//
 define("DB_HOST" , "localhost");
 define("DB_NAME" , "moviepass");
 define("DB_USER" , "root");
 define("DB_PASS" , "");
 
 define("PW_ADMIN" , "holamundo");
+
+define("MOVIES_TO_DISPLAY", 4);
 
 ?>
 
