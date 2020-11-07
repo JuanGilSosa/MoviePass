@@ -48,7 +48,7 @@ class AdressDAO implements IAdressDAO
                     (:street,:number,:floor,:zipCode)';
 
             $city = $adress->GetCity();
-            var_dump($city);
+            //var_dump($city);
 
             $params['street'] = $adress->GetStreet();
             $params['number'] = $adress->GetNumber();
