@@ -5,7 +5,7 @@ namespace Database;
 use Models\Location\Adress as Adress;
 use PDOException as PDOException;
 
-class AdressDAO implements IDAO
+class AdressDAO implements IAdressDAO
 {
     /*
         public function __construct(){
@@ -47,10 +47,13 @@ class AdressDAO implements IDAO
             $query = 'INSERT INTO adresses(street,number,floor,zipCode) VALUES
                     (:street,:number,:floor,:zipCode)';
 
+            $city = $adress->GetCity();
+            var_dump($city);
+
             $params['street'] = $adress->GetStreet();
             $params['number'] = $adress->GetNumber();
             $params['floor'] = $adress->GetFloor();
-            $params['zipCode'] = $adress->GetCity()->GetZipCode();
+            $params['zipCode'] = $city->GetZipCode();
             return $con->executeNonQuery($query, $params);
         } catch (PDOException $e) {
             throw $e;

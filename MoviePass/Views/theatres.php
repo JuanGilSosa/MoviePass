@@ -56,7 +56,7 @@ require_once('nav.php');
                                              echo $adress->GetStreet() . ", " .
                                                   $adress->GetNumber() ;
                                              if ($adress->GetFloor() != "") {
-                                                  echo ", " . $adress->getPiso();
+                                                  echo ", " . $adress->GetFloor();
                                              } ?>
                                         </td>
 

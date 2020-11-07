@@ -3,7 +3,7 @@
     use Models\Location\City as City;
     use PDOException as PDOException;
 
-    class CityDAO implements IDAO{
+    class CityDAO implements ICityDAO{
 /*
         public function __construct(){
             try{
@@ -37,9 +37,11 @@
                 $con = Connection::getInstance();
                 $query = 'INSERT INTO cities(zipCode, name, provinceId) VALUES(:zipCode,:name,:provinceId)';
 
-                $params['zipCode'] = $city->getCodigoPostal();
-                $params['name'] = $city->getNameCiudad();
-                $params['provinceId'] = $city->getProvincia()->getId();
+                $province = $city->GetProvince();
+
+                $params['zipCode'] = $city->GetZipCode();
+                $params['name'] = $city->GetName();
+                $params['provinceId'] = $province->GetId();
                 
                 return $con->executeNonQuery($query, $params);
             } catch (PDOException $e) {

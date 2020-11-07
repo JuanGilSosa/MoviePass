@@ -4,7 +4,7 @@
     use Models\Movie\Movie as Movie;
     use Models\Movie\Genre as Genre;
     
-    class MoviesDAO implements IDAO{
+    class MoviesDAO implements IMovieDAO{
 
         protected $peliculas;
 

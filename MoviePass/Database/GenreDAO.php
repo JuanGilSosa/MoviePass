@@ -2,7 +2,7 @@
     namespace Database; 
     use Models\Movie\Genre as Genre;
 
-    class GenreDAO implements IDAO{
+    class GenreDAO implements IGenreDAO{
         
         private $genres;
 

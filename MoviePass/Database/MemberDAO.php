@@ -4,7 +4,7 @@
     use Database\Connection as Connection;
     use PDOException as PDOException;
 
-    class MemberDAO implements IDAO
+    class MemberDAO implements IMemberDAO
     {
 
         public function Add($member)
