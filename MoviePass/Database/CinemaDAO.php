@@ -33,10 +33,10 @@
                 $query = 'INSERT INTO cinemas(name,price,capacity,type) VALUES
                             (:name,:price,:capacity,:type)';
 
-                $params['name'] = $cinema->getNombre();
-                $params['price'] = $cinema->getPrecio();
-                $params['capacity'] = $cinema->getCapacidad();
-                $params['type'] = $cinema->getTipo();
+                $params['name'] = $cinema->GetName();
+                $params['price'] = $cinema->GetPrice();
+                $params['capacity'] = $cinema->GetCapacity();
+                $params['type'] = $cinema->GetType();
 
                 return $con->executeNonQuery($query, $params);
             }catch(PDOException $e){

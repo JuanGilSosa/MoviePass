@@ -18,11 +18,7 @@
 
     <!-- Links -->
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
+  
       <li class="nav-item">
         <a class="nav-link" href="#">Entradas</a>
       </li>
@@ -46,11 +42,11 @@
       <?php } ?>
 
       <?php if (isset($_SESSION['userLogged']) || isset($_SESSION['adminLogged'])){ ?>
-              <li class="nav-item">
+              <li class="nav-item active">
                 <a class="nav-link js-scroll-trigger text-white" href="<?php echo FRONT_ROOT."Login/LogOut"?>">Cerrar Sesion</a>
               </li>
             <?php }else{ ?>
-              <li class="nav-item">
+              <li class="nav-item active">
                 <a class="nav-link js-scroll-trigger text-white" href="<?php echo FRONT_ROOT."Views/ShowLogIn"?>">Iniciar Sesion</a>
               </li>
             <?php } ?>

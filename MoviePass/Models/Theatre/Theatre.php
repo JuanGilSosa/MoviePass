@@ -17,7 +17,7 @@
         private $phoneNumber;
         private $adress; 
         /** @var array || null */
-        private $auditorium;
+        private $cinema;
         private $billboard;
         private $active;
 
@@ -29,7 +29,7 @@
             $this->email = $email;
             $this->phoneNumber = $phoneNumber;
             $this->adress = $adress;
-            $this->auditorium = array();
+            $this->cinema = array();
             $this->billboard = new Billboard();
             $this->active = true;
         }
@@ -54,8 +54,8 @@
             return $this->adress;
         }
 
-        public function GetAuditorium(){
-            return $this->auditorium;
+        public function GetCinemas(){
+            return $this->cinema;
         }
 
         public function GetBillboard(){
@@ -86,8 +86,8 @@
             $this->adress = $adress;
         }
 
-        public function SetAuditorium($auditorium){
-            $this->auditorium = $auditorium;
+        public function SetCinemas($cinema){
+            $this->cinema = $cinema;
         }
         
         public function SetBillboard($billboard){

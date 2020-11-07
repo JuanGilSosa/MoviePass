@@ -11,6 +11,7 @@ require_once("nav.php");
                          <div class="col-lg-12">
                               <div class="form-group">
                                    <label for="">Cine</label>
+                                   <br>
                                    <input type="text" placeholder="<?php echo $theatre->GetName() ?>"  disabled required></input>
                               </div>
                          </div>
@@ -18,7 +19,7 @@ require_once("nav.php");
                          <div class="col-lg-12 " hidden>
                               <div class="form-group ">
                                    <label for="">Cine ID</label>
-                                   <input type="text" name="idCine" value="<?php echo $theatre->GetId() ?>"  disabled required></input>
+                                   <input type="text" name="theatreId" value="<?php echo $theatre->GetId() ?>"  required></input>
                               </div>
                          </div>
                          

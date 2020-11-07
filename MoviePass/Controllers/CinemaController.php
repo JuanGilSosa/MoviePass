@@ -47,7 +47,10 @@ class CinemaController
     public function AddCinema($theatreId = "", $name = "", $type = "", $price = "", $capacity = "")
     {
         try{
+            //var_dump($theatreId);
+            //var_dump($name);
             $theatre = $this->theatreDAO->GetTheatreById($theatreId);
+            //var_dump($theatre);
             if (!is_null($theatre)) {
                 if ($this->FindCinemaByName($theatre, $name) == 0) {
                     $cinema = new Cinema(0, $name, $price, $capacity, $type);

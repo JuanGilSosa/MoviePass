@@ -26,9 +26,9 @@ require_once('nav.php');
                          <tr>
                               <th class="th-sm">Cine
                               </th>
-                              <th class="th-sm">Nombre Cinema
+                              <th class="th-sm">Nombre Sala
                               </th>
-                              <th class="th-sm">Tipo de Cinema
+                              <th class="th-sm">Tipo de Sala
                               </th>
                               <th class="th-sm">Precio
                               </th>
@@ -54,7 +54,7 @@ require_once('nav.php');
                                    <tr>
                                         <td><?php echo $theatreName ?> </td>
                                         <td><?php echo $cinemaName ?> </td>
-                                        <td><?php echo $tipoDeSala ?> </td>
+                                        <td><?php echo $cinemaType ?> </td>
                                         <td><?php echo '$' . $price ?> </td>
                                         <td><?php echo $capacity ?> </td>
 
