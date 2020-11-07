@@ -143,10 +143,6 @@ class AdressDAO implements IAdressDAO
                                 ($adress->GetNumber() == $adressParam->GetNumber()) &&
                                 ($adress->GetFloor() == $adressParam->GetFloor())
                             ) {
-                                // LA CIUDAD NO ES UN OBJETO
-                                //$zipCode = $city->GetZipCode();
-                                //echo "city en 141: ";
-                                //var_dump($city);
                                 $adress->SetCity($city);
                                 return $adress;
                             }
