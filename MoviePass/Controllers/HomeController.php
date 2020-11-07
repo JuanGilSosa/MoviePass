@@ -1,14 +1,14 @@
 <?php
     namespace Controllers;
 
-    use DAO\PeliculaDAO as PeliculaDAO;
+    use Database\MoviesDAO as MoviesDAO;
     class HomeController
     {
         public static function Index($message = "")
         {
-            $peliculasDAO = new PeliculaDAO();
-            $upcomingMovies = $peliculasDAO->GetUpcomingMovies();
-            $topRatedMovies = $peliculasDAO->GetPopular();
+            $moviesDAO = new MoviesDAO();
+            $upcomingMovies = $moviesDAO->GetUpcomingMovies();
+            $topRatedMovies = $moviesDAO->GetPopular();
             require_once(VIEWS_PATH."main.php");
         }        
         

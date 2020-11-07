@@ -19,56 +19,56 @@
             $this->lastName = $lastName;
         }
 
-        public function getId(){
+        public function GetId(){
             return $this->id;
         }
 
-        public function getDni() {
+        public function GetDni(){
             return $this->dni;
         }
 
-        public function getEmail() {
+        public function GetEmail(){
             return $this->email;
         }
 
-        public function getPassword() {
+        public function GetPassword(){
             return $this->password;
         }
 
-        public function getFirstName() {
+        public function GetFirstName(){
             return $this->firstName;
         }
 
-        public function getLastName() {
+        public function GetLastName(){
             return $this->lastName;
         }
 
-        public function setId($id)
+        public function SetId($id)
         {
             $this->id = $id;
         }
 
-        public function setDni($dni)
+        public function SetDni($dni)
         {
             $this->dni = $dni;
         }
 
-        public function setEmail($email)
+        public function SetEmail($email)
         {
             $this->email = $email; 
         }
 
-        public function setPassword($password)
+        public function SetPassword($password)
         {
             $this->password = $password;
         }
 
-        public function setFirstName($firstName)
+        public function SetFirstName($firstName)
         {
             $this->firstName = $firstName;
         }
 
-        public function setLastName($lastName)
+        public function SetLastName($lastName)
         {
             $this->lastName = $lastName;
         }

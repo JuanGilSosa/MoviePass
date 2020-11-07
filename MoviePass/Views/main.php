@@ -8,7 +8,8 @@ require_once("nav.php");
 
                 <!-- Content -->
                 <h1 class="card-title h1 my-4 py-2">MoviePass</h1>
-                <p>Aca ponele que chamuyamos algo medio largo, pero no tanto, para que parezca profesional, pero en realidad no dice nada.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et deleniti perferendis minus ipsam earum asperiores, ratione consectetur ad reprehenderit voluptates omnis, placeat ullam suscipit. Provident eius laboriosam aliquid ex dolore.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Et deleniti perferendis minus ipsam earum asperiores, ratione consectetur ad reprehenderit voluptates omnis, placeat ullam suscipit. Provident eius laboriosam aliquid ex dolore.</p>
                 <a class="btn purple-gradient" href="<?php echo FRONT_ROOT . 'Views/ShowRegisterForm' ?>"><i class="fas fa-users"></i></i> Registrate y Reserva!</a>
 
             </div>
@@ -23,13 +24,13 @@ require_once("nav.php");
             <div class="row container text-center" style="justify-content:center">
 
                 <?php
-                foreach ($topRatedMovies as $pelicula) {
+                foreach ($topRatedMovies as $movie) {
                 ?>
                     <div class="col container" style="height:300px; margin:1vh 0vh;">
                         <div class="container">
-                            <img style="width: 188px; height: 282px;" src="https://image.tmdb.org/t/p/original<?php echo $pelicula->getPosterPath() ?>" alt="Imagen">
+                            <img style="width: 188px; height: 282px;" src="https://image.tmdb.org/t/p/original<?php echo $movie->getPosterPath() ?>" alt="Imagen">
                             <section style="height:10px;">
-                                <p class="title" style="font-size:12px;	"><?php echo $pelicula->getTitle() ?></p>
+                                <p class="title" style="font-size:12px;	"><?php echo $movie->GetTitle() ?></p>
                             </section>
                         </div>
 
@@ -49,13 +50,13 @@ require_once("nav.php");
             <div class="row container text-center" style="justify-content:center">
 
                 <?php
-                foreach ($upcomingMovies as $pelicula) {
+                foreach ($upcomingMovies as $movie) {
                 ?>
                     <div class="col container" style="height:300px; margin:1vh 0vh;">
                         <div class="container">
-                            <img style="width: 188px; height: 282px;" src="https://image.tmdb.org/t/p/original<?php echo $pelicula->getPosterPath() ?>" alt="Imagen">
+                            <img style="width: 188px; height: 282px;" src="https://image.tmdb.org/t/p/original<?php echo $movie->getPosterPath() ?>" alt="Imagen">
                             <section style="height:10px;">
-                                <p class="title" style="font-size:12px;	"><?php echo $pelicula->getTitle() ?></p>
+                                <p class="title" style="font-size:12px;	"><?php echo $movie->GetTitle() ?></p>
                             </section>
                         </div>
 

@@ -18,16 +18,10 @@
 
     <!-- Links -->
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
+  
+      
       <li class="nav-item">
-        <a class="nav-link" href="#">Entradas</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<?php echo FRONT_ROOT. "Pelicula/ShowMovieDescription"?>">Funciones</a>
+        <a class="nav-link" href="<?php echo FRONT_ROOT. "Showtime/ShowShowtimes"?>">Cartelera</a>
       </li>
 
       <!-- Dropdown -->
@@ -39,19 +33,22 @@
             aria-haspopup="true" aria-expanded="false">Admins</a>
           <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="<?php  echo FRONT_ROOT . "Admin/ShowAddView "?>">Agregar Cine</a>
-            <a class="dropdown-item" href="<?php  echo FRONT_ROOT . "Cine/ListViewCine"?>">Listar Cines</a>
-            <a class="dropdown-item" href="<?php echo FRONT_ROOT. "Pelicula/ShowMovies"?>">Lista Peliculas</a>
-            <a class="dropdown-item" href="<?php echo FRONT_ROOT. "Funcion/ShowFunctions"?>">Lista Funciones</a>
+            <a class="dropdown-item" href="<?php  echo FRONT_ROOT . "Theatre/ShowTheatres"?>">Listar Cines</a>
+            <a class="dropdown-item" href="<?php echo FRONT_ROOT. "Movie/ShowMovies"?>">Lista Peliculas</a>
           </div>
         </li>
       <?php } ?>
 
+      <li class="nav-item">
+        <a class="nav-link" href="#">Carrito</a>
+      </li>
+
       <?php if (isset($_SESSION['userLogged']) || isset($_SESSION['adminLogged'])){ ?>
-              <li class="nav-item">
+              <li class="nav-item active">
                 <a class="nav-link js-scroll-trigger text-white" href="<?php echo FRONT_ROOT."Login/LogOut"?>">Cerrar Sesion</a>
               </li>
             <?php }else{ ?>
-              <li class="nav-item">
+              <li class="nav-item active">
                 <a class="nav-link js-scroll-trigger text-white" href="<?php echo FRONT_ROOT."Views/ShowLogIn"?>">Iniciar Sesion</a>
               </li>
             <?php } ?>
