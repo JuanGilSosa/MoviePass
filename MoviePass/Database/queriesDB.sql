@@ -92,7 +92,7 @@ CREATE TABLE Tickets(
     numberTicket INT NOT NULL AUTO_INCREMENT,
     showtimeId INT,
     CONSTRAINT pk_numberTicket PRIMARY KEY(numberTicket),
-    CONSTRAINT fk_showTimeId FOREIGN KEY(showtimeId) REFERENCES Showtimes(showtimeId); 
+    CONSTRAINT fk_showTimeId FOREIGN KEY(showtimeId) REFERENCES Showtimes(showtimeId)
 );
 
 CREATE TABLE ticketsXshowtimes(
