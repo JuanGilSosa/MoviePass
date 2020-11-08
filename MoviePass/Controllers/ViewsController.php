@@ -162,6 +162,7 @@ class ViewsController
     }
 
     public static function ShowShowtimesView($cinemas){
+        #$genreDAO = new GenreDAO();
         $billboards = array();
         if(is_array($cinemas)){
             foreach($cinemas as $cinema){
@@ -170,8 +171,6 @@ class ViewsController
         }else{
             array_push($billboards, $cinemas->GetBillboard());
         }
-
-        //var_dump($billboards);
         require_once(VIEWS_PATH . "showtimes.php");
     }
 }
