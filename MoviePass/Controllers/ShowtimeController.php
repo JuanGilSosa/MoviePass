@@ -125,7 +125,7 @@
                     }elseif(is_array($roomAux) && !empty($roomAux)){
                     
                         foreach($roomAux as $cinema){
-                            $func = $this->showtimeDAO->GetShowtime_showtimesxcinema($cinema->GetId());
+                            $func = $this->functionDAO->GetShowtime_showtimesxcinema($cinema->GetId());
                          
                             if(!is_array($func) && !empty($func)){
                                 $movie = $this->movieDAO->GetMovieById($func->GetMovie());
@@ -164,7 +164,7 @@
 
                     if(!is_array($roomAux) && !empty($roomAux)){
 
-                        $func = $this->showtimeDAO->GetShowtime_showtimesxcinema($roomAux->GetId());
+                        $func = $this->functionDAO->GetShowtime_showtimesxcinema($roomAux->GetId());
                         
                         if(!is_array($func) && !empty($func)){
                             $movie = $this->movieDAO->GetMovieById($func->GetMovie());
@@ -187,7 +187,7 @@
                     }elseif(!empty($roomAux) && is_array($roomAux)){
                    
                         foreach($roomAux as $cinema){
-                            $func = $this->showtimeDAO->GetShowtime_showtimesxcinema($cinema->GetId());
+                            $func = $this->functionDAO->GetShowtime_showtimesxcinema($cinema->GetId());
                    
                             if(!is_array($func) && !empty($func)){
                                 $movie = $this->movieDAO->GetMovieById($func->GetMovie());

@@ -157,7 +157,8 @@
         public function GetActiveCinemasByTheatreId($theatreId){
             try{
                 $con = Connection::getInstance();
-                $query = 'SELECT s.* FROM cinemas as s JOIN cinemasXtheatres as sxc ON sxc.cinemaId = s.cinemaId AND sxc.theatreId = :theatreId';
+                $query = 'SELECT s.* FROM cinemas as s JOIN cinemasXtheatres as sxc 
+                                     ON sxc.cinemaId = s.cinemaId AND sxc.theatreId = :theatreId AND s.active = 1';
                 $params['theatreId'] = $theatreId;
                 $cine = $con->execute($query, $params);
                 return (!empty($cine)) ? $this->mapping($cine) : array();
