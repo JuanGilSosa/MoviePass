@@ -164,7 +164,7 @@
 
                     if(!is_array($roomAux) && !empty($roomAux)){
 
-                        $func = $this->functionDAO->GetShowtime_showtimesxcinema($roomAux->GetId());
+                        $func = $this->showtimeDAO->GetShowtime_showtimesxcinema($roomAux->GetId());
                         
                         if(!is_array($func) && !empty($func)){
                             $movie = $this->movieDAO->GetMovieById($func->GetMovie());

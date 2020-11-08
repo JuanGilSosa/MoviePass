@@ -83,7 +83,7 @@
             $value = is_array($value) ? $value : [];
             $resp = array_map(function($a){
                 $cinema = new Cinema(
-                    $a['cinemaId'],$a['name'],$a['price'],$a['capacity'],$a['type'],$a['active']
+                    $a['cinemaId'],$a['name'],$a['price'],$a['capacity'],$a['type']
                 );
                 return $cinema;
             },$value);
