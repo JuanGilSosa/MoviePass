@@ -101,7 +101,6 @@ class TheatreController
         $countryId
     ) {
         $message = "";
-        var_dump($name);
         $isTheatre = $this->theatreDAO->FindTheatreByName($name);
 
         if (!$isTheatre) {
@@ -111,13 +110,12 @@ class TheatreController
                 $isPhoneNumber = $this->theatreDAO->FindTheatreByPhoneNumber($phoneNumber);
 
                 if (!$isPhoneNumber) {
-                    //var_dump($countryId);
-                    $adress = $this->adressDAO->CreateDireccion($street, (int)$number, (int)$floor, $city, (int)$zipCode, (int)$countryId, (int)$provinceId);
+                    $adress = $this->adressDAO->CreateAdress($street, (int)$number, (int)$floor, $city, (int)$zipCode, (int)$countryId, (int)$provinceId);
                     
                     if (!is_string($adress)) {
 
                         $isAdress = $this->adressDAO->FindAdress($adress);
-                        //var_dump($adress);
+
                         if (!$isAdress) {
                             $this->adressDAO->Add($adress);
                             $dirWithId = $this->adressDAO->ChangeObjectById($adress); #$this->adressDAO->FindAdress($adress);
@@ -152,8 +150,6 @@ class TheatreController
 
     public function Update($id, $name, $email, $phoneNumber)
     {
-
-
         $oldCine = $this->theatreDAO->GetTheatreById(strval($id)); #busca y guarda la informacion vieja del cine
         $isTheatre = $this->theatreDAO->FindTheatreByName($name);     #verifica que el nombre nuevo no exista en la base de datos
 

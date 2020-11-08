@@ -5,6 +5,7 @@ namespace Database;
 use Models\Location\Adress as Adress;
 use PDOException as PDOException;
 
+
 class AdressDAO implements IAdressDAO
 {
     /*
@@ -48,7 +49,7 @@ class AdressDAO implements IAdressDAO
                     (:street,:number,:floor,:zipCode)';
 
             $city = $adress->GetCity();
-            var_dump($city);
+            //var_dump($city);
 
             $params['street'] = $adress->GetStreet();
             $params['number'] = $adress->GetNumber();
@@ -82,31 +83,37 @@ class AdressDAO implements IAdressDAO
         return count($resp) > 1 ? $resp : reset($resp);
     }
 
-    public function CreateDireccion($street, $number, $floor, $idCiudad, $zipCode, $countryId, $provinceId)
+    public function CreateAdress($street, $number, $floor, $idCiudad, $zipCode, $countryId, $provinceId)
     {
-        //var_dump($countryId);
-        $countryDAO = new CountryDAO();
-        $country = $countryDAO->GetById($countryId);
-        if ($country != false) {
-            $provinceDAO = new ProvinceDAO();
-            $province = $provinceDAO->GetById($provinceId);
-            if ($province != false) {
-                $province->SetCountry($country); #haciendo esto, estamos sacando el id que tiene y le asignamos un objeto
-                $cityDAO = new CityDAO();
-                $city = $cityDAO->GetByZipCode($zipCode);
-                if ($city != false) {
-                    $city->SetProvince($province); #mesmo - cambio el id por el objeto
-                    $adress = new Adress($this->GetLastId(), $street, $number, $floor, $city);
+        // Armo la ciudad con el codigo postal que viene en el select. 
+        $cityDAO = new CityDAO();
+        $cityParam = $cityDAO->GetByZipCode($idCiudad);
+
+        if ($cityParam != false && $cityParam->GetZipCode() == $zipCode) // Si los codigos postales coinciden
+        {
+            if($cityParam->GetProvince() == $provinceId) // Si las provincias coinciden
+            {
+                $provinceDAO = new ProvinceDAO();
+                $province = $provinceDAO->GetById($provinceId);
+                if($province->GetCountry() == $countryId) // Si los paises coinciden
+                {
+                    $countryDAO = new CountryDAO();
+                    $country = $countryDAO->GetById($countryId);
+                    $adress = new Adress($this->GetLastId(), $street, $number, $floor, $cityParam);
+                    $adress->SetCity($cityParam);
+                    $adress->GetCity()->SetProvince($province);
+                    $adress->GetCity()->GetProvince()->SetCountry($country);
                     return $adress;
-                } else {
-                    return ("Codigo Postal equivocado, intente nuevamente.");
                 }
-            } else {
-                return ("No encontramos la province en nuestra base de datos");
+                else
+                    return ("Provincia equivocada, intente nuevamente.");
             }
-        } else {
-            return ("No encontramos el pais en nuestra base de datos");
+            else
+                return ("País equivocado, intente nuevamente.");
+                
         }
+        else
+            return ("Codigo Postal equivocado, intente nuevamente.");
     }
 
 
@@ -136,8 +143,7 @@ class AdressDAO implements IAdressDAO
                                 ($adress->GetNumber() == $adressParam->GetNumber()) &&
                                 ($adress->GetFloor() == $adressParam->GetFloor())
                             ) {
-                                $zipCodeSTR = $adress->GetCity()->GetZipCode();
-                                $adress->GetCity()->SetZipCode((int)$zipCodeSTR);
+                                $adress->SetCity($city);
                                 return $adress;
                             }
                         }

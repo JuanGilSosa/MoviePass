@@ -103,14 +103,14 @@ class ViewsController
         }
     }
 
-    public static function ShowAddCinema($theatreId)
+    public static function ShowAddCinema($theatreId, $message="")
     {
         $theatreDAO = new TheatreDAO();
         $theatre = $theatreDAO->GetTheatreById($theatreId);
         require_once(VIEWS_PATH . 'addCinema.php');
     }
 
-    public static function ShowCinemasByTheatre($theatreId)
+    public static function ShowCinemasByTheatre($theatreId, $message="")
     {
         $theatreDAO = new TheatreDAO();
         $theatre = $theatreDAO->GetTheatreById($theatreId);
@@ -119,6 +119,15 @@ class ViewsController
         $cinemas = $cinemaDAO->ConvertToArray($cinemasByTheatre);
 
         require_once(VIEWS_PATH . 'cinemasByTheatre.php');
+    }
+
+    public static function ShowModifyCinema($cinemaId, $message="")
+    {
+        if (SessionHelper::isSession('adminLogged')) {
+            $cinemaDAO = New CinemaDAO();
+            $cinema = $cinemaDAO->GetCinemaById(intval($cinemaId));
+            require_once(VIEWS_PATH . 'modifyCinema.php');
+        }
     }
 
 

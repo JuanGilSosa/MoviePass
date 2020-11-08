@@ -33,24 +33,26 @@ class CinemaController
        // $this->salaxcineDAO = new salaXcineDAO();
     }
 
-    public function ViewAddCinema($theatreId)
+    public function ViewAddCinema($theatreId, $message="")
     {
-        ViewsController::ShowAddCinema($theatreId);
+        ViewsController::ShowAddCinema($theatreId, $message);
     }
 
-    public function ShowCinemasByTheatre($theatreId)
+    public function ShowCinemasByTheatre($theatreId, $message="")
     {
-        
-        ViewsController::ShowCinemasByTheatre($theatreId);
+        ViewsController::ShowCinemasByTheatre($theatreId, $message);
+    }
+
+    public function ShowModify ($cinemaId, $message="")
+    {
+        ViewsController::ShowModifyCinema($cinemaId, $message);
     }
 
     public function AddCinema($theatreId = "", $name = "", $type = "", $price = "", $capacity = "")
     {
         try{
-            //var_dump($theatreId);
-            //var_dump($name);
             $theatre = $this->theatreDAO->GetTheatreById($theatreId);
-            //var_dump($theatre);
+
             if (!is_null($theatre)) {
                 if ($this->FindCinemaByName($theatre, $name) == 0) {
                     $cinema = new Cinema(0, $name, $price, $capacity, $type);
@@ -64,12 +66,13 @@ class CinemaController
                     $theatreId = $theatre->GetId();
 
                     $this->cinemaDAO->Add_cinemasXtheatre($lastIdSala, $theatreId);
+                    $message = "Sala agregada con éxito.";
+                    $this->ShowCinemasByTheatre($theatreId, $message);
 
-                    $theatreController = new TheatreController();
-                    $theatreController->ShowTheatres();
 
                 } else {
-                    #Es porque la sala isCinema 
+                    $message = "El nombre de la sala ya se encuentra registrado.";
+                    $this->ViewAddCinema($theatreId, $message);
                 }
             }
         }catch (PDOException $ex){
@@ -80,15 +83,44 @@ class CinemaController
     public function FindCinemaByName($theatre, $cinemaName)
     {
         $isCinema = 0;
-        $cinemas = $theatre->GetCinemas();
+        $cinemaDAO = new CinemaDAO();
+        $cinemas = $cinemaDAO->GetCinemasByTheatreId($theatre->GetId());
+
         if (is_array($cinemas)) {
             foreach ($cinemas as $cinema) {
-                if (strcasecmp($cinema->GetName, $cinemaName)) {
+                if ($cinema->GetName() == $cinemaName) {
                     $isCinema = 1;
                     break;
                 }
             }
         }
         return $isCinema;
+    }
+
+    public function Update ($cinemaId="", $name = "", $type = "", $price = "", $capacity="")
+    {
+
+        // TENGO QUE BUSCAR EL THEATER POR LA TABLA DE CINESXSALAS
+        $cinemaDAO = new CinemaDAO();
+        $theaterId = $cinemaDAO->GetTheaterXCinema($cinemaId);
+        $theatreDAO = new TheatreDAO();
+        $theatre = $theatreDAO->GetTheatreById($theaterId);
+
+        if($this->FindCinemaByName($theatre,$name) == 0)
+        {
+            $cinema = new Cinema ($cinemaId, $name, $price, $capacity, $type);
+            $this->cinemaDAO->Update($cinema);
+            $message = "Sala modificada con éxito.";
+            
+            $theatreDAO = new TheatreDAO();
+            $theatres = $theatreDAO->GetAllActive();
+            
+            $this->ShowCinemasByTheatre($theaterId, $message);
+        } else {
+            $message = "El nombre de la sala ya se encuentra registrado.";
+            $this->ShowModify($cinemaId, $message);
+        }
+        
+
     }
 }

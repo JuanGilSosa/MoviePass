@@ -82,8 +82,19 @@
 
         }
         
-        public function Update($cinemaId){
-
+        public function Update($cinema){
+            try{
+                $query = 'UPDATE cinemas SET name = :name, price = :price, capacity = :capacity, type= :type WHERE cinemaId = :cinemaId;';
+                $con = Connection::getInstance();
+                $params['name'] = $cinema->GetName();
+                $params['price'] = $cinema->GetPrice();
+                $params['capacity'] = $cinema->GetCapacity();
+                $params['type'] = $cinema->GetType();
+                $params['cinemaId'] = $cinema->GetId();
+                $con->executeNonQuery($query, $params);
+            }catch(PDOException $e){
+                echo 'Exception en Update='.$e->getMessage();
+            }
         }
         /* 
             Se usa este metodo para insertar en la tabla salaXcine ya que como agrego en la tabla salaxcine
@@ -153,6 +164,26 @@
                 echo $e->getMessage();
             }
         }
+
+        public function GetTheaterXCinema($cinemaId){
+            try {
+                $con = Connection::getInstance();
+                $query = 'SELECT theatreId FROM cinemasXtheatres WHERE cinemaId= :cinemaId';
+                $params['cinemaId'] = $cinemaId;
+                $res = $con->execute($query,$params);
+                if(is_array($res))
+                {
+                    $rta = array_shift($res);
+                    return intval($rta);
+                }
+                
+
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+
+
         public function GetCinema_showtimesXcinema($showtimeId){
             try {
                 $con = Connection::getInstance();
