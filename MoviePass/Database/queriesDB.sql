@@ -89,7 +89,19 @@ CREATE TABLE if not exists  members(
     CONSTRAINT pk_idMember PRIMARY KEY(idMember)
 );
 
+CREATE TABLE Tickets(
+    numberTicket INT NOT NULL AUTO_INCREMENT,
+    showtimeId INT,
+    CONSTRAINT pk_numberTicket PRIMARY KEY(numberTicket),
+    CONSTRAINT fk_showTimeId FOREIGN KEY(showtimeId) REFERENCES Showtimes(showtimeId)
+);
 
+CREATE TABLE ticketsXshowtimes(
+    numberTicket INT,
+    showtimeId INT,
+    CONSTRAINT pk_numberTicket FOREIGN KEY(numberTicket) REFERENCES Tickets(numberTicket),
+    CONSTRAINT fk_showTimeId FOREIGN KEY(showtimeId) REFERENCES Showtimes(showtimeId) 
+);
 
 #########OTRAS QUERIES#########
 

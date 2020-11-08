@@ -4,8 +4,10 @@
     foreach($billboards as $billboard):
         foreach($billboard->GetShowtime() as $showtime):
             if(!empty($showtime) && !empty($showtime->GetMovie())):
+                #$movie = $showtime->GetMovie();
+                #$genres = $genreDAO->GetGenresNamesById($movie->GetGenres());
     ?>
-                <div class="col-lg-2 col-md-6">
+                <div class="row container col-lg-2 col-md-6" style="margin-left:2vh;margin-top:2vh;align-items:stretch;background-color: rgba(158, 140, 219, 0.4);">
                     <div class="card card-cascade narrower">
                         <div class="view view-cascade overlay">
                             <img class="" src="<?php $link = $showtime->GetMovie()->getPosterPath(); echo REQUEST_IMG.'/w300/'.$link; ?>" alt="Portada">
@@ -16,14 +18,14 @@
                         
                     </div>
                     <div class="card-body card-body-cascade">
-                        <h5 class="red-text"><i class="fas fa-film"></i> <?php $cinemaName = $showtime->GetCinema()->GetName(); echo $cinemaName;?></h5>
-                        <h4 class="card-title text-dark"><?php 
+                        <h5 class="red-text"><i class="fas fa-film"></i> SALA -  <?php $cinemaName = $showtime->GetCinema()->GetName(); echo $cinemaName;?></h5>
+                        <h4 class="card-title"><?php 
                                                     $title = $showtime->GetMovie()->GetTitle();
                                                     echo $title; 
                                                     ?>
                         </h4>
-                        <p class="card-text">Comienzo: <?php echo $showtime->GetStartTime();?></p>
-                        <p class="card-text">Generos: <?php echo '{los generos}';?></p>
+                        <p style="color:#C1C1C1;" class="card-text">Comienzo: <?php echo $showtime->GetStartTime();?></p>
+                        <!--<p class="card-text small">Generos: <#?php foreach($genres as $g){echo $g;}?></p>-->
                     
                         <a value="<?php echo ''; ?>" href="<?php echo FRONT_ROOT . 'Movie/ShowMovieDescription?idPelicula=' ?>" type="button" class="btn btn-unique">Reservar</a>
                         <a href="<?php echo FRONT_ROOT . 'Movie/ShowMovieDescription?idPelicula='.$showtime->GetMovie()->GetId(); ?>" type="button" class="btn btn-unique">Ver Info</a>        

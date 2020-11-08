@@ -54,7 +54,7 @@ require_once('nav.php');
 				?>
 					<div class="cell">
 						<div class="container">
-							<a href="<?php echo FRONT_ROOT . 'Pelicula/ShowMovieDescription?idPelicula=' . $movie->GetId() ?>">
+							<a href="<?php echo FRONT_ROOT . 'Movie/ShowMovieDescription?idPelicula=' . $movie->GetId() ?>">
 								<img style="width: 188px; height: 282px;" src="https://image.tmdb.org/t/p/original<?php echo $movie->getPosterPath() ?>" alt="Imagen">
 							</a>
 						</div>
