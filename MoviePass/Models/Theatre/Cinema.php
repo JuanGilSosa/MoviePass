@@ -9,13 +9,15 @@
         private $price;
         private $capacity;
         private $type;
+        private $active;
 
-        public function __construct($id, $name, $price, $capacity, $type){
+        public function __construct($id, $name, $price, $capacity, $type, $active=true){
             $this->id = $id;
             $this->name = $name;
             $this->price = $price;
             $this->capacity = $capacity;
             $this->type = $type;
+            $this->active = $active;
         }
         
         public function SetId($id){$this->id = $id;}
@@ -28,6 +30,8 @@
 
         public function SetType($type){$this->type = $type;}
         
+        public function SetActive($active){$this->active = $active;}
+
         public function GetId(){return $this->id;}
 
         public function GetName(){return $this->name;}
@@ -37,4 +41,6 @@
         public function GetCapacity(){return $this->capacity;}
 
         public function GetType(){return $this->type;}
+
+        public function GetActive(){return $this->active;}
     }

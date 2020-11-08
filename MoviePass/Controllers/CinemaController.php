@@ -108,7 +108,7 @@ class CinemaController
 
         if($this->FindCinemaByName($theatre,$name) == 0)
         {
-            $cinema = new Cinema ($cinemaId, $name, $price, $capacity, $type);
+            $cinema = new Cinema ($cinemaId, $name, $price, $capacity, $type, $active);
             $this->cinemaDAO->Update($cinema);
             $message = "Sala modificada con éxito.";
             
@@ -121,6 +121,24 @@ class CinemaController
             $this->ShowModify($cinemaId, $message);
         }
         
+    }
+
+    public function Delete ($cinemaId)
+    {
+        $cinemaDAO = new CinemaDAO();
+        $theaterId = $cinemaDAO->GetTheaterXCinema($cinemaId);
+        $theatreDAO = new TheatreDAO();
+        $theatre = $theatreDAO->GetTheatreById($theaterId);
+
+        if(!empty($theatre))
+        {
+            $cinemaDAO->Delete($cinemaId);
+            $message = "Sala eliminada con éxito.";
+            $this->ShowCinemasByTheatre($theaterId, $message);
+        } else {
+            $message = "Error al intentar eliminar la sala.";
+            $this->ShowCinemasByTheatre($theaterId, $message);
+        }
 
     }
 }

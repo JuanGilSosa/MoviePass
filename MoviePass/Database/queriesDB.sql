@@ -51,6 +51,7 @@ CREATE TABLE if not exists  Cinemas(
     price INT, 
     capacity INT,
     type VARCHAR(5),
+    active BOOLEAN;
     CONSTRAINT pk_cinemaId PRIMARY KEY(cinemaId)
 );
 

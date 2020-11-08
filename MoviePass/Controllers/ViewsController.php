@@ -115,7 +115,7 @@ class ViewsController
         $theatreDAO = new TheatreDAO();
         $theatre = $theatreDAO->GetTheatreById($theatreId);
         $cinemaDAO = new CinemaDAO();
-        $cinemasByTheatre = $cinemaDAO->GetCinemasByTheatreId($theatreId);
+        $cinemasByTheatre = $cinemaDAO->GetActiveCinemasByTheatreId($theatreId);
         $cinemas = $cinemaDAO->ConvertToArray($cinemasByTheatre);
 
         require_once(VIEWS_PATH . 'cinemasByTheatre.php');

@@ -55,6 +55,18 @@
             }
         }
 
+        public function GetAllActive(){
+            try{
+                $con = Connection::getInstance();
+                $query = 'SELECT * FROM cinemas WHERE active = :active';
+                $params['active'] = 1;
+                $allActive = $con->execute($query,$params); 
+                return (!empty($allActive)) ? $this->mapping($allActive) : array();
+            }catch(PDOException $e){
+                throw $e;
+            }
+        }
+
         public function GetCinemaById($cinemaId){
             try{
                 $con = Connection::getInstance();
@@ -71,15 +83,22 @@
             $value = is_array($value) ? $value : [];
             $resp = array_map(function($a){
                 $cinema = new Cinema(
-                    $a['cinemaId'],$a['name'],$a['price'],$a['capacity'],$a['type']
+                    $a['cinemaId'],$a['name'],$a['price'],$a['capacity'],$a['type'],$a['active']
                 );
                 return $cinema;
             },$value);
             return count($resp)>1 ? $resp : $resp[0];
         }
 
-        public function Delete($cinema){
-
+        public function Delete($cinemaId){
+            try{
+                $query = 'UPDATE cinemas SET active = 0 WHERE cinemaId = :cinemaId;';
+                $con = Connection::getInstance();
+                $params['cinemaId'] = $cinemaId;
+                $con->executeNonQuery($query, $params);
+            }catch(PDOException $e){
+                echo 'Exception en Update='.$e->getMessage();
+            }
         }
         
         public function Update($cinema){
@@ -124,6 +143,18 @@
 
         ////TRATAR PARA SALAXCINE////
         public function GetCinemasByTheatreId($theatreId){
+            try{
+                $con = Connection::getInstance();
+                $query = 'SELECT s.* FROM cinemas as s JOIN cinemasXtheatres as sxc ON sxc.cinemaId = s.cinemaId AND sxc.theatreId = :theatreId';
+                $params['theatreId'] = $theatreId;
+                $cine = $con->execute($query, $params);
+                return (!empty($cine)) ? $this->mapping($cine) : array();
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
+        }
+
+        public function GetActiveCinemasByTheatreId($theatreId){
             try{
                 $con = Connection::getInstance();
                 $query = 'SELECT s.* FROM cinemas as s JOIN cinemasXtheatres as sxc ON sxc.cinemaId = s.cinemaId AND sxc.theatreId = :theatreId';
@@ -182,6 +213,8 @@
                 echo $e->getMessage();
             }
         }
+
+        
 
 
         public function GetCinema_showtimesXcinema($showtimeId){
