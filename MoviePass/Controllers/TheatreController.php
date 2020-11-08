@@ -150,8 +150,6 @@ class TheatreController
 
     public function Update($id, $name, $email, $phoneNumber)
     {
-
-
         $oldCine = $this->theatreDAO->GetTheatreById(strval($id)); #busca y guarda la informacion vieja del cine
         $isTheatre = $this->theatreDAO->FindTheatreByName($name);     #verifica que el nombre nuevo no exista en la base de datos
 

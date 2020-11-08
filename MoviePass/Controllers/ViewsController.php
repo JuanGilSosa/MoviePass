@@ -121,6 +121,15 @@ class ViewsController
         require_once(VIEWS_PATH . 'cinemasByTheatre.php');
     }
 
+    public static function ShowModifyCinema($cinemaId, $message="")
+    {
+        if (SessionHelper::isSession('adminLogged')) {
+            $cinemaDAO = New CinemaDAO();
+            $cinema = $cinemaDAO->GetCinemaById(intval($cinemaId));
+            require_once(VIEWS_PATH . 'modifyCinema.php');
+        }
+    }
+
 
     public static function ShowBillboard()
     {

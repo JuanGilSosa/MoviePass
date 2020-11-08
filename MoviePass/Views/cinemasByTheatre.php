@@ -59,10 +59,10 @@ require_once('nav.php');
                                         <td><?php echo $capacity ?> </td>
 
                                         <form action="<?php echo FRONT_ROOT . 'Cinema/ShowModify' ?>" method="POST">
-                                             <td><button type="submit" value="<?php echo $theatre->getId() ?>" class="btn  btn-info w-20" name="idCine">Modificar</button></td>
+                                             <td><button type="submit" value="<?php echo $cinema->getId() ?>" class="btn  btn-info w-20" name="idCine">Modificar</button></td>
                                         </form>
                                         <form action="<?php echo FRONT_ROOT . 'Cinema/Delete' ?>" method="post">
-                                             <td><button type="submit" value="<?php echo $theatre->getId() ?>" class="btn btn-danger w-20" name="eliminar">Eliminar</button></td>
+                                             <td><button type="submit" value="<?php echo $cinema->getId() ?>" class="btn btn-danger w-20" name="eliminar">Eliminar</button></td>
                                         </form>
 
                                    </tr>
