@@ -27,8 +27,14 @@
                         <p style="color:#C1C1C1;" class="card-text">Comienzo: <?php echo $showtime->GetStartTime();?></p>
                         <!--<p class="card-text small">Generos: <#?php foreach($genres as $g){echo $g;}?></p>-->
                     
-                        <a value="<?php echo $showtime->GetMovie()->GetId(); ?>" href="<?php echo FRONT_ROOT.'Cart/ShowCart' ?>" type="button" class="btn btn-unique">Reservar</a>
-                        <a href="<?php echo FRONT_ROOT . 'Movie/ShowMovieDescription?idPelicula='.$showtime->GetMovie()->GetId(); ?>" type="button" class="btn btn-unique">Ver Info</a>        
+                        <a  
+                            href="<?php echo FRONT_ROOT.'Cart/AddShowtime?idShowTime='.$showtime->GetId(); ?>" 
+                            type="button" class="btn btn-unique">Reservar
+                        </a>
+                        <a href="<?php echo FRONT_ROOT . 'Movie/ShowMovieDescription?idPelicula='.$showtime->GetMovie()->GetId(); ?>" 
+                            type="button" 
+                            class="btn btn-unique">Ver Info
+                        </a>        
                     </div>
                 </div>
     <?php 

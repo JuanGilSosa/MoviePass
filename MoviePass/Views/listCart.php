@@ -1,5 +1,10 @@
 <?php 
     require_once('nav.php');
+    $tickets = $myCart->GetTickets();
+    foreach($tickets as $ticket):
+        $showtime = $ticket->GetShowtime();
+        $movie = $showtime->GetMovie();
+        $titleMovie = $movie->GetTitle();
 ?>
 <div class="container">
     <div class="row">
@@ -9,7 +14,9 @@
         <aside class="col-sm-4">
             <h2>Carrito</h2>
 
-            <ul id="carrito" class="list-group"></ul>
+            <ul id="carrito" class="list-group">
+                <li><?php echo $titleMovie; ?></li>
+            </ul>
             <hr>
 
             <p class="text-right">Total: <span id="total"></span>&euro;</p>
@@ -17,6 +24,7 @@
         </aside>
     </div>
 </div>
+    <?php endforeach; ?>
 <!--
 <script>
         window.onload = function () {
