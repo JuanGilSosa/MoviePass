@@ -24,43 +24,98 @@
             $this->cinemaDAO = new CinemaDAO();
         }
 
-        public function AddShowtime($theatreId, $cinemaId, $movieId="", $startTime="", $releaseDate="", $endDate=""){
+        public function AddShowtime($theatreId="", $cinemaId="", $movieId="", $startTime="", $releaseDate="", $endDate=""){
+            
+            $message;
+            // Verifico si la película no está en otra sala del cine
+            if(!empty($theatreId) && !empty($cinemaId) && empty($movieId) && empty($startTime) && empty($startCartelera) && empty($endCartelera)){ 
+               // Acá estoy eligiendo la sala.
+               $movieId = $cinemaId;
+               $movie = $this->movieDAO->GetMovieById($movieId);
+               $theatre = $this->theatreDAO->GetTheatreById($theatreId);
+               $cinemas=$this->cinemaDAO->GetCinemasByTheatreId($theatreId);
+               if(empty($cinemas))
+               { // El cine ingresado todavia no tiene salas cargadas.
+                    $message = "El cine ingresado no tiene salas disponibles.";
+                    ViewsController::ShowAddShowtimeView($message, $movie->GetId(), "", $cinemas);
+               }
+               ViewsController::ShowAddShowtimeView("", $movie->GetId(), $theatre, $cinemas);
 
-            if(!empty($theatreId) && !empty($cinemaId) && empty($movieId) && empty($startTime) && empty($startCartelera) && empty($endCartelera)){
-                $movieId = $cinemaId;
-                $movie = $this->movieDAO->GetMovieById($movieId);
-                $theatre = $this->theatreDAO->GetTheatreById($theatreId);
-                $cinemas=$this->cinemaDAO->GetCinemasByTheatreId($theatreId);
+            } else {
                 
-
-                ViewsController::ShowAddShowtimeView("", $movie->GetId(), $theatre, $cinemas);
-            }else{
-                $movie = $this->movieDAO->GetMovieById($movieId);
-                $runtime = $this->movieDAO->GetRuntime($movieId);
-
-                $startTimeSeconds = strtotime($startTime);
-                $runtimeSeconds = $runtime*60;
-                $endTime=date("H:i", $startTimeSeconds+$runtimeSeconds);
-
-
                 $theatre = $this->theatreDAO->GetTheatreById($theatreId);
-                $cinema=$this->cinemaDAO->GetCinemaById($cinemaId);
+                $cinemas=$this->cinemaDAO->GetActiveCinemasByTheatreId($theatreId);
+                $movie = $this->movieDAO->GetMovieById($movieId);
 
-                $showtime = new Showtime(0, $movie, $startTime, $endTime, $cinema);
-                //var_dump($showtime); HASTA ACA OK
+                $existMovieInShowtime = $this->PeliculaEnUnaSalaDelCine($theatre, $cinemas, $movie);
+                if(!isset($existMovieInShowtime))
+                {
+                    $runtime = $this->movieDAO->GetRuntime($movieId);
+                    $startTimeSeconds = strtotime($startTime);
+                    $runtimeSeconds = $runtime*60;
+                    $endTime=date("H:i", $startTimeSeconds+$runtimeSeconds);
+                    $theatre = $this->theatreDAO->GetTheatreById($theatreId);
+                    $cinema=$this->cinemaDAO->GetCinemaById($cinemaId);
+                    $showtime = new Showtime(0, $movie, $startTime, $endTime, $cinema);
+                    //var_dump($showtime); HASTA ACA OK
+                    $this->showtimeDAO->Add($showtime);
+                    $showtimeLastId = $this->showtimeDAO->GetLastId(); #uso esto porque como el objeto tiene 0 - no sirve
+                    $cinemaId = $cinema->GetId();
+                    $this->showtimeDAO->Add_showtimesXcinemas($cinemaId, $showtimeLastId);
+                    $message = "Función agregada con éxito";
+                    $this->ShowShowtimes($message);
+                } else {
+                    // ENTRA ACÁ SI LA PELICULA YA EXISTE EN EL CINE
 
-                $this->showtimeDAO->Add($showtime);
+                    // LO TENDRIA QUE LLEVAR DE NUEVO A LA LISTA DE PELICULAS?
+                    ViewsController::ShowAddShowtimeView($existMovieInShowtime, $movieId, $theatre, $cinemas);
+                }
 
                 
-                $showtimeLastId = $this->showtimeDAO->GetLastId(); #uso esto porque como el objeto tiene 0 - no sirve
-                $cinemaId = $cinema->GetId();
+                // Compruebo que la pelicula no esté en las funciones de ninguna sala del cine.
+                
+            }
+        }
 
-                $this->showtimeDAO->Add_showtimesXcinemas($cinemaId, $showtimeLastId);
+        // Compruebo que la pelicula no esté en las funciones de ninguna sala del cine.
+        private function PeliculaEnUnaSalaDelCine($theatre, $cinemas, $movie){
+            $movieId = $movie->GetId();
 
-                ViewsController::ShowMoviesNowPlaying();
-/*
-                array_push($theatre->GetCartelera(), $movie);
-                var_dump($theatre);*/
+            if(is_array($cinemas)){// Si el cine tiene muchas salas
+                
+                foreach ($cinemas as $cinema)
+                {
+                    $showtimes = $this->showtimeDAO->GetShowtime_showtimesxcinema($cinema->GetId());
+                    if(is_array($showtimes)){
+                        foreach ($showtimes as $showtime)
+                        {
+                            $movieIdShowtime = $showtime->GetMovie();
+                            if (!empty($movieId) && $movieIdShowtime == $movieId){
+                                return "La película elegida ya se encuentra disponible en una sala del cine.";
+                                break;
+                            }
+                        }
+                    } else {
+                       
+                        $movieIdShowtime = $showtimes->GetMovie();
+                            if (!empty($movieId) && $movieIdShowtime == $movieId){
+                             return "La película elegida ya se encuentra disponible en una sala del cine.";
+                            break;
+                        }
+
+                    }
+                    
+                }
+            } else { // Si hay solamente una sala en el cine
+                
+                $showtimes = $this->showtimeDAO->GetShowtime_showtimesxcinema($cinemas->GetId());
+                if(isset($showtime)){
+                    $movieIdShowtime = $showtimes->GetMovie();
+                    if (!empty($movieId) && $movieIdShowtime == $movieId)
+                    {
+                        return "La película elegida ya se encuentra disponible en la única sala del cine.";
+                    }
+                }
             }
         }
 
@@ -84,8 +139,7 @@
         }
 
         
-        public function ShowShowtimes(){
-
+        public function ShowShowtimes($message=""){
             $theatreController = new TheatreController();
 
             $theatres = $this->theatreDAO->GetAllActive();
@@ -218,7 +272,7 @@
                 }
                 
             }
-            ViewsController::ShowShowtimesView($theatreAux);   
+            ViewsController::ShowShowtimesView($message,$theatreAux);   
 
         }
         
