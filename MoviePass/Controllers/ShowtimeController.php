@@ -26,7 +26,7 @@
 
         public function AddShowtime($theatreId="", $cinemaId="", $movieId="", $startTime="", $releaseDate="", $endDate=""){
             
-            $message;
+            $message = "";
             // Verifico si la película no está en otra sala del cine
             if(!empty($theatreId) && !empty($cinemaId) && empty($movieId) && empty($startTime) && empty($startCartelera) && empty($endCartelera)){ 
                // Acá estoy eligiendo la sala.
