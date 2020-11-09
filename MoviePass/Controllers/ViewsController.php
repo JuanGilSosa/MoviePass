@@ -170,6 +170,7 @@ class ViewsController
     }
 
     public static function ShowShowtimesView($message, $cinemas){
+        $theatreDAO = new TheatreDAO();
         #$genreDAO = new GenreDAO();
         $billboards = array();
         if(is_array($cinemas)){

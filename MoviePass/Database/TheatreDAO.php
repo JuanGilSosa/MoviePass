@@ -184,6 +184,18 @@
                 echo $e->getMessage();
             }
         }
+
+        public function GetTheatreByCinemaId_cinemasXtheatres($cinemaId){
+            try{
+                $con = Connection::getInstance();
+                $query = 'SELECT c.* FROM theatres as c JOIN cinemasXtheatres as sxc ON sxc.theatreID = c.theatreID AND sxc.cinemaId = :cinemaId';
+                $params['cinemaId'] = $cinemaId;
+                $theatre = $con->execute($query,$params);
+                return (!empty($theatre)) ? $this->mapping($theatre) : array();
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
+        }
  
         
 

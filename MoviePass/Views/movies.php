@@ -47,7 +47,7 @@ require_once('nav.php');
 			</div>
 
 
-			<div class="grid-container text-center" style="justify-content:center">
+			<div class="grid-container text-center" style="justify-content:center; height: 100%">
 
 				<?php
 				foreach ($movies as $movie) {
