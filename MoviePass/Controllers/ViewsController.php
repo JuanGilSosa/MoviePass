@@ -161,7 +161,7 @@ class ViewsController
         }
     }
 
-    public static function ShowShowtimesView($cinemas){
+    public static function ShowShowtimesView($message,$cinemas){
         #$genreDAO = new GenreDAO();
         $billboards = array();
         if(is_array($cinemas)){
