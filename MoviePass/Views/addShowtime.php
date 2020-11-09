@@ -28,13 +28,13 @@ require_once("nav.php");
                         <div class="form-group">
 
                             
-                                <select name="idCine" class="form-control" onchange="this.form.submit()" required>
+                                <select name="theatreId" class="form-control" onchange="this.form.submit()" required>
                                     <option selected disabled>Seleccione Cine</option>
                                     <?php
                                     if (is_array($theatres)) {
                                         foreach ($theatres as $theatre) {
                                     ?>
-                                            <option value="<?php echo $theatre->GetId() ?>"><?php echo $theatre->GetName() ?></option>
+                                            <option value="<?php echo $theatre->GetId() ?>" required> <?php echo $theatre->GetName() ?></option>
                                         <?php }
                                     } else {
                                         ?>
@@ -53,11 +53,11 @@ require_once("nav.php");
                                     if (is_array($cinemas)) {
                                         foreach ($cinemas as $cinema) {
                                     ?>
-                                        <option name="salaId" value="<?php echo $cinema->GetId() ?>" required><?php echo $cinema->GetName() ?></option>
+                                        <option name="cinemaId" value="<?php echo $cinema->GetId() ?>" required><?php echo $cinema->GetName() ?></option>
                                         <?php }
                                     } else {
                                         ?>
-                                        <option name="salaId" value="<?php echo $cinemas->GetId() ?>" required><?php echo $cinemas->GetName() ?></option>
+                                        <option name="cinemaId" value="<?php echo $cinemas->GetId() ?>" required><?php echo $cinemas->GetName() ?></option>
                                     <?php } ?>
                                 
                             
@@ -67,25 +67,26 @@ require_once("nav.php");
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="">Pelicula</label>
-                            <input type="text" name="peliculaId" placeholder="<?php echo $movie->GetTitle() ?>" value="<?php echo $movie->GetId() ?>" class="form-control" required>
+                            <input type="text" name="movieId" placeholder="<?php echo $movie->GetTitle() ?>" value="<?php echo $movie->GetId() ?>" class="form-control" required hidden>
+                            <input type="text" name="" placeholder="<?php echo $movie->GetTitle() ?>" value="" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="">Horario de funcion</label>
-                            <input type="time" name="horaInicio" value="" min="17:00" max="23:00" class="w-100" class="form-control" required />
+                            <input type="time" name="startTime" value="" min="17:00" max="23:00" class="w-100" class="form-control" required />
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="">En cartelera desde:</label>
-                            <input type="date" name="fechaInicio" class="w-100" class="form-control" required />
+                            <input type="date" name="releaseDate" class="w-100" class="form-control" required />
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="">En cartelera hasta:</label>
-                            <input type="date" name="fechaFin" class="w-100" class="form-control" required />
+                            <input type="date" name="feendDatechaFin" class="w-100" class="form-control" required />
                         </div>
                     </div>
                 </div>
