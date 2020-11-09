@@ -30,13 +30,14 @@
             try{
                 $con = Connection::getInstance();
 
-                $query = 'INSERT INTO cinemas(name,price,capacity,type) VALUES
-                            (:name,:price,:capacity,:type)';
+                $query = 'INSERT INTO cinemas(name,price,capacity,type, active) VALUES
+                            (:name,:price,:capacity,:type, :active)';
 
                 $params['name'] = $cinema->GetName();
                 $params['price'] = $cinema->GetPrice();
                 $params['capacity'] = $cinema->GetCapacity();
                 $params['type'] = $cinema->GetType();
+                $params['active'] = $cinema->GetActive();
 
                 return $con->executeNonQuery($query, $params);
             }catch(PDOException $e){
