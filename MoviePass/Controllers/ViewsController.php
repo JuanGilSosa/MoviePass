@@ -138,12 +138,12 @@ class ViewsController
 
     public static function ShowMovieDescription($movie, $trailerKey)
     {
-        if (SessionHelper::isSession('adminLogged')) {
+        if (!empty($movie) && !empty($trailerKey)) {
             $genresDAO = new GenreDAO();
             $moviesDAO = new MoviesDAO();
             require_once(VIEWS_PATH . "moviesDescription.php");
         } else {
-            ViewsController::ShowLogIn();
+            ViewsController::ShowIndex();
         }
     }
 
