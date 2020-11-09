@@ -16,9 +16,6 @@ use Helpers\SessionHelper as SessionHelper;
 
 class ViewsController
 {
-    private $theatreDAO;
-    private $adressDAO;
-
     public static function ShowIndex()
     {
         HomeController::Index();
@@ -52,6 +49,15 @@ class ViewsController
     {
         if (SessionHelper::isSession('adminLogged')) {
             require_once(VIEWS_PATH . "theatres.php");
+        } else {
+            ViewsController::ShowLogIn();
+        }
+    }
+
+    public static function ShowAllTheatres($theatres = "", $message = "")
+    {
+        if (SessionHelper::isSession('adminLogged')) {
+            require_once(VIEWS_PATH . "allTheatres.php");
         } else {
             ViewsController::ShowLogIn();
         }

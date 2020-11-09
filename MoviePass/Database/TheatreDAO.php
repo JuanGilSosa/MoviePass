@@ -68,7 +68,6 @@
                     $a['email'],
                     $a['phoneNumber'],
                     $a['adressId'],
-                    array(),
                     $a['active']
                 );                
                 return $theatre;
@@ -150,15 +149,27 @@
         }
         public function Update($theatre){
             try{
-                $query = 'UPDATE theatres SET name = :name, email = :email, phoneNumber = :phoneNumber WHERE theatreID = :theatreID;';
+                $query = 'UPDATE theatres SET name = :name, email = :email, phoneNumber = :phoneNumber, active = :active WHERE theatreID = :theatreID;';
                 $con = Connection::getInstance();
                 $params['theatreID'] = $theatre->GetId();
                 $params['name'] = $theatre->GetName();
                 $params['email'] = $theatre->GetEmail();
                 $params['phoneNumber'] = $theatre->GetPhoneNumber();
+                $params['active'] = 1;
                 $con->executeNonQuery($query, $params);
             }catch(PDOException $e){
                 echo 'Exception en Update='.$e->getMessage();
+            }
+        }
+
+        public function SetActive($theatreId){
+            try{
+                $query = 'UPDATE theatres SET active = 1 WHERE theatreID = ' . $theatreId .';';
+                $con = Connection::getInstance();
+                
+                $con->execute($query);
+            }catch(PDOException $ex){
+                //echo 'Exception en SetActive='.$ex->getMessage(); #ESTE PRINT me tira un GENERAL ERROR pero el cine se activa igual
             }
         }
         

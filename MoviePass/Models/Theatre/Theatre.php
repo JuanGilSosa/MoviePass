@@ -21,9 +21,8 @@
         private $billboard;
         private $active;
 
-        public function __construct($id = "", $name = "", $email = "", $phoneNumber = "", $adress="")
+        public function __construct($id = "", $name = "", $email = "", $phoneNumber = "", $adress="", $active = true)
         {
-            
             $this->id = strval($id);
             $this->name = $name;
             $this->email = $email;
@@ -31,7 +30,7 @@
             $this->adress = $adress;
             $this->cinema = array();
             $this->billboard = new Billboard();
-            $this->active = true;
+            $this->active = $active;
         }
 
         public function GetId(){
