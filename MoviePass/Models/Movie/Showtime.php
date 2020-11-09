@@ -11,17 +11,15 @@
         private $startTime;
         private $endTime;
         private $releaseDate;
-        private $endDate;
         private $cinema;
         private $active;
 
-        public function __construct($id = "",$movie="", $startTime = "", $endTime ="", $releaseDate = "", $endDate = "", $cinema = ""){
+        public function __construct($id = "",$movie="", $startTime = "", $endTime ="", $releaseDate = "", $cinema = ""){
             $this->id = $id;
             $this->movie = $movie;
             $this->startTime = $startTime;
             $this->endTime = $endTime;
             $this->releaseDate = $releaseDate;
-            $this->endDate = $endDate;
             $this->cinema = $cinema;
             $this->active = true;
         }
@@ -31,7 +29,6 @@
         public function GetStartTime(){return $this->startTime;}
         public function GetEndTime(){return $this->endTime;}
         public function GetReleaseDate(){return $this->releaseDate;}
-        public function GetEndDate(){return $this->endDate;}
         public function GetCinema(){return $this->cinema;}
         public function isActive(){return $this->active;}
         public function SetActive($active){$this->active = $active;}

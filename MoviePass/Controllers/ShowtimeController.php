@@ -24,7 +24,7 @@
             $this->cinemaDAO = new CinemaDAO();
         }
 
-        public function AddShowtime($theatreId="", $cinemaId="", $movieId="", $startTime="", $releaseDate="", $endDate=""){
+        public function AddShowtime($theatreId="", $cinemaId="", $movieId="",  $releaseDate="", $startTime=""){
             
             $message = "";
             // Verifico si la película no está en otra sala del cine
@@ -53,8 +53,7 @@
                 {
                     //Verifico fechas
                     $ahora = date("Y-m-d");
-                    if($releaseDate >= $ahora){
-                        if($endDate >= $releaseDate){
+                    if($releaseDate >= $ahora){ 
                             // LAS FECHAS SON CORRECTAS
                             $runtime = $this->movieDAO->GetRuntime($movieId);
                             $startTimeSeconds = strtotime($startTime);
@@ -69,7 +68,7 @@
                                 // LA HORA ES MAYOR A LA FUNCION
                                 $theatre = $this->theatreDAO->GetTheatreById($theatreId);
                                 $cinema=$this->cinemaDAO->GetCinemaById($cinemaId);
-                                $showtime = new Showtime(0, $movie, $startTime, $endTime, $cinema);
+                                $showtime = new Showtime(0, $movie, $startTime, $endTime, $releaseDate, $cinema);
                                 //var_dump($showtime); HASTA ACA OK
                                 $this->showtimeDAO->Add($showtime);
                                 $showtimeLastId = $this->showtimeDAO->GetLastId(); #uso esto porque como el objeto tiene 0 - no sirve
@@ -78,12 +77,11 @@
                                 $message = "Función agregada con éxito";
                                 $this->ShowShowtimes($message);
                             }
-                        } else {
-                            $message = "La fecha de finalización no puede ser posterior a la fecha de lanzamiento.";
-                            ViewsController::ShowAddShowtimeView($message, $movieId, $theatre, $cinemas);
-                        }
+                            
                     } else {
-                        $message = "La fecha de comienzo no puede ser anterior a hoy.";
+                        $ahora = date("d-m-Y");
+
+                        $message = "La fecha de comienzo no puede ser anterior a: " . $ahora;
                         ViewsController::ShowAddShowtimeView($message, $movieId, $theatre, $cinemas);
                     }
                 } else {
