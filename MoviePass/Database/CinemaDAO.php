@@ -84,7 +84,7 @@
             $value = is_array($value) ? $value : [];
             $resp = array_map(function($a){
                 $cinema = new Cinema(
-                    $a['cinemaId'],$a['name'],$a['price'],$a['capacity'],$a['type'],$a['active']
+                    $a['cinemaId'],$a['name'],$a['price'],$a['capacity'],$a['type']
                 );
                 return $cinema;
             },$value);
@@ -208,6 +208,8 @@
                 {
                     $rta = array_shift($res);
                     return intval($rta);
+                }else{
+                    echo 'ACA MURIO CINEMADAO 211';
                 }
                 
 
@@ -223,7 +225,7 @@
             try {
                 $con = Connection::getInstance();
                 $query = 'SELECT s.* 
-                            FROM showtimesXcinema as sxf 
+                            FROM showtimesxcinemas as sxf 
                             INNER JOIN cinemas as s 
                                 ON sxf.cinemaId = s.cinemaId 
                                     AND s.cinemaId = :showtimeId;';

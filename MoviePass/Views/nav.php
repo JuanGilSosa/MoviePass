@@ -40,7 +40,7 @@
       <?php } ?>
 
       <li class="nav-item">
-        <a class="nav-link" href="#">Carrito</a>
+        <a class="nav-link" href="<?php echo FRONT_ROOT.'Cart/ShowCart'?>">Carrito</a>
       </li>
 
       <?php if (isset($_SESSION['userLogged']) || isset($_SESSION['adminLogged'])){ ?>

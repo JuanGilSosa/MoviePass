@@ -1,5 +1,22 @@
 <?php require_once('nav.php'); ?>
 <div class="row">
+
+        <?php
+            if (isset($message) && !empty($message)) {
+                #echo "<small>" . $message . "</small>";
+            ?>
+                <div class="container">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <?php echo $message ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            <?php
+            }
+        ?>
+            
     <?php 
     foreach($billboards as $billboard):
         foreach($billboard->GetShowtime() as $showtime):
@@ -27,8 +44,14 @@
                         <p style="color:#C1C1C1;" class="card-text">Comienzo: <?php echo $showtime->GetStartTime();?></p>
                         <!--<p class="card-text small">Generos: <#?php foreach($genres as $g){echo $g;}?></p>-->
                     
-                        <a value="<?php echo ''; ?>" href="<?php echo FRONT_ROOT . 'Movie/ShowMovieDescription?idPelicula=' ?>" type="button" class="btn btn-unique">Reservar</a>
-                        <a href="<?php echo FRONT_ROOT . 'Movie/ShowMovieDescription?idPelicula='.$showtime->GetMovie()->GetId(); ?>" type="button" class="btn btn-unique">Ver Info</a>        
+                        <a  
+                            href="<?php echo FRONT_ROOT.'Cart/AddShowtime?idShowTime='.$showtime->GetId(); ?>" 
+                            type="button" class="btn btn-unique">Reservar
+                        </a>
+                        <a href="<?php echo FRONT_ROOT . 'Movie/ShowMovieDescription?idPelicula='.$showtime->GetMovie()->GetId(); ?>" 
+                            type="button" 
+                            class="btn btn-unique">Ver Info
+                        </a>        
                     </div>
                 </div>
     <?php 

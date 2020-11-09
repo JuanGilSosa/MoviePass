@@ -121,6 +121,18 @@
                 echo $e->getMessage();
             }
         }
+
+        public function GetShowtimeById($idShowtime){
+            try {
+                $con = Connection::getInstance();
+                $query = 'SELECT * FROM showtimes WHERE showtimeId = :showtimeId AND active = 1';
+                $params['showtimeId'] = $idShowtime;
+                $showtimes = $con->execute($query, $params);
+                return (!empty($showtimes)) ? $this->mapping($showtimes) : array();
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
         
     }
 ?>
