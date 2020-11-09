@@ -6,27 +6,27 @@
     
     class MoviesDAO implements IMovieDAO{
 
-        protected $peliculas;
+        protected $movies;
 
         public function __construct(){
-            $this->peliculas = array();
+            $this->movies = array();
         }
 
         public function GetAll(){
             $this->GetMoviesNowPlaying();
-            return $this->peliculas;
+            return $this->movies;
         }
 
-        public function Add($pelicula){
+        public function Add($movie){
             $this->GetMoviesNowPlaying();
-            array_push($this->peliculas, $pelicula);
+            array_push($this->movies, $movie);
             #$this->SaveData();
         }
 
-        public function Delete($idPelicula){
+        public function Delete($movieId){
         
         }
-        public function Update($pelicula){
+        public function Update($movie){
 
         }
 
@@ -43,21 +43,21 @@
                 google y la muestro con un echo $var;
                 En este caso si se lee la documentacion("example of how to get a json::")en la seccion Try It out(al lado de Definition),
                 y ponemos nuestra key en api_key, presionamos SEND REQUEST muestra un json, siendo que el LINK que aparece al lado del button que envia 
-                el request es el que utilizaremos para obtener la lista de peliculas
+                el request es el que utilizaremos para obtener la lista de movies
 
                 Todo este proceso es similar para obtener los generos
             */
 
         private function GetMoviesNowPlaying(){
             
-            $peliculas = file_get_contents(
+            $movies = file_get_contents(
                 API_URL.'now_playing?api_key='.API_KEY1.'&language=es-ES&page=1'
             );
 			
-            $decode = json_decode($peliculas, true);
+            $decode = json_decode($movies, true);
             /*
-                recorro el decode que tiene el arreglo asociativo con los datos de las peliculas accediendo al arreglo 'results' y recoriiendolo
-                siendo 'results' el arreglo con todas las peliculas devueltas por la API
+                recorro el decode que tiene el arreglo asociativo con los datos de las movies accediendo al arreglo 'results' y recoriiendolo
+                siendo 'results' el arreglo con todas las movies devueltas por la API
             */
             foreach($decode['results'] as $allresults){
                 $movie = new Movie(
@@ -72,7 +72,7 @@
                     $allresults['overview'],
                     $allresults['release_date'],
                 );
-                array_push($this->peliculas, $movie);
+                array_push($this->movies, $movie);
             }
 		}
 		
@@ -82,7 +82,7 @@
             
             $movies = array();
             
-            foreach($this->peliculas as $m){
+            foreach($this->movies as $m){
                 $valuesArray['poster_path'] = $m->getPosterPath();
                 $valuesArray['backdrop_path'] = $m->getBackdropPath();
                 $valuesArray['id'] = $m->getId();
@@ -100,16 +100,16 @@
             file_put_contents($moviesFile, $dataContent);
         }
     /*
-      Retorna un arreglo de peliculas seleccionadas por genero
+      Retorna un arreglo de movies seleccionadas por genero
     */
     public function GetMoviesByGenre($idGenre){
       $this->GetMoviesNowPlaying();
       $moviesByGenre = array();
-      foreach($this->peliculas as $pelicula){
-        $generosPelicula = $pelicula->getGenres();
+      foreach($this->movies as $movie){
+        $generosPelicula = $movie->getGenres();
         foreach($generosPelicula as $idGenero){
           if($idGenero == $idGenre){ #@param idGenre
-            array_push($moviesByGenre, $pelicula);
+            array_push($moviesByGenre, $movie);
           }
         }
       }
@@ -117,7 +117,7 @@
     }
 
     /*
-      Si no existe la pelicula retorna null - no creo que pase eso ya que la logica del programa evita este tipo
+      Si no existe la movie retorna null - no creo que pase eso ya que la logica del programa evita este tipo
       de retorno
     */
     public function getMovieById($idMovie){
@@ -127,8 +127,8 @@
       $flag = false;
       $return = null;
 
-      while(($flag==false) && ($i<count($this->peliculas))){
-        $aux = $this->peliculas[$i];
+      while(($flag==false) && ($i<count($this->movies))){
+        $aux = $this->movies[$i];
         if(strval($aux->getId()) == $idMovie){
           $return = $aux;
           $flag = true;
@@ -138,25 +138,25 @@
       return $return;
     }
 
-    public function getTrailerKey($idPelicula){
+    public function getTrailerKey($movieId){
       $trailerJson = file_get_contents(
-        API_URL."{$idPelicula}/videos?api_key=".API_KEY1."&language=en-US"
+        API_URL."{$movieId}/videos?api_key=".API_KEY1."&language=en-US"
       );
       $trailerArray = ($trailerJson) ? json_decode($trailerJson, true) : array();
       return $trailerArray['results'][0]['key'];
     }
 
     public function GetUpcomingMovies(){
-      $peliculas = file_get_contents(
+      $movies = file_get_contents(
         API_URL.'upcoming?api_key='.API_KEY1.'&language=es-ES&page=1'
       );
 
       $upcomingMovies = array();
 
-      $decode = json_decode($peliculas, true);
+      $decode = json_decode($movies, true);
       /*
-          recorro el decode que tiene el arreglo asociativo con los datos de las peliculas accediendo al arreglo 'results' y recoriiendolo
-          siendo 'results' el arreglo con todas las peliculas devueltas por la API
+          recorro el decode que tiene el arreglo asociativo con los datos de las movies accediendo al arreglo 'results' y recoriiendolo
+          siendo 'results' el arreglo con todas las movies devueltas por la API
       */
       foreach($decode['results'] as $allresults){
           $movie = new Movie(
@@ -180,16 +180,16 @@
     }
 
     public function GetPopular(){
-      $peliculas = file_get_contents(
+      $movies = file_get_contents(
         API_URL.'popular?api_key='.API_KEY1.'&language=es-ES&page=1'
       );
 
       $popularMovies = array();
 
-      $decode = json_decode($peliculas, true);
+      $decode = json_decode($movies, true);
       /*
-          recorro el decode que tiene el arreglo asociativo con los datos de las peliculas accediendo al arreglo 'results' y recoriiendolo
-          siendo 'results' el arreglo con todas las peliculas devueltas por la API
+          recorro el decode que tiene el arreglo asociativo con los datos de las movies accediendo al arreglo 'results' y recoriiendolo
+          siendo 'results' el arreglo con todas las movies devueltas por la API
       */
       foreach($decode['results'] as $allresults){
           $movie = new Movie(
@@ -226,9 +226,9 @@
       return $array[$elementPosition];
     }
 
-    public function GetCast($idPelicula){
+    public function GetCast($movieId){
       $castJson = file_get_contents(
-        API_URL."{$idPelicula}/credits?api_key=".API_KEY1."&language=es-ES"
+        API_URL."{$movieId}/credits?api_key=".API_KEY1."&language=es-ES"
       );
       $cast = array();
       $castArray = ($castJson) ? json_decode($castJson, true) : array();
@@ -246,9 +246,9 @@
       }
     }
 
-    public function GetRuntime($idPelicula){
+    public function GetRuntime($movieId){
       $movieJson = file_get_contents(
-        API_URL ."{$idPelicula}?api_key=".API_KEY1
+        API_URL ."{$movieId}?api_key=".API_KEY1
       );
 
       $movie = array();

@@ -66,9 +66,11 @@ class ViewsController
     public static function ShowMoviesNowPlaying()
     {
         $genreDAO = new GenreDAO();
-        $genres = $genreDAO->GetAll();
+        
         $moviesDAO = new MoviesDAO();
         $movies = $moviesDAO->GetAll();
+
+        $genres = $genreDAO->GetGenresFromMoviesNowPlaying($movies);
 
         require_once(VIEWS_PATH . "movies.php");
     }

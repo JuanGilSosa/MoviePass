@@ -100,5 +100,41 @@
                 $count++;
             }
         }
+
+        public function GetGenresFromMoviesNowPlaying($movies){
+            $this->RetrieveGenres();
+            $activeGenres = array();
+            $genresIds = array();
+
+            foreach($movies as $movie){
+                $movieGenres = $movie->GetGenres();
+                foreach($movieGenres as $genre){
+                    array_push($genresIds, $genre);
+                }
+            }
+
+            $result = array_unique($genresIds);
+            $activeGenres = $this->FilterGenres($result);
+            //var_dump($activeGenres);
+            return $activeGenres;
+        }
+
+        public function FilterGenres($genresIds)
+        {
+            $genres = array();
+
+            foreach ($this->genres as $genre) {
+                foreach ($genresIds as $genreId) {
+                    //var_dump($genre);
+                    if($genre['id'] == $genreId){
+                        array_push($genres, $genre);
+                        break;
+                    }
+                }
+            }
+            return $genres;
+        }
+
+        
     }
 ?>
