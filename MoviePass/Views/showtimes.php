@@ -1,5 +1,22 @@
 <?php require_once('nav.php'); ?>
 <div class="row">
+
+        <?php
+            if (isset($message) && !empty($message)) {
+                #echo "<small>" . $message . "</small>";
+            ?>
+                <div class="container">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <?php echo $message ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            <?php
+            }
+        ?>
+            
     <?php 
     foreach($billboards as $billboard):
         foreach($billboard->GetShowtime() as $showtime):
