@@ -404,10 +404,14 @@
                     </tr>
                     </tbody>
                </table>
-               
-               <form action="<?php echo FRONT_ROOT.'Cart/EmtpyCart'; ?>" method="POST">
-                    <button type="submit" value="" class="btn btn-secondary btn-info w-20" name="empty">VACIAR CARRITO</button>
-                </form>
+               <div class="btn-group">
+                <form action="<?php echo FRONT_ROOT.'Cart/EmtpyCart'; ?>" method="POST">
+                        <button type="submit" value="" class="btn btn-secondary btn-info w-20" name="empty">VACIAR CARRITO</button>
+                    </form>
+                    <form action="<?php echo FRONT_ROOT.'Cart/ProcessOrder'; ?>" method="POST">
+                        <button type="submit" value="" class="btn btn-light-green" name="empty">INICIAR COMPRA</button>
+                    </form>
+                </div>
           </div>
      </section>
 
