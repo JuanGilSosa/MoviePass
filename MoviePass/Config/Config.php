@@ -24,6 +24,7 @@ define("DB_PASS" , "");
 define("PW_ADMIN" , "holamundo");
 
 define("MOVIES_TO_DISPLAY", 4);
+define("TIME_BETWEEN_MOVIES", 15); #in minutes
 
 ?>
 

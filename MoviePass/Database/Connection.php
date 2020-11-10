@@ -1,4 +1,6 @@
 <?php namespace Database;
+
+use PDOException as PDOException;
 	class Connection{
 
 		private $pdo = null;

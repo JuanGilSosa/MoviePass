@@ -43,10 +43,7 @@
                         <section class="col container d-block" style="width: 100%; height: 100%; margin:2vh 0vh;">
                             <a class="btn btn-outline-primary" style="width: 100%;" href="https://www.youtube.com/embed/<?php echo $trailerKey;?>" data-lity>Ver Trailer</a>
                         </section>
-                        <section class="col container d-block" style="width: 100%; height: 100%; margin:2vh 0vh;">
-                            <button type="" class="btn btn-primary" style="width: 100%;">Reserva</button>
-                        </section>
-
+            
                     </section>
                 </div>
                 

@@ -3,6 +3,7 @@
 
     use Models\Movie\Movie as Movie;
     use Models\Movie\Genre as Genre;
+    use PDOException as PDOException;
     
     class MoviesDAO implements IMovieDAO{
 
@@ -23,16 +24,86 @@
             #$this->SaveData();
         }
 
-        public function Delete($movieId){
-        
-        }
-        public function Update($movie){
+        public function GetAllFromDatabase(){
+          try{
+              $con = Connection::getInstance();
+              $query = 'SELECT * FROM movies';
+              $array = $con->execute($query);
+              return (!empty($array)) ? $this->mapping($array) : false;
+          }catch(PDOException $e){
+              echo $e->getMessage();
+          }
+      }
 
+      public function GetMovieByIdFromDatabase($movieId){
+        try{
+            $con = Connection::getInstance();
+            $query = 'SELECT * FROM movies where movieId=' . $movieId .';';
+            $array = $con->execute($query);
+            return (!empty($array)) ? $this->mapping($array) : false;
+        }catch(PDOException $e){
+            echo $e->getMessage();
         }
+    }
+      
+      public function AddToDatabase($movie){
+          try{
+              $con = Connection::getInstance();
 
-        public function mapping($value){
+              $query = 'INSERT INTO movies(movieId, poster_path, backdrop_path, adult, original_language, title, vote_average, overview, release_date, active) VALUES
+                          (:movieId,:poster_path,:backdrop_path,:adult,:original_language,:title, :vote_average, :overview, :release_date, :active)';
 
+              $params['movieId'] = $movie->GetId();
+              $params['poster_path'] = $movie->GetPosterPath();
+              $params['backdrop_path'] = $movie->GetBackDropPath();
+              $params['adult'] = $movie->isAdult();
+              $params['original_language'] = $movie->GetOriginalLanguage();
+              $params['title'] = $movie->GetTitle();
+              $params['vote_average'] = $movie->GetVoteAverage();
+              $params['overview'] = $movie->GetOverview();
+              $params['release_date'] = $movie->GetReleaseDate();
+              $params['active'] = $movie->isActive();
+
+              return $con->executeNonQuery($query, $params);
+          }catch(PDOException $e){
+              throw $e;
+          }
+      }
+
+      public function Delete($movieId){
+        try{
+            $query = 'UPDATE movies SET active = 0 WHERE movieId = :movieId;';
+            $con = Connection::getInstance();
+            $params['movieId'] = $movieId;
+            $con->executeNonQuery($query, $params);
+        }catch(PDOException $e){
+           // echo 'Exception en Delete='.$e->getMessage();
         }
+    }
+    
+    public function Update($cinema){
+        ##no creemos necesario un metodo update para las peliculas
+    }
+
+      public function mapping($value){
+          $value = is_array($value) ? $value : [];
+          $resp = array_map(function($a){
+              $movie = new Movie(
+                $a['poster_path'],
+                $a['backdrop_path'],
+                $a['movieId'],
+                $a['adult'],
+                $a['original_language'],
+                $a['title'],
+                array(),
+                $a['vote_average'],
+                $a['release_date'],
+                $a['active']
+              );                
+              return $movie;
+          },$value);
+          return count($resp)>1 ? $resp : $resp[0];
+      }
 
         /*
                 example of how to get a json :: https://developers.themoviedb.org/3/movies/get-now-playing  section Try It out

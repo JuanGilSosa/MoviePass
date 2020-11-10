@@ -50,12 +50,15 @@
         public function Add($funcion){
             try {
                 $con = Connection::getInstance();
-                $query = 'INSERT INTO showtimes(startTime, endTime, movieId, releaseDate ,active) VALUES(:startTime, :endTime, :movieId, :releaseDate, :active)';
+                $query = 'INSERT INTO showtimes(startTime, endTime, movieId, releaseDate ,active) 
+                VALUES(:startTime, :endTime, :movieId, :releaseDate, :active)';
+
                 $params['startTime'] = $funcion->GetStartTime();
                 $params['endTime'] = $funcion->GetEndTime();
                 $params['movieId'] = $funcion->GetMovie()->GetId();
                 $params['releaseDate'] = $funcion->GetReleaseDate();
                 $params['active'] = 1;
+                
                 return $con->executeNonQuery($query, $params);
             } catch (PDOException $e) {
                 echo $e->getMessage();
