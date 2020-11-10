@@ -364,7 +364,7 @@
                               </th>
                               <th class="th-sm">Cantidad
                               </th>
-                              <th class="th-sm">Total
+                              <th class="th-sm">Sub-Total
                               </th>
                          </tr>
                     </thead>
@@ -382,11 +382,16 @@
                             <td><?php echo $movie->GetTitle(); ?></td>
                             <td><?php echo $showtime->GetReleaseDate().'--'.$showtime->GetStartTime(); ?></td>
                             <td><?php echo $cinema->GetName().'|'; ?></td>
-                            <td><?php echo $ticket->GetNumberOfTickets();?></td>
+                            
+                            <td>
+                            <button class=""><i class="far fa-minus-square"></i></button>
+                            <?php echo $ticket->GetNumberOfTickets();?>
+                            <button class=""><i class="far fa-plus-square"></i></button>
+                            </td>
                             <td><?php echo '$'.number_format($cinema->GetPrice()*$ticket->GetNumberOfTickets(),2);?></td>  
                             <th class="th-sm">
                                 <a href="<?php echo FRONT_ROOT.'Cart/RemoveTicket?numberOfTicket='.$ticket->GetNumberTicket();?>" 
-                                    type="button" class="btn btn-danger">Sacar
+                                    type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp;Quitar
                                 </a>
                             </th>
                         </tr> 
