@@ -331,6 +331,7 @@
 <?php
     require_once('nav.php');
     use Helpers\SessionHelper;
+
 ?>
 <main class="mx-auto">
      <section id="listado" class="mb-5">
@@ -357,24 +358,48 @@
                          <tr>
                               <th class="th-sm">Funcion(peli)
                               </th>
-                              <th class="th-sm">Fecha
+                              <th class="th-sm">Fecha Y Hora
                               </th>
-                              <th class="th-sm">Hora
+                              <th class="th-sm">Sala & Cine
                               </th>
-                              <th class="th-sm">Sala
+                              <th class="th-sm">Cantidad
                               </th>
-                              <th class="th-sm">Cine
-                              </th>
-                              <th class="th-sm">Direccion
+                              <th class="th-sm">Total
                               </th>
                          </tr>
                     </thead>
                     <tbody>
-                        <form action="<?php echo FRONT_ROOT . 'Cinema/ViewAddCinema' ?>" method="POST">
-                            <td><button type="submit" value="<?php echo $theatre->GetId() ?>" class="btn btn-secondary btn-info w-20" name="idCine">+Sala</button></td>
-                        </form>
+                    <?php 
+                    $cart = SessionHelper::GetValue('CART');
+                    $total = 0;
+                    foreach($cart as $index=>$ticket){
+                        $showtime = $ticket->GetShowtime();
+                        $cinema = $showtime->GetCinema();
+                        $movie = $showtime->GetMovie();$titleMovie = $movie->GetTitle();
+                        
+                        ?>
+                        <tr>
+                            <td><?php echo $movie->GetTitle(); ?></td>
+                            <td><?php echo $showtime->GetReleaseDate().'DIA-'.$showtime->GetStartTime(); ?></td>
+                            <td><?php echo $cinema->GetName().'+cine'; ?></td>
+                            <td><?php echo $ticket->GetNumberOfTickets();?></td>
+                            <td><?php echo '$'.number_format($cinema->GetPrice()*$ticket->GetNumberOfTickets(),2);?></td>  
+                            <th class="th-sm"><button class="btn btn-danger">Sacar</button>
+                            </th>
+                        </tr> 
+                        
+                    <?php $total = $total+($cinema->GetPrice()*$ticket->GetNumberOfTickets());
+                        }?>
+                    <tr style="background:#8C3FC1;">
+                        <td colspan="5" align="right"><h4>Total</h4></td>
+                        <td align="center"><h4><?php echo '$'.number_format($total,2);?></h4></td>
+                    </tr>
                     </tbody>
                </table>
+               
+               <form action="<?php ?>" method="POST">
+                    <td><button type="submit" value="" class="btn btn-secondary btn-info w-20" name="idCine">VACIAR CARRITO</button></td>
+                </form>
           </div>
      </section>
 

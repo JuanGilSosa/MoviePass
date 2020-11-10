@@ -40,7 +40,7 @@
       <?php } ?>
 
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo FRONT_ROOT.'Cart/AddShowtime'?>">
+        <a class="nav-link" href="<?php echo FRONT_ROOT.'Cart/ShowCart'?>">
             Carrito(
               <?php 
                 echo (!SessionHelper::isSession('CART')) ? 0 : (SessionHelper::LengthOfKey('CART'));                                                              

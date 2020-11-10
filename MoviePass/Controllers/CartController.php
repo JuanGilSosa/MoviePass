@@ -51,20 +51,46 @@
                 $movie = $this->movieDAO->getMovieById($showTime->GetMovie());
                 $showTime->SetMovie($movie);
                 $showTime->SetCinema($cinema);
-                $myTicket =  new Ticket(0,$showTime); echo 'VER LINEA 32 CartController '.$idShowTime;
+                $myTicket =  new Ticket(0,$showTime);
                 $this->cart->PushTicket($myTicket);
 
-                if(!SessionHelper::isSession('CART')){
-                    SessionHelper::SetOnIndex('CART',0,$myTicket);#$_SESSION['CART'][0] = $myTicket;
-                }else{
-                    $length = SessionHelper::LengthOfKey('CART');
-                    SessionHelper:SetOnIndex('CART',$length,$myTicket);#$_SESSION['CART'][$length] = $myTicket;
+                var_dump($cinema);
+                
+                #Reemplazo el ticket en el session simplemente incrementando la variable
+                if($this->ReplaceTicketIfExists($showTime)==false){ 
+                    if(!SessionHelper::isSession('CART')){
+                        SessionHelper::SetOnIndex('CART',0,$myTicket);#$_SESSION['CART'][0] = $myTicket;
+                    }else{
+                        $length = SessionHelper::LengthOfKey('CART');
+                        SessionHelper:SetOnIndex('CART',intval($length),$myTicket);#$_SESSION['CART'][$length] = $myTicket;
+                        echo 'seteado en array de session';
+                    }
                 }
                 $showTimeController = new ShowtimeController();
                 $showTimeController->ShowShowtimes();
-                #ViewsController::ShowCartView();
             }
         }
+
+        public function ShowCart(){
+            ViewsController::ShowCartView();
+        }
+        /*
+            Remplasa un ticket si existe en la session, dado que si el usuario ingresa dos veces la misma funcion debe incrementar
+            el contador de ticket
+        */
+        public function ReplaceTicketIfExists($showtime){
+            if(SessionHelper::isSession('CART')){
+                foreach (SessionHelper::GetValue('CART') as $index => $ticket) {
+                    if($ticket->GetShowtime()->GetId()==$showtime->GetId()){
+                        $ticket->SetNumberOfTickets();
+                        SessionHelper::SetOnIndex('CART',$index,$ticket);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
     }
 
 ?>
