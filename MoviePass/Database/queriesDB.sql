@@ -60,6 +60,7 @@ CREATE TABLE if not exists  Showtimes(
     startTime VARCHAR(30) NOT NULL,
     endTime VARCHAR(30) NOT NULL,
     movieId INT,
+    releaseDate date,
     active BOOLEAN,
     CONSTRAINT pk_showtimeId PRIMARY KEY(showtimeId)
 );

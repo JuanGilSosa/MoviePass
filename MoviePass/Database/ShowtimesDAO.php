@@ -137,6 +137,37 @@
                 echo $e->getMessage();
             }
         }
-        
+
+        public function GetShowtimeXMovie($movieId, $releaseDate){
+            try {
+                $idint = intval($movieId);
+                $con = Connection::getInstance();
+                $query = 'SELECT * FROM showtimes WHERE active = 1 AND movieId = :movieId' ;
+                //$params['active'] = 1;
+                $params['movieId'] = $idint;
+                //$params['releaseDate'] = $releaseDate;
+                $showtimes = $con->execute($query, $params); 
+                return (!empty($showtimes)) ? $this->mapping($showtimes) : array();
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+
+  /*      public function GetShowtimesXCinemaXReleaseDate($cinemaId, $releaseDate){
+            echo "DENTRO DEL DAO 157 ";
+            
+            try {
+                $con = Connection::getInstance();
+                $query = 'SELECT s* FROM showtimes as s join showtimesxcinemas sxc on s.showtimeId = sxc.showtimeId 
+                                                where sxc.cinemaId = :cinemaId AND s.releaseDate = :releaseDate';
+                $params['cinemaId'] = $cinemaId;
+                $params['releaseDate'] = $releaseDate;
+                $showtimes = $con->execute($query, $params); 
+                return (!empty($showtimes)) ? $this->mapping($showtimes) : array();
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+        */
     }
 ?>
