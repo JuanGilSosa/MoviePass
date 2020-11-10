@@ -51,16 +51,16 @@
                 $movie = $this->movieDAO->getMovieById($showTime->GetMovie());
                 $showTime->SetMovie($movie);
                 $showTime->SetCinema($cinema);
-                $myTicket =  new Ticket(0,$showTime);
-                $this->cart->PushTicket($myTicket);
+                #$myTicket =  new Ticket(0,$showTime);
+                #$this->cart->PushTicket($myTicket);
                 
                 #Reemplazo el ticket en el session simplemente incrementando la variable
                 if($this->ReplaceTicketIfExists($showTime)==false){ 
                     if(!SessionHelper::isSession('CART')){
-                        SessionHelper::SetOnIndex('CART',0,$myTicket);#$_SESSION['CART'][0] = $myTicket;
+                        SessionHelper::SetOnIndex('CART',0,new Ticket(0,$showTime));#$_SESSION['CART'][0] = $myTicket;
                     }else{
                         $length = SessionHelper::LengthOfKey('CART');
-                        SessionHelper::SetOnIndex('CART',intval($length),$myTicket);#$_SESSION['CART'][$length] = $myTicket;
+                        SessionHelper::SetOnIndex('CART',intval($length),new Ticket($length,$showTime));#$_SESSION['CART'][$length] = $myTicket;
                     }
                 }
                 $showTimeController = new ShowtimeController();
