@@ -30,13 +30,14 @@
             try{
                 $con = Connection::getInstance();
 
-                $query = 'INSERT INTO cinemas(name,price,capacity,type) VALUES
-                            (:name,:price,:capacity,:type)';
+                $query = 'INSERT INTO cinemas(name,price,capacity,type, active) VALUES
+                            (:name,:price,:capacity,:type, :active)';
 
                 $params['name'] = $cinema->GetName();
                 $params['price'] = $cinema->GetPrice();
                 $params['capacity'] = $cinema->GetCapacity();
                 $params['type'] = $cinema->GetType();
+                $params['active'] = $cinema->GetActive();
 
                 return $con->executeNonQuery($query, $params);
             }catch(PDOException $e){
@@ -83,7 +84,7 @@
             $value = is_array($value) ? $value : [];
             $resp = array_map(function($a){
                 $cinema = new Cinema(
-                    $a['cinemaId'],$a['name'],$a['price'],$a['capacity'],$a['type'],$a['active']
+                    $a['cinemaId'],$a['name'],$a['price'],$a['capacity'],$a['type']
                 );
                 return $cinema;
             },$value);
@@ -145,7 +146,7 @@
         public function GetCinemasByTheatreId($theatreId){
             try{
                 $con = Connection::getInstance();
-                $query = 'SELECT s.* FROM cinemas as s JOIN cinemasXtheatres as sxc ON sxc.cinemaId = s.cinemaId AND sxc.theatreId = :theatreId';
+                $query = 'SELECT s.* FROM cinemas as s JOIN cinemasXtheatres as sxc ON sxc.cinemaId = s.cinemaId AND sxc.theatreId = :theatreId AND s.active = 1';
                 $params['theatreId'] = $theatreId;
                 $cine = $con->execute($query, $params);
                 return (!empty($cine)) ? $this->mapping($cine) : array();
@@ -207,6 +208,8 @@
                 {
                     $rta = array_shift($res);
                     return intval($rta);
+                }else{
+                    echo 'ACA MURIO CINEMADAO 211';
                 }
                 
 
@@ -222,7 +225,7 @@
             try {
                 $con = Connection::getInstance();
                 $query = 'SELECT s.* 
-                            FROM showtimesXcinema as sxf 
+                            FROM showtimesxcinemas as sxf 
                             INNER JOIN cinemas as s 
                                 ON sxf.cinemaId = s.cinemaId 
                                     AND s.cinemaId = :showtimeId;';

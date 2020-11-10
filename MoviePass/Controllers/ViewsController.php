@@ -16,9 +16,6 @@ use Helpers\SessionHelper as SessionHelper;
 
 class ViewsController
 {
-    private $theatreDAO;
-    private $adressDAO;
-
     public static function ShowIndex()
     {
         HomeController::Index();
@@ -57,12 +54,23 @@ class ViewsController
         }
     }
 
+    public static function ShowAllTheatres($theatres = "", $message = "")
+    {
+        if (SessionHelper::isSession('adminLogged')) {
+            require_once(VIEWS_PATH . "allTheatres.php");
+        } else {
+            ViewsController::ShowLogIn();
+        }
+    }
+
     public static function ShowMoviesNowPlaying()
     {
         $genreDAO = new GenreDAO();
-        $genres = $genreDAO->GetAll();
+        
         $moviesDAO = new MoviesDAO();
         $movies = $moviesDAO->GetAll();
+
+        $genres = $genreDAO->GetGenresFromMoviesNowPlaying($movies);
 
         require_once(VIEWS_PATH . "movies.php");
     }
@@ -138,12 +146,12 @@ class ViewsController
 
     public static function ShowMovieDescription($movie, $trailerKey)
     {
-        if (SessionHelper::isSession('adminLogged')) {
+        if (!empty($movie) && !empty($trailerKey)) {
             $genresDAO = new GenreDAO();
             $moviesDAO = new MoviesDAO();
             require_once(VIEWS_PATH . "moviesDescription.php");
         } else {
-            ViewsController::ShowLogIn();
+            ViewsController::ShowIndex();
         }
     }
 
@@ -161,7 +169,8 @@ class ViewsController
         }
     }
 
-    public static function ShowShowtimesView($message,$cinemas){
+    public static function ShowShowtimesView($message, $cinemas){
+        $theatreDAO = new TheatreDAO();
         #$genreDAO = new GenreDAO();
         $billboards = array();
         if(is_array($cinemas)){
@@ -173,4 +182,9 @@ class ViewsController
         }
         require_once(VIEWS_PATH . "showtimes.php");
     }
+
+    public static function ShowCartView($myCart){
+        require_once(VIEWS_PATH.'listCart.php');
+    }
+
 }

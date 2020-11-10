@@ -46,8 +46,10 @@
       <form action="<?php echo FRONT_ROOT . 'Members\Registrando' ?>" method="POST">
         <label class="text-white" style="margin-right: 10px;">¿Aun no estas registrado?</label><button class="btn btn-secondary btn btn-success w-20">Registrate</button>
       </form>
-      
-        <a href="<?php echo FRONT_ROOT.'Views/ShowRegisterAdmin'?>" class="text-warning" style="font-size:12px;">Ingresa como Administrador</a>
+      <div class="text-center">
+      <a href="" class="text-warning" style="font-size:12px;" data-toggle="modal" data-target="#modalLoginAvatar">Ingresa Como Administrador</a>
+        </div>
+        <!--<a href="<#?php echo FRONT_ROOT.'Views/ShowRegisterAdmin'?>" class="text-warning" style="font-size:12px;">Ingresa como Administrador</a>-->
       
     </div>
 
@@ -73,3 +75,38 @@
       <!--<#?php include('Login-Facebook\index.php');?>-->
     </form>
 </main>
+
+
+<div class="desplegable">
+  <form action="<?php echo FRONT_ROOT . 'Admin/LoginAdmin' ?>" method="POST" class="md-form">
+
+    <div class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+          <!--Header-->
+          <div class="modal-header">
+            <img src="https://pbs.twimg.com/profile_images/618130306307104768/InYJ1cJH_400x400.jpg" alt="avatar" class="rounded-circle img-responsive">
+          </div>
+          <!--Body-->
+          <div class="modal-body text-center mb-1">
+
+            <h5 class="mt-1 mb-2">Administrador</h5>
+
+            <div class="md-form ml-0 mr-0">
+              <input placeholder="Ingrese contraseña" type="password" name="pw" class="form-control form-control-sm validate ml-0">
+            </div>
+
+            <div class="text-center mt-4">
+              <button type="submit" class="btn btn-cyan mt-1">Iniciar Sesion <i class="fas fa-sign-in ml-1"></i></button>
+            </div>
+          </div>
+
+        </div>
+        <!--/.Content-->
+      </div>
+    </div>
+  </form>
+</div>

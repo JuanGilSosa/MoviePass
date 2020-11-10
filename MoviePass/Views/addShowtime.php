@@ -71,24 +71,23 @@ require_once("nav.php");
                             <input type="text" name="" placeholder="<?php echo $movie->GetTitle() ?>" value="" class="form-control" readonly>
                         </div>
                     </div>
+                    
+                    <div class="col-lg-6">
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="">Fecha de funcion:</label>
+                            <input type="date" name="releaseDate" class="w-100" class="form-control" required />
+                        </div>
+                    </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="">Horario de funcion</label>
                             <input type="time" name="startTime" value="" min="17:00" max="23:00" class="w-100" class="form-control" required />
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="">En cartelera desde:</label>
-                            <input type="date" name="releaseDate" class="w-100" class="form-control" required />
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="">En cartelera hasta:</label>
-                            <input type="date" name="feendDatechaFin" class="w-100" class="form-control" required />
-                        </div>
-                    </div>
+                    
                 </div>
                 <button type="submit" name="button" class="btn btn-light ml-auto d-block">Cargar Función</button>
             </form>
