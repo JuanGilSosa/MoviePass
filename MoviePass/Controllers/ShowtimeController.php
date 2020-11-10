@@ -50,14 +50,19 @@ class ShowtimeController
             $movie = $this->movieDAO->GetMovieById($movieId);
 
             // LA PELICULA ESTÁ EN ALGÚN CINE ESE DÍA?
-            $existShowtime = $this->showtimeDAO->GetShowtimeXMovie($movieId, $releaseDate);
-            
+            $existShowtime = $this->showtimeDAO->GetShowtimeXMovie($movieId);
             $existMovieInShowtime = $this->FindReleaseDate($existShowtime, $releaseDate);
-            
 
-            if ($existMovieInShowtime == array()){
+            //var_dump($existMovieInShowtime);
+
+            if(!empty($existMovieInShowtime)){
+                $cinemaIdOfShowtime = $this->showtimeDAO->GetCinemaIdxShowtimeId($existMovieInShowtime->GetId());
+                
+            }
+                var_dump($cinemaIdOfShowtime);
+
+                if ( is_array($existMovieInShowtime) && empty($existMovieInShowtime)  || $cinemaId = $cinemaIdOfShowtime ){
                 // ACA ESTARIA CUANDO LA PELICULA NO EXISTE EN NINGUNA SALA EN ESE DIA. ENTONCES LO PUEDO GUARDAR
-
                 // Verifico que la fecha ingresada sea mayor a hoy.
                 $now = date("Y-m-d");
                 if ($releaseDate >= $now){
@@ -71,7 +76,12 @@ class ShowtimeController
                     $cinema = $this->cinemaDAO->GetCinemaById($cinemaId);
 
                     // AHORA TENGO QUE VERIFICAR LA HORA DE INICIO Y LA HORA DE FINAL
+                    // VERIFICAR SI LA SALA TIENE LA PELICULA
+                    
+                    
                     $checkTime = $this->CheckTime($cinemaId, $releaseDate, $startTime, $newEndTime);
+                   
+                   
                     if($checkTime == "ok"){
                         $showtime = new Showtime(0, $movie, $startTime, $endTime, $releaseDate, $cinema);
                         //var_dump($showtime);
@@ -106,10 +116,11 @@ class ShowtimeController
                     ViewsController::ShowAddShowtimeView($message, $movieId, $theatre, $cinemas);
                 }   
             } else {
-                $message = "La película ingresada ya se encuentra en una función.";
+                
+                $message = "La película ingresada ya se encuentra en una función el día ingresado.";
                 ViewsController::ShowAddShowtimeView($message, $movieId, $theatre, $cinemas);
             }
-        }
+        } 
     }
 
     private function FindReleaseDate ($showtimes, $releaseDate) {
@@ -130,72 +141,80 @@ class ShowtimeController
     private function CheckTime($cinemaId, $releaseDate, $startTime, $newEndTime){
         
         $showtimes = $this->showtimeDAO->GetShowtime_showtimesxcinema($cinemaId);
+        $messageCheckTime = "";
 
-        if(!$showtimes == array()){
+        if(!empty($showtimes)){
             if(is_array($showtimes)){
                 foreach ($showtimes as $showtime){
+                    
+                    //var_dump($showtime);
                     if($showtime->GetReleaseDate() == $releaseDate){
-                       
                         $endTime = $showtime->GetEndTime();
                         $newEndTimeShowtime = $this->AddMinutes($endTime);
                         // Verifico que la hora del final con los 15 minutos ya sumados sean menores a la hora de comienzo de la funcion
-                        if($newEndTimeShowtime < $startTime){
-                            // Puedo grabar
-                            $messageCheckTime = "ok";
-                        } else {
-                            echo "146";
-
-                            $messageCheckTime = "El horario de comienzo no se encuentra disponible";
-                            return  $messageCheckTime;
-                        }
                         
-                        // Si paso la verificacion de arriba.
-                        // Verifico que el tiempo de finalización de la funcion sea menor al de la funcion ya grabada
-                        if($messageCheckTime == "ok"){      
-                            echo "155"; 
-                            if ($newEndTime > $showtime->GetStartTime()){
-                                var_dump($newEndTime);
-                                var_dump($showtime->GetStartTime());
-                                $messageCheckTime = "No hay tiempo suficiente entre funciones para agregar esta película";
-                                return  $messageCheckTime;
+                        if($startTime > $showtime->GetStartTime()){
+                            if($startTime > $newEndTimeShowtime){
+                                $messageCheckTime = "ok";
+                            } else {
+                                // HAY FUNCION EN CURSO
+                                $messageCheckTime = "El horario de comienzo no se encuentra disponible.";
                             }
+                        } else if ($startTime < $showtime->GetStartTime()) {
+
+                            if ($this->AddMinutes($endTime) < $showtime->GetStartTime())
+                            {
+                                $messageCheckTime = "ok";
+
+                            } else {
+                                $messageCheckTime = "El horario de comienzo no se encuentra disponible.";
+                            }
+                            
+                        } else{
+
+                            $messageCheckTime = "El horario de comienzo no se encuentra disponible.";
                         }
-                    }
-                    return $messageCheckTime;
+                    } 
                 } 
+                return $messageCheckTime;
             } else { // ES PORQUE HAY SOLAMENTE UNA FUNCION
+                
                 if($showtimes->GetReleaseDate() == $releaseDate){
                     $endTime = $showtimes->GetEndTime();
                     $newEndTimeShowtime = $this->AddMinutes($endTime);
-                        // Verifico que la hora del final con los 15 minutos ya sumados sean menores a la hora de comienzo de la funcion
-                    if($newEndTimeShowtime < $startTime){
-                        $messageCheckTime = "ok";
-                    } else {
-                        echo "172";
-                        var_dump($newEndTimeShowtime);
-                        var_dump($startTime);
-                        $messageCheckTime = "El horario de comienzo no se encuentra disponible";
-                    }
-                        // Si paso la verificacion de arriba.
-                        // Verifico que el tiempo de finalización de la funcion sea menor al de la funcion ya grabada
-                    if($messageCheckTime == "ok"){
-                        if ($newEndTime > $showtimes->GetStartTime()){
-                            var_dump($newEndTime);
-                            var_dump($showtimes->GetStartTime());
-                            echo "179";
-                            $messageCheckTime = "No hay tiempo suficiente entre funciones para agregar esta película";
+                    // Verifico que la hora del final con los 15 minutos ya sumados sean menores a la hora de comienzo de la funcion
+                    
+                    if($startTime > $showtimes->GetStartTime()){
+                        if($startTime > $newEndTimeShowtime){
+                            $messageCheckTime = "ok";
+                        } else {
+                            // HAY FUNCION EN CURSO
+                            $messageCheckTime = "El horario de comienzo no se encuentra disponible.";
                         }
+                    } else if ($startTime < $showtimes->GetStartTime()) {
+
+                        if ($this->AddMinutes($endTime) < $showtimes->GetStartTime())
+                        {
+                            $messageCheckTime = "ok";
+
+                        } else {
+                            $messageCheckTime = "El horario de comienzo no se encuentra disponible.";
+                        }
+                        
+                    } else{
+
+                        $messageCheckTime = "El horario de comienzo no se encuentra disponible.";
                     }
-                } else {
-                    $messageCheckTime = "ok";
-                }
+                } 
                 return $messageCheckTime;
+               
             }
         } else {
-            // NO HAY FUNCIONES ESE DIA EN LA SALA
+            // NO HAY FUNCIONES ESE DIA EN LA SALA 
             return "ok";
         }
     }
+
 
 
     private function FindMovieInCinema ($movieId, $releaseDate){
