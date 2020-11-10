@@ -1,10 +1,16 @@
-<?php 
+
+<!--
+<#?php 
+    use Helpers\SessionHelper;
     require_once('nav.php');
-    $tickets = $myCart->GetTickets();
-    foreach($tickets as $ticket):
-        $showtime = $ticket->GetShowtime();
-        $movie = $showtime->GetMovie();
-        $titleMovie = $movie->GetTitle();
+    #$tickets = $myCart->GetTickets();
+    #foreach($tickets as $ticket):
+    #    $showtime = $ticket->GetShowtime();
+    #    $movie = $showtime->GetMovie();
+    #    $titleMovie = $movie->GetTitle();
+    if(SessionHelper::isSession('CART')){
+        $values = SessionHelper::GetValue('CART');
+        if(!empty($values)){
 ?>
 <div class="container">
     <div class="row">
@@ -12,10 +18,11 @@
         <main id="items" class="col-sm-8 row"></main>
 
         <aside class="col-sm-4">
-            <h2>Carrito</h2>
-
+            <h2>Carrito</h2>  
             <ul id="carrito" class="list-group">
-                <li><?php echo $titleMovie; ?></li>
+            <#?php foreach($values as $value){?>
+                <li> <#?php var_dump($value);?></li>
+            <#?php }?>
             </ul>
             <hr>
 
@@ -24,7 +31,8 @@
         </aside>
     </div>
 </div>
-    <?php endforeach; ?>
+    <#?php }}?> -->
+    <!--<#?php endforeach; ?>-->
 <!--
 <script>
         window.onload = function () {
@@ -319,3 +327,55 @@
 	}
 	/*Fin de Menù lateral*/
 </style>-->
+
+<?php
+    require_once('nav.php');
+    use Helpers\SessionHelper;
+?>
+<main class="mx-auto">
+     <section id="listado" class="mb-5">
+          <div class="container">
+               <table id="dt-vertical-scroll" class="table  table-striped bg-dark text-white" cellspacing="0">
+
+                    <?php
+                    if (isset($message) && !empty($message)) {
+                         #echo "<small>" . $message . "</small>";
+                    ?>
+                         <div class="container">
+                              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                   <?php echo $message ?>
+                                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                   </button>
+                              </div>
+                         </div>
+                    <?php
+                    }
+                    ?>
+
+                    <thead>
+                         <tr>
+                              <th class="th-sm">Funcion(peli)
+                              </th>
+                              <th class="th-sm">Fecha
+                              </th>
+                              <th class="th-sm">Hora
+                              </th>
+                              <th class="th-sm">Sala
+                              </th>
+                              <th class="th-sm">Cine
+                              </th>
+                              <th class="th-sm">Direccion
+                              </th>
+                         </tr>
+                    </thead>
+                    <tbody>
+                        <form action="<?php echo FRONT_ROOT . 'Cinema/ViewAddCinema' ?>" method="POST">
+                            <td><button type="submit" value="<?php echo $theatre->GetId() ?>" class="btn btn-secondary btn-info w-20" name="idCine">+Sala</button></td>
+                        </form>
+                    </tbody>
+               </table>
+          </div>
+     </section>
+
+     <main>
