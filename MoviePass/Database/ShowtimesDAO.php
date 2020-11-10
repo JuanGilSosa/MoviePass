@@ -138,8 +138,9 @@
             }
         }
 
-        public function GetShowtimeXMovie($movieId, $releaseDate){
+        public function GetShowtimeXMovie($movieId){
             try {
+                /// Este método devuelve las funciones que tienen la película.
                 $idint = intval($movieId);
                 $con = Connection::getInstance();
                 $query = 'SELECT * FROM showtimes WHERE active = 1 AND movieId = :movieId' ;
@@ -153,21 +154,22 @@
             }
         }
 
-  /*      public function GetShowtimesXCinemaXReleaseDate($cinemaId, $releaseDate){
-            echo "DENTRO DEL DAO 157 ";
-            
+
+        public function GetCinemaIdxShowtimeId($showtimeId){
             try {
                 $con = Connection::getInstance();
-                $query = 'SELECT s* FROM showtimes as s join showtimesxcinemas sxc on s.showtimeId = sxc.showtimeId 
-                                                where sxc.cinemaId = :cinemaId AND s.releaseDate = :releaseDate';
-                $params['cinemaId'] = $cinemaId;
-                $params['releaseDate'] = $releaseDate;
-                $showtimes = $con->execute($query, $params); 
-                return (!empty($showtimes)) ? $this->mapping($showtimes) : array();
+                $query = 'SELECT sxf.cinemaId 
+                            FROM showtimesxcinemas as sxf 
+                            WHERE showtimeId = :showtimeId'
+                            ;
+                $params['showtimeId'] = $showtimeId;
+                $cinemaId = $con->execute($query, $params);
+                
+                
+                return (!empty($cinemaId)) ? $cinemaId[0][0] : array();
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }
         }
-        */
     }
 ?>

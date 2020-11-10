@@ -50,14 +50,19 @@ class ShowtimeController
             $movie = $this->movieDAO->GetMovieById($movieId);
 
             // LA PELICULA ESTÁ EN ALGÚN CINE ESE DÍA?
-            $existShowtime = $this->showtimeDAO->GetShowtimeXMovie($movieId, $releaseDate);
-            
+            $existShowtime = $this->showtimeDAO->GetShowtimeXMovie($movieId);
             $existMovieInShowtime = $this->FindReleaseDate($existShowtime, $releaseDate);
-            
 
-            if ($existMovieInShowtime == array()){
+            //var_dump($existMovieInShowtime);
+
+            if(!empty($existMovieInShowtime)){
+                $cinemaIdOfShowtime = $this->showtimeDAO->GetCinemaIdxShowtimeId($existMovieInShowtime->GetId());
+                
+            }
+                var_dump($cinemaIdOfShowtime);
+
+                if ( is_array($existMovieInShowtime) && empty($existMovieInShowtime)  || $cinemaId = $cinemaIdOfShowtime ){
                 // ACA ESTARIA CUANDO LA PELICULA NO EXISTE EN NINGUNA SALA EN ESE DIA. ENTONCES LO PUEDO GUARDAR
-
                 // Verifico que la fecha ingresada sea mayor a hoy.
                 $now = date("Y-m-d");
                 if ($releaseDate >= $now){
@@ -71,7 +76,12 @@ class ShowtimeController
                     $cinema = $this->cinemaDAO->GetCinemaById($cinemaId);
 
                     // AHORA TENGO QUE VERIFICAR LA HORA DE INICIO Y LA HORA DE FINAL
+                    // VERIFICAR SI LA SALA TIENE LA PELICULA
+                    
+                    
                     $checkTime = $this->CheckTime($cinemaId, $releaseDate, $startTime, $newEndTime);
+                   
+                   
                     if($checkTime == "ok"){
                         $showtime = new Showtime(0, $movie, $startTime, $endTime, $releaseDate, $cinema);
                         //var_dump($showtime);
@@ -110,7 +120,7 @@ class ShowtimeController
                 $message = "La película ingresada ya se encuentra en una función el día ingresado.";
                 ViewsController::ShowAddShowtimeView($message, $movieId, $theatre, $cinemas);
             }
-        }
+        } 
     }
 
     private function FindReleaseDate ($showtimes, $releaseDate) {
