@@ -104,7 +104,7 @@
         public function mapping($value){
             $value = is_array($value) ? $value : [];
             $ans = array_map(function($p){
-                return new Showtime($p['showtimeId'], $p['movieId'], $p['startTime'], $p['endTime'], $p['releaseDate'], $p['active']);
+                return new Showtime($p['showtimeId'], $p['movieId'], $p['startTime'], $p['endTime'], $p['releaseDate'],0);
             }, $value);
             return (count($ans)>1) ? $ans : $ans[0];
         }

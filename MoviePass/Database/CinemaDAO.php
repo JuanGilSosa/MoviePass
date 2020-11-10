@@ -30,13 +30,8 @@
             try{
                 $con = Connection::getInstance();
 
-<<<<<<< HEAD
-                $query = 'INSERT INTO cinemas(name,price,capacity,type,active) VALUES
-                            (:name,:price,:capacity,:type,1)';
-=======
                 $query = 'INSERT INTO cinemas(name,price,capacity,type, active) VALUES
                             (:name,:price,:capacity,:type, :active)';
->>>>>>> master
 
                 $params['name'] = $cinema->GetName();
                 $params['price'] = $cinema->GetPrice();
