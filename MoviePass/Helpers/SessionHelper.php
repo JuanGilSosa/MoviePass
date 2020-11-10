@@ -25,5 +25,9 @@
         public static function GetValue($key){
             return (isset($_SESSION[$key])) ? $_SESSION[$key] : array();
         }
+
+        public static function DestroySession($key){
+            unset($_SESSION[$key]);
+        }
     }
 ?>

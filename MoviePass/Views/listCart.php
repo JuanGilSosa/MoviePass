@@ -380,8 +380,8 @@
                         ?>
                         <tr>
                             <td><?php echo $movie->GetTitle(); ?></td>
-                            <td><?php echo $showtime->GetReleaseDate().'DIA-'.$showtime->GetStartTime(); ?></td>
-                            <td><?php echo $cinema->GetName().'+cine'; ?></td>
+                            <td><?php echo $showtime->GetReleaseDate().'--'.$showtime->GetStartTime(); ?></td>
+                            <td><?php echo $cinema->GetName().'|'; ?></td>
                             <td><?php echo $ticket->GetNumberOfTickets();?></td>
                             <td><?php echo '$'.number_format($cinema->GetPrice()*$ticket->GetNumberOfTickets(),2);?></td>  
                             <th class="th-sm"><button class="btn btn-danger">Sacar</button>
@@ -397,8 +397,8 @@
                     </tbody>
                </table>
                
-               <form action="<?php ?>" method="POST">
-                    <td><button type="submit" value="" class="btn btn-secondary btn-info w-20" name="idCine">VACIAR CARRITO</button></td>
+               <form action="<?php echo FRONT_ROOT.'Cart/EmtpyCart'; ?>" method="POST">
+                    <button type="submit" value="" class="btn btn-secondary btn-info w-20" name="empty">VACIAR CARRITO</button>
                 </form>
           </div>
      </section>

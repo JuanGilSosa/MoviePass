@@ -53,8 +53,6 @@
                 $showTime->SetCinema($cinema);
                 $myTicket =  new Ticket(0,$showTime);
                 $this->cart->PushTicket($myTicket);
-
-                var_dump($cinema);
                 
                 #Reemplazo el ticket en el session simplemente incrementando la variable
                 if($this->ReplaceTicketIfExists($showTime)==false){ 
@@ -62,8 +60,7 @@
                         SessionHelper::SetOnIndex('CART',0,$myTicket);#$_SESSION['CART'][0] = $myTicket;
                     }else{
                         $length = SessionHelper::LengthOfKey('CART');
-                        SessionHelper:SetOnIndex('CART',intval($length),$myTicket);#$_SESSION['CART'][$length] = $myTicket;
-                        echo 'seteado en array de session';
+                        SessionHelper::SetOnIndex('CART',intval($length),$myTicket);#$_SESSION['CART'][$length] = $myTicket;
                     }
                 }
                 $showTimeController = new ShowtimeController();
@@ -89,6 +86,11 @@
                 }
             }
             return false;
+        }
+
+        public function EmtpyCart(){
+            SessionHelper::DestroySession('CART');
+            $this->ShowCart();
         }
 
     }
