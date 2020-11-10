@@ -169,7 +169,7 @@ class ShowtimeController
                 return $messageCheckTime;
             } else { // ES PORQUE HAY SOLAMENTE UNA FUNCION
                 
-                if($showtime->GetReleaseDate() == $releaseDate){
+                if($showtimes->GetReleaseDate() == $releaseDate){
                     $endTime = $showtimes->GetEndTime();
                     $newEndTimeShowtime = $this->AddMinutes($endTime);
                     // Verifico que la hora del final con los 15 minutos ya sumados sean menores a la hora de comienzo de la funcion
@@ -196,6 +196,7 @@ class ShowtimeController
                         $messageCheckTime = "El horario de comienzo no se encuentra disponible.";
                     }
                 } 
+                return $messageCheckTime;
                
             }
         } else {
