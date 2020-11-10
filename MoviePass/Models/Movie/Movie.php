@@ -14,13 +14,14 @@
         private $vote_average;
         private $overview;
         private $release_date;
+        private $active;
 
 
         public function __construct (
             $poster_path, $backdrop_path,
             $id, $adult, $original_language,
             $title, $genres, $vote_average,
-            $overview, $release_date
+            $overview, $release_date, $active = true
         )
         {
             $this->poster_path = $poster_path;
@@ -33,6 +34,7 @@
             $this->vote_average = $vote_average;
             $this->overview = $overview;
             $this->release_date = $release_date;
+            $this->active = $active;
         }
 
         public function GetPosterPath(){return $this->poster_path;}
@@ -54,6 +56,8 @@
         public function GetOverview(){return $this->overview;}
         
         public function GetReleaseDate(){return $this->release_date;}
+    
+        public function isActive(){return $this->active;}
     }
     
 

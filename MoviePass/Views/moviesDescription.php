@@ -1,9 +1,9 @@
 <?php 
     require_once('nav.php');
 ?>
-<section id="listado" class="mb-5">
+<section id="listado" class="mb-5 py-3">
 
-    <div class="container" style="margin-top:10vh;">
+    <div class="container" >
         <div class="row container" style="margin:0px; padding:0px;background-color: rgba(158, 140, 219, 1);">
             <div class="col container mx-auto">
                 <section class="container" style="width: 100%; height:5vh;">
@@ -43,10 +43,7 @@
                         <section class="col container d-block" style="width: 100%; height: 100%; margin:2vh 0vh;">
                             <a class="btn btn-outline-primary" style="width: 100%;" href="https://www.youtube.com/embed/<?php echo $trailerKey;?>" data-lity>Ver Trailer</a>
                         </section>
-                        <section class="col container d-block" style="width: 100%; height: 100%; margin:2vh 0vh;">
-                            <button type="" class="btn btn-primary" style="width: 100%;">Reserva</button>
-                        </section>
-
+            
                     </section>
                 </div>
                 

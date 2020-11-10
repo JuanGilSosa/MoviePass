@@ -108,7 +108,7 @@ class CinemaController
 
         if($this->FindCinemaByName($theatre,$name) == 0)
         {
-            $cinema = new Cinema ($cinemaId, $name, $price, $capacity, $type, $active);
+            $cinema = new Cinema ($cinemaId, $name, $price, $capacity, $type);
             $this->cinemaDAO->Update($cinema);
             $message = "Sala modificada con éxito.";
             
