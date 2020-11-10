@@ -103,6 +103,15 @@ CREATE TABLE ticketsXshowtimes(
     CONSTRAINT fk_showTimeId FOREIGN KEY(showtimeId) REFERENCES Showtimes(showtimeId) 
 );
 
+CREATE TABLE History(
+    date DATE,
+    idMember INT,
+    numberTicket INT,
+
+    CONSTRAINT fk_idMember FOREIGN KEY(idMember) REFERENCES members(idMember),
+    CONSTRAINT fk_idMember FOREIGN KEY(idMember) REFERENCES members(idMember)
+);
+
 #########OTRAS QUERIES#########
 
 #AGREGANDO PAIES
