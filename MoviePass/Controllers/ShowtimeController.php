@@ -85,7 +85,7 @@ class ShowtimeController
 
                             $this->movieDAO->AddToDatabase($movie);
                             $genresIds = $movie->GetGenres();
-                            var_dump($genresIds);
+                            //var_dump($genresIds);
                             foreach ($genresIds as $genreId) {
                                 $this->genreDAO->Add_genresXmovies($genreId, $movie->GetId());
                             }
