@@ -1,4 +1,4 @@
-
+<?php use Helpers\SessionHelper; ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark secondary-color">
 <div class="container">
@@ -40,7 +40,13 @@
       <?php } ?>
 
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo FRONT_ROOT.'Cart/ShowCart'?>">Carrito</a>
+        <a class="nav-link" href="<?php echo FRONT_ROOT.'Cart/AddShowtime'?>">
+            Carrito(
+              <?php 
+                echo (!SessionHelper::isSession('CART')) ? 0 : (SessionHelper::LengthOfKey('CART'));                                                              
+              ?>
+            )
+        </a>
       </li>
 
       <?php if (isset($_SESSION['userLogged']) || isset($_SESSION['adminLogged'])){ ?>
