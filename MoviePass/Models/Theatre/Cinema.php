@@ -11,13 +11,13 @@
         private $type;
         private $active;
 
-        public function __construct($id, $name, $price, $capacity, $type, $active=true){
+        public function __construct($id, $name, $price, $capacity, $type){
             $this->id = $id;
             $this->name = $name;
             $this->price = $price;
             $this->capacity = $capacity;
             $this->type = $type;
-            $this->active = $active;
+            $this->active = true;
         }
         
         public function SetId($id){$this->id = $id;}

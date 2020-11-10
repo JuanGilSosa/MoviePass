@@ -30,13 +30,14 @@
             try{
                 $con = Connection::getInstance();
 
-                $query = 'INSERT INTO cinemas(name,price,capacity,type) VALUES
-                            (:name,:price,:capacity,:type)';
+                $query = 'INSERT INTO cinemas(name,price,capacity,type, active) VALUES
+                            (:name,:price,:capacity,:type, :active)';
 
                 $params['name'] = $cinema->GetName();
                 $params['price'] = $cinema->GetPrice();
                 $params['capacity'] = $cinema->GetCapacity();
                 $params['type'] = $cinema->GetType();
+                $params['active'] = $cinema->GetActive();
 
                 return $con->executeNonQuery($query, $params);
             }catch(PDOException $e){
@@ -145,7 +146,7 @@
         public function GetCinemasByTheatreId($theatreId){
             try{
                 $con = Connection::getInstance();
-                $query = 'SELECT s.* FROM cinemas as s JOIN cinemasXtheatres as sxc ON sxc.cinemaId = s.cinemaId AND sxc.theatreId = :theatreId';
+                $query = 'SELECT s.* FROM cinemas as s JOIN cinemasXtheatres as sxc ON sxc.cinemaId = s.cinemaId AND sxc.theatreId = :theatreId AND s.active = 1';
                 $params['theatreId'] = $theatreId;
                 $cine = $con->execute($query, $params);
                 return (!empty($cine)) ? $this->mapping($cine) : array();

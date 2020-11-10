@@ -50,11 +50,15 @@
         public function Add($funcion){
             try {
                 $con = Connection::getInstance();
-                $query = 'INSERT INTO showtimes(startTime, endTime, movieId, active) VALUES(:startTime, :endTime, :movieId, :active)';
+                $query = 'INSERT INTO showtimes(startTime, endTime, movieId, releaseDate ,active) 
+                VALUES(:startTime, :endTime, :movieId, :releaseDate, :active)';
+
                 $params['startTime'] = $funcion->GetStartTime();
                 $params['endTime'] = $funcion->GetEndTime();
                 $params['movieId'] = $funcion->GetMovie()->GetId();
+                $params['releaseDate'] = $funcion->GetReleaseDate();
                 $params['active'] = 1;
+                
                 return $con->executeNonQuery($query, $params);
             } catch (PDOException $e) {
                 echo $e->getMessage();
@@ -100,7 +104,7 @@
         public function mapping($value){
             $value = is_array($value) ? $value : [];
             $ans = array_map(function($p){
-                return new Showtime($p['showtimeId'], $p['movieId'], $p['startTime'], $p['endTime'], $p['active']);
+                return new Showtime($p['showtimeId'], $p['movieId'], $p['startTime'], $p['endTime'], $p['releaseDate'], $p['active']);
             }, $value);
             return (count($ans)>1) ? $ans : $ans[0];
         }

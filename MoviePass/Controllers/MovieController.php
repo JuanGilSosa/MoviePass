@@ -18,18 +18,20 @@
         
         public function ShowMoviesNowPlaying(){
             $movies = $this->moviesDAO->GetAll();
-            $genres = $this->genresDAO->GetAll();
+            $genres = $this->genresDAO->GetGenresFromMoviesNowPlaying($movies);
+
             ViewsController::ShowMoviesListView("",$movies,$genres);
         }
 
         #@param valueOfSelect tiene el id del genero
         
         public function ShowMovies($valueOfSelect=""){
-            #ACA TENEMOS QUE VER SI LA LISTA DE PELICULAS SE PUEDEN VER SIN ESTAR LOGEADO O SOLAMENTE LOS ADMIN
+            $allMovies = $this->moviesDAO->GetAll();
+
             if(SessionHelper::isSession('userLogged') || SessionHelper::isSession('adminLogged')){
                 if($valueOfSelect != 0){
                     $movies = $this->moviesDAO->GetMoviesByGenre($valueOfSelect);
-                    $genres = $this->genresDAO->GetAll();
+                    $genres = $this->genresDAO->GetGenresFromMoviesNowPlaying($allMovies);
                     ViewsController::ShowMoviesListView("",$movies,$genres);
                 }else{
                     ViewsController::ShowMoviesNowPlaying();

@@ -51,7 +51,7 @@ CREATE TABLE if not exists  Cinemas(
     price INT, 
     capacity INT,
     type VARCHAR(5),
-    active BOOLEAN;
+    active BOOLEAN,
     CONSTRAINT pk_cinemaId PRIMARY KEY(cinemaId)
 );
 
@@ -64,19 +64,48 @@ CREATE TABLE if not exists  Showtimes(
     CONSTRAINT pk_showtimeId PRIMARY KEY(showtimeId)
 );
 
-CREATE TABLE  showtimesXcinemas(
+CREATE TABLE if not exists showtimesXcinemas(
     showtimeId INT,
     cinemaId INT,
     CONSTRAINT fk_showtimeId FOREIGN KEY(showtimeId) REFERENCES Showtimes(showtimeId),
     CONSTRAINT fk_cinemaId FOREIGN KEY(cinemaId) REFERENCES Cinemas(cinemaId)
 );
 
-CREATE TABLE cinemasXtheatres(
+CREATE TABLE if not exists cinemasXtheatres(
     cinemaId INT,
     theatreId INT,
     CONSTRAINT pk_cinemaId FOREIGN KEY(cinemaId) REFERENCES cinemas(cinemaId),
     CONSTRAINT pk_theatreId FOREIGN KEY(theatreId) REFERENCES theatres(theatreId)
 );
+
+CREATE TABLE if not exists  movies(
+    movieId INT NOT NULL,
+    poster_path varchar(100) NOT NULL,
+    backdrop_path varchar(100) NOT NULL,
+    adult boolean NOT NULL,
+    original_language varchar(2) NOT NULL,
+    title varchar(100) NOT NULL,
+    vote_average INT not null,
+    overview text not null,
+    release_date date not null,
+    active boolean not null,
+    CONSTRAINT pk_movieId PRIMARY KEY(movieId)
+);
+
+CREATE TABLE if not exists genres(
+    genreId INT NOT NULL,
+    genre varchar(50) NOT NULL,
+    CONSTRAINT pk_genreId PRIMARY KEY (genreId)
+);
+
+CREATE TABLE if not exists genreXmovies(
+    movieId INT,
+    genreId INT,
+    CONSTRAINT pk_movieId FOREIGN KEY(movieId) REFERENCES movies(movieId),
+    CONSTRAINT pk_genreId FOREIGN KEY(genreId) REFERENCES genres(genreId)
+);
+
+
 
 CREATE TABLE if not exists  members(
     idMember INT NOT NULL AUTO_INCREMENT,
@@ -89,14 +118,14 @@ CREATE TABLE if not exists  members(
     CONSTRAINT pk_idMember PRIMARY KEY(idMember)
 );
 
-CREATE TABLE Tickets(
+CREATE TABLE if not exists Tickets(
     numberTicket INT NOT NULL AUTO_INCREMENT,
     showtimeId INT,
     CONSTRAINT pk_numberTicket PRIMARY KEY(numberTicket),
     CONSTRAINT fk_showTimeId FOREIGN KEY(showtimeId) REFERENCES Showtimes(showtimeId)
 );
 
-CREATE TABLE ticketsXshowtimes(
+CREATE TABLE if not exists ticketsXshowtimes(
     numberTicket INT,
     showtimeId INT,
     CONSTRAINT pk_numberTicket FOREIGN KEY(numberTicket) REFERENCES Tickets(numberTicket),
@@ -110,17 +139,38 @@ INSERT INTO COUNTRIES(NAME) VALUES('Argentina'),('Brasil'),('Chile'),('Uruguay')
 
 #AGREGANDO PROVINCIAS
 INSERT INTO Provinces(name, countryId) VALUES('Buenos Aires',1),
-                                                            ('Santa Fe',1),
-                                                            ('Cordoba',1),
-                                                            ('Paysandu',4),
-                                                            ('Salta',1),
-                                                            ('Valdivia',3),
-                                                            ('San Felipe',3),
-                                                            ('Santa Catarina',2),
-                                                            ('Rio Grande del Sur',2);
+                                             ('Santa Fe',1),
+                                             ('Cordoba',1),
+                                             ('Paysandu',4),
+                                             ('Salta',1),
+                                             ('Valdivia',3),
+                                             ('San Felipe',3),
+                                             ('Santa Catarina',2),
+                                             ('Rio Grande del Sur',2);
 
 #AGREGANDO CIUDADES
 INSERT INTO Cities(zipCode, name, provinceId) VALUES(7600,'Mar del Plata',1),
-                                                                            (1016,'CABA',1),
-                                                                            (4555,'Santa Fe',2),
-                                                                            (5468,'Carlos Paz',3);
+                                                    (1016,'CABA',1),
+                                                    (4555,'Santa Fe',2),
+                                                    (5468,'Carlos Paz',3);
+
+#AGREGANDO GENEROS
+INSERT INTO genres(genreId, genre) VALUES(28,'Action'),
+                                         (12,'Adventure'),
+                                         (16,'Animation'),
+                                         (35,'Comedy'),
+                                         (80,'Crime'),
+                                         (99,'Documentary'),
+                                         (18,'Drama'),
+                                         (10751,'Family'),
+                                         (14,'Fantasy'),
+                                         (36,'History'),
+                                         (53,'Thriller'),
+                                         (27,'Horror'),
+                                         (10402,'Music'),
+                                         (9648,'Mystery'),
+                                         (10749,'Romance'),
+                                         (878,'Science Fiction'),
+                                         (10770,'TV Movie'),
+                                         (10752,'War'),
+                                         (37,'Western');

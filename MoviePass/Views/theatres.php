@@ -3,7 +3,8 @@ require_once('nav.php');
 ?>
 <main class="mx-auto">
      <section id="listado" class="mb-5">
-          <div class="container">
+          
+          <div class="container py-3">
                <table id="dt-vertical-scroll" class="table  table-striped bg-dark text-white" cellspacing="0">
 
                     <?php
@@ -88,6 +89,9 @@ require_once('nav.php');
 
                     </tbody>
                </table>
+          </div>
+          <div class="container" style="display:flex; justify-content:flex-end">
+               <a type="button" class="btn btn-light" href="<?php echo FRONT_ROOT . 'Theatre/ShowAllTheatres' ?>">Listado de Cines</a>
           </div>
      </section>
 

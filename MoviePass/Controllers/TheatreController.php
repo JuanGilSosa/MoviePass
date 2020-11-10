@@ -11,6 +11,8 @@ use Database\ProvinceDAO as ProvinceDAO;
 use Database\CountryDAO as CountryDAO;
 use Database\CinemaDAO as CinemaDAO;
 
+use PDOException as PDOException;
+
 
 use Helpers\SessionHelper as SessionHelper;
 
@@ -72,6 +74,32 @@ class TheatreController
     {
         if (SessionHelper::isSession('adminLogged')) {
             ViewsController::ShowModifyTheatre(strval($theatreId), $message);
+        } else {
+            ViewsController::ShowLogIn();
+        }
+    }
+
+    public function ShowAllTheatres($message = "")
+    {
+        if (SessionHelper::isSession('adminLogged')) {
+            $theatres = $this->theatreDAO->GetAll();
+            $theatresWithObjects = array();
+            if ((is_array($theatres))  and
+                (count($theatres) > 1) and
+                ($theatres != null)
+            ) {
+                foreach ($theatres as $theatre) {
+                    $theatreWithObject = $this->CreateCine($theatre);
+                    array_push($theatresWithObjects, $theatreWithObject);
+                }
+                ViewsController::ShowAllTheatres($theatresWithObjects , $message);
+            } else {
+                if ($theatres != null) {
+                    $theatreObject = $this->CreateCine($theatres);
+                    array_push($theatresWithObjects , $theatreObject);
+                }
+                ViewsController::ShowAllTheatres($theatresWithObjects , $message);
+            }
         } else {
             ViewsController::ShowLogIn();
         }
@@ -188,9 +216,26 @@ class TheatreController
 
     public function Delete($theatreId)
     {
-        $this->theatreDAO->Delete($theatreId);
-        $message = "Cine eliminado con éxito";
-        $this->ShowTheatres($message);
+        try{
+            $this->theatreDAO->Delete($theatreId);
+            $message = "Cine eliminado con éxito";
+            $this->ShowTheatres($message);
+        }catch (PDOException $e){
+            $message = "No pudimos eliminar el cine";
+            $this->ShowTheatres($message);
+        }
+    }
+
+    public function Activate($theatreId)
+    {
+        try{
+            $this->theatreDAO->SetActive($theatreId);
+            $message = "Cine activado con éxito";
+            $this->ShowAllTheatres($message);
+        }catch (PDOException $e){
+            $message = "No pudimos eliminar el cine";
+            $this->ShowAllTheatres($message);
+        }
     }
 
     public function CreateCine($mappedTheatre)

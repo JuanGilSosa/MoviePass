@@ -3,7 +3,7 @@ require_once('nav.php');
 ?>
 
 <main class="mx-auto">
-	<section id="listado" class="mb-5 ">
+	<section id="listado" class="">
 		<div class="container">
 			<?php
 			if (isset($message) && !empty($message)) {
@@ -20,7 +20,7 @@ require_once('nav.php');
 			<?php
 			}
 			?>
-			<h2 class="mb-4">Listado de Peliculas</h2>
+			<h2 class="">Listado de Peliculas</h2>
 
 			<div class="row container">
 				<div class="col">
@@ -47,7 +47,7 @@ require_once('nav.php');
 			</div>
 
 
-			<div class="grid-container text-center" style="justify-content:center">
+			<div class="grid-container text-center" style="justify-content:center; height: 100%">
 
 				<?php
 				foreach ($movies as $movie) {
