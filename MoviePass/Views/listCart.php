@@ -384,7 +384,10 @@
                             <td><?php echo $cinema->GetName().'|'; ?></td>
                             <td><?php echo $ticket->GetNumberOfTickets();?></td>
                             <td><?php echo '$'.number_format($cinema->GetPrice()*$ticket->GetNumberOfTickets(),2);?></td>  
-                            <th class="th-sm"><button class="btn btn-danger">Sacar</button>
+                            <th class="th-sm">
+                                <a href="<?php echo FRONT_ROOT.'Cart/RemoveTicket?numberOfTicket='.$ticket->GetNumberTicket();?>" 
+                                    type="button" class="btn btn-danger">Sacar
+                                </a>
                             </th>
                         </tr> 
                         

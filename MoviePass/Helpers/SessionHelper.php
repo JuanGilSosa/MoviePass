@@ -29,5 +29,10 @@
         public static function DestroySession($key){
             unset($_SESSION[$key]);
         }
+
+        public static function UnsetValue($key, $index){
+            unset($_SESSION[$key][$index]);
+        }
+
     }
 ?>

@@ -93,6 +93,18 @@
             $this->ShowCart();
         }
 
+        public function RemoveTicket($numberOfTicket){
+            if(SessionHelper::isSession('CART')){
+                foreach (SessionHelper::GetValue('CART') as $index => $ticket) {
+                    if($ticket->GetNumberTicket() == $numberOfTicket){
+                        SessionHelper::UnsetValue('CART',$index);
+                        break;
+                    }
+                }
+                $this->ShowCart();
+            }
+        }
+
     }
 
 ?>
