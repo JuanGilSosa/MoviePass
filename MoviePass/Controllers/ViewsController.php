@@ -217,7 +217,7 @@ class ViewsController
                     } else if (is_object($showtimes)) {
                         $dateReleaseDate =  DateTime::createFromFormat('Y-m-d', $showtimes->GetReleaseDate());
 
-                        if ($dateNow >= $dateReleaseDate && $dateOneMoreWeek <= $dateReleaseDate) {
+                        if ($dateNow < $dateReleaseDate && $dateOneMoreWeek > $dateReleaseDate) {
                             array_push($billboards, $showtimes);
                         }
                     }
