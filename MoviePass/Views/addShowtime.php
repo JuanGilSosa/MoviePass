@@ -29,7 +29,7 @@ require_once("nav.php");
 
                             
                                 <select name="theatreId" class="form-control" onchange="this.form.submit()" required>
-                                    <option selected disabled>Seleccione Cine</option>
+                                    <option value="" selected disabled>Seleccione Cine</option>
                                     <?php
                                     if (is_array($theatres)) {
                                         foreach ($theatres as $theatre) {
@@ -47,8 +47,8 @@ require_once("nav.php");
                     <div class="col-lg-6">
                         <label for="">Elegi la Sala</label>
                         <div class="form-group">
-                            <select name="select-movies" class="form-control" onchange="">
-                                <option selected="true" disabled="disabled">Seleccione Sala</option>
+                            <select name="select-movies" class="form-control" onchange="" required>
+                                <option value="" selected disabled>Seleccione Sala</option>
                                 <?php
                                     if (is_array($cinemas)) {
                                         foreach ($cinemas as $cinema) {

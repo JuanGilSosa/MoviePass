@@ -126,6 +126,27 @@
             }
         }
 
+        public function GetShowtimeOfTheatre($theatreID){
+            try {
+                $con = Connection::getInstance();
+
+                $query = 'SELECT f.* 
+                            FROM showtimesxcinemas as sxf 
+                            INNER JOIN cinemasxtheatres as cxt
+                            ON sxf.cinemaId = cxt.cinemaId  
+                            AND cxt.theatreID = :theatreID 
+                            INNER JOIN showtimes as f 
+                                ON sxf.showtimeId = f.showtimeId 
+                            ';
+                $params['theatreID'] = $theatreID;
+
+                $showtimes = $con->execute($query, $params);
+                return (!empty($showtimes)) ? $this->mapping($showtimes) : array();
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+
         public function GetShowtimeById($idShowtime){
             try {
                 $con = Connection::getInstance();

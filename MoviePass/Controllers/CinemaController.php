@@ -112,10 +112,9 @@ class CinemaController
             $this->cinemaDAO->Update($cinema);
             $message = "Sala modificada con éxito.";
             
-            $theatreDAO = new TheatreDAO();
-            $theatres = $theatreDAO->GetAllActive();
-            
-            $this->ShowCinemasByTheatre($theaterId, $message);
+            #$this->ShowCinemasByTheatre($theaterId, $message);
+            $theatreController = new TheatreController();
+            $theatreController->ShowTheatres($message);
         } else {
             $message = "El nombre de la sala ya se encuentra registrado.";
             $this->ShowModify($cinemaId, $message);

@@ -56,22 +56,11 @@
 
         public function FindMemberByEmail ($email)
         {
-            $loggedMember = null;
-
-            $members = $this->membersDAO->GetAll($email);
-            
-            if(is_array($members) && !empty($members)){
-                foreach ($members as $member)
-                {
-                    if($member->GetEmail() == $email)
-                    {
-                        return $member;
-                    }
-                }
-            }else if(!empty($members)){ #si solo hay un miembro en la base de datos, se devuelve un objeto y no un array
-                return $members;    
+            $members = $this->membersDAO->GetMemberByEmail($email);
+            if(!is_array($members) && !empty($members)){
+                return $members;
             }
-            return $loggedMember;
+            return null;
         }
 
         public function VerifyMemberAndPassword($email, $password)

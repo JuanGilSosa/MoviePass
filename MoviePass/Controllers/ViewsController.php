@@ -33,6 +33,7 @@ class ViewsController
 
     public static function ShowAddTheatre($message = "")
     {
+        if (SessionHelper::isSession('adminLogged')) {
         $countryDAO = new CountryDAO();
         $countries = $countryDAO->GetAll();
 
@@ -43,6 +44,9 @@ class ViewsController
         $cities = $cityDAO->GetAll();
 
         require_once(VIEWS_PATH . "addTheatre.php");
+        } else {
+            ViewsController::ShowLogIn();
+        }
     }
 
     public static function ShowTheatres($theatres, $message = "")
@@ -113,9 +117,13 @@ class ViewsController
 
     public static function ShowAddCinema($theatreId, $message="")
     {
+        if (SessionHelper::isSession('adminLogged')) {
         $theatreDAO = new TheatreDAO();
         $theatre = $theatreDAO->GetTheatreById($theatreId);
         require_once(VIEWS_PATH . 'addCinema.php');
+        } else {
+            ViewsController::ShowLogIn();
+        }
     }
 
     public static function ShowCinemasByTheatre($theatreId, $message="")
@@ -135,6 +143,8 @@ class ViewsController
             $cinemaDAO = New CinemaDAO();
             $cinema = $cinemaDAO->GetCinemaById(intval($cinemaId));
             require_once(VIEWS_PATH . 'modifyCinema.php');
+        } else {
+            ViewsController::ShowLogIn();
         }
     }
 
@@ -184,7 +194,17 @@ class ViewsController
     }
 
     public static function ShowCartView($message = ""/*$myCart*/){
+        $theatreDAO = new TheatreDAO();
+
         require_once(VIEWS_PATH.'listCart.php');
+    }
+
+    public static function ShowProcessOrderView(){
+        require_once(VIEWS_PATH.'payment.php');
+    }
+
+    public static function ShowTicketsListView($tickets, $message = ""){
+        require_once(VIEWS_PATH.'ticketsList.php');
     }
 
 }
