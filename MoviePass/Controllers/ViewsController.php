@@ -199,8 +199,12 @@ class ViewsController
         require_once(VIEWS_PATH.'listCart.php');
     }
 
-    public static function ShowProcessOrder($cart){
+    public static function ShowProcessOrderView(){
         require_once(VIEWS_PATH.'payment.php');
+    }
+
+    public static function ShowTicketsListView($tickets, $message = ""){
+        require_once(VIEWS_PATH.'ticketsList.php');
     }
 
 }

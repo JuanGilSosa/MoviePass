@@ -26,23 +26,6 @@
             $this->movieDAO = new MoviesDAO();
             $this->cart = new Cart();
         }
-/*
-        public function AddShowtime($idShowTime){
-            $showTime = $this->showTimeDAO->GetShowtimeById($idShowTime);
-            if(!empty($showTime) && is_object($showTime)){ #trato asi la condicion porque solo voy a traer una funcion, nada mas(object)
-                $cinema = $this->cinemaDAO->GetCinema_showtimesXcinema($idShowTime);
-                $movie = $this->movieDAO->getMovieById($showTime->GetMovie());
-                $showTime->SetMovie($movie);
-                $showTime->SetCinema($cinema);
-                $myTicket =  new Ticket(0,$showTime); echo 'VER LINEA 32 CartController';
-                $this->cart->PushTicket($myTicket);
-                ViewsController::ShowCartView($this->cart);
-            }
-        }
-
-        public function AddTicket($arrOfTickets){
-            $this->ticketDAO->Add($arrOfTickets);
-        }*/
 
         public function AddShowTime($idShowTime){
 
@@ -107,11 +90,21 @@
         }
 
         public function ProcessOrder(){
-            if(SessionHelper::isSession('CART') && SessionHelper::isSession('adminLogged') || SessionHelper::isSession('userLogged')){
-                $cart = SessionHelper::GetValue('CART');
-                ViewsController::ShowProcessOrder($cart);
+            $ticketController = new TicketController();
+            if(SessionHelper::isSession('CART') && (SessionHelper::isSession('adminLogged') || SessionHelper::isSession('userLogged'))){
+                ViewsController::ShowProcessOrderView();
             }else if(!SessionHelper::isSession('adminLogged') || !SessionHelper::isSession('userLogged')){
                 ViewsController::ShowLogIn();
+            }
+        }
+
+        public function ConfirmPayment(){
+            if(SessionHelper::isSession('CART')){
+                $ticketController = new TicketController();
+                $cart = SessionHelper::GetValue('CART');
+                foreach($cart as $index=>$ticket){
+                    $ticketController->AddTicket($ticket);
+                }
             }
         }
 
