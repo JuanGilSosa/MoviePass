@@ -45,7 +45,9 @@
         }*/
 
         public function AddShowTime($idShowTime){
+
             $showTime = $this->showTimeDAO->GetShowtimeById($idShowTime);
+        
             if(!empty($showTime) && is_object($showTime)){ #trato asi la condicion porque solo voy a traer una funcion, nada mas(object)
                 $cinemaId = $this->showTimeDAO->GetCinemaIdxShowtimeId($idShowTime);
                 $cinema = $this->cinemaDAO->GetCinemaById($cinemaId);

@@ -374,8 +374,10 @@
                     $total = 0;
                     foreach($cart as $index=>$ticket){
                         $showtime = $ticket->GetShowtime();
+                        //var_dump($cart);
                         $cinema = $showtime->GetCinema();
-                        $movie = $showtime->GetMovie();$titleMovie = $movie->GetTitle();
+                        $movie = $showtime->GetMovie();
+                        $titleMovie = $movie->GetTitle();
                         
                         ?>
                         <tr>
