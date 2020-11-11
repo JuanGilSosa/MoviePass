@@ -122,6 +122,7 @@ CREATE TABLE if not exists  members(
 CREATE TABLE if not exists Tickets(
     numberTicket INT NOT NULL AUTO_INCREMENT,
     showtimeId INT,
+    numbersOfTickets INT,
     CONSTRAINT pk_numberTicket PRIMARY KEY(numberTicket),
     CONSTRAINT fk_showTimeId FOREIGN KEY(showtimeId) REFERENCES Showtimes(showtimeId)
 );
@@ -131,6 +132,15 @@ CREATE TABLE if not exists ticketsXshowtimes(
     showtimeId INT,
     CONSTRAINT pk_numberTicket FOREIGN KEY(numberTicket) REFERENCES Tickets(numberTicket),
     CONSTRAINT fk_showTimeId FOREIGN KEY(showtimeId) REFERENCES Showtimes(showtimeId) 
+);
+
+CREATE TABLE History(
+    date DATE,
+    idMember INT,
+    numberTicket INT,
+
+    CONSTRAINT fk_idMember FOREIGN KEY(idMember) REFERENCES members(idMember),
+    CONSTRAINT fk_idMember FOREIGN KEY(idMember) REFERENCES members(idMember)
 );
 
 #########OTRAS QUERIES#########

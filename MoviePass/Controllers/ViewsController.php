@@ -183,7 +183,7 @@ class ViewsController
         require_once(VIEWS_PATH . "showtimes.php");
     }
 
-    public static function ShowCartView($myCart){
+    public static function ShowCartView($message = ""/*$myCart*/){
         require_once(VIEWS_PATH.'listCart.php');
     }
 

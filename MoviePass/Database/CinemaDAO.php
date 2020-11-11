@@ -211,8 +211,6 @@
                 }else{
                     echo 'ACA MURIO CINEMADAO 211';
                 }
-                
-
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }
