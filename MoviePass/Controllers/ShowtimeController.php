@@ -55,13 +55,13 @@ class ShowtimeController
 
             //var_dump($existMovieInShowtime);
 
+            $cinemaIdOfShowtime;
             if(!empty($existMovieInShowtime)){
                 $cinemaIdOfShowtime = $this->showtimeDAO->GetCinemaIdxShowtimeId($existMovieInShowtime->GetId());
                 
             }
-                var_dump($cinemaIdOfShowtime);
-
-                if ( is_array($existMovieInShowtime) && empty($existMovieInShowtime)  || $cinemaId = $cinemaIdOfShowtime ){
+               
+                if ( is_array($existMovieInShowtime) && empty($existMovieInShowtime)  || $cinemaId == $cinemaIdOfShowtime ){
                 // ACA ESTARIA CUANDO LA PELICULA NO EXISTE EN NINGUNA SALA EN ESE DIA. ENTONCES LO PUEDO GUARDAR
                 // Verifico que la fecha ingresada sea mayor a hoy.
                 $now = date("Y-m-d");
