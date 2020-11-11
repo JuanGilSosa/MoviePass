@@ -31,9 +31,8 @@ class ShowtimeController
 
     public function AddShowtime($theatreId = "", $cinemaId = "", $movieId = "",  $releaseDate = "", $startTime = ""){
         $message = "";
-        // Verifico si la película no está en otra sala del cine
-        if (!empty($theatreId) && !empty($cinemaId) && empty($movieId) && empty($startTime) && empty($releaseDate)) {
-            //empty($startCartelera) && empty($endCartelera)
+
+        if (!empty($theatreId) && !empty($cinemaId) && empty($movieId) && empty($startTime) && empty($releaseDate)) {            
             // Acá estoy eligiendo la sala.
             $movieId = $cinemaId;
             $movie = $this->movieDAO->GetMovieById($movieId);
@@ -51,19 +50,19 @@ class ShowtimeController
 
             // LA PELICULA ESTÁ EN ALGÚN CINE ESE DÍA?
             $existShowtime = $this->showtimeDAO->GetShowtimeXMovie($movieId);
-            $existMovieInShowtime = $this->FindReleaseDate($existShowtime, $releaseDate);
-
-            //var_dump($existMovieInShowtime);
-
-            $cinemaIdOfShowtime;
-            if(!empty($existMovieInShowtime)){
-                $cinemaIdOfShowtime = $this->showtimeDAO->GetCinemaIdxShowtimeId($existMovieInShowtime->GetId());
-                
+            $wantedShowtime = $this->FindShowtimeXReleaseDate($existShowtime, $releaseDate);
+            
+            
+            $cinemaIdShowtime = -1;
+            if(!empty($wantedShowtime)){
+                $cinemaIdShowtime = $this->showtimeDAO->GetCinemaIdxShowtimeId($wantedShowtime->GetId());
             }
-               
-                if ( is_array($existMovieInShowtime) && empty($existMovieInShowtime)  || $cinemaId == $cinemaIdOfShowtime ){
+
+            
+            if ($wantedShowtime == array() || $cinemaIdShowtime == $cinemaId ){
                 // ACA ESTARIA CUANDO LA PELICULA NO EXISTE EN NINGUNA SALA EN ESE DIA. ENTONCES LO PUEDO GUARDAR
-                // Verifico que la fecha ingresada sea mayor a hoy.
+                // O LA FUNCION ESTA EN LA MISMA SALA EL MISMO DIA
+                // VERIFICO QUE LA FECHA INGRESADA SEA MAYOR A HOY.
                 $now = date("Y-m-d");
                 if ($releaseDate >= $now){
                     $runtime = $this->movieDAO->GetRuntime($movieId);
@@ -76,12 +75,10 @@ class ShowtimeController
                     $cinema = $this->cinemaDAO->GetCinemaById($cinemaId);
 
                     // AHORA TENGO QUE VERIFICAR LA HORA DE INICIO Y LA HORA DE FINAL
-                    // VERIFICAR SI LA SALA TIENE LA PELICULA
-                    
-                    
                     $checkTime = $this->CheckTime($cinemaId, $releaseDate, $startTime, $newEndTime);
-                   
-                   
+                    echo "Estoy en la 81"; 
+                    var_dump($checkTime);
+
                     if($checkTime == "ok"){
                         $showtime = new Showtime(0, $movie, $startTime, $endTime, $releaseDate, $cinema);
                         //var_dump($showtime);
@@ -105,8 +102,8 @@ class ShowtimeController
                         $message = "Función agregada con éxito";
                         $this->ShowShowtimes($message);
                     } else {
-                        // LA SALA NO ESTÁ DISPONIBLE
-                        $message = $checkTime; // PARA QUE NO CONFUNDIRNOS
+                        // LA SALA NO ESTÁ DISPONIBLE PORQUE FALLA LA VALIDACION DE TIEMPO.
+                        $message = $checkTime; // PARA QUE NO CONFUNDIRNOS IGUALO EL MENSAJE CON CHECKTIME.
                         ViewsController::ShowAddShowtimeView($message, $movieId, $theatre, $cinemas);
                     }
 
@@ -120,10 +117,10 @@ class ShowtimeController
                 $message = "La película ingresada ya se encuentra en una función el día ingresado.";
                 ViewsController::ShowAddShowtimeView($message, $movieId, $theatre, $cinemas);
             }
-        } 
+        }
     }
 
-    private function FindReleaseDate ($showtimes, $releaseDate) {
+    private function FindShowtimeXReleaseDate ($showtimes, $releaseDate) {
         if(!empty($showtimes) && is_array($showtimes)) {
             foreach ($showtimes as $showtime){
                 if($showtime->GetReleaseDate() == $releaseDate){
@@ -140,24 +137,28 @@ class ShowtimeController
 
     private function CheckTime($cinemaId, $releaseDate, $startTime, $newEndTime){
         
+        // SHOWTIMES nos da todas las funciones de la sala.
         $showtimes = $this->showtimeDAO->GetShowtime_showtimesxcinema($cinemaId);
         $messageCheckTime = "";
 
         if(!empty($showtimes)){
             if(is_array($showtimes)){
                 foreach ($showtimes as $showtime){
-                    
-                    //var_dump($showtime);
                     if($showtime->GetReleaseDate() == $releaseDate){
                         $endTime = $showtime->GetEndTime();
                         $newEndTimeShowtime = $this->AddMinutes($endTime);
                         // Verifico que la hora del final con los 15 minutos ya sumados sean menores a la hora de comienzo de la funcion
+                        
+                        echo "<br><br>";
+                        var_dump($startTime);
+                        var_dump($newEndTimeShowtime);
                         
                         if($startTime > $showtime->GetStartTime()){
                             if($startTime > $newEndTimeShowtime){
                                 $messageCheckTime = "ok";
                             } else {
                                 // HAY FUNCION EN CURSO
+                                
                                 $messageCheckTime = "El horario de comienzo no se encuentra disponible.";
                             }
                         } else if ($startTime < $showtime->GetStartTime()) {
@@ -174,12 +175,16 @@ class ShowtimeController
 
                             $messageCheckTime = "El horario de comienzo no se encuentra disponible.";
                         }
-                    } 
+                    } else {
+                        // SIGNIFICA QUE LA SALA TIENE FUNCIONES PERO NO PARA ESE DÍA. PUEDO GRABAR
+                        $messageCheckTime = "ok";
+                    }
                 } 
                 return $messageCheckTime;
             } else { // ES PORQUE HAY SOLAMENTE UNA FUNCION
-                
+             echo "<br><br> Estoy en la 197";   
                 if($showtimes->GetReleaseDate() == $releaseDate){
+                    echo "<br>Estoy en la 199";
                     $endTime = $showtimes->GetEndTime();
                     $newEndTimeShowtime = $this->AddMinutes($endTime);
                     // Verifico que la hora del final con los 15 minutos ya sumados sean menores a la hora de comienzo de la funcion
@@ -196,22 +201,25 @@ class ShowtimeController
                         if ($this->AddMinutes($endTime) < $showtimes->GetStartTime())
                         {
                             $messageCheckTime = "ok";
-
                         } else {
                             $messageCheckTime = "El horario de comienzo no se encuentra disponible.";
                         }
                         
                     } else{
-
                         $messageCheckTime = "El horario de comienzo no se encuentra disponible.";
                     }
-                } 
+                    
+                } else {
+                    $messageCheckTime = "ok";
+                }
                 return $messageCheckTime;
                
             }
         } else {
-            // NO HAY FUNCIONES ESE DIA EN LA SALA 
-            return "ok";
+            // NO HAY NINGUNA FUNCION PARA ESE DIA EN ESA SALA.
+            echo "226 NO HAY FUNCIONES PARA ESE DIA";
+            $messageCheckTime = "ok";
+            return $messageCheckTime;
         }
     }
 
@@ -228,42 +236,6 @@ class ShowtimeController
     {
         $newEndTime = date("H:i", strtotime($endTime) + (TIME_BETWEEN_MOVIES * 60));
         return $newEndTime;
-    }
-
-
-    // Compruebo que la pelicula no esté en las funciones de ninguna sala del cine.
-    private function PeliculaEnUnaSalaDelCine($theatre, $cinemas, $movie)
-    {
-        $movieId = $movie->GetId();
-
-        if (is_array($cinemas)) { // Si el cine tiene muchas salas
-            foreach ($cinemas as $cinema) {
-                $showtimes = $this->showtimeDAO->GetShowtime_showtimesxcinema($cinema->GetId());
-                if (is_array($showtimes)) {
-                    foreach ($showtimes as $showtime) {
-                        $movieIdShowtime = $showtime->GetMovie();
-                        if (!empty($movieId) && $movieIdShowtime == $movieId) {
-                            return "La película elegida ya se encuentra disponible en una sala del cine.";
-                            break;
-                        }
-                    }
-                } else {
-                    $movieIdShowtime = $showtimes->GetMovie();
-                    if (!empty($movieId) && $movieIdShowtime == $movieId) {
-                        return "La película elegida ya se encuentra disponible en una sala del cine.";
-                        break;
-                    }
-                }
-            }
-        } else { // Si hay solamente una sala en el cine
-            $showtimes = $this->showtimeDAO->GetShowtime_showtimesxcinema($cinemas->GetId());
-            if (isset($showtime)) {
-                $movieIdShowtime = $showtimes->GetMovie();
-                if (!empty($movieId) && $movieIdShowtime == $movieId) {
-                    return "La película elegida ya se encuentra disponible en la única sala del cine.";
-                }
-            }
-        }
     }
 
     public function ShowAddShowtime($movieId)
