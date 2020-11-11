@@ -76,10 +76,10 @@ class ShowtimeController
 
                     // AHORA TENGO QUE VERIFICAR LA HORA DE INICIO Y LA HORA DE FINAL
                     $checkTime = $this->CheckTime($cinemaId, $releaseDate, $startTime, $newEndTime);
-                    echo "Estoy en la 81"; 
-                    var_dump($checkTime);
+                    
 
                     if($checkTime == "ok"){
+                       
                         $showtime = new Showtime(0, $movie, $startTime, $endTime, $releaseDate, $cinema);
                         //var_dump($showtime);
                         $this->showtimeDAO->Add($showtime);
@@ -149,9 +149,7 @@ class ShowtimeController
                         $newEndTimeShowtime = $this->AddMinutes($endTime);
                         // Verifico que la hora del final con los 15 minutos ya sumados sean menores a la hora de comienzo de la funcion
                         
-                        echo "<br><br>";
-                        var_dump($startTime);
-                        var_dump($newEndTimeShowtime);
+                        
                         
                         if($startTime > $showtime->GetStartTime()){
                             if($startTime > $newEndTimeShowtime){
@@ -182,9 +180,9 @@ class ShowtimeController
                 } 
                 return $messageCheckTime;
             } else { // ES PORQUE HAY SOLAMENTE UNA FUNCION
-             echo "<br><br> Estoy en la 197";   
+               
                 if($showtimes->GetReleaseDate() == $releaseDate){
-                    echo "<br>Estoy en la 199";
+                    
                     $endTime = $showtimes->GetEndTime();
                     $newEndTimeShowtime = $this->AddMinutes($endTime);
                     // Verifico que la hora del final con los 15 minutos ya sumados sean menores a la hora de comienzo de la funcion
@@ -217,7 +215,6 @@ class ShowtimeController
             }
         } else {
             // NO HAY NINGUNA FUNCION PARA ESE DIA EN ESA SALA.
-            echo "226 NO HAY FUNCIONES PARA ESE DIA";
             $messageCheckTime = "ok";
             return $messageCheckTime;
         }
@@ -227,8 +224,6 @@ class ShowtimeController
 
     private function FindMovieInCinema ($movieId, $releaseDate){
         $showtime = $this->showtimeDAO->GetShowTimeXMovie($movieId, $releaseDate);
-        echo "Linea 128";
-        var_dump($showtime);
         return $showtime;
     }
 
