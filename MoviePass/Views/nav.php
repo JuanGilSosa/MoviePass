@@ -26,15 +26,15 @@
 
       <!-- Dropdown -->
       <?php #isset($_SESSION['userLogged']) 
-            if (isset($_SESSION['adminLogged'])){ ?>
+            if (SessionHelper::isSession('adminLogged')){ ?>
                 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">Admins</a>
           <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="<?php  echo FRONT_ROOT . "Admin/ShowAddView "?>">Agregar Cine</a>
-            <a class="dropdown-item" href="<?php  echo FRONT_ROOT . "Theatre/ShowTheatres"?>">Listar Cines</a>
-            <a class="dropdown-item" href="<?php echo FRONT_ROOT. "Movie/ShowMovies"?>">Lista Peliculas</a>
+            <a class="dropdown-item" href="<?php echo FRONT_ROOT . "Admin/ShowAddView"   ?>">Agregar Cine</a>
+            <a class="dropdown-item" href="<?php echo FRONT_ROOT . "Theatre/ShowTheatres"?>">Listar Cines</a>
+            <a class="dropdown-item" href="<?php echo FRONT_ROOT . "Movie/ShowMovies"     ?>">Lista Peliculas</a>
           </div>
         </li>
       <?php } ?>
@@ -51,7 +51,16 @@
         </a>
       </li>
 
-      <?php if (isset($_SESSION['userLogged']) || isset($_SESSION['adminLogged'])){ ?>
+      <?php if (SessionHelper::isSession('userLogged')){ ?>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo FRONT_ROOT.'Ticket/ShowTicketsOfMember?idMember='.SessionHelper::GetValue('userLogged')->GetId(); ?>">Mis Entradas</a>
+            </li>
+            <?php }elseif(SessionHelper::isSession('adminLogged')){ ?>
+              <li class="nav-item">
+                <a class="nav-link" href="<?php echo FRONT_ROOT.''?>">Ventas</a>
+              </li>
+            <?php } ?>
+      <?php if (SessionHelper::isSession('userLogged') || SessionHelper::isSession('adminLogged')){ ?>
               <li class="nav-item active">
                 <a class="nav-link js-scroll-trigger text-white" href="<?php echo FRONT_ROOT."Login/LogOut"?>">Cerrar Sesion</a>
               </li>

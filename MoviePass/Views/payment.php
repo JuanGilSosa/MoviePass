@@ -77,9 +77,9 @@ require_once('nav.php');
             
         </div>
 
-        <form class="text-center">
-                <div class="form-group" id="pay-now" action="<?php echo FRONT_ROOT . 'Cart/ShowTickets' ?>>">
-                    <button type="submit" class="btn btn-default" id="confirm-purchase">Confirmar</button>
+        <form class="text-center" action="<?php echo FRONT_ROOT . 'Cart/ConfirmPayment' ?>">
+                <div class="form-group" id="pay-now">
+                    <button name="confirmar" type="submit" class="btn btn-default" id="confirm-purchase">Confirmar</button>
                 </div>
         </form>
     </div>
