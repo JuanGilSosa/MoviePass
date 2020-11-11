@@ -130,6 +130,8 @@ CREATE TABLE if not exists ticketsXshowtimes(
     showtimeId INT,
     CONSTRAINT pk_numberTicket FOREIGN KEY(numberTicket) REFERENCES Tickets(numberTicket),
     CONSTRAINT fk_showTimeId__ FOREIGN KEY(showtimeId) REFERENCES Showtimes(showtimeId) 
+<<<<<<< HEAD
+=======
 );
 
 CREATE TABLE History(
@@ -139,6 +141,7 @@ CREATE TABLE History(
 
     CONSTRAINT fk_idMember FOREIGN KEY(idMember) REFERENCES members(idMember),
     CONSTRAINT fk_idMember FOREIGN KEY(idMember) REFERENCES members(idMember)
+>>>>>>> f4fc6adf10726cc3c7ea64a8ae763b88a3408a75
 );
 
 #########OTRAS QUERIES#########
