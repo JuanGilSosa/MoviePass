@@ -286,7 +286,7 @@ class ViewsController
         require_once(VIEWS_PATH . 'ticketsList.php');
     }
     
-    public static function ShowStatsTheatreView($total=0){
+    public static function ShowStatsTheatreView($total=0, $countOfTickets=0, $remainder=0){
         $theatreDAO = new TheatreDAO();
         $theatres = $theatreDAO->GetAllActive();
         require_once(VIEWS_PATH . 'statsTheatre.php');

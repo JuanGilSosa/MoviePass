@@ -28,7 +28,7 @@ require_once("nav.php");
                         <div class="form-group">
 
                             
-                                <select name="theatreId" class="form-control" required>
+                                <select name="theatreId" class="form-control" onchange="this.form.submit()" required>
                                     <option value="" selected disabled>Seleccione Cine</option>
                                     <?php
                                     if (is_array($theatres)) {
@@ -47,12 +47,19 @@ require_once("nav.php");
                     <div class="col-lg-6"></div>
                     <div class="col-lg-6">
                         <div class="form-group">                    
-                            <label for="">Total Vendido : </label>
-                            <input type="text" placeholder="0" value="<?php if(isset($total)){echo $total;}?>">
+                            <label for="">Total Ganancia : </label><br>
+                            <input disabled type="text" placeholder="0" value="<?php if(isset($total)){echo '$'.$total;}?>">
+                        </div>
+                        <div class="form-group">                    
+                            <label for="">Tickets Vendidos : </label><br>
+                            <input disabled type="text" placeholder="0" value="<?php if(isset($countOfTickets)){echo $countOfTickets;}?>">
+                        </div>
+                        <div class="form-group">                    
+                            <label for="">Remanente Entradas : </label><br>
+                            <input disabled type="text" placeholder="0" value="<?php if(isset($remainder)){echo $remainder;}?>">
                         </div>
                     </div>
                 </div>
-                <button type="submit" name="button" class="btn btn-light ml-auto d-block">Consultar</button>
             </form>
         </div>
     </section>

@@ -265,16 +265,21 @@ class TheatreController
     }
 
     public function Stats($theatreId){
+
         $cinemas = $this->cinemaDAO->GetCinemasByTheatreId($theatreId);
         $total = 0;
         $subTotal = 0;
         $countOfTickets = 0;
         $price = 0;
+        $totalCapacity = 0;
+        $remainder = 0;
+
         if(is_array($cinemas) && !empty($cinemas)){
-
+            
             foreach ($cinemas as $cinema) {
+                
                 $showtime = $this->showtimeDAO->GetShowtime_showtimesxcinema($cinema->GetId());
-
+                
                 if(is_array($showtime) && !empty($showtime)){
                     $price = $cinema->GetPrice();
                     foreach($showtime as $s){
@@ -283,12 +288,13 @@ class TheatreController
 
                     $subTotal=($price*$countOfTickets);
                     $total+=$subTotal;
-                    
+                    $totalCapacity+=$cinema->GetCapacity();
                 }elseif(is_object($showtime) && !empty($showtime)){
                     $price = $cinema->GetPrice();
                     $countOfTickets+=$this->ticketDAO->GetTicketByIdShowtime($showtime->GetId());
                     $subTotal=($price*$countOfTickets);
                     $total+=$subTotal;
+                    $totalCapacity+=$cinema->GetCapacity();
                 }
             }
         }elseif(is_object($cinemas) && !empty($cinemas)){
@@ -300,14 +306,17 @@ class TheatreController
                 }
                 $subTotal=($price*$countOfTickets);
                 $total+=$subTotal;
+                $totalCapacity+=$cinemas->GetCapacity();
                 
             }elseif(is_object($showtime) && !empty($showtime)){
                 $price = $cinemas->GetPrice();
                 $countOfTickets+=$this->ticketDAO->GetTicketByIdShowtime($showtime->GetId());
                 $subTotal=($price*$countOfTickets);
                 $total+=$subTotal;
+                $totalCapacity+=$cinemas->GetCapacity();
             }
         }
-        ViewsController::ShowStatsTheatreView($total);
+        $remainder=$totalCapacity - $countOfTickets;
+        ViewsController::ShowStatsTheatreView($total, $countOfTickets, $remainder);
     }
 }
