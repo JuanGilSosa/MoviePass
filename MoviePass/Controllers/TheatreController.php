@@ -10,7 +10,8 @@ use Database\CityDAO as CityDAO;
 use Database\ProvinceDAO as ProvinceDAO;
 use Database\CountryDAO as CountryDAO;
 use Database\CinemaDAO as CinemaDAO;
-
+use Database\ShowtimesDAO as ShowtimesDAO;
+use Database\TicketDAO as TicketDAO;
 use PDOException as PDOException;
 
 
@@ -24,7 +25,8 @@ class TheatreController
     private $cityDAO;
     private $provinceDAO;
     private $countryDAO;
-
+    private $showtimeDAO;
+    private $ticketDAO;
     public function __construct()
     {
         $this->theatreDAO = new TheatreDAO();
@@ -33,6 +35,8 @@ class TheatreController
         $this->cityDAO = new CityDAO();
         $this->provinceDAO = new ProvinceDAO();
         $this->countryDAO = new CountryDAO();
+        $this->showtimeDAO = new ShowtimesDAO();
+        $this->ticketDAO = new TicketDAO();
     }
 
     public function ViewAddTheatre($message = "")
@@ -254,5 +258,56 @@ class TheatreController
         $mappedTheatre->GetAdress()->GetCity()->GetProvince()->SetCountry($objPais);
 
         return $mappedTheatre;
+    }
+    
+    public function ShowStatsTheatre(){
+        ViewsController::ShowStatsTheatreView();
+    }
+
+    public function Stats($theatreId){
+        $cinemas = $this->cinemaDAO->GetCinemasByTheatreId($theatreId);
+        $total = 0;
+        $subTotal = 0;
+        $countOfTickets = 0;
+        $price = 0;
+        if(is_array($cinemas) && !empty($cinemas)){
+
+            foreach ($cinemas as $cinema) {
+                $showtime = $this->showtimeDAO->GetShowtime_showtimesxcinema($cinema->GetId());
+
+                if(is_array($showtime) && !empty($showtime)){
+                    $price = $cinema->GetPrice();
+                    foreach($showtime as $s){
+                        $countOfTickets+=$this->ticketDAO->GetTicketByIdShowtime($s->GetId());
+                    }
+
+                    $subTotal=($price*$countOfTickets);
+                    $total+=$subTotal;
+                    
+                }elseif(is_object($showtime) && !empty($showtime)){
+                    $price = $cinema->GetPrice();
+                    $countOfTickets+=$this->ticketDAO->GetTicketByIdShowtime($showtime->GetId());
+                    $subTotal=($price*$countOfTickets);
+                    $total+=$subTotal;
+                }
+            }
+        }elseif(is_object($cinemas) && !empty($cinemas)){
+            $showtime = $this->showtimeDAO->GetShowtime_showtimesxcinema($cinemas->GetId());
+            if(is_array($showtime) && !empty($showtime)){
+                $price = $cinemas->GetPrice();
+                foreach($showtime as $s){
+                    $countOfTickets+=$this->ticketDAO->GetTicketByIdShowtime($s->GetId());
+                }
+                $subTotal=($price*$countOfTickets);
+                $total+=$subTotal;
+                
+            }elseif(is_object($showtime) && !empty($showtime)){
+                $price = $cinemas->GetPrice();
+                $countOfTickets+=$this->ticketDAO->GetTicketByIdShowtime($showtime->GetId());
+                $subTotal=($price*$countOfTickets);
+                $total+=$subTotal;
+            }
+        }
+        ViewsController::ShowStatsTheatreView($total);
     }
 }

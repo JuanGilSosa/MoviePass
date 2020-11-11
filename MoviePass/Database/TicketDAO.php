@@ -96,6 +96,17 @@
             }
         }
 
+        function GetTicketByIdShowtime($idShowtime){
+            try {
+                $con = Connection::getInstance();
+                $query = 'SELECT sum(numbersOfTickets) FROM tickets as t WHERE t.showtimeId = :showtimeId';
+                $params['showtimeId'] = $idShowtime;
+                $countTickets = $con->execute($query, $params); 
+                return (!empty($countTickets)) ? $countTickets[0][0] : array();
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
 
     }
 ?>
