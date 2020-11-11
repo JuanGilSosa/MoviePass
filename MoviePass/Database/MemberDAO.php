@@ -59,5 +59,18 @@
             },$value);
             return count($resp)>1 ? $resp : $resp[0];
         }
+
+        public function GetMemberByEmail($email){
+            try{
+                $con = Connection::getInstance();
+                $query = 'SELECT * FROM members WHERE email = :email;';
+                $params['email'] = $email;
+                $array = $con->execute($query, $params);
+                
+                return (!empty($array)) ? $this->mapping($array) : array();
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
+        }
     }
 ?>

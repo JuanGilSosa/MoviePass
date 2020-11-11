@@ -194,7 +194,17 @@ class ViewsController
     }
 
     public static function ShowCartView($message = ""/*$myCart*/){
+        $theatreDAO = new TheatreDAO();
+
         require_once(VIEWS_PATH.'listCart.php');
+    }
+
+    public static function ShowProcessOrderView(){
+        require_once(VIEWS_PATH.'payment.php');
+    }
+
+    public static function ShowTicketsListView($tickets, $message = ""){
+        require_once(VIEWS_PATH.'ticketsList.php');
     }
 
 }

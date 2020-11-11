@@ -29,10 +29,11 @@ class ShowtimeController
         $this->genreDAO = new GenreDAO();
     }
 
-    public function AddShowtime($theatreId = "", $cinemaId = "", $movieId = "",  $releaseDate = "", $startTime = ""){
+    public function AddShowtime($theatreId = "", $cinemaId = "", $movieId = "",  $releaseDate = "", $startTime = "")
+    {
         $message = "";
 
-        if (!empty($theatreId) && !empty($cinemaId) && empty($movieId) && empty($startTime) && empty($releaseDate)) {            
+        if (!empty($theatreId) && !empty($cinemaId) && empty($movieId) && empty($startTime) && empty($releaseDate)) {
             // Acá estoy eligiendo la sala.
             $movieId = $cinemaId;
             $movie = $this->movieDAO->GetMovieById($movieId);
@@ -51,35 +52,35 @@ class ShowtimeController
             // LA PELICULA ESTÁ EN ALGÚN CINE ESE DÍA?
             $existShowtime = $this->showtimeDAO->GetShowtimeXMovie($movieId);
             $wantedShowtime = $this->FindShowtimeXReleaseDate($existShowtime, $releaseDate);
-            
-            
+
+
             $cinemaIdShowtime = -1;
-            if(!empty($wantedShowtime)){
+            if (!empty($wantedShowtime)) {
                 $cinemaIdShowtime = $this->showtimeDAO->GetCinemaIdxShowtimeId($wantedShowtime->GetId());
             }
 
-            
-            if ($wantedShowtime == array() || $cinemaIdShowtime == $cinemaId ){
+
+            if ($wantedShowtime == array() || $cinemaIdShowtime == $cinemaId) {
                 // ACA ESTARIA CUANDO LA PELICULA NO EXISTE EN NINGUNA SALA EN ESE DIA. ENTONCES LO PUEDO GUARDAR
                 // O LA FUNCION ESTA EN LA MISMA SALA EL MISMO DIA
                 // VERIFICO QUE LA FECHA INGRESADA SEA MAYOR A HOY.
                 $now = date("Y-m-d");
-                if ($releaseDate >= $now){
+                if ($releaseDate >= $now) {
                     $runtime = $this->movieDAO->GetRuntime($movieId);
                     $startTimeSeconds = strtotime($startTime);
                     $runtimeSeconds = $runtime * 60;
                     $endTime = date("H:i", $startTimeSeconds + $runtimeSeconds);
                     $newEndTime = $this->AddMinutes($endTime);
-                   
+
                     $theatre = $this->theatreDAO->GetTheatreById($theatreId);
                     $cinema = $this->cinemaDAO->GetCinemaById($cinemaId);
 
                     // AHORA TENGO QUE VERIFICAR LA HORA DE INICIO Y LA HORA DE FINAL
                     $checkTime = $this->CheckTime($cinemaId, $releaseDate, $startTime, $newEndTime);
-                    
 
-                    if($checkTime == "ok"){
-                       
+
+                    if ($checkTime == "ok") {
+
                         $showtime = new Showtime(0, $movie, $startTime, $endTime, $releaseDate, $cinema);
                         //var_dump($showtime);
                         $this->showtimeDAO->Add($showtime);
@@ -106,70 +107,68 @@ class ShowtimeController
                         $message = $checkTime; // PARA QUE NO CONFUNDIRNOS IGUALO EL MENSAJE CON CHECKTIME.
                         ViewsController::ShowAddShowtimeView($message, $movieId, $theatre, $cinemas);
                     }
-
                 } else {
                     $now = date("d-m-Y");
                     $message = "La fecha de comienzo no puede ser anterior a: " . $now;
                     ViewsController::ShowAddShowtimeView($message, $movieId, $theatre, $cinemas);
-                }   
+                }
             } else {
-                
+
                 $message = "La película ingresada ya se encuentra en una función el día ingresado.";
                 ViewsController::ShowAddShowtimeView($message, $movieId, $theatre, $cinemas);
             }
         }
     }
 
-    private function FindShowtimeXReleaseDate ($showtimes, $releaseDate) {
-        if(!empty($showtimes) && is_array($showtimes)) {
-            foreach ($showtimes as $showtime){
-                if($showtime->GetReleaseDate() == $releaseDate){
+    private function FindShowtimeXReleaseDate($showtimes, $releaseDate)
+    {
+        if (!empty($showtimes) && is_array($showtimes)) {
+            foreach ($showtimes as $showtime) {
+                if ($showtime->GetReleaseDate() == $releaseDate) {
                     return $showtime;
                 }
-            } 
+            }
         } else if (!empty($showtimes)) {
-            if($showtimes->GetReleaseDate() == $releaseDate)
+            if ($showtimes->GetReleaseDate() == $releaseDate)
                 return $showtimes;
         } else {
             return array();
         }
     }
 
-    private function CheckTime($cinemaId, $releaseDate, $startTime, $newEndTime){
-        
+    private function CheckTime($cinemaId, $releaseDate, $startTime, $newEndTime)
+    {
+
         // SHOWTIMES nos da todas las funciones de la sala.
         $showtimes = $this->showtimeDAO->GetShowtime_showtimesxcinema($cinemaId);
         $messageCheckTime = "";
 
-        if(!empty($showtimes)){
-            if(is_array($showtimes)){
-                foreach ($showtimes as $showtime){
-                    if($showtime->GetReleaseDate() == $releaseDate){
+        if (!empty($showtimes)) {
+            if (is_array($showtimes)) {
+                foreach ($showtimes as $showtime) {
+                    if ($showtime->GetReleaseDate() == $releaseDate) {
                         $endTime = $showtime->GetEndTime();
                         $newEndTimeShowtime = $this->AddMinutes($endTime);
                         // Verifico que la hora del final con los 15 minutos ya sumados sean menores a la hora de comienzo de la funcion
-                        
-                        
-                        
-                        if($startTime > $showtime->GetStartTime()){
-                            if($startTime > $newEndTimeShowtime){
+
+
+
+                        if ($startTime > $showtime->GetStartTime()) {
+                            if ($startTime > $newEndTimeShowtime) {
                                 $messageCheckTime = "ok";
                             } else {
                                 // HAY FUNCION EN CURSO
-                                
+
                                 $messageCheckTime = "El horario de comienzo no se encuentra disponible.";
                             }
                         } else if ($startTime < $showtime->GetStartTime()) {
 
-                            if ($this->AddMinutes($endTime) < $showtime->GetStartTime())
-                            {
+                            if ($this->AddMinutes($endTime) < $showtime->GetStartTime()) {
                                 $messageCheckTime = "ok";
-
                             } else {
                                 $messageCheckTime = "El horario de comienzo no se encuentra disponible.";
                             }
-                            
-                        } else{
+                        } else {
 
                             $messageCheckTime = "El horario de comienzo no se encuentra disponible.";
                         }
@@ -177,18 +176,18 @@ class ShowtimeController
                         // SIGNIFICA QUE LA SALA TIENE FUNCIONES PERO NO PARA ESE DÍA. PUEDO GRABAR
                         $messageCheckTime = "ok";
                     }
-                } 
+                }
                 return $messageCheckTime;
             } else { // ES PORQUE HAY SOLAMENTE UNA FUNCION
-               
-                if($showtimes->GetReleaseDate() == $releaseDate){
-                    
+
+                if ($showtimes->GetReleaseDate() == $releaseDate) {
+
                     $endTime = $showtimes->GetEndTime();
                     $newEndTimeShowtime = $this->AddMinutes($endTime);
                     // Verifico que la hora del final con los 15 minutos ya sumados sean menores a la hora de comienzo de la funcion
-                    
-                    if($startTime > $showtimes->GetStartTime()){
-                        if($startTime > $newEndTimeShowtime){
+
+                    if ($startTime > $showtimes->GetStartTime()) {
+                        if ($startTime > $newEndTimeShowtime) {
                             $messageCheckTime = "ok";
                         } else {
                             // HAY FUNCION EN CURSO
@@ -196,22 +195,18 @@ class ShowtimeController
                         }
                     } else if ($startTime < $showtimes->GetStartTime()) {
 
-                        if ($this->AddMinutes($endTime) < $showtimes->GetStartTime())
-                        {
+                        if ($this->AddMinutes($endTime) < $showtimes->GetStartTime()) {
                             $messageCheckTime = "ok";
                         } else {
                             $messageCheckTime = "El horario de comienzo no se encuentra disponible.";
                         }
-                        
-                    } else{
+                    } else {
                         $messageCheckTime = "El horario de comienzo no se encuentra disponible.";
                     }
-                    
                 } else {
                     $messageCheckTime = "ok";
                 }
                 return $messageCheckTime;
-               
             }
         } else {
             // NO HAY NINGUNA FUNCION PARA ESE DIA EN ESA SALA.
@@ -220,12 +215,13 @@ class ShowtimeController
         }
     }
 
-    private function FindMovieInCinema ($movieId, $releaseDate){
+    private function FindMovieInCinema($movieId, $releaseDate)
+    {
         $showtime = $this->showtimeDAO->GetShowTimeXMovie($movieId, $releaseDate);
         return $showtime;
     }
 
-    private function AddMinutes ($endTime)
+    private function AddMinutes($endTime)
     {
         $newEndTime = date("H:i", strtotime($endTime) + (TIME_BETWEEN_MOVIES * 60));
         return $newEndTime;
@@ -258,12 +254,13 @@ class ShowtimeController
         $theatreController = new TheatreController();
 
         $theatres = $this->theatreDAO->GetAllActive();
+
         $theatreAux = array();
         #$arrFunc = array();
+
         if (is_array($theatres) && !empty($theatres)) {
 
             foreach ($theatres as $theatre) {
-
                 $theatre = $theatreController->CreateCine($theatre);
                 $roomAux = $this->cinemaDAO->GetCinemasByTheatreId($theatre->GetId()); #no verifico nada porque sea lo que sea, se va a setear en las salas del theatre
                 $theatre->SetCinemas($roomAux);
@@ -274,20 +271,24 @@ class ShowtimeController
                     $func = $this->showtimeDAO->GetShowtime_showtimesxcinema($roomAux->GetId());
 
                     if (!is_array($func) && !empty($func)) {
-                        $movie = $this->movieDAO->GetMovieById($func->GetMovie());
-                        $func->SetCinema($roomAux);
-                        $func->SetMovie($movie);
-                        $objBillboard->PushShowtime($func);
-                        #array_push($arrFunc, $func);
-
+                        
+                            $movie = $this->movieDAO->GetMovieById($func->GetMovie());
+                            $func->SetCinema($roomAux);
+                            $func->SetMovie($movie);
+                            $objBillboard->PushShowtime($func);
+                            #array_push($arrFunc, $func);
+                        
                     } elseif (is_array($func) && !empty($func)) {
 
                         foreach ($func as $f) {
-                            $movie = $this->movieDAO->GetMovieById($f->GetMovie());
-                            $f->SetMovie($movie);
-                            $f->SetCinema($roomAux);
-                            $objBillboard->PushShowtime($f);
-                            #array_push($arrFunc, $f);
+                                                      
+                            
+                                $movie = $this->movieDAO->GetMovieById($f->GetMovie());
+                                $f->SetMovie($movie);
+                                $f->SetCinema($roomAux);
+                                $objBillboard->PushShowtime($f);
+                                #array_push($arrFunc, $f);
+                            
                         }
                     }
                 } elseif (is_array($roomAux) && !empty($roomAux)) {
@@ -313,11 +314,11 @@ class ShowtimeController
                             }
                         }
                     }
-                }
 
-                #$objBillboard->setFunctions($arrFunc);
-                $theatre->SetBillboard($objBillboard);
-                array_push($theatreAux, $theatre);
+                    #$objBillboard->setFunctions($arrFunc);
+                    $theatre->SetBillboard($objBillboard);
+                    array_push($theatreAux, $theatre);
+                }
             }
         } else {
 
@@ -381,4 +382,5 @@ class ShowtimeController
         }
         ViewsController::ShowShowtimesView($message, $theatreAux);
     }
+
 }
