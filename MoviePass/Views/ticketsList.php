@@ -34,15 +34,26 @@ require_once('nav.php');
                 </thead>
                 <tbody>
                 <?php foreach($tickets as $index=>$ticket){
-                            $movie = $ticket->GetMovie();
-                            $showtime = $ticket->GetShowtime();
+                            if($ticket->GetNumberOfTickets() == 1){
+                                $showtime = $ticket->GetShowtime();
+                                $movie = $showtime->GetMovie();
                 ?>
                     <tr>
-                        <td><?php echo $ticket->SetNumberTicket();    ?></td>
+                        <td><?php echo $ticket->GetNumberTicket();    ?></td>
                         <td><?php echo $movie->GetTitle();             ?></td>
                         <td><?php echo $showtime->GetReleaseDate();?></td>
                     </tr>
-                    <?php }?>
+                    <?php }elseif($ticket->GetNumberOfTickets() > 1){
+                                for($i = 0 ; $i<$ticket->GetNumberOfTickets();$i+=1){
+                                    $showtime = $ticket->GetShowtime();
+                                    $movie = $showtime->GetMovie();
+                                ?>
+                                    <tr>
+                                        <td><?php echo $ticket->GetNumberTicket();    ?></td>
+                                        <td><?php echo $movie->GetTitle();             ?></td>
+                                        <td><?php echo $showtime->GetReleaseDate();?></td>
+                                    </tr> 
+                            <?php }}}?>
                 </tbody>
             </table>
         </div>
