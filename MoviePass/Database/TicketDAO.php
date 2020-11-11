@@ -2,13 +2,15 @@
 
     use Models\Shopping\Ticket as Ticket;
 
+    use PDOException as PDOException;
+
     class TicketDAO implements ITicketDAO{
 
         function GetAll(){
             try {
                 $con = Connection::getInstance();
                 $query = 'SELECT * FROM tickets;';
-                $tickets = $con->execute($query, $params); 
+                $tickets = $con->execute($query); 
                 return (!empty($tickets)) ? $this->mapping($tickets) : array();
             } catch (PDOException $e) {
                 echo $e->getMessage();
@@ -39,9 +41,9 @@
         function mapping($value){
             $value = is_array($value) ? $value : [];
             $ans = array_map(function($p){
-                $t =  new Ticket($p['numberTicket'],$p['showtimeId']);
-                $t->SetNumberOfTickets(intval($p['numbersOfTickets']));
-                return $t;
+                $ticket =  new Ticket($p['numberTicket'],$p['showtimeId']);
+                $ticket->SetAmountOfTickets(intval($p['numbersOfTickets']));
+                return $ticket;
             },$value);
             return (count($ans)>1) ? $ans : $ans[0];
         }
@@ -78,7 +80,7 @@
             try {
                 $con = Connection::getInstance();
                 $query = 'SELECT max(numberTicket) FROM tickets;';
-                $tickets = $con->execute($query, $params); 
+                $tickets = $con->execute($query); 
                 return (!empty($tickets)) ? $this->mapping($tickets) : array();
             } catch (PDOException $e) {
                 echo $e->getMessage();

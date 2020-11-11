@@ -44,7 +44,7 @@
                         SessionHelper::SetOnIndex('CART',0,new Ticket(0,$showTime));#$_SESSION['CART'][0] = $myTicket;
                     }else{
                         $length = SessionHelper::LengthOfKey('CART');
-                        SessionHelper::SetOnIndex('CART',intval($length),new Ticket($length,$showTime));#$_SESSION['CART'][$length] = $myTicket;
+                        SessionHelper::SetOnIndex('CART',intval($length),new Ticket(0,$showTime));#$_SESSION['CART'][$length] = $myTicket;
                     }
                 }
                 $showTimeController = new ShowtimeController();
