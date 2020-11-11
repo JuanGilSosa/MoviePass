@@ -122,6 +122,7 @@ CREATE TABLE if not exists  members(
 CREATE TABLE if not exists Tickets(
     numberTicket INT NOT NULL AUTO_INCREMENT,
     showtimeId INT,
+    numbersOfTickets INT,
     CONSTRAINT pk_numberTicket PRIMARY KEY(numberTicket),
     CONSTRAINT fk_showTimeId FOREIGN KEY(showtimeId) REFERENCES Showtimes(showtimeId)
 );

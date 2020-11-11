@@ -106,7 +106,10 @@
         }
 
         public function ProcessOrder(){
-            
+            if(SessionHelper::isSession('CART')){
+                $cart = SessionHelper::GetValue('CART');
+                    
+            }
         }
 
     }
