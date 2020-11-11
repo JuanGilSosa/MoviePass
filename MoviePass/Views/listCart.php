@@ -356,11 +356,11 @@
 
                     <thead>
                          <tr>
-                              <th class="th-sm">Funcion(peli)
+                              <th class="th-sm">Funcion
+                              </th>
+                              <th class="th-sm">Cine | Sala
                               </th>
                               <th class="th-sm">Fecha Y Hora
-                              </th>
-                              <th class="th-sm">Sala & Cine
                               </th>
                               <th class="th-sm">Cantidad
                               </th>
@@ -378,12 +378,15 @@
                         $cinema = $showtime->GetCinema();
                         $movie = $showtime->GetMovie();
                         $titleMovie = $movie->GetTitle();
+                        $theatre = $theatreDAO->GetTheatreByCinemaId_cinemasXtheatres($cinema->GetId());
+                        
+
                         
                         ?>
                         <tr>
                             <td><?php echo $movie->GetTitle(); ?></td>
+                            <td><?php echo  $theatre->GetName() .' | ' . $cinema->GetName(); ?></td>
                             <td><?php echo $showtime->GetReleaseDate().'--'.$showtime->GetStartTime(); ?></td>
-                            <td><?php echo $cinema->GetName().'|'; ?></td>
                             
                             <td>
                             <button class=""><i class="far fa-minus-square"></i></button>
@@ -406,12 +409,12 @@
                     </tr>
                     </tbody>
                </table>
-               <div class="btn-group">
-                <form action="<?php echo FRONT_ROOT.'Cart/EmtpyCart'; ?>" method="POST">
-                        <button type="submit" value="" class="btn btn-secondary btn-info w-20" name="empty">VACIAR CARRITO</button>
+               <div class="btn-group " >
+                <form action="<?php echo FRONT_ROOT.'Cart/EmtpyCart'; ?>" method="POST" >
+                        <button type="submit" value="" class="btn btn-secondary btn-info w-30 h-100" name="empty">VACIAR CARRITO</button>
                     </form>
                     <form action="<?php echo FRONT_ROOT.'Cart/ProcessOrder'; ?>" method="POST">
-                        <button type="submit" value="" class="btn btn-light-green" name="start-buy">INICIAR COMPRA</button>
+                        <button type="submit" value="" class="btn btn-light-green h-100" name="start-buy">INICIAR COMPRA</button>
                     </form>
                 </div>
           </div>
