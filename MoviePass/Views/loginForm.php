@@ -88,7 +88,7 @@
 
           <!--Header-->
           <div class="modal-header">
-            <img src="https://pbs.twimg.com/profile_images/618130306307104768/InYJ1cJH_400x400.jpg" alt="avatar" class="rounded-circle img-responsive">
+          <img src="https://cdn3.iconfinder.com/data/icons/business-295/96/42-512.png" alt="avatar" class="rounded-circle img-responsive" >
           </div>
           <!--Body-->
           <div class="modal-body text-center mb-1">
