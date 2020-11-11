@@ -41,11 +41,13 @@
 
       <li class="nav-item">
         <a class="nav-link" href="<?php echo FRONT_ROOT.'Cart/ShowCart'?>">
-            Carrito(
+            Carrito 
               <?php 
-                echo (!SessionHelper::isSession('CART')) ? 0 : (SessionHelper::LengthOfKey('CART'));                                                              
+                echo '(';
+                echo (!SessionHelper::isSession('CART')) ? 0 : (SessionHelper::LengthOfKey('CART'));
+                echo ')';                                                              
               ?>
-            )
+            
         </a>
       </li>
 
