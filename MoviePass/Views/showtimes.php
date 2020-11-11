@@ -22,9 +22,8 @@
 
         <?php
 
-        foreach ($billboards as $billboard) {
-            if (!empty($billboard->GetShowtime())) {
-                foreach ($billboard->GetShowtime() as $showtime) {
+  
+                foreach ($billboards as $showtime) {
                     if (!empty($showtime) && !empty($showtime->GetMovie())) {
                         $cinema = $showtime->GetCinema();
                         $theatre = $theatreDAO->GetTheatreByCinemaId_cinemasXtheatres($cinema->GetId());
@@ -74,8 +73,8 @@
                 <?php
                     }
                 }
-            } 
-        } ?>
+            
+        ?>
 
 
     </div>

@@ -251,10 +251,6 @@ class ShowtimeController
 
     public function ShowShowtimes($message = "")
     {
-
-        $now = date("Y-m-d");
-        $oneWeekMore = date("Y-m-d", strtotime($now . "+1week"));
-
         $theatreController = new TheatreController();
 
         $theatres = $this->theatreDAO->GetAllActive();
@@ -265,9 +261,6 @@ class ShowtimeController
         if (is_array($theatres) && !empty($theatres)) {
 
             foreach ($theatres as $theatre) {
-
-               
-
                 $theatre = $theatreController->CreateCine($theatre);
                 $roomAux = $this->cinemaDAO->GetCinemasByTheatreId($theatre->GetId()); #no verifico nada porque sea lo que sea, se va a setear en las salas del theatre
                 $theatre->SetCinemas($roomAux);
@@ -278,24 +271,24 @@ class ShowtimeController
                     $func = $this->showtimeDAO->GetShowtime_showtimesxcinema($roomAux->GetId());
 
                     if (!is_array($func) && !empty($func)) {
-                        if ($func->GetReleaseDate() >= $now && $func->GetReleaseDate() <= $oneWeekMore) {
+                        
                             $movie = $this->movieDAO->GetMovieById($func->GetMovie());
                             $func->SetCinema($roomAux);
                             $func->SetMovie($movie);
                             $objBillboard->PushShowtime($func);
                             #array_push($arrFunc, $func);
-                        }
+                        
                     } elseif (is_array($func) && !empty($func)) {
 
                         foreach ($func as $f) {
                                                       
-                            if ($f->GetReleaseDate() >= $now && $f->GetReleaseDate() <= $oneWeekMore) {
+                            
                                 $movie = $this->movieDAO->GetMovieById($f->GetMovie());
                                 $f->SetMovie($movie);
                                 $f->SetCinema($roomAux);
                                 $objBillboard->PushShowtime($f);
                                 #array_push($arrFunc, $f);
-                            }
+                            
                         }
                     }
                 } elseif (is_array($roomAux) && !empty($roomAux)) {
@@ -304,23 +297,20 @@ class ShowtimeController
                         $func = $this->showtimeDAO->GetShowtime_showtimesxcinema($cinema->GetId());
 
                         if (!is_array($func) && !empty($func)) {
-                            if ($func->GetReleaseDate() >= $now && $func->GetReleaseDate() <= $oneWeekMore) {
-                                $movie = $this->movieDAO->GetMovieById($func->GetMovie());
-                                $func->SetMovie($movie);
-                                $func->SetCinema($cinema);
-                                $objBillboard->PushShowtime($func);
-                                #array_push($arrFunc, $func);
-                            }
+                            $movie = $this->movieDAO->GetMovieById($func->GetMovie());
+                            $func->SetMovie($movie);
+                            $func->SetCinema($cinema);
+                            $objBillboard->PushShowtime($func);
+                            #array_push($arrFunc, $func);
+
                         } elseif (is_array($func) && !empty($func)) {
 
                             foreach ($func as $f) {
-                                if ($f->GetReleaseDate() >= $now && $f->GetReleaseDate() <= $oneWeekMore) {
-                                    $movie = $this->movieDAO->GetMovieById($f->GetMovie());
-                                    $f->SetMovie($movie);
-                                    $f->SetCinema($cinema);
-                                    $objBillboard->PushShowtime($f);
-                                    #array_push($arrFunc, $f);
-                                }
+                                $movie = $this->movieDAO->GetMovieById($f->GetMovie());
+                                $f->SetMovie($movie);
+                                $f->SetCinema($cinema);
+                                $objBillboard->PushShowtime($f);
+                                #array_push($arrFunc, $f);
                             }
                         }
                     }
@@ -344,23 +334,20 @@ class ShowtimeController
                     $func = $this->showtimeDAO->GetShowtime_showtimesxcinema($roomAux->GetId());
 
                     if (!is_array($func) && !empty($func)) {
-                        if ($func->GetReleaseDate() >= $now && $func->GetReleaseDate() <= $oneWeekMore) {
-                            $movie = $this->movieDAO->GetMovieById($func->GetMovie());
-                            $func->SetMovie($movie);
-                            $func->SetCinema($roomAux);
-                            $objBillboard->PushShowtime($func);
-                            #array_push($arrFunc, $func);
-                        }
+                        $movie = $this->movieDAO->GetMovieById($func->GetMovie());
+                        $func->SetMovie($movie);
+                        $func->SetCinema($roomAux);
+                        $objBillboard->PushShowtime($func);
+                        #array_push($arrFunc, $func);
+
                     } elseif (is_array($func) && !empty($func)) {
 
                         foreach ($func as $f) {
-                            if ($f->GetReleaseDate() >= $now && $f->GetReleaseDate() <= $oneWeekMore) {
-                                $movie = $this->movieDAO->GetMovieById($f->GetMovie());
-                                $f->SetMovie($movie);
-                                $f->SetCinema($roomAux);
-                                $objBillboard->PushShowtime($f);
-                                #array_push($arrFunc, $f);
-                            }
+                            $movie = $this->movieDAO->GetMovieById($f->GetMovie());
+                            $f->SetMovie($movie);
+                            $f->SetCinema($roomAux);
+                            $objBillboard->PushShowtime($f);
+                            #array_push($arrFunc, $f);
                         }
                     }
                 } elseif (!empty($roomAux) && is_array($roomAux)) {
@@ -369,23 +356,20 @@ class ShowtimeController
                         $func = $this->showtimeDAO->GetShowtime_showtimesxcinema($cinema->GetId());
 
                         if (!is_array($func) && !empty($func)) {
-                            if ($func->GetReleaseDate() >= $now && $func->GetReleaseDate() <= $oneWeekMore) {
-                                $movie = $this->movieDAO->GetMovieById($func->GetMovie());
-                                $func->SetMovie($movie);
-                                $func->SetCinema($cinema);
-                                $objBillboard->PushShowtime($func);
-                                #array_push($arrFunc, $func);
-                            }
+                            $movie = $this->movieDAO->GetMovieById($func->GetMovie());
+                            $func->SetMovie($movie);
+                            $func->SetCinema($cinema);
+                            $objBillboard->PushShowtime($func);
+                            #array_push($arrFunc, $func);
+
                         } elseif (is_array($func) && !empty($func)) {
 
                             foreach ($func as $f) {
-                                if ($f->GetReleaseDate() >= $now && $f->GetReleaseDate() <= $oneWeekMore) {
-                                    $movie = $this->movieDAO->GetMovieById($f->GetMovie());
-                                    $f->SetMovie($movie);
-                                    $f->SetCinema($cinema);
-                                    $objBillboard->PushShowtime($f);
-                                    #array_push($arrFunc, $f);
-                                }
+                                $movie = $this->movieDAO->GetMovieById($f->GetMovie());
+                                $f->SetMovie($movie);
+                                $f->SetCinema($cinema);
+                                $objBillboard->PushShowtime($f);
+                                #array_push($arrFunc, $f);
                             }
                         }
                     }
@@ -399,21 +383,4 @@ class ShowtimeController
         ViewsController::ShowShowtimesView($message, $theatreAux);
     }
 
-
-    public function FilterCartelera($theatreId)
-    {
-        $now = date("Y-m-d");
-        $oneWeekMore = date("Y-m-d", strtotime($now . "+1week"));
-
-
-        if (!empty($theatreId)) {   
-
-            $showtimesInTheatre = $this->showtimeDAO->GetShowtimeOfTheatre($theatreId);
-
-            if(is_array($showtimesInTheatre) && !empty($showtimesInTheatre)){
-                
-            }
-        
-        }
-    }
 }

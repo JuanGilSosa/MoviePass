@@ -13,6 +13,7 @@ use Database\MoviesDAO as MoviesDAO;
 use Database\GenreDAO as GenreDAO;
 
 use Helpers\SessionHelper as SessionHelper;
+use DateTime as DateTime;
 
 class ViewsController
 {
@@ -34,16 +35,16 @@ class ViewsController
     public static function ShowAddTheatre($message = "")
     {
         if (SessionHelper::isSession('adminLogged')) {
-        $countryDAO = new CountryDAO();
-        $countries = $countryDAO->GetAll();
+            $countryDAO = new CountryDAO();
+            $countries = $countryDAO->GetAll();
 
-        $provinceDAO = new ProvinceDAO();
-        $provinces = $provinceDAO->GetAll();
+            $provinceDAO = new ProvinceDAO();
+            $provinces = $provinceDAO->GetAll();
 
-        $cityDAO = new CityDAO();
-        $cities = $cityDAO->GetAll();
+            $cityDAO = new CityDAO();
+            $cities = $cityDAO->GetAll();
 
-        require_once(VIEWS_PATH . "addTheatre.php");
+            require_once(VIEWS_PATH . "addTheatre.php");
         } else {
             ViewsController::ShowLogIn();
         }
@@ -70,7 +71,7 @@ class ViewsController
     public static function ShowMoviesNowPlaying()
     {
         $genreDAO = new GenreDAO();
-        
+
         $moviesDAO = new MoviesDAO();
         $movies = $moviesDAO->GetAll();
 
@@ -95,7 +96,7 @@ class ViewsController
         if (SessionHelper::isSession('adminLogged')) {
             $theatreDAO = new TheatreDAO();
             $theatre = $theatreDAO->GetTheatreById(strval($theatreId));
-            
+
             $countryDAO = new CountryDAO();
             $countries = $countryDAO->GetAll();
 
@@ -115,18 +116,18 @@ class ViewsController
         }
     }
 
-    public static function ShowAddCinema($theatreId, $message="")
+    public static function ShowAddCinema($theatreId, $message = "")
     {
         if (SessionHelper::isSession('adminLogged')) {
-        $theatreDAO = new TheatreDAO();
-        $theatre = $theatreDAO->GetTheatreById($theatreId);
-        require_once(VIEWS_PATH . 'addCinema.php');
+            $theatreDAO = new TheatreDAO();
+            $theatre = $theatreDAO->GetTheatreById($theatreId);
+            require_once(VIEWS_PATH . 'addCinema.php');
         } else {
             ViewsController::ShowLogIn();
         }
     }
 
-    public static function ShowCinemasByTheatre($theatreId, $message="")
+    public static function ShowCinemasByTheatre($theatreId, $message = "")
     {
         $theatreDAO = new TheatreDAO();
         $theatre = $theatreDAO->GetTheatreById($theatreId);
@@ -137,10 +138,10 @@ class ViewsController
         require_once(VIEWS_PATH . 'cinemasByTheatre.php');
     }
 
-    public static function ShowModifyCinema($cinemaId, $message="")
+    public static function ShowModifyCinema($cinemaId, $message = "")
     {
         if (SessionHelper::isSession('adminLogged')) {
-            $cinemaDAO = New CinemaDAO();
+            $cinemaDAO = new CinemaDAO();
             $cinema = $cinemaDAO->GetCinemaById(intval($cinemaId));
             require_once(VIEWS_PATH . 'modifyCinema.php');
         } else {
@@ -179,32 +180,69 @@ class ViewsController
         }
     }
 
-    public static function ShowShowtimesView($message, $cinemas){
+    public static function ShowShowtimesView($message, $cinemas)
+    {
         $theatreDAO = new TheatreDAO();
         #$genreDAO = new GenreDAO();
+
+
         $billboards = array();
-        if(is_array($cinemas)){
-            foreach($cinemas as $cinema){
-                array_push($billboards, $cinema->GetBillboard());
+        if (is_array($cinemas)) {
+            foreach ($cinemas as $cinema) {
+                $cinemaBillboard = $cinema->GetBillboard();
+
+                $now = date("Y-m-d");
+                $oneMoreWeek = date("Y-m-d", strtotime($now . ("+1 week")));
+
+                $dateNow = DateTime::createFromFormat('Y-m-d', $now);
+                $dateOneMoreWeek = DateTime::createFromFormat('Y-m-d', $oneMoreWeek);
+
+
+                if (is_object($cinemaBillboard)) {
+                    $showtimes = $cinemaBillboard->GetShowtime();
+
+                    if (is_array($showtimes)) {
+
+                        foreach ($showtimes as $showtime) {
+                            
+                            $dateReleaseDate =  DateTime::createFromFormat('Y-m-d', $showtime->GetReleaseDate());
+
+                          
+
+                            if ($dateNow < $dateReleaseDate && $dateOneMoreWeek > $dateReleaseDate) {
+                                //var_dump($dateReleaseDate);
+                                array_push($billboards, $showtime);
+                            }
+                        }
+                    } else if (is_object($showtimes)) {
+                        $dateReleaseDate =  DateTime::createFromFormat('Y-m-d', $showtimes->GetReleaseDate());
+
+                        if ($dateNow < $dateReleaseDate && $dateOneMoreWeek > $dateReleaseDate) {
+                            array_push($billboards, $showtimes);
+                        }
+                    }
+                }
             }
-        }else{
+        } else {
             array_push($billboards, $cinemas->GetBillboard());
         }
         require_once(VIEWS_PATH . "showtimes.php");
     }
 
-    public static function ShowCartView($message = ""/*$myCart*/){
+    public static function ShowCartView($message = ""/*$myCart*/)
+    {
         $theatreDAO = new TheatreDAO();
 
-        require_once(VIEWS_PATH.'listCart.php');
+        require_once(VIEWS_PATH . 'listCart.php');
     }
 
-    public static function ShowProcessOrderView(){
-        require_once(VIEWS_PATH.'payment.php');
+    public static function ShowProcessOrderView()
+    {
+        require_once(VIEWS_PATH . 'payment.php');
     }
 
-    public static function ShowTicketsListView($tickets, $message = ""){
-        require_once(VIEWS_PATH.'ticketsList.php');
+    public static function ShowTicketsListView($tickets, $message = "")
+    {
+        require_once(VIEWS_PATH . 'ticketsList.php');
     }
-
 }
