@@ -354,7 +354,7 @@ class ShowtimeController
                 } elseif (!empty($roomAux) && is_array($roomAux)) {
 
                     foreach ($roomAux as $cinema) {
-                        $func = $this->functionDAO->GetShowtime_showtimesxcinema($cinema->GetId());
+                        $func = $this->showtimeDAO->GetShowtime_showtimesxcinema($cinema->GetId());
 
                         if (!is_array($func) && !empty($func)) {
                             $movie = $this->movieDAO->GetMovieById($func->GetMovie());
