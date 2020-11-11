@@ -219,7 +219,6 @@
         
 
 
-      
         public function GetCinema_showtimesXcinema($showtimeId){
             try {
                 $con = Connection::getInstance();

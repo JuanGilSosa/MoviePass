@@ -26,6 +26,25 @@
      <!-- Custom styles -->
      <link rel="stylesheet" type="text/css" href="<?php echo CSS_PATH ?>main.css">
 
+     <style media="screen">
+        .noPrint {
+            display: block;
+        }
+
+        .yesPrint {
+            display: block !important;
+        }
+    </style>
+
+    <style media="print">
+        .noPrint {
+            display: none;
+        }
+
+        .yesPrint {
+            display: block !important;
+        }
+    </style>
 
      <title>MoviePass</title>
 </head>
