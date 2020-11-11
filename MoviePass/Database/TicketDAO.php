@@ -8,7 +8,7 @@
             try {
                 $con = Connection::getInstance();
                 $query = 'SELECT * FROM tickets;';
-                $tickets = $con->execute($query, $params); 
+                $tickets = $con->execute($query); 
                 return (!empty($tickets)) ? $this->mapping($tickets) : array();
             } catch (PDOException $e) {
                 echo $e->getMessage();
@@ -39,9 +39,7 @@
         function mapping($value){
             $value = is_array($value) ? $value : [];
             $ans = array_map(function($p){
-                $t =  new Ticket($p['numberTicket'],$p['showtimeId']);
-                $t->SetNumberOfTickets(intval($p['numbersOfTickets']));
-                return $t;
+                return new Ticket($p['numberTicket'],$p['showtimeId'],$p['numbersOfTickets']);
             },$value);
             return (count($ans)>1) ? $ans : $ans[0];
         }
@@ -78,8 +76,19 @@
             try {
                 $con = Connection::getInstance();
                 $query = 'SELECT max(numberTicket) FROM tickets;';
-                $tickets = $con->execute($query, $params); 
-                return (!empty($tickets)) ? $this->mapping($tickets) : array();
+                $tickets = $con->execute($query); 
+                return (!empty($tickets)) ? intval($tickets[0][0]) : array();
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+
+        function GetCountTickets(){
+            try {
+                $con = Connection::getInstance();
+                $query = 'SELECT sum(numbersOfTickets) FROM tickets;';
+                $tickets = $con->execute($query); 
+                return (!empty($tickets)) ? intval($tickets[0][0]) : array();
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }
