@@ -46,6 +46,45 @@
             return (count($ans)>1) ? $ans : $ans[0];
         }
 
+        function GetTicketByIdMember($idMember){
+            try {
+                $con = Connection::getInstance();
+                $query = 'SELECT t.* 
+                            FROM tickets as t 
+                            INNER JOIN ticketxmember as txm 
+                                ON t.numberTicket = txm.numberTicket 
+                                    AND txm.idMember = :idMember;';
+                $params['idMember'] = $idMember;
+                $tickets = $con->execute($query, $params);
+                return (!empty($tickets)) ? $this->mapping($tickets) : array();
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+
+        function Add_ticketxmember($idMember, $numberTicket){
+            try {
+                $con = Connection::getInstance();
+                $query = 'INSERT INTO ticketxmember(idMember,numberTicket)VALUES(:idMember,:numberTicket);';
+                $params['numberTicket'] = $numberTicket;
+                $params['idMember'] = $idMember;
+                return $con->executeNonQuery($query, $params);
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+
+        function GetLastId(){
+            try {
+                $con = Connection::getInstance();
+                $query = 'SELECT max(numberTicket) FROM tickets;';
+                $tickets = $con->execute($query, $params); 
+                return (!empty($tickets)) ? $this->mapping($tickets) : array();
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+
 
     }
 ?>
