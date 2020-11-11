@@ -6,7 +6,7 @@
         private $showTime;
         private $numbersOfTickets;
 
-        public function __construct($numberTicket, $showTime, $numbersOfTickets=1){
+        public function __construct($numberTicket, $showTime, $numbersOfTickets = 1){
             $this->numberTicket = $numberTicket;
             $this->showTime = $showTime;
             $this->numbersOfTickets = $numbersOfTickets;
