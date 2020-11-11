@@ -9,20 +9,26 @@
         public function __construct($numberTicket, $showTime, $numbersOfTickets = 1){
             $this->numberTicket = $numberTicket;
             $this->showTime = $showTime;
-            $this->numbersOfTickets = 1;
+            $this->numbersOfTickets = $numbersOfTickets;
         }
+
         public function SetNumberTicket($numberTicket){$this->numberTicket = $numberTicket;}
-        public function SetAmountOfTickets($amountOfTickets){$this->numbersOfTickets = $amountOfTickets;}
         public function SetShowtime($showTime){$this->showTime = $showTime;}
         public function GetShowtime(){return $this->showTime;}
         public function GetNumberTicket(){return $this->numberTicket;}
 
-        public function SetNumberOfTickets(){
-            $this->numbersOfTickets+=1;
-        }
         public function GetNumberOfTickets(){
             return $this->numbersOfTickets;
         }
+
+        public function IncrementNumberOfTickets(){
+            $this->numbersOfTickets+=1;
+        }
+
+        public function SetAmountOfTickets($amountOfTickets){
+            $this->numbersOfTickets = $amountOfTickets;
+        }
+
     }
 
 ?>

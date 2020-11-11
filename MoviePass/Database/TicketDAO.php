@@ -41,9 +41,7 @@
         function mapping($value){
             $value = is_array($value) ? $value : [];
             $ans = array_map(function($p){
-                $ticket =  new Ticket($p['numberTicket'],$p['showtimeId']);
-                $ticket->SetAmountOfTickets(intval($p['numbersOfTickets']));
-                return $ticket;
+                return new Ticket($p['numberTicket'],$p['showtimeId'],$p['numbersOfTickets']);
             },$value);
             return (count($ans)>1) ? $ans : $ans[0];
         }
@@ -81,7 +79,18 @@
                 $con = Connection::getInstance();
                 $query = 'SELECT max(numberTicket) FROM tickets;';
                 $tickets = $con->execute($query); 
-                return (!empty($tickets)) ? $this->mapping($tickets) : array();
+                return (!empty($tickets)) ? intval($tickets[0][0]) : array();
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+
+        function GetCountTickets(){
+            try {
+                $con = Connection::getInstance();
+                $query = 'SELECT sum(numbersOfTickets) FROM tickets;';
+                $tickets = $con->execute($query); 
+                return (!empty($tickets)) ? intval($tickets[0][0]) : array();
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }

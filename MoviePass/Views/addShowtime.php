@@ -48,7 +48,7 @@ require_once("nav.php");
                         <label for="">Elegi la Sala</label>
                         <div class="form-group">
                             <select name="select-movies" class="form-control" onchange="" required>
-                                <option value="" selected="true" disabled="disabled">Seleccione Sala</option>
+                                <option value="" selected disabled>Seleccione Sala</option>
                                 <?php
                                     if (is_array($cinemas)) {
                                         foreach ($cinemas as $cinema) {
