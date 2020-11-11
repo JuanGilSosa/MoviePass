@@ -14,6 +14,7 @@ use Database\GenreDAO as GenreDAO;
 
 use Helpers\SessionHelper as SessionHelper;
 use DateTime as DateTime;
+use Models\Location\City;
 
 class ViewsController
 {
@@ -279,6 +280,9 @@ class ViewsController
 
     public static function ShowTicketsListView($tickets, $message = "")
     {
+        $theatreDAO = new TheatreDAO();
+        $adressDAO = new AdressDAO();
+        $cityDAO = new CityDAO();
         require_once(VIEWS_PATH . 'ticketsList.php');
     }
     
