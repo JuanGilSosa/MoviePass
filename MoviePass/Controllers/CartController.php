@@ -49,13 +49,11 @@
             $showTime = $this->showTimeDAO->GetShowtimeById($idShowTime);
         
             if(!empty($showTime) && is_object($showTime)){ #trato asi la condicion porque solo voy a traer una funcion, nada mas(object)
-                $cinema = $this->cinemaDAO->GetCinema_showtimesXcinema($idShowTime);
-
+                $cinemaId = $this->showTimeDAO->GetCinemaIdxShowtimeId($idShowTime);
+                $cinema = $this->cinemaDAO->GetCinemaById($cinemaId);
                 $movie = $this->movieDAO->getMovieById($showTime->GetMovie());
                 $showTime->SetMovie($movie);
                 $showTime->SetCinema($cinema);
-                #$myTicket =  new Ticket(0,$showTime);
-                #$this->cart->PushTicket($myTicket);
                 
                 #Reemplazo el ticket en el session simplemente incrementando la variable
                 if($this->ReplaceTicketIfExists($showTime)==false){ 
@@ -66,10 +64,8 @@
                         SessionHelper::SetOnIndex('CART',intval($length),new Ticket($length,$showTime));#$_SESSION['CART'][$length] = $myTicket;
                     }
                 }
-//                $showTimeController = new ShowtimeController();
-  //              $showTimeController->ShowShowtimes();
-                $this->ShowCart();
-
+                $showTimeController = new ShowtimeController();
+                $showTimeController->ShowShowtimes('Agrega otra funcion o finaliza tu compra en el carrito');
             }
         }
 
