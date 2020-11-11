@@ -54,13 +54,12 @@ class ShowtimeController
             $existMovieInShowtime = $this->FindReleaseDate($existShowtime, $releaseDate);
 
             //var_dump($existMovieInShowtime);
-
-            $cinemaIdOfShowtime;
+            $cinemaIdOfShowtime = ''; 
             if(!empty($existMovieInShowtime)){
                 $cinemaIdOfShowtime = $this->showtimeDAO->GetCinemaIdxShowtimeId($existMovieInShowtime->GetId());
-                
             }
-               
+                
+
                 if ( is_array($existMovieInShowtime) && empty($existMovieInShowtime)  || $cinemaId == $cinemaIdOfShowtime ){
                 // ACA ESTARIA CUANDO LA PELICULA NO EXISTE EN NINGUNA SALA EN ESE DIA. ENTONCES LO PUEDO GUARDAR
                 // Verifico que la fecha ingresada sea mayor a hoy.
@@ -80,9 +79,10 @@ class ShowtimeController
                     
                     
                     $checkTime = $this->CheckTime($cinemaId, $releaseDate, $startTime, $newEndTime);
-                   
+                    
                    
                     if($checkTime == "ok"){
+                        echo 'estoy aca NASHE';
                         $showtime = new Showtime(0, $movie, $startTime, $endTime, $releaseDate, $cinema);
                         //var_dump($showtime);
                         $this->showtimeDAO->Add($showtime);

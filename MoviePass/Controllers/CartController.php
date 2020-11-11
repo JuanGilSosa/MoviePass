@@ -51,7 +51,6 @@
                 $movie = $this->movieDAO->getMovieById($showTime->GetMovie());
                 $showTime->SetMovie($movie);
                 $showTime->SetCinema($cinema);
-                var_dump($cinema); 
                 #$myTicket =  new Ticket(0,$showTime);
                 #$this->cart->PushTicket($myTicket);
                 
