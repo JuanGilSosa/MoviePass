@@ -254,6 +254,7 @@ class ShowtimeController
         $theatreController = new TheatreController();
 
         $theatres = $this->theatreDAO->GetAllActive();
+        //var_dump($theatres);
 
         $theatreAux = array();
         #$arrFunc = array();
@@ -269,6 +270,8 @@ class ShowtimeController
                 if (!is_array($roomAux) && !empty($roomAux)) {
 
                     $func = $this->showtimeDAO->GetShowtime_showtimesxcinema($roomAux->GetId());
+
+                    //var_dump($func);
 
                     if (!is_array($func) && !empty($func)) {
                         
@@ -315,10 +318,11 @@ class ShowtimeController
                         }
                     }
 
-                    #$objBillboard->setFunctions($arrFunc);
-                    $theatre->SetBillboard($objBillboard);
-                    array_push($theatreAux, $theatre);
+                    
                 }
+                #$objBillboard->setFunctions($arrFunc);
+                $theatre->SetBillboard($objBillboard);
+                array_push($theatreAux, $theatre);
             }
         } else {
 
@@ -380,6 +384,11 @@ class ShowtimeController
                 array_push($theatreAux, $theatres);
             }
         }
+
+        $billboard = array();
+
+        //var_dump($theatreAux);
+        
         ViewsController::ShowShowtimesView($message, $theatreAux);
     }
 

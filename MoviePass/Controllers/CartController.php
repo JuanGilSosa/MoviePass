@@ -46,31 +46,6 @@ class CartController
             $cinema = $this->cinemaDAO->GetCinemaById($cinemaId);
             $movie = $this->movieDAO->getMovieById($showTime->GetMovie());
 
-<<<<<<< HEAD
-        public function AddShowTime($idShowTime){
-            $showTimeController = new ShowtimeController();
-            $showTime = $this->showTimeDAO->GetShowtimeById($idShowTime);
-            if(!empty($showTime) && is_object($showTime)){ #trato asi la condicion porque solo voy a traer una funcion, nada mas(object)
-                $capacity = $showTime->GetCinema()->GetCapacity();
-                $soldTickets = $this->ticketDAO->GetCountTickets();
-                if($soldTickets < $capacity ){
-                    $cinemaId = $this->showTimeDAO->GetCinemaIdxShowtimeId($idShowTime);
-                    $cinema = $this->cinemaDAO->GetCinemaById($cinemaId);
-                    $movie = $this->movieDAO->getMovieById($showTime->GetMovie());
-                    $showTime->SetMovie($movie);
-                    $showTime->SetCinema($cinema);
-                        
-                    #Reemplazo el ticket en el session simplemente incrementando la variable
-                    if($this->ReplaceTicketIfExists($showTime)==false){ 
-                        if(!SessionHelper::isSession('CART')){
-                            SessionHelper::SetOnIndex('CART',0,new Ticket(0,$showTime));#$_SESSION['CART'][0] = $myTicket;
-                        }else{
-                            $length = SessionHelper::LengthOfKey('CART');
-                            SessionHelper::SetOnIndex('CART',intval($length),new Ticket(0,$showTime));#$_SESSION['CART'][$length] = $myTicket;
-                        }
-                    }
-                    $showTimeController->ShowShowtimes('Agrega otra funcion o finaliza tu compra en el carrito');
-=======
             $capacity = $cinema->GetCapacity();
 
             if ($soldTickets < $capacity) {
@@ -86,7 +61,6 @@ class CartController
                         $length = SessionHelper::LengthOfKey('CART');
                         SessionHelper::SetOnIndex('CART', intval($length), new Ticket(0, $showTime)); #$_SESSION['CART'][$length] = $myTicket;
                     }
->>>>>>> b2c797eb576401f63d41c0b71c008feb501330e2
                 }
                 $showTimeController->ShowShowtimes('Agrega otra funcion o finaliza tu compra en el carrito');
             } else {

@@ -180,16 +180,17 @@ class ViewsController
         }
     }
 
-    public static function ShowShowtimesView($message, $cinemas)
+    public static function ShowShowtimesView($message, $theatres)
     {
         $theatreDAO = new TheatreDAO();
         #$genreDAO = new GenreDAO();
 
-
         $billboards = array();
-        if (is_array($cinemas)) {
-            foreach ($cinemas as $cinema) {
-                $cinemaBillboard = $cinema->GetBillboard();
+
+        if (is_array($theatres)) {
+            foreach ($theatres as $theatre) {
+                $cinemaBillboard = $theatre->GetBillboard();
+
 
                 $now = date("Y-m-d");
                 $oneMoreWeek = date("Y-m-d", strtotime($now . ("+1 week")));
@@ -223,8 +224,43 @@ class ViewsController
                     }
                 }
             }
-        } else {
-            array_push($billboards, $cinemas->GetBillboard());
+        } else if(is_object($theatres)){
+
+            $cinemaBillboard = $theatres->GetBillboard();
+
+
+                $now = date("Y-m-d");
+                $oneMoreWeek = date("Y-m-d", strtotime($now . ("+1 week")));
+
+                $dateNow = DateTime::createFromFormat('Y-m-d', $now);
+                $dateOneMoreWeek = DateTime::createFromFormat('Y-m-d', $oneMoreWeek);
+
+
+                if (is_object($cinemaBillboard)) {
+                    $showtimes = $cinemaBillboard->GetShowtime();
+
+                    if (is_array($showtimes)) {
+
+                        foreach ($showtimes as $showtime) {
+                            
+                            $dateReleaseDate =  DateTime::createFromFormat('Y-m-d', $showtime->GetReleaseDate());
+
+                          
+
+                            if ($dateNow < $dateReleaseDate && $dateOneMoreWeek > $dateReleaseDate) {
+                                //var_dump($dateReleaseDate);
+                                array_push($billboards, $showtime);
+                            }
+                        }
+                    } else if (is_object($showtimes)) {
+                        $dateReleaseDate =  DateTime::createFromFormat('Y-m-d', $showtimes->GetReleaseDate());
+
+                        if ($dateNow < $dateReleaseDate && $dateOneMoreWeek > $dateReleaseDate) {
+                            array_push($billboards, $showtimes);
+                        }
+                    }
+                }
+                
         }
         require_once(VIEWS_PATH . "showtimes.php");
     }
