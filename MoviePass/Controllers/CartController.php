@@ -107,9 +107,11 @@
         }
 
         public function ProcessOrder(){
-            if(SessionHelper::isSession('CART')){
+            if(SessionHelper::isSession('CART') && SessionHelper::isSession('adminLogged') || SessionHelper::isSession('userLogged')){
                 $cart = SessionHelper::GetValue('CART');
                 ViewsController::ShowProcessOrder($cart);
+            }else if(!SessionHelper::isSession('adminLogged') || !SessionHelper::isSession('userLogged')){
+                ViewsController::ShowLogIn();
             }
         }
 
