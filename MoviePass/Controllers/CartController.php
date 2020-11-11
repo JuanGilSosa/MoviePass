@@ -26,49 +26,38 @@
             $this->movieDAO = new MoviesDAO();
             $this->cart = new Cart();
         }
-/*
-        public function AddShowtime($idShowTime){
-            $showTime = $this->showTimeDAO->GetShowtimeById($idShowTime);
-            if(!empty($showTime) && is_object($showTime)){ #trato asi la condicion porque solo voy a traer una funcion, nada mas(object)
-                $cinema = $this->cinemaDAO->GetCinema_showtimesXcinema($idShowTime);
-                $movie = $this->movieDAO->getMovieById($showTime->GetMovie());
-                $showTime->SetMovie($movie);
-                $showTime->SetCinema($cinema);
-                $myTicket =  new Ticket(0,$showTime); echo 'VER LINEA 32 CartController';
-                $this->cart->PushTicket($myTicket);
-                ViewsController::ShowCartView($this->cart);
-            }
-        }
-
-        public function AddTicket($arrOfTickets){
-            $this->ticketDAO->Add($arrOfTickets);
-        }*/
 
         public function AddShowTime($idShowTime){
             $showTime = $this->showTimeDAO->GetShowtimeById($idShowTime);
             if(!empty($showTime) && is_object($showTime)){ #trato asi la condicion porque solo voy a traer una funcion, nada mas(object)
-                $cinemaId = $this->showTimeDAO->GetCinemaIdxShowtimeId($idShowTime);
-                $cinema = $this->cinemaDAO->GetCinemaById($cinemaId);
-                $movie = $this->movieDAO->getMovieById($showTime->GetMovie());
-                $showTime->SetMovie($movie);
-                $showTime->SetCinema($cinema);
-                
-                #Reemplazo el ticket en el session simplemente incrementando la variable
-                if($this->ReplaceTicketIfExists($showTime)==false){ 
-                    if(!SessionHelper::isSession('CART')){
-                        SessionHelper::SetOnIndex('CART',0,new Ticket(0,$showTime));#$_SESSION['CART'][0] = $myTicket;
-                    }else{
-                        $length = SessionHelper::LengthOfKey('CART');
-                        SessionHelper::SetOnIndex('CART',intval($length),new Ticket($length,$showTime));#$_SESSION['CART'][$length] = $myTicket;
+                $capacity = $showTime->GetCinema()->GetCapacity();
+                $soldTickets = $this->ticketDAO->GetCountTickets();
+                if($soldTickets < $capacity ){
+                    $cinemaId = $this->showTimeDAO->GetCinemaIdxShowtimeId($idShowTime);
+                    $cinema = $this->cinemaDAO->GetCinemaById($cinemaId);
+                    $movie = $this->movieDAO->getMovieById($showTime->GetMovie());
+                    $showTime->SetMovie($movie);
+                    $showTime->SetCinema($cinema);
+                        
+                    #Reemplazo el ticket en el session simplemente incrementando la variable
+                    if($this->ReplaceTicketIfExists($showTime)==false){ 
+                        if(!SessionHelper::isSession('CART')){
+                            SessionHelper::SetOnIndex('CART',0,new Ticket(0,$showTime));#$_SESSION['CART'][0] = $myTicket;
+                        }else{
+                            $length = SessionHelper::LengthOfKey('CART');
+                            SessionHelper::SetOnIndex('CART',intval($length),new Ticket(0,$showTime));#$_SESSION['CART'][$length] = $myTicket;
+                        }
                     }
+                    $showTimeController = new ShowtimeController();
+                    $showTimeController->ShowShowtimes('Agrega otra funcion o finaliza tu compra en el carrito');
                 }
-                $showTimeController = new ShowtimeController();
-                $showTimeController->ShowShowtimes('Agrega otra funcion o finaliza tu compra en el carrito');
+            }else{
+                $showTimeController->ShowShowtimes('NO HAY TICKETS PARA ESTA FUNCION');
             }
         }
 
-        public function ShowCart(){
-            ViewsController::ShowCartView();
+        public function ShowCart($message = ""){
+            ViewsController::ShowCartView($message);
         }
         /*
             Remplasa un ticket si existe en la session, dado que si el usuario ingresa dos veces la misma funcion debe incrementar
@@ -78,7 +67,7 @@
             if(SessionHelper::isSession('CART')){
                 foreach (SessionHelper::GetValue('CART') as $index => $ticket) {
                     if($ticket->GetShowtime()->GetId()==$showtime->GetId()){
-                        $ticket->SetNumberOfTickets();
+                        $ticket->IncrementNumberOfTickets();
                         SessionHelper::SetOnIndex('CART',$index,$ticket);
                         return true;
                     }
@@ -105,9 +94,24 @@
         }
 
         public function ProcessOrder(){
+            $ticketController = new TicketController();
+            if(SessionHelper::isSession('CART') && SessionHelper::isSession('userLogged')){
+                ViewsController::ShowProcessOrderView();
+            }else if(!SessionHelper::isSession('userLogged')){
+                ViewsController::ShowLogIn();
+            }else{
+                $this->ShowCart('No hay productos en el carrito');
+            }
+        }
+
+        public function ConfirmPayment(){
             if(SessionHelper::isSession('CART')){
+                $ticketController = new TicketController();
                 $cart = SessionHelper::GetValue('CART');
-                    
+                foreach($cart as $index=>$ticket){
+                    $ticketController->AddTicket($ticket);
+                }
+                ViewsController::ShowTicketsListView(SessionHelper::GetValue('CART'));
             }
         }
 

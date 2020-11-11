@@ -103,7 +103,6 @@ nav div a span {
   border: none;
   border-radius: 5px;
   padding: 25px;
-  margin-top: 10%;
 }
 
 @media screen and (max-width: 1800px) {
@@ -344,3 +343,4 @@ th {
   width: 100%;
   margin: 0 auto;
 }
+
