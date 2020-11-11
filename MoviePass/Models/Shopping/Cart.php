@@ -21,6 +21,16 @@
             array_push($this->tickets, $ticket);
             $this->countTicket+=1;
         }
+        public function GetTicketsSimil(){
+            foreach($this->tickets as $index=>$ticket){
+                if(isset($this->tickets[$index+1])){
+                    $nextTicket = $this->tickets[$index+1];
+                }
+                if($ticket){
+
+                }
+            }
+        }
     
     }
 ?>
