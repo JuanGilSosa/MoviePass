@@ -24,8 +24,8 @@
         #Sube el ticket a la base de datos
         public function AddTicket($ticket){
             if(!empty($ticket)){
-                $this->ticketDAO->Add($ticket);      
-                $this->ticketDAO->Add_ticketxmember(intval(SessionHelper::GetValue('userLogged')->GetId()), intval($this->ticketDAO->GetLastId()));
+                $this->ticketDAO->Add($ticket); 
+                $this->ticketDAO->Add_ticketxmember(intval(SessionHelper::GetValue('userLogged')->GetId()), $this->ticketDAO->GetLastId());
             }   
         }
 
