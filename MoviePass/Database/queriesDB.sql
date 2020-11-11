@@ -106,8 +106,6 @@ CREATE TABLE if not exists genreXmovies(
     CONSTRAINT pk_genreId FOREIGN KEY(genreId) REFERENCES genres(genreId)
 );
 
-
-
 CREATE TABLE if not exists  members(
     idMember INT NOT NULL AUTO_INCREMENT,
     DNI INT NOT NULL,
@@ -122,15 +120,16 @@ CREATE TABLE if not exists  members(
 CREATE TABLE if not exists Tickets(
     numberTicket INT NOT NULL AUTO_INCREMENT,
     showtimeId INT,
+    numbersOfTickets INT,
     CONSTRAINT pk_numberTicket PRIMARY KEY(numberTicket),
-    CONSTRAINT fk_showTimeId FOREIGN KEY(showtimeId) REFERENCES Showtimes(showtimeId)
+    CONSTRAINT fk_showTimeId_ FOREIGN KEY(showtimeId) REFERENCES Showtimes(showtimeId)
 );
 
 CREATE TABLE if not exists ticketsXshowtimes(
     numberTicket INT,
     showtimeId INT,
     CONSTRAINT pk_numberTicket FOREIGN KEY(numberTicket) REFERENCES Tickets(numberTicket),
-    CONSTRAINT fk_showTimeId FOREIGN KEY(showtimeId) REFERENCES Showtimes(showtimeId) 
+    CONSTRAINT fk_showTimeId__ FOREIGN KEY(showtimeId) REFERENCES Showtimes(showtimeId) 
 );
 
 CREATE TABLE History(

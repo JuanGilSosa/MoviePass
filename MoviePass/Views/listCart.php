@@ -374,8 +374,10 @@
                     $total = 0;
                     foreach($cart as $index=>$ticket){
                         $showtime = $ticket->GetShowtime();
+                        //var_dump($cart);
                         $cinema = $showtime->GetCinema();
-                        $movie = $showtime->GetMovie();$titleMovie = $movie->GetTitle();
+                        $movie = $showtime->GetMovie();
+                        $titleMovie = $movie->GetTitle();
                         
                         ?>
                         <tr>
@@ -409,7 +411,7 @@
                         <button type="submit" value="" class="btn btn-secondary btn-info w-20" name="empty">VACIAR CARRITO</button>
                     </form>
                     <form action="<?php echo FRONT_ROOT.'Cart/ProcessOrder'; ?>" method="POST">
-                        <button type="submit" value="" class="btn btn-light-green" name="empty">INICIAR COMPRA</button>
+                        <button type="submit" value="" class="btn btn-light-green" name="start-buy">INICIAR COMPRA</button>
                     </form>
                 </div>
           </div>

@@ -45,9 +45,12 @@
         }*/
 
         public function AddShowTime($idShowTime){
+
             $showTime = $this->showTimeDAO->GetShowtimeById($idShowTime);
+        
             if(!empty($showTime) && is_object($showTime)){ #trato asi la condicion porque solo voy a traer una funcion, nada mas(object)
                 $cinema = $this->cinemaDAO->GetCinema_showtimesXcinema($idShowTime);
+
                 $movie = $this->movieDAO->getMovieById($showTime->GetMovie());
                 $showTime->SetMovie($movie);
                 $showTime->SetCinema($cinema);
@@ -63,8 +66,10 @@
                         SessionHelper::SetOnIndex('CART',intval($length),new Ticket($length,$showTime));#$_SESSION['CART'][$length] = $myTicket;
                     }
                 }
-                $showTimeController = new ShowtimeController();
-                $showTimeController->ShowShowtimes();
+//                $showTimeController = new ShowtimeController();
+  //              $showTimeController->ShowShowtimes();
+                $this->ShowCart();
+
             }
         }
 
@@ -106,7 +111,10 @@
         }
 
         public function ProcessOrder(){
-            
+            if(SessionHelper::isSession('CART')){
+                $cart = SessionHelper::GetValue('CART');
+                    
+            }
         }
 
     }
