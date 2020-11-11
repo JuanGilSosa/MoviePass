@@ -2,6 +2,8 @@
 
     use Models\Shopping\Ticket as Ticket;
 
+    use PDOException as PDOException;
+
     class TicketDAO implements ITicketDAO{
 
         function GetAll(){
