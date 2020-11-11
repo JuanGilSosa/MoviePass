@@ -35,6 +35,7 @@
             <a class="dropdown-item" href="<?php echo FRONT_ROOT . "Admin/ShowAddView"   ?>">Agregar Cine</a>
             <a class="dropdown-item" href="<?php echo FRONT_ROOT . "Theatre/ShowTheatres"?>">Listar Cines</a>
             <a class="dropdown-item" href="<?php echo FRONT_ROOT . "Movie/ShowMovies"     ?>">Lista Peliculas</a>
+            <a class="dropdown-item" href="<?php echo FRONT_ROOT . "Theatre/ShowStatsTheatre"?>">Ventas</a>
           </div>
         </li>
       <?php } ?>
@@ -55,10 +56,6 @@
             <li class="nav-item">
               <a class="nav-link" href="<?php echo FRONT_ROOT.'Ticket/ShowTicketsOfMember?idMember='.SessionHelper::GetValue('userLogged')->GetId(); ?>">Mis Entradas</a>
             </li>
-            <?php }elseif(SessionHelper::isSession('adminLogged')){ ?>
-              <li class="nav-item">
-                <a class="nav-link" href="<?php echo FRONT_ROOT.''?>">Ventas</a>
-              </li>
             <?php } ?>
       <?php if (SessionHelper::isSession('userLogged') || SessionHelper::isSession('adminLogged')){ ?>
               <li class="nav-item active">

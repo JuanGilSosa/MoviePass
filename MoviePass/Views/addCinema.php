@@ -73,7 +73,7 @@ require_once("nav.php");
                               </div>
                          </div>
                     </div>
-
+                    
                     <button type="submit" name="button" class="btn btn-light ml-auto d-block">Cargar Sala</button>
                </form>
           </div>

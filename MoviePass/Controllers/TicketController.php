@@ -34,16 +34,21 @@
             $tickets = $this->ticketDAO->GetTicketByIdMember($idMember);
             $ticketsArrayAux = array();
             $ticketsArrayAux2 = array();
+
             if(!is_array($tickets) && !empty($tickets)){
                 array_push($ticketsArrayAux, $tickets);
             }elseif(!empty($tickets)){
                 $ticketsArrayAux = $tickets;
             }
             foreach($ticketsArrayAux as $ticket){
-                $showtime = $this->showtimeDAO->GetShowtimeById($ticket->GetShowtime());
-                $movie = $this->movieDAO->getMovieById($showtime->GetMovie());
-                $cinema = $this->cinemaDAO->GetCinemaById($showtime->GetCinema());
 
+                $showtime = $this->showtimeDAO->GetShowtimeById($ticket->GetShowtime());
+                
+                $movie = $this->movieDAO->getMovieById($showtime->GetMovie());
+
+                $cinemaId = $this->showtimeDAO->GetCinemaIdxShowtimeId($showtime->GetId());
+                $cinema = $this->cinemaDAO->GetCinemaById($cinemaId);
+                
                 $showtime->SetMovie($movie);
                 $showtime->SetCinema($cinema);
 
