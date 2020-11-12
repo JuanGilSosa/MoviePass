@@ -204,12 +204,13 @@
                 $query = 'SELECT theatreId FROM cinemasXtheatres WHERE cinemaId= :cinemaId';
                 $params['cinemaId'] = $cinemaId;
                 $res = $con->execute($query,$params);
+
                 if(is_array($res))
                 {
                     $rta = array_shift($res);
                     return intval($rta);
                 }else{
-                    echo 'ACA MURIO CINEMADAO 211';
+                    echo 'ACA MURIO CINEMADAO 211';#·sacar este echo
                 }
             } catch (PDOException $e) {
                 echo $e->getMessage();
@@ -219,7 +220,6 @@
         
 
 
-      
         public function GetCinema_showtimesXcinema($showtimeId){
             try {
                 $con = Connection::getInstance();
