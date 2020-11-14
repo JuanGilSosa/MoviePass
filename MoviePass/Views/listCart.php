@@ -62,15 +62,15 @@ use Helpers\SessionHelper;
                     ?>
                         <tr>
                             <td><?php echo $movie->GetTitle(); ?></td>
-                            <td><?php echo  $theatre->GetName(); ?> </td>
-                            <td><?php echo   $cinema->GetName(); ?> </td>
+                            <td><?php echo $theatre->GetName(); ?> </td>
+                            <td><?php echo $cinema->GetName(); ?> </td>
                             <td><?php echo $showtime->GetReleaseDate(); ?></td>
                             <td><?php echo $showtime->GetStartTime(); ?></td>
 
                             <td>
-                                <button class=""><i class="far fa-minus-square"></i></button>
+                                <!--<button class=""><i class="far fa-minus-square"></i></button>-->
                                 <?php echo $ticket->GetNumberOfTickets(); ?>
-                                <button class=""><i class="far fa-plus-square"></i></button>
+                                <!--<button class=""><i class="far fa-plus-square"></i></button>-->
                             </td>
                             <td><?php echo '$' . number_format($cinema->GetPrice() * $ticket->GetNumberOfTickets(), 2); ?></td>
                             <th class="th-sm">

@@ -1,4 +1,7 @@
 <?php
+
+use Helpers\SessionHelper;
+
 require_once('nav.php');
 ?>
 
@@ -25,16 +28,17 @@ require_once('nav.php');
                 <h1>Entradas</h1>
             </div>
             <?php foreach ($tickets as $index => $ticket) {
-
-                if ($ticket->GetNumberOfTickets() == 1) {
-                    $showtime = $ticket->GetShowtime();
-                    $cinema = $showtime->GetCinema();
-                    $theatre = $theatreDAO->GetTheatreByCinemaId_cinemasXtheatres($cinema->GetId());
-                    $movie = $showtime->GetMovie();
-                    $adressId = $theatre->GetAdress();
-                    $adress = $adressDAO->GetAdressById($adressId);
-                    $cityId = $adress->GetCity();
-                    $city = $cityDAO->GetByZipCode($cityId);
+                $numOfTickets = $ticket->GetNumberOfTickets();
+                if ($ticket->GetNumberOfTickets() >= 1) {
+                    for($i = 0;$i<$numOfTickets;$i+=1){
+                        $showtime = $ticket->GetShowtime();
+                        $cinema = $showtime->GetCinema();
+                        $theatre = $theatreDAO->GetTheatreByCinemaId_cinemasXtheatres($cinema->GetId());
+                        $movie = $showtime->GetMovie();
+                        $adressId = $theatre->GetAdress();
+                        $adress = $adressDAO->GetAdressById($adressId);
+                        $cityId = $adress->GetCity();
+                        $city = $cityDAO->GetByZipCode($cityId);
             ?>
                     <div class="row container text-center" style="color:white;background-color:black; margin-bottom:2vh; padding:10px;">
                         <div class="col-2">
@@ -68,7 +72,10 @@ require_once('nav.php');
                     </div>
 
             <?php  }
-            } ?>
+                } 
+            }?>
+
+            <?php SessionHelper::DestroySession('CART'); ?>
 
         </div>
         <div class="form-group mx-auto w-25  col col-sm-12 col-xs-12 col-md-4">

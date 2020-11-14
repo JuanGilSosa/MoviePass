@@ -112,7 +112,6 @@ class CartController
 
     public function ProcessOrder()
     {
-        $ticketController = new TicketController();
         if (SessionHelper::isSession('CART') && SessionHelper::isSession('userLogged')) {
             ViewsController::ShowProcessOrderView();
         } else if (!SessionHelper::isSession('userLogged')) {
