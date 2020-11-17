@@ -7,7 +7,7 @@
             #echo "<small>" . $message . "</small>";
         ?>
             <div class="container">
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
                     <?php echo $message ?>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -57,8 +57,9 @@
                                                                                         echo $cinemaName; ?></h5>
 
                                     <p style="color:#C1C1C1;" class="card-text">Fecha: <?php echo $showtime->GetReleaseDate(); ?></p>
-                                    <p style="color:#C1C1C1;" class="card-text">Comienza: <?php echo $showtime->GetStartTime(); ?> hs</p>
+                                    <p style="color:#C1C1C1;" class="card-text">&nbsp; Comienza: <?php echo $showtime->GetStartTime(); ?> hs</p>
                                     <!--<p class="card-text small">Generos: <#?php foreach($genres as $g){echo $g;}?></p>-->
+                                    <p style="color:#C1C1C1;" class="card-text">Precio:<span>$</span><?php echo number_format($showtime->GetCinema()->GetPrice(),2); ?></p>
                                 </div>
                                 <div class="card-body card-body-cascade">
 
