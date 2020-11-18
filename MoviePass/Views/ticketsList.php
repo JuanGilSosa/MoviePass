@@ -63,8 +63,13 @@ require_once('nav.php');
                                     <?php echo "Fin: " . $showtime->GetEndTime() . " hs"?>                                    
                                 </div>
                                 <div class="col-4">
+                                <div class="row">
                                     <img src="<?php echo IMG_PATH . "qr.png" ?>" style="width:80%; margin-bottom:3px;"></img>
-
+                                </div>
+                                <div class="row">
+                                <?php echo "Valor: $" . $cinema->GetPrice() ?>  
+                                </div>                     
+                                    
                                 </div>
                             </div>
                         </div>
