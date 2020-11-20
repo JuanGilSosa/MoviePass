@@ -3,7 +3,7 @@
     use Models\Movie\Showtime as Showtime;
     use PDOException as PDOException;
 
-    class ShowtimesDAO implements IDAO{
+    class ShowtimesDAO implements IShowtimesDAO{
          
         
         /*

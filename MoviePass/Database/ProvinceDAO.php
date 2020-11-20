@@ -3,7 +3,7 @@
     use Models\Location\Province as Province;
     use PDOException as PDOException;
 
-    class ProvinceDAO implements IDAO{
+    class ProvinceDAO implements IProvinceDAO{
 /*
         public function __construct(){
             try {

@@ -5,7 +5,7 @@
     use Models\Theatre\Theatre as Theatre;
     use PDOException as PDOException;
 
-    class TheatreDAO implements IDAO{
+    class TheatreDAO implements ITheatreDAO{
 /*
         public function __construct(){
             try{

@@ -3,7 +3,7 @@
     use Models\Location\Country as Country;
     use PDOException as PDOException;
 
-    class CountryDAO implements IDAO{
+    class CountryDAO implements ICountryDAO{
 /*
         public function __construct(){
             try{
@@ -33,7 +33,7 @@
                 $query = 'INSERT INTO countries(name) VALUES
                             (:name)';
 
-                $params['name'] = $country->getNombre();
+                $params['name'] = $country->GetName();
                 
                 return $con->executeNonQuery($query, $params);
             }catch(PDOException $e){

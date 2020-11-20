@@ -4,7 +4,7 @@
 
     use Models\Location\Province as Province;
 
-    interface IAdressDAO
+    interface IProvinceDAO
     {
         function GetAll();
         function Add(Province $province);
