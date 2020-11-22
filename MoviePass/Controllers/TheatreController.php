@@ -290,17 +290,16 @@ class TheatreController
                 $showtime = $this->showtimeDAO->GetShowtime_showtimesxcinema($cinema->GetId());
 
                 if (is_array($showtime) && !empty($showtime)) {
-                    $price = $cinema->GetPrice();
                     foreach ($showtime as $s) {
-                        $countOfTickets += $this->ticketDAO->GetTicketByIdShowtime($s->GetId());
+                        $price = $cinema->GetPrice();
+                        $countOfTickets = $this->ticketDAO->GetTicketByIdShowtime($s->GetId());
+                        $subTotal = ($price * $countOfTickets);
+                        $total += $subTotal;
+                        $totalCapacity += $cinema->GetCapacity();
                     }
-
-                    $subTotal = ($price * $countOfTickets);
-                    $total += $subTotal;
-                    $totalCapacity += $cinema->GetCapacity();
                 } elseif (is_object($showtime) && !empty($showtime)) {
                     $price = $cinema->GetPrice();
-                    $countOfTickets += $this->ticketDAO->GetTicketByIdShowtime($showtime->GetId());
+                    $countOfTickets = $this->ticketDAO->GetTicketByIdShowtime($showtime->GetId());
                     $subTotal = ($price * $countOfTickets);
                     $total += $subTotal;
                     $totalCapacity += $cinema->GetCapacity();
@@ -313,6 +312,8 @@ class TheatreController
                 foreach ($showtime as $s) {
                     $countOfTickets += $this->ticketDAO->GetTicketByIdShowtime($s->GetId());
                 }
+
+
                 $subTotal = ($price * $countOfTickets);
                 $total += $subTotal;
                 $totalCapacity += $cinemas->GetCapacity();
@@ -399,7 +400,7 @@ class TheatreController
                     $cinema = $this->cinemaDAO->GetCinemaById($cinemaId);
 
                     $price = $cinema->GetPrice();
-                    $countOfTickets += $this->ticketDAO->GetTicketByIdShowtime($showtime->GetId());
+                    $countOfTickets = $this->ticketDAO->GetTicketByIdShowtime($showtime->GetId());
                     $total += ($price * $countOfTickets);
                     $totalCapacity += $cinema->GetCapacity();
                     $remainder = $totalCapacity - $countOfTickets;
@@ -436,11 +437,13 @@ class TheatreController
 
                 $price = $cinema->GetPrice();
                 $countOfTickets = $this->ticketDAO->GetTicketByIdShowtime($showtime->GetId());
-                if(is_null($countOfTickets)){
+
+                if (is_null($countOfTickets)) {
                     $countOfTickets = 0;
                 }
+
+
                 $total += ($price * $countOfTickets);
-                
             }
         } else if (is_object($showtimes)) {
             $cinemaId = $this->showtimeDAO->GetCinemaIdxShowtimeId($showtimes->GetId());
@@ -451,6 +454,6 @@ class TheatreController
             $total = ($price * $countOfTickets);
         }
 
-        ViewsController::ShowStatsTheatreView("","","", $total);
+        ViewsController::ShowStatsTheatreView("", "", "", $total);
     }
 }
