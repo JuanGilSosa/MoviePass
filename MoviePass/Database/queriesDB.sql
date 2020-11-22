@@ -125,13 +125,6 @@ CREATE TABLE if not exists Tickets(
     CONSTRAINT fk_showTimeId_ FOREIGN KEY(showtimeId) REFERENCES Showtimes(showtimeId)
 );
 
-CREATE TABLE if not exists ticketsXshowtimes(
-    numberTicket INT,
-    showtimeId INT,
-    CONSTRAINT pk_numberTicket FOREIGN KEY(numberTicket) REFERENCES Tickets(numberTicket),
-    CONSTRAINT fk_showTimeId__ FOREIGN KEY(showtimeId) REFERENCES Showtimes(showtimeId) 
-);
-
 CREATE TABLE ticketXmember(
     idMember INT,
     numberTicket INT,
