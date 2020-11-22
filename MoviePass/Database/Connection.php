@@ -11,7 +11,7 @@ use PDOException as PDOException;
 			try{	
 				$this->pdo = new \PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME,DB_USER,DB_PASS);
 				$this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-			}catch(Exception $e){
+			}catch(PDOException $e){
 				throw $e;
 			}
 		}
@@ -45,6 +45,7 @@ use PDOException as PDOException;
 				foreach($param as $paramName => $value){
 					$this->pdoStatement->bindParam(":".$paramName, $value);
 				}
+				
 				$this->pdoStatement->execute();
 				#retornamos en formato de array asocitativo todos los registros que tenemos de la query
 				return $this->pdoStatement->fetchAll();

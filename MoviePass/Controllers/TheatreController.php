@@ -418,4 +418,39 @@ class TheatreController
             ViewsController::ShowStatsMoviesView($total, $countOfTickets, $remainder);
         }
     }
+
+    public function StatsProfits($theatreId = "", $startDate = "", $endDate = "")
+    {
+        $showtimes = $this->showtimeDAO->GetShowtimesOfTheatreBetweenDates($theatreId, $startDate, $endDate);
+
+        $total = 0;
+        $countOfTickets = 0;
+        $price = 0;
+
+
+        if (is_array($showtimes)) {
+            foreach ($showtimes as $showtime) {
+
+                $cinemaId = $this->showtimeDAO->GetCinemaIdxShowtimeId($showtime->GetId());
+                $cinema = $this->cinemaDAO->GetCinemaById($cinemaId);
+
+                $price = $cinema->GetPrice();
+                $countOfTickets = $this->ticketDAO->GetTicketByIdShowtime($showtime->GetId());
+                if(is_null($countOfTickets)){
+                    $countOfTickets = 0;
+                }
+                $total += ($price * $countOfTickets);
+                
+            }
+        } else if (is_object($showtimes)) {
+            $cinemaId = $this->showtimeDAO->GetCinemaIdxShowtimeId($showtimes->GetId());
+            $cinema = $this->cinemaDAO->GetCinemaById($cinemaId);
+
+            $price = $cinema->GetPrice();
+            $countOfTickets = $this->ticketDAO->GetTicketByIdShowtime($showtimes->GetId());
+            $total = ($price * $countOfTickets);
+        }
+
+        ViewsController::ShowStatsTheatreView("","","", $total);
+    }
 }

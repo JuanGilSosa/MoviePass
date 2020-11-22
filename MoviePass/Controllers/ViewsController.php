@@ -286,10 +286,11 @@ class ViewsController
         require_once(VIEWS_PATH . 'ticketsList.php');
     }
 
-    public static function ShowStatsTheatreView($total = 0, $countOfTickets = 0, $remainder = 0)
+    public static function ShowStatsTheatreView($total = 0, $countOfTickets = 0, $remainder = 0, $theatreProfits = 0)
     {
         $theatreDAO = new TheatreDAO();
         $theatres = $theatreDAO->GetAllActive();
+
         require_once(VIEWS_PATH . 'statsTheatre.php');
     }
 
@@ -307,7 +308,7 @@ class ViewsController
         require_once(VIEWS_PATH . 'statsShowtime.php');
     }
 
-    public static function ShowStatsMoviesView($total = 0, $countOfTickets = 0, $remainder = 0)
+    public static function ShowStatsMoviesView($total = 0)
     {
         $movieDAO = new MoviesDAO();
         $movies = $movieDAO->GetAllFromDatabase();
