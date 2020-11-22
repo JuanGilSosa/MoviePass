@@ -306,4 +306,14 @@ class ViewsController
 
         require_once(VIEWS_PATH . 'statsShowtime.php');
     }
+
+    public static function ShowStatsMoviesView($total = 0, $countOfTickets = 0, $remainder = 0)
+    {
+        $movieDAO = new MoviesDAO();
+        $movies = $movieDAO->GetAllFromDatabase();
+    
+       
+        require_once(VIEWS_PATH . 'statsMovies.php');
+    }
+
 }

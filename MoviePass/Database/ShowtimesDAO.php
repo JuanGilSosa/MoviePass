@@ -193,4 +193,20 @@
             }
         }
 
+        public function GetShowtimesByMovieId($movieId){
+            try {
+                $con = Connection::getInstance();
+                $query = 'SELECT * 
+                            FROM showtimes as s 
+                            WHERE s.movieId = :movieId'
+                            ;
+                $params['movieId'] = $movieId;
+                $showtimes = $con->execute($query, $params);
+                
+                return (!empty($showtimes)) ? $this->mapping($showtimes) : array();
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+
     }
