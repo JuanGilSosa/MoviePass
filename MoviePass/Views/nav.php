@@ -37,7 +37,7 @@
             <a class="dropdown-item" href="<?php echo FRONT_ROOT . "Movie/ShowMovies"     ?>">Lista Peliculas</a>
             <a class="dropdown-item" href="<?php echo FRONT_ROOT . "Theatre/ShowStatsTheatre"?>">Estadisticas Cine</a>
             <a class="dropdown-item" href="<?php echo FRONT_ROOT . "Theatre/ShowStatsShowtime"?>">Estadisticas Funcion</a>
-            <a class="dropdown-item" href="<?php echo FRONT_ROOT . "Theatre/ShowStatsMovie"?>">Estadisticas Peliculas</a>
+            <a class="dropdown-item" href="<?php echo FRONT_ROOT . "Theatre/ShowStatsMovies"?>">Estadisticas Peliculas</a>
           </div>
         </li>
       <?php } ?>
