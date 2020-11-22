@@ -43,8 +43,7 @@
             foreach($ticketsArrayAux as $ticket){
 
                 $showtime = $this->showtimeDAO->GetShowtimeById($ticket->GetShowtime());
-                
-                $movie = $this->movieDAO->getMovieById($showtime->GetMovie());
+                $movie = $this->movieDAO->GetMovieByIdFromDatabase($showtime->GetMovie());
 
                 $cinemaId = $this->showtimeDAO->GetCinemaIdxShowtimeId($showtime->GetId());
                 $cinema = $this->cinemaDAO->GetCinemaById($cinemaId);

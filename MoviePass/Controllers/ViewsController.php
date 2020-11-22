@@ -283,6 +283,7 @@ class ViewsController
         $theatreDAO = new TheatreDAO();
         $adressDAO = new AdressDAO();
         $cityDAO = new CityDAO();
+
         require_once(VIEWS_PATH . 'ticketsList.php');
     }
 
