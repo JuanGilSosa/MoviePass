@@ -35,7 +35,9 @@
             <a class="dropdown-item" href="<?php echo FRONT_ROOT . "Admin/ShowAddView"   ?>">Agregar Cine</a>
             <a class="dropdown-item" href="<?php echo FRONT_ROOT . "Theatre/ShowTheatres"?>">Listar Cines</a>
             <a class="dropdown-item" href="<?php echo FRONT_ROOT . "Movie/ShowMovies"     ?>">Lista Peliculas</a>
-            <a class="dropdown-item" href="<?php echo FRONT_ROOT . "Theatre/ShowStatsTheatre"?>">Ventas</a>
+            <a class="dropdown-item" href="<?php echo FRONT_ROOT . "Theatre/ShowStatsTheatre"?>">Estadisticas Cine</a>
+            <a class="dropdown-item" href="<?php echo FRONT_ROOT . "Theatre/ShowStatsShowtime"?>">Estadisticas Funcion</a>
+            <a class="dropdown-item" href="<?php echo FRONT_ROOT . "Theatre/ShowStatsMovie"?>">Estadisticas Peliculas</a>
           </div>
         </li>
       <?php } ?>
