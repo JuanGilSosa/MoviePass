@@ -130,17 +130,17 @@
             try {
                 $con = Connection::getInstance();
 
-                $query = 'SELECT f.* 
-                            FROM showtimesxcinemas as sxf 
+                $query = 'SELECT *
+                            FROM showtimes s
+                            INNER JOIN showtimesxcinemas as sxf
+                            ON s.showtimeId = sxf.showtimeId 
                             INNER JOIN cinemasxtheatres as cxt
                             ON sxf.cinemaId = cxt.cinemaId  
-                            AND cxt.theatreID = :theatreID 
-                            INNER JOIN showtimes as f 
-                                ON sxf.showtimeId = f.showtimeId 
-                            ';
-                $params['theatreID'] = $theatreID;
+                            AND cxt.theatreID = :theatreID ;';
 
+                $params['theatreID'] = $theatreID;
                 $showtimes = $con->execute($query, $params);
+                
                 return (!empty($showtimes)) ? $this->mapping($showtimes) : array();
             } catch (PDOException $e) {
                 echo $e->getMessage();
@@ -179,8 +179,8 @@
         public function GetCinemaIdxShowtimeId($showtimeId){
             try {
                 $con = Connection::getInstance();
-                $query = 'SELECT sxf.cinemaId 
-                            FROM showtimesxcinemas as sxf 
+                $query = 'SELECT sxc.cinemaId 
+                            FROM showtimesxcinemas as sxc 
                             WHERE showtimeId = :showtimeId'
                             ;
                 $params['showtimeId'] = $showtimeId;
@@ -194,4 +194,3 @@
         }
 
     }
-?>

@@ -61,13 +61,13 @@ class TheatreController
                     $theatreWithObject = $this->CreateCine($theatre);
                     array_push($theatresWithObjects, $theatreWithObject);
                 }
-                ViewsController::ShowTheatres($theatresWithObjects , $message);
+                ViewsController::ShowTheatres($theatresWithObjects, $message);
             } else {
                 if ($theatres != null) {
                     $theatreObject = $this->CreateCine($theatres);
-                    array_push($theatresWithObjects , $theatreObject);
+                    array_push($theatresWithObjects, $theatreObject);
                 }
-                ViewsController::ShowTheatres($theatresWithObjects , $message);
+                ViewsController::ShowTheatres($theatresWithObjects, $message);
             }
         } else {
             ViewsController::ShowLogIn();
@@ -96,13 +96,13 @@ class TheatreController
                     $theatreWithObject = $this->CreateCine($theatre);
                     array_push($theatresWithObjects, $theatreWithObject);
                 }
-                ViewsController::ShowAllTheatres($theatresWithObjects , $message);
+                ViewsController::ShowAllTheatres($theatresWithObjects, $message);
             } else {
                 if ($theatres != null) {
                     $theatreObject = $this->CreateCine($theatres);
-                    array_push($theatresWithObjects , $theatreObject);
+                    array_push($theatresWithObjects, $theatreObject);
                 }
-                ViewsController::ShowAllTheatres($theatresWithObjects , $message);
+                ViewsController::ShowAllTheatres($theatresWithObjects, $message);
             }
         } else {
             ViewsController::ShowLogIn();
@@ -143,7 +143,7 @@ class TheatreController
 
                 if (!$isPhoneNumber) {
                     $adress = $this->adressDAO->CreateAdress($street, (int)$number, (int)$floor, $city, (int)$zipCode, (int)$countryId, (int)$provinceId);
-                    
+
                     if (!is_string($adress)) {
 
                         $isAdress = $this->adressDAO->FindAdress($adress);
@@ -220,11 +220,11 @@ class TheatreController
 
     public function Delete($theatreId)
     {
-        try{
+        try {
             $this->theatreDAO->Delete($theatreId);
             $message = "Cine eliminado con éxito";
             $this->ShowTheatres($message);
-        }catch (PDOException $e){
+        } catch (PDOException $e) {
             $message = "No pudimos eliminar el cine";
             $this->ShowTheatres($message);
         }
@@ -232,11 +232,11 @@ class TheatreController
 
     public function Activate($theatreId)
     {
-        try{
+        try {
             $this->theatreDAO->SetActive($theatreId);
             $message = "Cine activado con éxito";
             $this->ShowAllTheatres($message);
-        }catch (PDOException $e){
+        } catch (PDOException $e) {
             $message = "No pudimos eliminar el cine";
             $this->ShowAllTheatres($message);
         }
@@ -259,12 +259,17 @@ class TheatreController
 
         return $mappedTheatre;
     }
-    
-    public function ShowStatsTheatre(){
-        ViewsController::ShowStatsTheatreView();
+
+    public function ShowStatsTheatre()
+    {
+        if (SessionHelper::isSession('adminLogged'))
+            ViewsController::ShowStatsTheatreView();
+        else
+            ViewsController::ShowLogIn('Inicie sesion para acceder a las estadisticas');
     }
 
-    public function Stats($theatreId){
+    public function Stats($theatreId)
+    {
 
         $cinemas = $this->cinemaDAO->GetCinemasByTheatreId($theatreId);
         $total = 0;
@@ -274,49 +279,89 @@ class TheatreController
         $totalCapacity = 0;
         $remainder = 0;
 
-        if(is_array($cinemas) && !empty($cinemas)){
-            
+        if (is_array($cinemas) && !empty($cinemas)) {
+
             foreach ($cinemas as $cinema) {
-                
+
                 $showtime = $this->showtimeDAO->GetShowtime_showtimesxcinema($cinema->GetId());
-                
-                if(is_array($showtime) && !empty($showtime)){
+
+                if (is_array($showtime) && !empty($showtime)) {
                     $price = $cinema->GetPrice();
-                    foreach($showtime as $s){
-                        $countOfTickets+=$this->ticketDAO->GetTicketByIdShowtime($s->GetId());
+                    foreach ($showtime as $s) {
+                        $countOfTickets += $this->ticketDAO->GetTicketByIdShowtime($s->GetId());
                     }
 
-                    $subTotal=($price*$countOfTickets);
-                    $total+=$subTotal;
-                    $totalCapacity+=$cinema->GetCapacity();
-                }elseif(is_object($showtime) && !empty($showtime)){
+                    $subTotal = ($price * $countOfTickets);
+                    $total += $subTotal;
+                    $totalCapacity += $cinema->GetCapacity();
+                } elseif (is_object($showtime) && !empty($showtime)) {
                     $price = $cinema->GetPrice();
-                    $countOfTickets+=$this->ticketDAO->GetTicketByIdShowtime($showtime->GetId());
-                    $subTotal=($price*$countOfTickets);
-                    $total+=$subTotal;
-                    $totalCapacity+=$cinema->GetCapacity();
+                    $countOfTickets += $this->ticketDAO->GetTicketByIdShowtime($showtime->GetId());
+                    $subTotal = ($price * $countOfTickets);
+                    $total += $subTotal;
+                    $totalCapacity += $cinema->GetCapacity();
                 }
             }
-        }elseif(is_object($cinemas) && !empty($cinemas)){
+        } elseif (is_object($cinemas) && !empty($cinemas)) {
             $showtime = $this->showtimeDAO->GetShowtime_showtimesxcinema($cinemas->GetId());
-            if(is_array($showtime) && !empty($showtime)){
+            if (is_array($showtime) && !empty($showtime)) {
                 $price = $cinemas->GetPrice();
-                foreach($showtime as $s){
-                    $countOfTickets+=$this->ticketDAO->GetTicketByIdShowtime($s->GetId());
+                foreach ($showtime as $s) {
+                    $countOfTickets += $this->ticketDAO->GetTicketByIdShowtime($s->GetId());
                 }
-                $subTotal=($price*$countOfTickets);
-                $total+=$subTotal;
-                $totalCapacity+=$cinemas->GetCapacity();
-                
-            }elseif(is_object($showtime) && !empty($showtime)){
+                $subTotal = ($price * $countOfTickets);
+                $total += $subTotal;
+                $totalCapacity += $cinemas->GetCapacity();
+            } elseif (is_object($showtime) && !empty($showtime)) {
                 $price = $cinemas->GetPrice();
-                $countOfTickets+=$this->ticketDAO->GetTicketByIdShowtime($showtime->GetId());
-                $subTotal=($price*$countOfTickets);
-                $total+=$subTotal;
-                $totalCapacity+=$cinemas->GetCapacity();
+                $countOfTickets += $this->ticketDAO->GetTicketByIdShowtime($showtime->GetId());
+                $subTotal = ($price * $countOfTickets);
+                $total += $subTotal;
+                $totalCapacity += $cinemas->GetCapacity();
             }
         }
-        $remainder=$totalCapacity - $countOfTickets;
+        $remainder = $totalCapacity - $countOfTickets;
         ViewsController::ShowStatsTheatreView($total, $countOfTickets, $remainder);
+    }
+
+    public function ShowStatsShowtime()
+    {
+        if (SessionHelper::isSession('adminLogged'))
+            ViewsController::ShowStatsShowtimeView();
+        else
+            ViewsController::ShowLogIn('Inicie sesion para acceder a las estadisticas');
+    }
+
+    public function StatsShowtime($theatreId = "", $showtimeId = "")
+    {
+
+        $showtimes = "";
+        $total = 0;
+        $countOfTickets = 0;
+        $price = 0;
+        $totalCapacity = 0;
+        $remainder = 0;
+        if (!empty($theatreId) && empty($showtimeId)) {
+            $showtimes = $this->showtimeDAO->GetShowtimeOfTheatre($theatreId);
+            $theatre = $this->theatreDAO->GetTheatreById($theatreId);
+            if (!empty($showtimes)) {
+                ViewsController::ShowStatsShowtimeView($theatre, $showtimes);
+            }
+        } else if (!empty($theatreId) && !empty($showtimeId)) {
+            $theatre = $this->theatreDAO->GetTheatreById($theatreId);
+            $showtimes = $this->showtimeDAO->GetShowtimeById($showtimeId);
+            $cinemaId = $this->showtimeDAO->GetCinemaIdxShowtimeId($showtimeId);
+            $cinema = $this->cinemaDAO->GetCinemaById($cinemaId);
+
+            if (!empty($showtimes)) {
+                $price = $cinema->GetPrice();
+                $countOfTickets = $this->ticketDAO->GetTicketByIdShowtime($showtimeId);
+                $total = ($price * $countOfTickets);
+                $totalCapacity = $cinema->GetCapacity();
+                $remainder = $totalCapacity - $countOfTickets;
+            }
+
+            ViewsController::ShowStatsShowtimeView($theatre, $showtimes, $total, $countOfTickets, $remainder);
+        }
     }
 }

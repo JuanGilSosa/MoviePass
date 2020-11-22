@@ -18,8 +18,8 @@ require_once("nav.php");
         }
         ?>
         <div class="container">
-            <h2 class="mb-4">Estadisticas Por Cine</h2>
-            <form action="<?php echo FRONT_ROOT . 'Theatre/Stats' ?>" method="POST" class="bg-light-alpha p-5">
+            <h2 class="mb-4">Estadisticas Por Función</h2>
+            <form action="<?php echo FRONT_ROOT . 'Theatre/StatsShowtime' ?>" method="POST" class="bg-light-alpha p-5">
                 <div class="row justify-content-start">
 
                     <div class="col-lg-6">
@@ -43,7 +43,39 @@ require_once("nav.php");
                             </select>
                         </div>
                     </div>
-                    <div class="col-lg-6"></div>
+
+                    <div class="col-lg-6">
+                        <label for="">Elegi la Función</label>
+                        <div class="form-group">
+
+
+                            <select name="showtimeId" class="form-control" onchange="this.form.submit()" required>
+                                <option value="" selected disabled>Seleccione una Función</option>
+                                <?php
+                                if (is_array($showtimes)) {
+                                    foreach ($showtimes as $showtime) {
+                                        $movieId = $showtime->GetMovie();
+                                        $movie = $movieDAO->GetMovieByIdFromDatabase($movieId);
+
+                                        $cinemaId = $showtimesDAO->GetCinemaIdxShowtimeId($showtime->GetId());
+                                        $cinema = $cinemaDAO->GetCinemaById($cinemaId);
+                                ?>
+                                        <option value="<?php echo $showtime->GetId() ?>" required> <?php echo $movie->GetTitle() . " - " . $cinema->GetName() . " - " . $showtime->GetReleaseDate() ?></option>
+                                    <?php }
+                                } else {
+                                    $movieId = $showtimes->GetMovie();
+                                    $movie = $movieDAO->GetMovieByIdFromDatabase($movieId);
+                                    $cinemaId = $showtimesDAO->GetCinemaIdxShowtimeId($showtimes->GetId());
+                                    $cinema = $cinemaDAO->GetCinemaById($cinemaId);
+                                    ?>
+                                    <option value="<?php echo $showtimes->GetId() ?>" selected required> <?php echo $movie->GetTitle() . " - " . $cinema->GetName() . " - " . $showtimes->GetReleaseDate() ?></option>
+                                <?php } ?>
+
+                            </select>
+                        </div>
+                    </div>
+
+
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="">Total Vendido (en pesos): </label><br>
