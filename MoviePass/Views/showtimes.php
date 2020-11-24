@@ -1,7 +1,7 @@
 <?php require_once('nav.php'); ?>
 
 <main>
-    <div class="container">
+    <div class="container " >
         <?php
         if (isset($message) && !empty($message)) {
             #echo "<small>" . $message . "</small>";
@@ -18,7 +18,7 @@
         }
         ?>
     </div>
-    <div class="grid-container text-center" style="justify-content:center; height:100%">
+    <div class="grid-container text-center mb-5 h-100" style="justify-content:center; ">
 
         <?php
 
@@ -30,7 +30,7 @@
                         #$movie = $showtime->GetMovie();
                         #$genres = $genreDAO->GetGenresNamesById($movie->GetGenres());
         ?>
-                        <div class="grid-container">
+                        <div class="grid-container h-100">
                             <div class="cell " style="background-color: #000000; padding-top:2vh;">
                                 <div class="container ">
 
@@ -49,7 +49,7 @@
                                                                                     ?>
                                     </h5>
 
-                                    <h5 class="red-text"></i><?php if (is_object($theatre)) {
+                                    <h5 class="red-text" style="min-height:10vh;"></i><?php if (is_object($theatre)) {
                                                                     echo $theatre->GetName();
                                                                 } ?></h5>
 
